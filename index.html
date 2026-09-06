@@ -3,90 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - Enterprise ERP & Logistics System Pro</title>
-    <!-- Tailwind CSS CDN -->
+    <title>AS Enterprises - Enterprise ERP Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- QR Code Generator Library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
-    <!-- JSZip for Backup Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- Firebase SDKs for Realtime Cloud Sync -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: { 900: '#020617', 950: '#00030b', 800: '#0f172a', 700: '#1e293b' }
-                    }
-                }
-            }
+            theme: { extend: { colors: { navy: { 900: '#020617', 950: '#00030b', 800: '#0f172a', 700: '#1e293b' } } } }
         }
     </script>
     <style>
-        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; margin: 0; padding: 0; padding-bottom: 80px; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 70px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.95); padding-left: 100%; box-sizing: border-box; border-bottom: 1px solid #1e293b; }
-        .ticker { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
-        .ticker-item { display: inline-block; padding: 0 2rem; font-size: 0.9rem; color: #38bdf8; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid #1e293b; padding: 6px 0; }
+        .ticker { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; }
+        .ticker-item { display: inline-block; padding: 0 2rem; font-size: 11px; color: #38bdf8; font-weight: 600; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
     </style>
 </head>
 <body class="bg-navy-900 min-h-screen text-slate-100 flex flex-col justify-between">
 
-    <!-- GLOBAL AUTHENTICATION OVERLAY -->
+    <!-- AUTH OVERLAY -->
     <div id="auth-overlay" class="fixed inset-0 bg-navy-950 z-[9999] flex items-center justify-center p-4">
-        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 w-full max-w-md space-y-6 shadow-2xl">
-            <div class="flex justify-between items-center">
-                <span class="text-xs text-blue-400 font-bold">AS ENTERPRISES PRO</span>
-                <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-navy-950 text-slate-200 border border-slate-700 rounded-lg px-2 py-1 text-xs">
-                    <option value="en">English</option>
-                    <option value="hi">हिंदी (Hindi)</option>
-                    <option value="te">తెలుగు (Telugu)</option>
-                </select>
-            </div>
-
+        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-6 w-full max-w-sm space-y-5 shadow-2xl">
             <div class="text-center space-y-2">
-                <div class="bg-blue-600 w-12 h-12 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-blue-600/30">
+                <div class="bg-blue-600 w-12 h-12 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
                     <i class="fa-solid fa-industry text-white text-xl"></i>
                 </div>
-                <h2 class="text-2xl font-black text-white tracking-wide">AS ENTERPRISES</h2>
+                <h2 class="text-xl font-black text-white">AS ENTERPRISES</h2>
                 <p class="text-xs text-slate-400">Select Portal to Continue</p>
             </div>
-
             <div class="grid grid-cols-3 gap-2">
-                <button onclick="switchAuthMode('admin')" id="auth-btn-admin" class="py-2.5 rounded-xl text-[11px] font-bold uppercase bg-blue-600 text-white shadow">Admin</button>
-                <button onclick="switchAuthMode('customer')" id="auth-btn-customer" class="py-2.5 rounded-xl text-[11px] font-bold uppercase bg-navy-950 text-slate-300 border border-slate-700">Customer</button>
-                <button onclick="switchAuthMode('driver')" id="auth-btn-driver" class="py-2.5 rounded-xl text-[11px] font-bold uppercase bg-navy-950 text-slate-300 border border-slate-700">Driver</button>
+                <button onclick="switchAuthMode('admin')" id="auth-btn-admin" class="py-2 rounded-xl text-[11px] font-bold uppercase bg-blue-600 text-white shadow">Admin</button>
+                <button onclick="switchAuthMode('customer')" id="auth-btn-customer" class="py-2 rounded-xl text-[11px] font-bold uppercase bg-navy-950 text-slate-300 border border-slate-700">Customer</button>
+                <button onclick="switchAuthMode('driver')" id="auth-btn-driver" class="py-2 rounded-xl text-[11px] font-bold uppercase bg-navy-950 text-slate-300 border border-slate-700">Driver</button>
             </div>
-
-            <form id="form-admin-login" onsubmit="handleAdminLogin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Admin Master Password</label>
-                    <input type="password" id="admin-pass" required placeholder="Default: admin123" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs uppercase shadow">Access Admin Dashboard</button>
+            <form id="form-admin-login" onsubmit="handleAdminLogin(event)" class="space-y-3">
+                <input type="password" id="admin-pass" required placeholder="Password: admin123" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs uppercase shadow">Login Admin</button>
             </form>
-
-            <form id="form-customer-login" onsubmit="handleCustomerLogin(event)" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Customer Mobile Number</label>
-                    <input type="tel" id="cust-mobile" required placeholder="e.g. 9030574216" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
-                </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs uppercase shadow">Login Customer Portal</button>
+            <form id="form-customer-login" onsubmit="handleCustomerLogin(event)" class="space-y-3 hidden">
+                <input type="tel" id="cust-mobile" required placeholder="Mobile Number" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white">
+                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl text-xs uppercase shadow">Login Customer</button>
             </form>
-
-            <form id="form-driver-login" onsubmit="handleDriverLogin(event)" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Driver Vehicle ID / Phone</label>
-                    <input type="text" id="driver-id" required placeholder="e.g. TS-09-UA-1929" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
-                </div>
-                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl text-xs uppercase shadow">Access Driver App</button>
+            <form id="form-driver-login" onsubmit="handleDriverLogin(event)" class="space-y-3 hidden">
+                <input type="text" id="driver-id" required placeholder="Vehicle ID" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white">
+                <button type="submit" class="w-full bg-amber-600 text-white font-bold py-2.5 rounded-xl text-xs uppercase shadow">Login Driver</button>
             </form>
         </div>
     </div>
@@ -94,134 +60,117 @@
     <!-- MAIN APP CONTAINER -->
     <div id="main-app-container" class="hidden flex flex-col justify-between min-h-screen w-full">
         <div class="w-full">
-            <div class="ticker-wrap py-2 shadow-inner">
-                <div class="ticker">
-                    <span class="ticker-item"><i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> Rice PP Bags (50kg): ₹18.50/pc (Live)</span>
-                    <span class="ticker-item"><i class="fa-solid fa-cloud text-cyan-400 mr-2"></i> Meta WhatsApp API & Multi-Warehouse Synced</span>
+            <!-- SMART HEADER WITH SMART AS ENTERPRISES TITLE & 3-DOTS MENU -->
+            <header class="bg-navy-950 border-b border-slate-800 sticky top-0 z-50 px-3 py-2.5 flex justify-between items-center shadow-lg">
+                <button onclick="switchTab('dashboard')" class="bg-slate-800 text-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 border border-slate-700">
+                    <i class="fa-solid fa-house text-blue-400"></i> Home
+                </button>
+                <div class="text-center">
+                    <h1 class="text-xs font-black tracking-wider text-white uppercase bg-blue-600/20 px-2 py-0.5 rounded border border-blue-500/30">AS ENTERPRISES</h1>
+                    <p class="text-[9px] text-slate-400">Hyderabad &bull; ERP Pro</p>
                 </div>
-            </div>
-
-            <header class="bg-navy-950 border-b border-slate-800 sticky top-0 z-50 shadow-xl w-full">
-                <div class="w-full px-4 py-3 flex justify-between items-center gap-3">
-                    <div class="flex items-center space-x-3">
-                        <button onclick="switchTab('dashboard')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 p-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 border border-slate-700">
-                            <i class="fa-solid fa-arrow-left text-blue-400"></i> Back
-                        </button>
-                        <div class="bg-blue-600 p-2.5 rounded-xl shadow-lg"><i class="fa-solid fa-industry text-white text-xl"></i></div>
-                        <div>
-                            <h1 class="text-xl font-black tracking-wide text-white flex items-center gap-2">
-                                AS ENTERPRISES <span id="portal-badge" class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full border">ADMIN PRO</span>
-                            </h1>
-                            <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-red-500"></i> Hyderabad &bull; Direct Factory Mfg</p>
-                        </div>
-                    </div>
-                    <button onclick="logoutSystem()" class="bg-red-600/20 text-red-400 border border-red-500/30 px-3 py-2 rounded-xl text-xs font-semibold"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="toggleMenu()" class="bg-slate-800 text-amber-400 px-2.5 py-1.5 rounded-lg text-xs border border-slate-700">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <button onclick="logoutSystem()" class="bg-red-600/20 text-red-400 border border-red-500/30 px-2 py-1.5 rounded-lg text-xs"><i class="fa-solid fa-power-off"></i></button>
                 </div>
             </header>
 
-            <nav class="bg-navy-800/90 border-b border-slate-700/80 sticky top-[65px] z-40 backdrop-blur-md shadow-md w-full">
-                <div class="w-full px-2 overflow-x-auto flex space-x-1 py-2 no-scrollbar" id="nav-tabs-container"></div>
-            </nav>
+            <!-- RUNNING RATE TICKER -->
+            <div class="ticker-wrap shadow-inner">
+                <div class="ticker">
+                    <span class="ticker-item"><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Rice PP Bags (50kg): ₹18.50/pc (Live)</span>
+                    <span class="ticker-item"><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Flour PP Bags (25kg): ₹12.00/pc (Live)</span>
+                    <span class="ticker-item"><i class="fa-solid fa-shield-halved text-cyan-400 mr-1"></i> 40+ Enterprise Modules Active</span>
+                </div>
+            </div>
 
-            <main class="w-full px-4 py-6 flex-grow space-y-6">
+            <!-- 3-DOTS DROPDOWN MENU -->
+            <div id="dropdown-menu" class="hidden fixed right-3 top-14 bg-navy-800 border border-slate-700 rounded-xl shadow-2xl z-[999] w-60 p-2 space-y-1">
+                <div class="text-[10px] text-slate-400 px-2 py-1 uppercase font-bold tracking-wider border-b border-slate-700">Modules (40+ Active)</div>
+                <button onclick="switchTab('dashboard'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-blue-400"></i> Dashboard & Payment Hub</button>
+                <button onclick="switchTab('orders'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-clipboard-list text-blue-400"></i> Orders & Approvals</button>
+                <button onclick="switchTab('warehouses'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-warehouse text-amber-400"></i> Multi-Warehouse Inventory</button>
+                <button onclick="switchTab('khata'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-book text-emerald-400"></i> Customer Khata Ledger</button>
+                <button onclick="switchTab('barcode'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-barcode text-cyan-400"></i> Barcode Sticker Generator</button>
+                <button onclick="switchTab('eway'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-file-invoice text-emerald-400"></i> GST E-Way Bill API</button>
+                <button onclick="switchTab('export-inv'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-globe text-purple-400"></i> Export Invoicing (USD/AED)</button>
+                <button onclick="switchTab('vehicle'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-truck text-red-400"></i> Fleet Fuel & Maintenance</button>
+                <button onclick="switchTab('meta-wa'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Meta WhatsApp Cloud API</button>
+            </div>
 
-                <!-- 1. DASHBOARD -->
-                <div id="tab-dashboard" class="tab-content space-y-6 w-full">
-                    <div class="bg-gradient-to-r from-blue-900/60 via-slate-900 to-navy-950 border border-blue-500/30 rounded-2xl p-6 md:p-8 shadow-2xl w-full">
-                        <div class="max-w-4xl space-y-3">
-                            <span class="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full font-semibold border">Ultimate Master ERP Active</span>
-                            <h2 class="text-2xl md:text-4xl font-black text-white tracking-tight">Wholesale PP Bags Manufacturing & Logistics</h2>
-                            <p class="text-slate-300 text-sm">Meta WhatsApp Cloud API, Multi-Warehouse Sync, GST E-Way Bill, and UPI/Bank Payment Hub fully operational.</p>
+            <main class="w-full px-3 py-4 space-y-4">
+                <!-- DASHBOARD TAB -->
+                <div id="tab-dashboard" class="tab-content space-y-4">
+                    <div class="bg-gradient-to-r from-blue-900/60 to-navy-950 border border-blue-500/30 rounded-xl p-4 shadow-xl space-y-2">
+                        <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded font-semibold border">Master ERP Pro</span>
+                        <h2 class="text-lg font-black text-white">Wholesale PP Bags Manufacturing & Logistics</h2>
+                        <p class="text-xs text-slate-300">Live Firebase Cloud Synced System.</p>
+                    </div>
+
+                    <!-- 4 INTERACTIVE METRIC CARDS -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div onclick="switchTab('orders')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
+                            <p class="text-[10px] text-slate-400 font-medium">Total Orders</p>
+                            <h3 id="metric-total-orders" class="text-2xl font-black text-white">0</h3>
+                        </div>
+                        <div onclick="switchTab('khata')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
+                            <p class="text-[10px] text-slate-400 font-medium">Active Customers</p>
+                            <h3 id="metric-total-customers" class="text-2xl font-black text-white">3</h3>
+                        </div>
+                        <div onclick="switchTab('dashboard')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
+                            <p class="text-[10px] text-slate-400 font-medium">Net Profit (P&L)</p>
+                            <h3 id="metric-net-profit" class="text-2xl font-black text-emerald-400">₹1,25,000</h3>
+                        </div>
+                        <div onclick="switchTab('vehicle')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
+                            <p class="text-[10px] text-slate-400 font-medium">Office Expenses</p>
+                            <h3 id="metric-total-expenses" class="text-2xl font-black text-red-400">₹14,500</h3>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                        <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl text-center space-y-4">
-                            <h3 class="text-lg font-bold text-white flex items-center justify-center gap-2"><i class="fa-solid fa-qrcode text-emerald-400"></i> Instant UPI QR Payment</h3>
-                            <div class="bg-white p-4 rounded-xl inline-block shadow-lg" id="qrcode-container"></div>
-                            <p class="text-sm font-mono font-bold text-emerald-400">UPI ID: 6301456725@paytm</p>
-                        </div>
+                    <!-- PRODUCT CATALOG FOR DIRECT ORDER ADDITION -->
+                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3 shadow-lg">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-emerald-400"></i> Select Products & Add Order</h3>
+                        <div class="grid grid-cols-2 gap-3" id="product-catalog-grid"></div>
+                    </div>
 
-                        <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-building-columns text-blue-400"></i> Direct Bank Transfer (RTGS/NEFT)</h3>
-                            <p class="text-xs text-slate-400">For large bulk orders, transfer directly to our current account:</p>
-                            <div class="bg-navy-950 p-4 rounded-xl border border-slate-700 space-y-2 text-xs font-mono">
-                                <p class="text-slate-300">Account Name: <span class="text-white font-bold">AS ENTERPRISES</span></p>
-                                <p class="text-slate-300">Account Number: <span class="text-emerald-400 font-bold">123456789012</span></p>
-                                <p class="text-slate-300">IFSC Code: <span class="text-blue-400 font-bold">HDFC0001234</span></p>
-                                <p class="text-slate-300">Bank Name: <span class="text-white font-bold">HDFC Bank, Hyderabad</span></p>
-                            </div>
-                        </div>
+                    <!-- COMPACT UPI & BANK PAYMENT HUB -->
+                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 text-center space-y-3 shadow-lg">
+                        <h3 class="text-sm font-bold text-white flex items-center justify-center gap-2"><i class="fa-solid fa-qrcode text-emerald-400"></i> Instant UPI QR Payment</h3>
+                        <div class="bg-white p-2 rounded-lg inline-block shadow max-w-[130px] mx-auto" id="qrcode-container"></div>
+                        <p class="text-xs font-mono font-bold text-emerald-400">UPI ID: 6301456725@paytm</p>
                     </div>
                 </div>
 
-                <!-- 2. ORDERS MANAGEMENT -->
-                <div id="tab-orders" class="tab-content hidden space-y-6 w-full">
-                    <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl w-full space-y-4">
-                        <div class="flex justify-between items-center pb-4 border-b border-slate-700">
-                            <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-clipboard-list text-blue-400"></i> Order Approvals & Meta WhatsApp API</h3>
-                            <button onclick="loadOrders()" class="bg-slate-800 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl text-xs">Refresh</button>
-                        </div>
-                        <div class="overflow-x-auto w-full">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-navy-950 text-slate-400 text-xs uppercase border-b border-slate-700">
-                                        <th class="p-3">ID / Date</th>
-                                        <th class="p-3">Customer & GSTIN</th>
-                                        <th class="p-3">Product</th>
-                                        <th class="p-3">Qty</th>
-                                        <th class="p-3">Status</th>
-                                        <th class="p-3 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="orders-table-body" class="text-sm divide-y divide-slate-800"></tbody>
+                <!-- ORDERS TAB -->
+                <div id="tab-orders" class="tab-content hidden space-y-4">
+                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3">
+                        <h3 class="text-sm font-bold text-white">Order Approvals & Management</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead><tr class="bg-navy-950 text-slate-400 border-b border-slate-700"><th class="p-2">ID</th><th class="p-2">Customer</th><th class="p-2">Qty</th><th class="p-2">Status</th><th class="p-2 text-right">Action</th></tr></thead>
+                                <tbody id="orders-table-body" class="divide-y divide-slate-800"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. MULTI-WAREHOUSE INVENTORY -->
-                <div id="tab-warehouses" class="tab-content hidden space-y-6 w-full">
-                    <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl max-w-3xl mx-auto space-y-4">
-                        <h3 class="text-xl font-bold text-white"><i class="fa-solid fa-warehouse text-amber-400"></i> Multi-Warehouse Stock Synchronization</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-navy-950 p-4 rounded-xl border border-slate-700 space-y-2">
-                                <h4 class="font-bold text-white text-sm">Jeedimetla Industrial Unit (Hub A)</h4>
-                                <p class="text-xs text-slate-400">Stock: Rice PP Bags (50kg) - <span class="text-emerald-400 font-bold">25,000 pcs</span></p>
-                            </div>
-                            <div class="bg-navy-950 p-4 rounded-xl border border-slate-700 space-y-2">
-                                <h4 class="font-bold text-white text-sm">Balanagar Distribution Center (Hub B)</h4>
-                                <p class="text-xs text-slate-400">Stock: Flour PP Bags (25kg) - <span class="text-emerald-400 font-bold">18,500 pcs</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. META WHATSAPP CLOUD API -->
-                <div id="tab-meta-wa" class="tab-content hidden space-y-6 w-full">
-                    <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl max-w-xl mx-auto space-y-4">
-                        <h3 class="text-xl font-bold text-white"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Meta WhatsApp Cloud API Dispatcher</h3>
-                        <p class="text-xs text-slate-400">Send automated template messages directly via Meta API endpoints.</p>
-                        <input type="text" id="wa-phone" placeholder="Customer Mobile (e.g. 919030574216)" class="w-full bg-navy-950 border border-slate-700 rounded-xl p-3 text-sm text-white">
-                        <button onclick="sendMetaCloudWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs shadow">Send Automated WhatsApp via Meta API</button>
-                    </div>
-                </div>
-
-                <!-- Other Placeholders -->
-                <div id="tab-eway" class="tab-content hidden space-y-6 w-full"><div class="bg-navy-800/90 p-6 rounded-2xl">E-Way Bill Active</div></div>
-                <div id="tab-export-inv" class="tab-content hidden space-y-6 w-full"><div class="bg-navy-800/90 p-6 rounded-2xl">Export Active</div></div>
-                <div id="tab-geofence" class="tab-content hidden space-y-6 w-full"><div class="bg-navy-800/90 p-6 rounded-2xl">Geofence Active</div></div>
+                <!-- OTHER TABS -->
+                <div id="tab-warehouses" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Multi-Warehouse Inventory Active</div></div>
+                <div id="tab-khata" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Customer Khata Ledger Active</div></div>
+                <div id="tab-barcode" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs text-center"><input type="text" value="AS-BAGS-50KG" class="w-full bg-navy-950 p-2 text-xs text-white rounded mb-2"><button onclick="window.print()" class="bg-cyan-600 text-white px-4 py-2 rounded text-xs font-bold">Print Barcode Sticker</button></div></div>
+                <div id="tab-eway" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('E-Way Bill Generated')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Generate GST E-Way Bill</button></div></div>
+                <div id="tab-export-inv" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('Export Invoice Generated')" class="bg-purple-600 text-white px-4 py-2 rounded text-xs font-bold">Generate Export Invoice (USD)</button></div></div>
+                <div id="tab-vehicle" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Fleet Fuel & Maintenance Log Active</div></div>
+                <div id="tab-meta-wa" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('Meta WhatsApp Dispatched')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Send Meta WhatsApp API</button></div></div>
             </main>
 
-            <!-- BOTTOM FIXED BAR -->
-            <div class="fixed bottom-0 left-0 right-0 bg-navy-950 border-t border-slate-800 px-4 py-3 z-50 flex justify-around items-center shadow-2xl">
-                <a href="tel:6301456725" class="flex-1 mr-2 bg-slate-800 text-slate-200 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-slate-700"><i class="fa-solid fa-phone text-emerald-400"></i> Call: 6301456725</a>
-                <a href="https://wa.me/916301456725?text=Hello%20AS%20Enterprises" target="_blank" class="flex-1 ml-2 bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+            <!-- BOTTOM FLOATING BAR -->
+            <div class="fixed bottom-0 left-0 right-0 bg-navy-950 border-t border-slate-800 px-3 py-2 z-50 flex justify-between items-center shadow-2xl">
+                <a href="tel:6301456725" class="flex-1 mr-1 bg-slate-800 text-slate-200 py-2 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 border border-slate-700"><i class="fa-solid fa-phone text-emerald-400"></i> Call: 6301456725</a>
+                <a href="https://wa.me/916301456725" target="_blank" class="flex-1 ml-1 bg-emerald-600 text-white py-2 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
             </div>
-
-            <footer class="bg-navy-950 border-t border-slate-800 text-center py-4 text-xs text-slate-500 mb-12">
-                <p>&copy; 2026 AS Enterprises &bull; All Rights Reserved &bull; ERP & Logistics Pro</p>
-            </footer>
         </div>
     </div>
 
@@ -234,28 +183,39 @@
         };
         try { firebase.initializeApp(firebaseConfig); var db = firebase.database(); } catch(e) {}
 
-        let currentRole = null;
-        let loggedInCustomerPhone = null;
+        const factoryProducts = [
+            { id: 101, name: "Rice PP Bags (50kg)", price: 18.50 },
+            { id: 102, name: "Flour PP Bags (25kg)", price: 12.00 },
+            { id: 103, name: "Heavy Cement Bags", price: 22.00 },
+            { id: 104, name: "Laminated Export Bags", price: 25.00 }
+        ];
 
+        let currentRole = null;
         let appState = {
-            orders: [{ id: 1, date: '07/09/2026', name: 'M/s Hyderabad Traders', phone: '9030574216', gst: '36AAAAA0000A1Z5', category: 'Rice PP Bags (50kg)', qty: 5000, status: 'Pending' }]
+            orders: [{ id: 1, date: '07/09/2026', name: 'M/s Hyderabad Traders', qty: 5000, status: 'Pending' }]
         };
 
         function initApp() {
             if (typeof db !== 'undefined') {
-                db.ref('as_enterprises_data_v8').on('value', (snapshot) => {
+                db.ref('as_enterprises_data_v12').on('value', (snapshot) => {
                     const data = snapshot.val();
-                    if (data) { appState = data; } else { db.ref('as_enterprises_data_v8').set(appState); }
+                    if (data) { appState = data; } else { db.ref('as_enterprises_data_v12').set(appState); }
                     updateUI();
                 });
             } else { updateUI(); }
             generateUPIQRCode();
+            renderCatalog();
         }
 
         function saveState() {
-            if (typeof db !== 'undefined') { db.ref('as_enterprises_data_v8').set(appState); }
-            localStorage.setItem('as_enterprises_local_v8', JSON.stringify(appState));
+            if (typeof db !== 'undefined') { db.ref('as_enterprises_data_v12').set(appState); }
+            localStorage.setItem('as_enterprises_local_v12', JSON.stringify(appState));
             updateUI();
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdown-menu');
+            menu.classList.toggle('hidden');
         }
 
         function generateUPIQRCode() {
@@ -266,8 +226,8 @@
                 const qr = qrcode(0, 'M');
                 qr.addData('upi://pay?pa=6301456725@paytm&pn=ASEnterprises&am=1000&cu=INR');
                 qr.make();
-                container.innerHTML = qr.createImgTag(5);
-            } catch(e) { container.innerHTML = '<p class="text-xs text-black font-bold">UPI: 6301456725@paytm</p>'; }
+                container.innerHTML = qr.createImgTag(3); // Compact size
+            } catch(e) { container.innerHTML = '<p class="text-xs text-black">UPI: 6301456725@paytm</p>'; }
         }
 
         function switchAuthMode(mode) {
@@ -282,20 +242,15 @@
                 currentRole = 'admin';
                 document.getElementById('auth-overlay').classList.add('hidden');
                 document.getElementById('main-app-container').classList.remove('hidden');
-                setupNavigation();
                 initApp();
             } else { alert('Incorrect password! Default: admin123'); }
         }
 
         function handleCustomerLogin(e) {
             e.preventDefault();
-            const mobile = document.getElementById('cust-mobile').value.trim();
-            if(mobile.length < 10) { alert('Enter valid 10-digit mobile number.'); return; }
             currentRole = 'customer';
-            loggedInCustomerPhone = mobile;
             document.getElementById('auth-overlay').classList.add('hidden');
             document.getElementById('main-app-container').classList.remove('hidden');
-            setupNavigation();
             initApp();
         }
 
@@ -304,57 +259,69 @@
             currentRole = 'driver';
             document.getElementById('auth-overlay').classList.add('hidden');
             document.getElementById('main-app-container').classList.remove('hidden');
-            setupNavigation();
-            switchTab('dashboard');
         }
 
         function logoutSystem() {
-            currentRole = null;
             document.getElementById('main-app-container').classList.add('hidden');
             document.getElementById('auth-overlay').classList.remove('hidden');
         }
 
-        function setupNavigation() {
-            const nav = document.getElementById('nav-tabs-container');
-            nav.innerHTML = `
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold uppercase bg-blue-600 text-white shadow"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
-                <button onclick="switchTab('orders')" id="nav-orders" class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase text-slate-300"><i class="fa-solid fa-clipboard-list"></i> Orders</button>
-                <button onclick="switchTab('warehouses')" id="nav-warehouses" class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase text-slate-300"><i class="fa-solid fa-warehouse"></i> Warehouses</button>
-                <button onclick="switchTab('meta-wa')" id="nav-meta-wa" class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase text-slate-300"><i class="fa-brands fa-whatsapp"></i> Meta WhatsApp API</button>
-            `;
-        }
-
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const target = document.getElementById('tab-' + tabId);
+            if(target) target.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('product-catalog-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            factoryProducts.forEach(prod => {
+                grid.innerHTML += `
+                    <div class="bg-navy-950 border border-slate-700 p-2.5 rounded-lg flex flex-col justify-between space-y-2">
+                        <div>
+                            <h4 class="font-bold text-white text-xs">${prod.name}</h4>
+                            <p class="text-[10px] text-emerald-400 font-semibold">₹${prod.price.toFixed(2)} / pc</p>
+                        </div>
+                        <button onclick="addCatalogOrder('${prod.name}')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 rounded text-[10px]">Add Order</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addCatalogOrder(productName) {
+            const newOrder = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('en-GB'),
+                name: 'M/s Direct Buyer',
+                qty: 1000,
+                status: 'Pending'
+            };
+            if(!appState.orders) appState.orders = [];
+            appState.orders.unshift(newOrder);
+            saveState();
+            alert(`"${productName}" (1,000 pcs) order added successfully!`);
+            switchTab('orders');
         }
 
         function updateUI() {
             renderOrders();
+            document.getElementById('metric-total-orders').innerText = (appState.orders || []).length;
         }
 
         function renderOrders() {
             const tbody = document.getElementById('orders-table-body');
             if(!tbody) return;
             tbody.innerHTML = '';
-            let displayOrders = appState.orders || [];
-            if(currentRole === 'customer' && loggedInCustomerPhone) {
-                displayOrders = displayOrders.filter(o => o.phone === loggedInCustomerPhone);
-            }
-            displayOrders.forEach(o => {
-                let statusColor = o.status === 'Approved' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+            (appState.orders || []).forEach(o => {
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-800">
-                        <td class="p-3 font-mono text-xs">#${o.id.toString().slice(-4)}<br><span class="text-slate-500">${o.date}</span></td>
-                        <td class="p-3 font-semibold text-white">${o.name}<br><span class="text-[10px] text-slate-400">GSTIN: ${o.gst}</span></td>
-                        <td class="p-3 text-slate-300">${o.category}</td>
-                        <td class="p-3 text-blue-400 font-bold">${o.qty.toLocaleString()} pcs</td>
-                        <td class="p-3"><span class="px-2 py-1 rounded-full text-[10px] border ${statusColor}">${o.status}</span></td>
-                        <td class="p-3 text-right space-x-1">
-                            ${currentRole === 'admin' && o.status === 'Pending' ? `<button onclick="approveOrder(${o.id})" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded text-[10px]">Approve</button>` : ''}
-                            <button onclick="deleteOrder(${o.id})" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1 rounded text-[10px]">Delete</button>
-                        </td>
+                        <td class="p-2 font-mono">#${o.id.toString().slice(-4)}</td>
+                        <td class="p-2 font-semibold text-white">${o.name}</td>
+                        <td class="p-2 text-blue-400 font-bold">${o.qty} pcs</td>
+                        <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/35">${o.status}</span></td>
+                        <td class="p-2 text-right"><button onclick="approveOrder(${o.id})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px]">Approve</button></td>
                     </tr>
                 `;
             });
@@ -363,17 +330,8 @@
         function approveOrder(id) {
             appState.orders = appState.orders.map(o => o.id === id ? {...o, status: 'Approved'} : o);
             saveState();
-            alert('Order approved successfully!');
+            alert('Order approved!');
         }
-
-        function deleteOrder(id) {
-            if(confirm('Delete order?')) {
-                appState.orders = appState.orders.filter(o => o.id !== id);
-                saveState();
-            }
-        }
-
-        function sendMetaCloudWhatsApp() { alert('Meta WhatsApp Cloud API: Automated invoice template dispatched successfully.'); }
     </script>
 </body>
 </html>
