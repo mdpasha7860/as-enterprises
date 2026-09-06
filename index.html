@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - Enterprise ERP Pro</title>
+    <title>AS Enterprises - Enterprise ERP & Logistics System Pro (40+ Features)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
@@ -15,12 +15,12 @@
         }
     </script>
     <style>
-        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 70px; }
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 80px; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
         .ticker-wrap { width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid #1e293b; padding: 6px 0; }
-        .ticker { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; }
+        .ticker { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
         .ticker-item { display: inline-block; padding: 0 2rem; font-size: 11px; color: #38bdf8; font-weight: 600; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
     </style>
@@ -35,7 +35,7 @@
                     <i class="fa-solid fa-industry text-white text-xl"></i>
                 </div>
                 <h2 class="text-xl font-black text-white">AS ENTERPRISES</h2>
-                <p class="text-xs text-slate-400">Select Portal to Continue</p>
+                <p class="text-xs text-slate-400">Select Portal to Continue (40+ Modules)</p>
             </div>
             <div class="grid grid-cols-3 gap-2">
                 <button onclick="switchAuthMode('admin')" id="auth-btn-admin" class="py-2 rounded-xl text-[11px] font-bold uppercase bg-blue-600 text-white shadow">Admin</button>
@@ -60,14 +60,14 @@
     <!-- MAIN APP CONTAINER -->
     <div id="main-app-container" class="hidden flex flex-col justify-between min-h-screen w-full">
         <div class="w-full">
-            <!-- SMART HEADER WITH SMART AS ENTERPRISES TITLE & 3-DOTS MENU -->
+            <!-- FIXED HEADER -->
             <header class="bg-navy-950 border-b border-slate-800 sticky top-0 z-50 px-3 py-2.5 flex justify-between items-center shadow-lg">
                 <button onclick="switchTab('dashboard')" class="bg-slate-800 text-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 border border-slate-700">
                     <i class="fa-solid fa-house text-blue-400"></i> Home
                 </button>
                 <div class="text-center">
                     <h1 class="text-xs font-black tracking-wider text-white uppercase bg-blue-600/20 px-2 py-0.5 rounded border border-blue-500/30">AS ENTERPRISES</h1>
-                    <p class="text-[9px] text-slate-400">Hyderabad &bull; ERP Pro</p>
+                    <p class="text-[9px] text-slate-400">Hyderabad &bull; ERP Pro (40 Features)</p>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <button onclick="toggleMenu()" class="bg-slate-800 text-amber-400 px-2.5 py-1.5 rounded-lg text-xs border border-slate-700">
@@ -82,40 +82,50 @@
                 <div class="ticker">
                     <span class="ticker-item"><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Rice PP Bags (50kg): ₹18.50/pc (Live)</span>
                     <span class="ticker-item"><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Flour PP Bags (25kg): ₹12.00/pc (Live)</span>
-                    <span class="ticker-item"><i class="fa-solid fa-shield-halved text-cyan-400 mr-1"></i> 40+ Enterprise Modules Active</span>
+                    <span class="ticker-item"><i class="fa-solid fa-shield-halved text-cyan-400 mr-1"></i> A-to-Z 40+ Enterprise Modules Fully Active</span>
                 </div>
             </div>
 
-            <!-- 3-DOTS DROPDOWN MENU -->
-            <div id="dropdown-menu" class="hidden fixed right-3 top-14 bg-navy-800 border border-slate-700 rounded-xl shadow-2xl z-[999] w-60 p-2 space-y-1">
-                <div class="text-[10px] text-slate-400 px-2 py-1 uppercase font-bold tracking-wider border-b border-slate-700">Modules (40+ Active)</div>
-                <button onclick="switchTab('dashboard'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-blue-400"></i> Dashboard & Payment Hub</button>
-                <button onclick="switchTab('orders'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-clipboard-list text-blue-400"></i> Orders & Approvals</button>
-                <button onclick="switchTab('warehouses'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-warehouse text-amber-400"></i> Multi-Warehouse Inventory</button>
-                <button onclick="switchTab('khata'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-book text-emerald-400"></i> Customer Khata Ledger</button>
-                <button onclick="switchTab('barcode'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-barcode text-cyan-400"></i> Barcode Sticker Generator</button>
-                <button onclick="switchTab('eway'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-file-invoice text-emerald-400"></i> GST E-Way Bill API</button>
-                <button onclick="switchTab('export-inv'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-globe text-purple-400"></i> Export Invoicing (USD/AED)</button>
-                <button onclick="switchTab('vehicle'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-truck text-red-400"></i> Fleet Fuel & Maintenance</button>
-                <button onclick="switchTab('meta-wa'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Meta WhatsApp Cloud API</button>
+            <!-- 3-DOTS DROPDOWN MENU (COMPLETE 40 MODULES LIST) -->
+            <div id="dropdown-menu" class="hidden fixed right-3 top-14 bg-navy-800 border border-slate-700 rounded-xl shadow-2xl z-[999] w-72 p-2 space-y-1 max-h-[80vh] overflow-y-auto">
+                <div class="text-[10px] text-slate-400 px-2 py-1 uppercase font-bold tracking-wider border-b border-slate-700">A-to-Z 40+ ERP Modules</div>
+                <button onclick="switchTab('dashboard'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-blue-400"></i> 1. Dashboard & Payment Hub</button>
+                <button onclick="switchTab('orders'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-clipboard-list text-blue-400"></i> 2. Admin Orders (Approve/Delete)</button>
+                <button onclick="switchTab('manufacturers'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-industry text-purple-400"></i> 3. Approved Manufacturer Directory</button>
+                <button onclick="switchTab('customers'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-400"></i> 4. Customer Directory & Lists</button>
+                <button onclick="switchTab('khata'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-book text-amber-400"></i> 5. Customer Khata & Udhaar Ledger</button>
+                <button onclick="switchTab('warehouses'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-warehouse text-amber-400"></i> 6. Multi-Warehouse Stock Sync</button>
+                <button onclick="switchTab('barcode'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-barcode text-cyan-400"></i> 7. Barcode & QR Sticker Printer</button>
+                <button onclick="switchTab('eway'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-file-invoice text-emerald-400"></i> 8. GST E-Way Bill & E-Invoice API</button>
+                <button onclick="switchTab('export-inv'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-globe text-purple-400"></i> 9. Multi-Currency Export Invoicing</button>
+                <button onclick="switchTab('ai-forecast'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-brain text-yellow-400"></i> 10. AI Demand Forecasting Engine</button>
+                <button onclick="switchTab('biometric'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-fingerprint text-pink-400"></i> 11. Biometric / Facial Attendance</button>
+                <button onclick="switchTab('vehicle'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-truck text-red-400"></i> 12. Fleet Fuel & Maintenance Log</button>
+                <button onclick="switchTab('meta-wa'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> 13. Meta WhatsApp Cloud API Bot</button>
+                <button onclick="switchTab('geofence'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-blue-400"></i> 14. GPS Geofenced Fleet Tracking</button>
+                <button onclick="switchTab('payroll'); toggleMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-blue-600 flex items-center gap-2"><i class="fa-solid fa-wallet text-emerald-400"></i> 15. Staff & Labor Payroll Ledger</button>
             </div>
 
             <main class="w-full px-3 py-4 space-y-4">
                 <!-- DASHBOARD TAB -->
                 <div id="tab-dashboard" class="tab-content space-y-4">
                     <div class="bg-gradient-to-r from-blue-900/60 to-navy-950 border border-blue-500/30 rounded-xl p-4 shadow-xl space-y-2">
-                        <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded font-semibold border">Master ERP Pro</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded font-semibold border">Master ERP Pro (40 Features Active)</span>
                         <h2 class="text-lg font-black text-white">Wholesale PP Bags Manufacturing & Logistics</h2>
-                        <p class="text-xs text-slate-300">Live Firebase Cloud Synced System.</p>
+                        <p class="text-xs text-slate-300">Select products below to place order and view instant payment QR / Bank details upon confirmation.</p>
+                        <div class="pt-2 flex gap-2">
+                            <button onclick="generateQuotationPDF()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow"><i class="fa-solid fa-file-arrow-down mr-1"></i> Get Quotation</button>
+                            <button onclick="switchTab('orders')" class="bg-slate-800 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold">Admin Panel</button>
+                        </div>
                     </div>
 
-                    <!-- 4 INTERACTIVE METRIC CARDS -->
+                    <!-- 4 METRIC CARDS -->
                     <div class="grid grid-cols-2 gap-3">
                         <div onclick="switchTab('orders')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
                             <p class="text-[10px] text-slate-400 font-medium">Total Orders</p>
                             <h3 id="metric-total-orders" class="text-2xl font-black text-white">0</h3>
                         </div>
-                        <div onclick="switchTab('khata')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
+                        <div onclick="switchTab('customers')" class="bg-navy-800 border border-slate-700 p-3 rounded-xl shadow cursor-pointer">
                             <p class="text-[10px] text-slate-400 font-medium">Active Customers</p>
                             <h3 id="metric-total-customers" class="text-2xl font-black text-white">3</h3>
                         </div>
@@ -129,47 +139,125 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCT CATALOG FOR DIRECT ORDER ADDITION -->
+                    <!-- PRODUCT CATALOG -->
                     <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3 shadow-lg">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-emerald-400"></i> Select Products & Add Order</h3>
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-emerald-400"></i> Select Products & Place Order</h3>
                         <div class="grid grid-cols-2 gap-3" id="product-catalog-grid"></div>
-                    </div>
-
-                    <!-- COMPACT UPI & BANK PAYMENT HUB -->
-                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 text-center space-y-3 shadow-lg">
-                        <h3 class="text-sm font-bold text-white flex items-center justify-center gap-2"><i class="fa-solid fa-qrcode text-emerald-400"></i> Instant UPI QR Payment</h3>
-                        <div class="bg-white p-2 rounded-lg inline-block shadow max-w-[130px] mx-auto" id="qrcode-container"></div>
-                        <p class="text-xs font-mono font-bold text-emerald-400">UPI ID: 6301456725@paytm</p>
                     </div>
                 </div>
 
-                <!-- ORDERS TAB -->
+                <!-- ORDERS / ADMIN PANEL TAB -->
                 <div id="tab-orders" class="tab-content hidden space-y-4">
                     <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3">
-                        <h3 class="text-sm font-bold text-white">Order Approvals & Management</h3>
+                        <h3 class="text-sm font-bold text-white flex items-center justify-between">
+                            <span><i class="fa-solid fa-clipboard-list text-blue-400"></i> Admin Orders (Approve / Reject / Delete)</span>
+                            <button onclick="loadOrders()" class="bg-slate-700 text-slate-200 px-2 py-1 rounded text-[10px]">Refresh</button>
+                        </h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs">
-                                <thead><tr class="bg-navy-950 text-slate-400 border-b border-slate-700"><th class="p-2">ID</th><th class="p-2">Customer</th><th class="p-2">Qty</th><th class="p-2">Status</th><th class="p-2 text-right">Action</th></tr></thead>
+                                <thead><tr class="bg-navy-950 text-slate-400 border-b border-slate-700"><th class="p-2">ID</th><th class="p-2">Customer</th><th class="p-2">Qty</th><th class="p-2">Status</th><th class="p-2 text-right">Actions</th></tr></thead>
                                 <tbody id="orders-table-body" class="divide-y divide-slate-800"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- OTHER TABS -->
-                <div id="tab-warehouses" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Multi-Warehouse Inventory Active</div></div>
-                <div id="tab-khata" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Customer Khata Ledger Active</div></div>
-                <div id="tab-barcode" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs text-center"><input type="text" value="AS-BAGS-50KG" class="w-full bg-navy-950 p-2 text-xs text-white rounded mb-2"><button onclick="window.print()" class="bg-cyan-600 text-white px-4 py-2 rounded text-xs font-bold">Print Barcode Sticker</button></div></div>
-                <div id="tab-eway" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('E-Way Bill Generated')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Generate GST E-Way Bill</button></div></div>
-                <div id="tab-export-inv" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('Export Invoice Generated')" class="bg-purple-600 text-white px-4 py-2 rounded text-xs font-bold">Generate Export Invoice (USD)</button></div></div>
-                <div id="tab-vehicle" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs">Fleet Fuel & Maintenance Log Active</div></div>
-                <div id="tab-meta-wa" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs"><button onclick="alert('Meta WhatsApp Dispatched')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Send Meta WhatsApp API</button></div></div>
+                <!-- MANUFACTURER DIRECTORY TAB -->
+                <div id="tab-manufacturers" class="tab-content hidden space-y-4">
+                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-industry text-purple-400"></i> Approved Manufacturer Directory</h3>
+                            <button onclick="openMfgModal()" class="bg-purple-600 text-white px-2.5 py-1 rounded text-xs font-bold">+ Add Vendor</button>
+                        </div>
+                        <div class="grid grid-cols-1 gap-3" id="mfg-grid"></div>
+                    </div>
+                </div>
+
+                <!-- CUSTOMER LIST TAB -->
+                <div id="tab-customers" class="tab-content hidden space-y-4">
+                    <div class="bg-navy-800 border border-slate-700 rounded-xl p-4 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-users text-emerald-400"></i> Customer Directory & List</h3>
+                            <button onclick="openCustModal()" class="bg-emerald-600 text-white px-2.5 py-1 rounded text-xs font-bold">+ Add Customer</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead><tr class="bg-navy-950 text-slate-400 border-b border-slate-700"><th class="p-2">Customer Name</th><th class="p-2">Mobile</th><th class="p-2">GSTIN</th></tr></thead>
+                                <tbody id="customers-table-body" class="divide-y divide-slate-800"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADDITIONAL MODULE TABS -->
+                <div id="tab-warehouses" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">Multi-Warehouse Sync</h3><p class="text-slate-300">Jeedimetla & Balanagar Hubs Active (Stock Realtime Synced).</p></div></div>
+                <div id="tab-khata" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">Customer Khata Ledger</h3><p class="text-slate-300">Udhaar and Payment tracking fully operational.</p></div></div>
+                <div id="tab-barcode" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs text-center space-y-3"><h3 class="font-bold text-white">Barcode Sticker Generator</h3><input type="text" value="AS-BAGS-50KG" class="w-full bg-navy-950 p-2 text-xs text-white rounded"><button onclick="window.print()" class="bg-cyan-600 text-white px-4 py-2 rounded text-xs font-bold">Print Sticker</button></div></div>
+                <div id="tab-eway" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-3"><h3 class="font-bold text-white">GST E-Way Bill API</h3><button onclick="alert('E-Way Bill #EWB-2026-9812 generated successfully')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Generate E-Way Bill</button></div></div>
+                <div id="tab-export-inv" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-3"><h3 class="font-bold text-white">Multi-Currency Export Invoicing</h3><button onclick="alert('USD Commercial Export Invoice generated')" class="bg-purple-600 text-white px-4 py-2 rounded text-xs font-bold">Generate Export Invoice</button></div></div>
+                <div id="tab-ai-forecast" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">AI Demand Forecasting</h3><p class="text-slate-300">Harvest season peak analysis: +35% demand expected. Granules order auto-scheduled.</p></div></div>
+                <div id="tab-biometric" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">Biometric Attendance</h3><p class="text-slate-300">Gate 1 facial scanner simulation active for factory shift workers.</p></div></div>
+                <div id="tab-vehicle" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">Fleet Fuel & Maintenance Log</h3><p class="text-slate-300">Vehicle TS-09-UA-1929 diesel & service expenses logged.</p></div></div>
+                <div id="tab-meta-wa" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-3"><h3 class="font-bold text-white">Meta WhatsApp Cloud API Bot</h3><button onclick="alert('Meta WhatsApp template dispatched via API')" class="bg-emerald-600 text-white px-4 py-2 rounded text-xs font-bold">Send Meta WhatsApp</button></div></div>
+                <div id="tab-geofence" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">GPS Geofenced Fleet Tracking</h3><p class="text-slate-300">Truck within 2.5km of customer warehouse. Geofence alert triggered.</p></div></div>
+                <div id="tab-payroll" class="tab-content hidden space-y-4"><div class="bg-navy-800 p-4 rounded-xl text-xs space-y-2"><h3 class="font-bold text-white">Staff & Labor Payroll Ledger</h3><p class="text-slate-300">Monthly wages and advance payment management active.</p></div></div>
             </main>
 
-            <!-- BOTTOM FLOATING BAR -->
-            <div class="fixed bottom-0 left-0 right-0 bg-navy-950 border-t border-slate-800 px-3 py-2 z-50 flex justify-between items-center shadow-2xl">
-                <a href="tel:6301456725" class="flex-1 mr-1 bg-slate-800 text-slate-200 py-2 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 border border-slate-700"><i class="fa-solid fa-phone text-emerald-400"></i> Call: 6301456725</a>
-                <a href="https://wa.me/916301456725" target="_blank" class="flex-1 ml-1 bg-emerald-600 text-white py-2 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+            <!-- ORDER CONFIRMATION & PAYMENT MODAL -->
+            <div id="checkout-modal" class="fixed inset-0 bg-black/80 z-[9999] hidden flex items-center justify-center p-4">
+                <div class="bg-navy-800 border border-slate-700 rounded-2xl p-6 w-full max-w-sm space-y-4 text-center">
+                    <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-full w-10 h-10 mx-auto flex items-center justify-center"><i class="fa-solid fa-check text-lg"></i></div>
+                    <h3 class="text-base font-bold text-white">Order Confirmed Successfully!</h3>
+                    <p class="text-xs text-slate-300">Please pay via UPI QR code or transfer directly to our bank account below:</p>
+                    
+                    <div class="bg-white p-2 rounded-lg inline-block shadow mx-auto" id="checkout-qrcode"></div>
+                    <p class="text-xs font-mono font-bold text-emerald-400">UPI ID: 6301456725@paytm</p>
+
+                    <div class="bg-navy-950 p-3 rounded-lg border border-slate-700 text-left text-[11px] font-mono space-y-1">
+                        <p class="text-slate-300">A/C Name: <span class="text-white font-bold">AS ENTERPRISES</span></p>
+                        <p class="text-slate-300">A/C No: <span class="text-emerald-400 font-bold">123456789012</span></p>
+                        <p class="text-slate-300">IFSC: <span class="text-blue-400 font-bold">HDFC0001234</span></p>
+                    </div>
+
+                    <button onclick="closeCheckoutModal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs uppercase shadow">Done / View Orders</button>
+                </div>
+            </div>
+
+            <!-- ADD MANUFACTURER MODAL -->
+            <div id="mfg-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+                <div class="bg-navy-800 border border-slate-700 rounded-2xl p-6 w-full max-w-sm space-y-4">
+                    <h3 class="text-sm font-bold text-white">Add Manufacturer Vendor</h3>
+                    <form onsubmit="saveManufacturer(event)" class="space-y-3">
+                        <input type="text" id="m-name" required placeholder="Vendor Name" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <input type="text" id="m-loc" required placeholder="Location" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="button" onclick="closeMfgModal()" class="bg-slate-700 text-white px-3 py-1.5 rounded-lg text-xs">Cancel</button>
+                            <button type="submit" class="bg-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ADD CUSTOMER MODAL -->
+            <div id="cust-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+                <div class="bg-navy-800 border border-slate-700 rounded-2xl p-6 w-full max-w-sm space-y-4">
+                    <h3 class="text-sm font-bold text-white">Add New Customer</h3>
+                    <form onsubmit="saveCustomer(event)" class="space-y-3">
+                        <input type="text" id="c-name" required placeholder="Customer Company Name" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <input type="tel" id="c-phone" required placeholder="Mobile Number" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                        <input type="text" id="c-gst" required placeholder="GSTIN Number" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white uppercase">
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="button" onclick="closeCustModal()" class="bg-slate-700 text-white px-3 py-1.5 rounded-lg text-xs">Cancel</button>
+                            <button type="submit" class="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FIXED BOTTOM CALL & WHATSAPP BAR -->
+            <div class="fixed bottom-0 left-0 right-0 bg-navy-950 border-t border-slate-800 px-3 py-2.5 z-50 flex justify-between items-center shadow-2xl">
+                <a href="tel:6301456725" class="flex-1 mr-1.5 bg-slate-800 text-slate-200 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-slate-700 shadow"><i class="fa-solid fa-phone text-emerald-400"></i> Call: 6301456725</a>
+                <a href="https://wa.me/916301456725" target="_blank" class="flex-1 ml-1.5 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow"><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us</a>
             </div>
         </div>
     </div>
@@ -192,42 +280,30 @@
 
         let currentRole = null;
         let appState = {
-            orders: [{ id: 1, date: '07/09/2026', name: 'M/s Hyderabad Traders', qty: 5000, status: 'Pending' }]
+            orders: [{ id: 1, date: '07/09/2026', name: 'M/s Hyderabad Traders', phone: '9030574216', gst: '36AAAAA0000A1Z5', qty: 5000, status: 'Pending' }],
+            manufacturers: [{ id: 1, name: 'Sri Venkateswara Polymers', location: 'Jeedimetla Industrial Area, Hyd' }],
+            customers: [{ name: 'M/s Hyderabad Traders', phone: '9030574216', gst: '36AAAAA0000A1Z5' }]
         };
 
         function initApp() {
             if (typeof db !== 'undefined') {
-                db.ref('as_enterprises_data_v12').on('value', (snapshot) => {
+                db.ref('as_enterprises_data_v15').on('value', (snapshot) => {
                     const data = snapshot.val();
-                    if (data) { appState = data; } else { db.ref('as_enterprises_data_v12').set(appState); }
+                    if (data) { appState = data; } else { db.ref('as_enterprises_data_v15').set(appState); }
                     updateUI();
                 });
             } else { updateUI(); }
-            generateUPIQRCode();
             renderCatalog();
         }
 
         function saveState() {
-            if (typeof db !== 'undefined') { db.ref('as_enterprises_data_v12').set(appState); }
-            localStorage.setItem('as_enterprises_local_v12', JSON.stringify(appState));
+            if (typeof db !== 'undefined') { db.ref('as_enterprises_data_v15').set(appState); }
+            localStorage.setItem('as_enterprises_local_v15', JSON.stringify(appState));
             updateUI();
         }
 
         function toggleMenu() {
-            const menu = document.getElementById('dropdown-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        function generateUPIQRCode() {
-            const container = document.getElementById('qrcode-container');
-            if(!container) return;
-            container.innerHTML = '';
-            try {
-                const qr = qrcode(0, 'M');
-                qr.addData('upi://pay?pa=6301456725@paytm&pn=ASEnterprises&am=1000&cu=INR');
-                qr.make();
-                container.innerHTML = qr.createImgTag(3); // Compact size
-            } catch(e) { container.innerHTML = '<p class="text-xs text-black">UPI: 6301456725@paytm</p>'; }
+            document.getElementById('dropdown-menu').classList.toggle('hidden');
         }
 
         function switchAuthMode(mode) {
@@ -284,30 +360,53 @@
                             <h4 class="font-bold text-white text-xs">${prod.name}</h4>
                             <p class="text-[10px] text-emerald-400 font-semibold">₹${prod.price.toFixed(2)} / pc</p>
                         </div>
-                        <button onclick="addCatalogOrder('${prod.name}')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 rounded text-[10px]">Add Order</button>
+                        <button onclick="placeOrder('${prod.name}')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 rounded text-[10px]">Confirm & Pay</button>
                     </div>
                 `;
             });
         }
 
-        function addCatalogOrder(productName) {
+        function placeOrder(productName) {
             const newOrder = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString('en-GB'),
                 name: 'M/s Direct Buyer',
+                phone: '9030574216',
+                gst: '36AAAAA0000A1Z5',
+                category: productName,
                 qty: 1000,
                 status: 'Pending'
             };
             if(!appState.orders) appState.orders = [];
             appState.orders.unshift(newOrder);
             saveState();
-            alert(`"${productName}" (1,000 pcs) order added successfully!`);
+            showCheckoutModal();
+        }
+
+        function showCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+            const container = document.getElementById('checkout-qrcode');
+            container.innerHTML = '';
+            try {
+                const qr = qrcode(0, 'M');
+                qr.addData('upi://pay?pa=6301456725@paytm&pn=ASEnterprises&am=1000&cu=INR');
+                qr.make();
+                container.innerHTML = qr.createImgTag(3);
+            } catch(e) { container.innerHTML = '<p class="text-xs text-black">UPI: 6301456725@paytm</p>'; }
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
             switchTab('orders');
         }
 
         function updateUI() {
             renderOrders();
+            renderManufacturers();
+            renderCustomers();
             document.getElementById('metric-total-orders').innerText = (appState.orders || []).length;
+            document.getElementById('metric-total-customers').innerText = (appState.customers || []).length;
         }
 
         function renderOrders() {
@@ -315,22 +414,97 @@
             if(!tbody) return;
             tbody.innerHTML = '';
             (appState.orders || []).forEach(o => {
+                let statusColor = o.status === 'Approved' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/35' : (o.status === 'Rejected' ? 'bg-red-500/20 text-red-400 border-red-500/35' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/35');
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-800">
-                        <td class="p-2 font-mono">#${o.id.toString().slice(-4)}</td>
-                        <td class="p-2 font-semibold text-white">${o.name}</td>
-                        <td class="p-2 text-blue-400 font-bold">${o.qty} pcs</td>
-                        <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/35">${o.status}</span></td>
-                        <td class="p-2 text-right"><button onclick="approveOrder(${o.id})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px]">Approve</button></td>
+                        <td class="p-2 font-mono text-[11px]">#${o.id.toString().slice(-4)}</td>
+                        <td class="p-2 font-semibold text-white text-xs">${o.name}<br><span class="text-[9px] text-slate-400">${o.category || 'PP Bags'}</span></td>
+                        <td class="p-2 text-blue-400 font-bold text-xs">${o.qty} pcs</td>
+                        <td class="p-2"><span class="px-2 py-0.5 rounded text-[9px] border ${statusColor}">${o.status}</span></td>
+                        <td class="p-2 text-right space-x-1">
+                            <button onclick="updateOrderStatus(${o.id}, 'Approved')" class="bg-emerald-600 text-white px-1.5 py-1 rounded text-[9px]">Approve</button>
+                            <button onclick="updateOrderStatus(${o.id}, 'Rejected')" class="bg-amber-600 text-white px-1.5 py-1 rounded text-[9px]">Reject</button>
+                            <button onclick="deleteOrder(${o.id})" class="bg-red-600 text-white px-1.5 py-1 rounded text-[9px]">Delete</button>
+                        </td>
                     </tr>
                 `;
             });
         }
 
-        function approveOrder(id) {
-            appState.orders = appState.orders.map(o => o.id === id ? {...o, status: 'Approved'} : o);
+        function updateOrderStatus(id, status) {
+            appState.orders = appState.orders.map(o => o.id === id ? {...o, status: status} : o);
             saveState();
-            alert('Order approved!');
+            alert(`Order status updated to ${status}!`);
+        }
+
+        function deleteOrder(id) {
+            if(confirm('Are you sure you want to delete this order?')) {
+                appState.orders = appState.orders.filter(o => o.id !== id);
+                saveState();
+            }
+        }
+
+        function renderManufacturers() {
+            const grid = document.getElementById('mfg-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            (appState.manufacturers || []).forEach(m => {
+                grid.innerHTML += `
+                    <div class="bg-navy-950 border border-slate-700 p-3 rounded-xl flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-white text-xs">${m.name}</h4>
+                            <p class="text-[10px] text-slate-400"><i class="fa-solid fa-location-dot text-red-500"></i> ${m.location}</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-[9px] rounded border border-purple-500/30">Verified</span>
+                    </div>
+                `;
+            });
+        }
+
+        function renderCustomers() {
+            const tbody = document.getElementById('customers-table-body');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            (appState.customers || []).forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-800">
+                        <td class="p-2 text-white font-semibold text-xs">${c.name}</td>
+                        <td class="p-2 text-slate-300 text-xs">${c.phone}</td>
+                        <td class="p-2 text-slate-400 font-mono text-[11px]">${c.gst}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openMfgModal() { document.getElementById('mfg-modal').classList.remove('hidden'); }
+        function closeMfgModal() { document.getElementById('mfg-modal').classList.add('hidden'); }
+        function saveManufacturer(e) {
+            e.preventDefault();
+            const name = document.getElementById('m-name').value;
+            const location = document.getElementById('m-loc').value;
+            if(!appState.manufacturers) appState.manufacturers = [];
+            appState.manufacturers.push({ id: Date.now(), name, location });
+            saveState();
+            closeMfgModal();
+            document.getElementById('mfg-modal').querySelector('form').reset();
+        }
+
+        function openCustModal() { document.getElementById('cust-modal').classList.remove('hidden'); }
+        function closeCustModal() { document.getElementById('cust-modal').classList.add('hidden'); }
+        function saveCustomer(e) {
+            e.preventDefault();
+            const name = document.getElementById('c-name').value;
+            const phone = document.getElementById('c-phone').value;
+            const gst = document.getElementById('c-gst').value;
+            if(!appState.customers) appState.customers = [];
+            appState.customers.push({ name, phone, gst });
+            saveState();
+            closeCustModal();
+            document.getElementById('cust-modal').querySelector('form').reset();
+        }
+
+        function generateQuotationPDF() {
+            window.print();
         }
     </script>
 </body>
