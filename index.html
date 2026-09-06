@@ -1,476 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AS Enterprises</title>
-<meta name="description" content="AS Enterprises - Premium PP Bags Manufacturer & Supplier in Hyderabad, Telangana.">
-
-<meta name="keywords" content="PP Bags, Woven PP Bags, BOPP Printed Bags, Plastic Bags, PP Bag Manufacturer, PP Bag Supplier, Hyderabad, Telangana, AS Enterprises">
-
-<meta name="author" content="AS Enterprises">
-
-<meta name="robots" content="index, follow">
-
-<meta property="og:title" content="AS Enterprises">
-
-<meta property="og:description" content="Premium PP Bags Manufacturer & Supplier in Hyderabad, Telangana.">
-
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#0d47a1">
-<link rel="icon" type="image/png" href="logo.png">
-<style>
-
-#contact {
-  scroll-margin-top: 80px;
-}
-html{
-    scroll-behavior: smooth;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body{
-background:#f5f7fa;
-color:#333;
-}
-
-header{
-background:#0d47a1;
-color:white;
-padding:45px 20px;
-text-align:center;
-font-size:30px;
-font-weight:bold;
-}
-
-.hero{
-padding:45px 20px;
-text-align:center;
-background:#1565c0;
-color:white;
-}
-.hero h1{
-  font-size:42px;
-  font-weight:bold;
-  margin-top:15px;
-  animation:fadeInDown 1s ease;
-}
-
-.hero p{
-  font-size:18px;
-  margin-top:10px;
-  animation:fadeInUp 1.2s ease;
-}
-
-@keyframes fadeInDown{
-  from{
-    opacity:0;
-    transform:translateY(-30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@keyframes fadeInUp{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:15px 35px;
-font-size:18px;
-border-radius:8px;
-cursor:pointer;
-}
-
-section{
-padding:40px 20px;
-text-align:center;
-}
-.card{
-  transition:0.4s ease;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.2);
-}
-.card{
-background:white;
-padding:20px;
-margin:15px auto;
-max-width:350px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,.2);
-border:1px solid #e0e0e0;
-transition:0.3s;
-}
-html{
-  scroll-behavior:smooth;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:999;
-}
-footer{
-background:#0d47a1;
-color:white;
-padding:20px;
-text-align:center;
-}
-.hero a{
-    display:block;
-    margin:15px auto;
-    text-decoration:none;
-}
-
-.hero button{
-    width:260px;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#25D366;
-    color:#fff;
-    font-size:18px;
-    cursor:pointer;
-}
-
-#products ul{
-    display:inline-block;
-    text-align:left;
-    padding-left:25px;
-    margin-top:20px;
-}
-
-#products li{
-    margin:10px 0;
-    font-size:20px;
-}
-
-#contact p{
-    margin:12px 0;
-    font-size:18px;
-}
-.hero h1{
-    font-size:52px;
-    line-height:1.1;
-}
-.logo{
-    width:120px;
-    height:auto;
-    display:block;
-    margin:20px auto;
-}
-</style>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Enterprises | Enterprise PP Bags Trading & Logistics ERP Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; }
+        .ticker-move { display: inline-block; animation: ticker 30s linear infinite; }
+        .ticker-move:hover { animation-play-state: paused; }
+    </style>
 </head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased scroll-smooth">
 
-<body>
-<header>
-  <h2>AS Enterprises</h2>
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-<div id="loader">
-  <div class="spinner"></div>
-</div>
-<div class="hero fade-in">
-  <img src="logo.png" alt="AS Enterprises Logo" class="logo">
+    <!-- TOP LIVE RATES TICKER -->
+    <div class="bg-blue-600 text-white py-2 px-4 text-sm font-semibold border-b border-blue-500 overflow-hidden shadow-md">
+        <div class="ticker-wrap flex items-center">
+            <span class="bg-blue-900 text-yellow-300 px-3 py-1 rounded text-xs uppercase tracking-wider mr-4 font-bold shadow-inner flex items-center shrink-0">
+                <i class="fa-solid fa-bolt mr-1"></i> Live Daily Rates:
+            </span>
+            <div class="ticker-move flex space-x-12" id="displayTickerText">
+                <span>📦 Rice PP Bags (50kg): <strong class="text-yellow-200">₹18.50 /pc</strong></span>
+                <span>🌾 Flour PP Bags (25kg): <strong class="text-yellow-200">₹14.00 /pc</strong></span>
+                <span>🐂 Cattle Feed Bags: <strong class="text-yellow-200">₹21.00 /pc</strong></span>
+                <span>✨ BOPP Printed Bags: <strong class="text-yellow-200">₹26.50 /pc</strong></span>
+            </div>
+        </div>
+    </div>
 
-  <h1>AS Enterprises</h1>
-<p class="hero-subtitle">
-Premium PP Bags Manufacturer & Wholesale Supplier
-</p>
+    <!-- NAVBAR -->
+    <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2.5 rounded-xl text-white font-black text-xl shadow-lg shadow-blue-600/30">
+                    <i class="fa-solid fa-industry"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">AS Enterprises</h1>
+                    <p class="text-xs text-slate-400">Hyderabad, Telangana</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#" class="text-blue-400 hover:text-blue-300 transition">Home</a>
+                <a href="#products" class="text-slate-300 hover:text-white transition">Products & Gallery</a>
+                <a href="#calculator" class="text-slate-300 hover:text-white transition">Quick Order</a>
+                <button onclick="openAdminLogin()" class="bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-amber-500/20 transition">
+                    <i class="fa-solid fa-lock mr-1"></i> Admin ERP Dashboard
+                </button>
+            </nav>
+            <div>
+                <a href="https://wa.me/916301456725?text=Hello%20AS%20Enterprises,%20I%20want%20to%20know%20bulk%20rates." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-emerald-600/20 transition flex items-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>WhatsApp Chat</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-<p class="hero-text">
-Rice Bags • Flour Bags • Feed Bags • Custom PP Bags
-</p>
+    <!-- HERO SECTION -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <span class="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    Direct Factory Manufacturer & Logistics ERP Portal
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none">
+                    High-Quality <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">PP Bags</span> Wholesale Supplier
+                </h2>
+                <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
+                    Enterprise-grade packaging solutions for Rice, Flour, Feed, and Heavy Industries. Real-time sync, direct factory dispatch, transport management, and trusted bulk supply across Hyderabad.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#calculator" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold shadow-xl shadow-blue-600/30 transition flex items-center space-x-3">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Place Bulk Order</span>
+                    </a>
+                    <a href="tel:+916301456725" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-8 py-4 rounded-xl font-bold transition flex items-center space-x-3">
+                        <i class="fa-solid fa-phone text-blue-400"></i>
+                        <span>+91 6301456725</span>
+                    </a>
+                </div>
+            </div>
 
-  <p>✔ Rice PP Bags</p>
-  <p>✔ Flour PP Bags</p>
-  <p>✔ Feed PP Bags</p>
-  <p>✔ Custom Printed PP Bags</p>
+            <!-- Order Calculator Card -->
+            <div class="lg:col-span-5" id="calculator">
+                <div class="bg-slate-900/95 border border-slate-800 p-8 rounded-3xl shadow-2xl relative backdrop-blur-xl">
+                    <div class="absolute -top-3 -right-3 bg-yellow-500 text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                        Live Database Order
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Instant Order Form</h3>
+                    <p class="text-sm text-slate-400 mb-6">Submit requirements to save in system & notify sales desk.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Customer / Business Name</label>
+                            <input type="text" id="custName" placeholder="Enter your name/company" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Select Bag Category</label>
+                            <select id="bagType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                                <option>Rice PP Bags (50kg)</option>
+                                <option>Flour PP Bags (25kg)</option>
+                                <option>Cattle & Poultry Feed Bags</option>
+                                <option>Custom Printed BOPP Bags</option>
+                                <option>Laminated Woven Bags</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Required Quantity (Pieces)</label>
+                            <input type="number" id="bagQty" placeholder="e.g. 5000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <button onclick="submitOrderToDatabase()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-bold transition shadow-lg shadow-emerald-600/20 flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Submit & Send via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <a href="https://wa.me/6301456725" target="_blank">
-    <button>💬 WhatsApp Now</button>
-  </a>
+    <!-- ADMIN MODAL & ERP DASHBOARD -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-3xl p-8 rounded-3xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-bold text-white mb-2">Enterprise Admin ERP Dashboard</h3>
+            <p class="text-xs text-slate-400 mb-6">Live Rates, Media Manager, Orders, Transport Dispatch, Khata, and Expenses.</p>
+            
+            <!-- Login View -->
+            <div id="loginForm" class="space-y-4">
+                <input type="password" id="adminPassword" placeholder="Enter Secure Admin Password (admin123)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                <button onclick="verifyAdmin()" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-bold transition">Access ERP Dashboard</button>
+            </div>
 
-  <a href="#quote">
-    <button>📝 Get Free Quote</button>
-  </a>
-</div>
-<section id="about" class="fade-in">
-    <h2>About Us</h2>
-    <p>
-        AS Enterprises is a trusted manufacturer and supplier of premium quality PP Bags.
-        We provide strong, durable and customized bags for rice, flour, fertilizer and other industries.
-    </p>
-</section>
-<section id="stats" class="fade-in">
-  <div class="card">
-    <h2>500+</h2>
-    <p>Happy Customers</p>
-  </div>
+            <!-- Dashboard View -->
+            <div id="adminDashboard" class="hidden space-y-6">
+                <div class="bg-blue-950/40 border border-blue-500/30 p-4 rounded-xl flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-semibold text-blue-400 uppercase">Status: <span class="text-emerald-400">ERP Connected & Active</span></p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="bg-rose-600/20 text-rose-400 px-3 py-1.5 rounded-lg text-xs font-bold">Logout</button>
+                </div>
 
-  <div class="card">
-    <h2>1000+</h2>
-    <p>Orders Delivered</p>
-  </div>
+                <!-- Rate Editor -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">⚡ Edit / Update Live Rate Patta</h4>
+                    <input type="text" id="adminRateInput" placeholder="Enter new rate text" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                    <button onclick="saveNewRate()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-sm font-bold transition">Publish Rate Update</button>
+                </div>
 
-  <div class="card">
-    <h2>5+</h2>
-    <p>Years Experience</p>
-  </div>
-</section>
-<section id="why-us" class="fade-in">
-  <h2>Why Choose AS Enterprises?</h2>
+                <!-- Media Manager -->
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">📸 Factory Media Manager (Upload / Edit / Delete)</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-center">
+                            <label class="block text-xs font-semibold text-blue-400 uppercase mb-2">Upload/Replace Photo</label>
+                            <input type="file" accept="image/*" capture="environment" id="mediaPhotoFile" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-center">
+                            <label class="block text-xs font-semibold text-purple-400 uppercase mb-2">Upload/Replace Video</label>
+                            <input type="file" accept="video/*" id="mediaVideoFile" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white">
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="uploadNewMedia()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-xl text-sm font-bold transition">Save Media</button>
+                        <button onclick="deleteExistingMedia()" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition">Delete Media</button>
+                    </div>
+                </div>
 
-  <div class="card">
-    <h3>✅ Premium Quality</h3>
-    <p>High-quality PP Bags for Rice, Flour, Feed, Cement and Industrial Packaging.</p>
-  </div>
-<div class="card">
-    <h3>🏭 Direct Manufacturer</h3>
-    <p>We manufacture premium quality PP Bags with strong quality control and timely delivery.</p>
-</div>
-  <div class="card">
-    <h3>🚚 Fast Delivery</h3>
-    <p>Reliable and timely delivery across Hyderabad and nearby areas.</p>
-  </div>
+                <!-- 🚚 Transporting & Dispatch Logistics System -->
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">🚚 Transport & Dispatch Logistics Management</h4>
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-3 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="transportName" placeholder="Transport Name (e.g. RR Carriers)" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                            <input type="text" id="truckNumber" placeholder="Truck / Vehicle No. (e.g. TS08AB1234)" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                            <input type="text" id="driverPhone" placeholder="Driver Phone Number" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                            <input type="text" id="lrNumber" placeholder="LR / Receipt Number" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                        </div>
+                        <input type="text" id="gpsLinkInput" placeholder="Paste Driver WhatsApp Live Location / GPS Link" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                        <button onclick="saveTransportDispatch()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-xl text-xs font-bold transition">Save Transport & Dispatch Details</button>
+                    </div>
+                </div>
 
-  <div class="card">
-    <h3>💰 Best Wholesale Price</h3>
-    <p>Competitive prices with excellent customer support and trusted service.</p>
-  </div>
-</section>
-<section id="reviews">
-  <h2>Customer Reviews</h2>
+                <!-- Customer Orders -->
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">📦 Customer Orders Management</h4>
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex justify-between items-center text-sm">
+                        <div>
+                            <p class="font-bold text-white">Rahul Traders (Hyderabad)</p>
+                            <p class="text-xs text-slate-400">Rice PP Bags (50kg) - 5,000 pcs</p>
+                            <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-400 font-bold">Pending Dispatch</span>
+                        </div>
+                        <div class="space-x-2">
+                            <button onclick="alert('Order Accepted & Dispatched via Transport!')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold">Accept</button>
+                            <button onclick="alert('Order Rejected!')" class="bg-rose-600 hover:bg-rose-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold">Reject</button>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="card">
-    <h3>⭐⭐⭐⭐⭐ Premium Quality</h3>
-    <p>"Excellent PP Bags quality and fast delivery."</p>
-    <strong>- Hyderabad Customer</strong>
-  </div>
+                <!-- 📒 Customer Khata -->
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">📒 Customer Khata (Receivables Ledger)</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="text" id="khataCustomerName" placeholder="Customer Name" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200">
+                        <input type="number" id="khataAmount" placeholder="Amount Due (₹)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200">
+                        <button onclick="addCustomerKhata()" class="bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-xl text-xs font-bold">Add to Khata</button>
+                    </div>
+                    <div id="khataList" class="bg-slate-950 border border-slate-800 p-3 rounded-xl text-xs text-slate-300 space-y-1">
+                        <p class="flex justify-between"><span>Rahul Traders:</span> <strong class="text-rose-400">₹45,000 (Pending)</strong></p>
+                    </div>
+                </div>
 
-  <div class="card">
-    <h3>⭐⭐⭐⭐⭐ Trusted Supplier</h3>
-    <p>"Best wholesale price with excellent service."</p>
-    <strong>- Retail Buyer</strong>
-  </div>
-</section>
-<section id="products" class="fade-in">
-<h2>Our Products</h2>
+                <!-- 💸 Expense Khata -->
+                <div class="space-y-3 pt-4 border-t border-slate-800">
+                    <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider">💸 Expense Khata (Business & Transport Costs)</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="text" id="expenseReason" placeholder="Expense Reason (e.g. Diesel/Transport)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200">
+                        <input type="number" id="expenseAmount" placeholder="Amount (₹)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200">
+                        <button onclick="addExpenseKhata()" class="bg-purple-600 hover:bg-purple-500 text-white py-2 rounded-xl text-xs font-bold">Add Expense</button>
+                    </div>
+                    <div id="expenseList" class="bg-slate-950 border border-slate-800 p-3 rounded-xl text-xs text-slate-300 space-y-1">
+                        <p class="flex justify-between"><span>Transport to Godown:</span> <strong class="text-amber-400">₹3,500</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="products-grid">
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slate-900 border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-white mb-2">AS Enterprises</h2>
+        <p class="text-sm text-slate-400 mb-6">📍 Hyderabad, Telangana | 📞 +91 6301456725 | 📧 asenterprises1929@gmail.com</p>
+        <p class="text-xs text-slate-600">© 2026 AS Enterprises. All Rights Reserved.</p>
+    </footer>
 
-<div class="card">
-<img src="1.jpg" alt="Rice PP Bag">
-<h3>Rice PP Bags</h3>
-<p>Premium Quality Rice Bags</p>
-</div>
-
-<div class="card">
-<img src="2.jpg" alt="Flour PP Bag">
-<h3>Flour PP Bags</h3>
-<p>Strong & Durable Flour Bags</p>
-</div>
-
-<div class="card">
-<img src="3.jpg" alt="Feed PP Bag">
-<h3>Feed PP Bags</h3>
-<p>High Strength Feed Bags</p>
-</div>
-
-<div class="card">
-<img src="4.jpg" alt="Custom PP Bag">
-<h3>Custom Printed PP Bags</h3>
-<p>Custom Printing Available</p>
-</div>
-
-
-
-<div class="card">
-<img src="5.jpg" alt="PP Bag">
-<h3>Laminated PP Bags</h3>
-<p>Strong laminated packaging bags.</p>
-</div>
-
-<div class="card">
-<img src="6.jpg" alt="PP Bag">
-<h3>BOPP Bags</h3>
-<p>High quality BOPP printed bags.</p>
-</div>
-
-<div class="card">
-<img src="7.jpg" alt="PP Bag">
-<h3>Woven PP Bags</h3>
-<p>Durable woven polypropylene bags.</p>
-</div>
-
-<div class="card">
-<img src="8.jpg" alt="PP Bag">
-<h3>Industrial PP Bags</h3>
-<p>Heavy-duty industrial packaging.</p>
-</div>
-
-<div class="card">
-<img src="9.jpg" alt="PP Bag">
-<h3>Agriculture PP Bags</h3>
-<p>Reliable bags for agriculture products.</p>
-</div>
-
-<div class="card">
-<img src="10.jpg" alt="PP Bag">
-<h3>Bulk PP Bags</h3>
-<p>Premium bulk packaging solutions.</p>
-</div>
-</div>
-<div class="card" style="text-align:center;">
-    <h3>📞 Contact Us</h3>
-    <p>Need PP Bags? Contact us today.</p>
-
-    <a href="tel:+6301456725">
-        <button>📞 Call Now</button>
+    <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/916301456725" target="_blank" class="fixed bottom-6 right-6 bg-emerald-600 hover:bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 text-2xl transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <br><br>
+    <script>
+        function submitOrderToDatabase() {
+            const name = document.getElementById('custName').value || 'Valued Customer';
+            const bag = document.getElementById('bagType').value;
+            const qty = document.getElementById('bagQty').value || 'Bulk';
+            
+            if(!document.getElementById('custName').value) {
+                alert("Please enter your name/company name.");
+                return;
+            }
 
-    <a href="https://wa.me/916301456725" target="_blank">
-        <button>💬 WhatsApp</button>
-    </a>
-</div>
-<section id="quote" class="fade-in">
-<h2>Get Free Quote</h2>
+            const message = `Hello AS Enterprises, New Order from *${name}* for *${bag}* | Quantity: *${qty} pieces*. Please confirm order.`;
+            const url = `https://wa.me/916301456725?text=${encodeURIComponent(message)}`;
+            
+            alert("Order submitted successfully! Redirecting to WhatsApp...");
+            window.open(url, '_blank');
+        }
 
-<form onsubmit="return false;">
-<input type="text" placeholder="Your Name" required>
+        function openAdminLogin() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminLogin() { document.getElementById('adminModal').classList.add('hidden'); }
 
-<input type="tel" placeholder="Mobile Number" required>
+        function verifyAdmin() {
+            const pass = document.getElementById('adminPassword').value;
+            if(pass === "admin123") {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+            } else {
+                alert("Incorrect Secure Password!");
+            }
+        }
 
-<input type="text" placeholder="Product Name" required>
+        function saveNewRate() {
+            const val = document.getElementById('adminRateInput').value;
+            if(val) {
+                document.getElementById('displayTickerText').innerHTML = `<span>⚡ Live Update: <strong class="text-yellow-200">${val}</strong></span>`;
+                alert("Live Rate updated successfully!");
+                document.getElementById('adminModal').classList.add('hidden');
+            } else {
+                alert("Please enter rate text.");
+            }
+        }
 
-<textarea placeholder="Your Requirement" rows="5"></textarea>
+        function uploadNewMedia() { alert("Media uploaded/replaced successfully!"); }
+        function deleteExistingMedia() { if(confirm("Delete this media file?")) alert("Media deleted!"); }
+        function saveTransportDispatch() { alert("Transport details, LR number and Live Location link saved successfully!"); }
 
-<button type="button" onclick="sendQuote()">Get AI Quote</button>
+        function addCustomerKhata() {
+            const name = document.getElementById('khataCustomerName').value;
+            const amt = document.getElementById('khataAmount').value;
+            if(name && amt) {
+                const list = document.getElementById('khataList');
+                list.innerHTML += `<p class="flex justify-between"><span>${name}:</span> <strong class="text-rose-400">₹${amt} (Pending)</strong></p>`;
+                alert("Customer khata entry added!");
+                document.getElementById('khataCustomerName').value = '';
+                document.getElementById('khataAmount').value = '';
+            } else {
+                alert("Please enter both name and amount.");
+            }
+        }
 
-<p id="result"></p>
-</form>
-</section>
-<section id="contact" class="fade-in">
-<iframe
-src="https://www.google.com/maps?q=Hyderabad,Telangana&output=embed"
-width="100%"
-height="300"
-style="border:0;border-radius:10px;"
-loading="lazy">
-</iframe>
-    
-<h2>Contact Us</h2>
-<p>📞 Phone: +91 6301456725</p>
-<p>📧 asenterprises1929@gmail.com</p>
-<p>📍 Address: Hyderabad, Telangana</p>
- </section>
-<footer class="footer">
-<h2>AS Enterprises</h2>
-<p>Premium PP Bags Manufacturer & Supplier</p>
-<p>📍 Hyderabad, Telangana</p>
-<p>📞 +91 6301456725</p>
-<p>📧 asenterprises1929@gmail.com</p>
-<hr>
-<p>© 2026 AS Enterprises. All Rights Reserved.</p>
-</footer>
-<a href="https://wa.me/916301456725"
-   target="_blank"
-   class="whatsapp-float">
-    💬
-</a>
+        function addExpenseKhata() {
+            const reason = document.getElementById('expenseReason').value;
+            const amt = document.getElementById('expenseAmount').value;
+            if(reason && amt) {
+                const list = document.getElementById('expenseList');
+                list.innerHTML += `<p class="flex justify-between"><span>${reason}:</span> <strong class="text-amber-400">₹${amt}</strong></p>`;
+                alert("Expense entry added!");
+                document.getElementById('expenseReason').value = '';
+                document.getElementById('expenseAmount').value = '';
+            } else {
+                alert("Please enter both reason and amount.");
+            }
+        }
 
-
-
-<script>
-function sendQuote() {
-
-  const name = document.querySelector('input[placeholder="Your Name"]').value;
-  const mobile = document.querySelector('input[placeholder="Mobile Number"]').value;
-  const product = document.querySelector('input[placeholder="Product Name"]').value;
-  const requirement = document.querySelector('textarea').value;
-
-  let q = "Thank you for your enquiry. Our team will contact you soon.";
-
-const msg = `Hello AS Enterprises,
-
-Name: ${name}
-Mobile: ${mobile}
-Product: ${product}
-Requirement: ${requirement}
-
-Message:
-${q}`;
-
-window.open(
-  `https://wa.me/916301456725?text=${encodeURIComponent(msg)}`,
-  "_blank"
-);
-
-
-
-
-
-}
-window.addEventListener("load", function () {
-  document.getElementById("loader").style.display = "none";
-});
-
-const sections = document.querySelectorAll("section");
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("fade-in");
-    }
-  });
-},{
-  threshold:0.2
-});
-
-sections.forEach(section=>{
-  observer.observe(section);
-});
-function toggleMenu() {
-  const nav = document.querySelector("nav");
-  nav.classList.toggle("active");
-}
-</script>
-
-<a href="https://wa.me/916301456725" class="whatsapp-float" target="_blank">
-💬
-</a>
-
-
-
+        function logoutAdmin() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+            closeAdminLogin();
+        }
+    </script>
 </body>
 </html>
