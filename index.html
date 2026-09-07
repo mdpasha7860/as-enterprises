@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - PP Bags ERP Pro (Accurate Numbers & UPI)</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Media Upload Live)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -50,6 +50,8 @@
         .hero-card h1 span { color: #f97316; }
         .hero-card p { font-size: 15px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
         
+        .menu-guide-banner { background: rgba(249, 115, 22, 0.2); border: 1px dashed #f97316; color: #fed7aa; padding: 12px; border-radius: 8px; font-size: 13.5px; font-weight: 800; text-align: center; margin-bottom: 16px; cursor: pointer; }
+
         .quick-action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
         .qa-btn-call { background: #065f46; color: #fff; padding: 13px 8px; border-radius: 8px; font-size: 13px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #047857; }
         .qa-btn-wa { background: #047857; color: #fff; padding: 13px 8px; border-radius: 8px; font-size: 13px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #059669; }
@@ -73,6 +75,7 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
         .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
         .item-card h4 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
+        .item-card img, .item-card video { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         .item-card .price-tag { font-size: 14px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
         .item-card button { background: #2563eb; color: #fff; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; }
 
@@ -100,9 +103,10 @@
         .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
+    <!-- Firebase SDK & Live Storage Upload Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
         const firebaseConfig = {
@@ -118,8 +122,42 @@
         const app = initializeApp(firebaseConfig);
         window.db = getFirestore(app);
         window.storage = getStorage(app);
+        
         window.colCustomers = collection(window.db, "as_enterprises_customers");
         window.colManufacturers = collection(window.db, "as_enterprises_manufacturers");
+        window.colProducts = collection(window.db, "as_enterprises_products");
+        window.colUniversal = collection(window.db, "as_enterprises_universal_modules");
+        
+        window.uploadBytes = uploadBytes;
+        window.ref = ref;
+        window.getDownloadURL = getDownloadURL;
+
+        // Real-time listener for live catalog & media sync
+        onSnapshot(window.colProducts, (snapshot) => {
+            let container = document.getElementById('liveCatalogContainer');
+            if(container) {
+                let html = '';
+                if(snapshot.docs.length === 0) {
+                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Use Admin Menu to add products with Camera/Gallery images.</p>';
+                } else {
+                    snapshot.forEach((docSnap) => {
+                        let p = docSnap.data();
+                        let mediaHtml = p.mediaUrl ? `<img src="${p.mediaUrl}" alt="Product">` : `<div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">No Image</div>`;
+                        html += `
+                            <div class="item-card">
+                                <div>
+                                    ${mediaHtml}
+                                    <h4>${p.name}</h4>
+                                    <div class="price-tag">₹${p.price} / pc (Live Cloud)</div>
+                                </div>
+                                <button onclick="generateAndSendBill('${p.name}', ${p.price})">Send Bill & UPI 📤</button>
+                            </div>
+                        `;
+                    });
+                }
+                container.innerHTML = html;
+            }
+        });
     </script>
 </head>
 <body>
@@ -198,7 +236,7 @@
 
     <div class="ticker-frame">
         <div class="ticker-content" id="t-ticker">
-            ⚡ AS ENTERPRISES HYDERABAD • UPI: 9030574216 • CALL/WA: 6301456725 ⚡
+            ⚡ AS ENTERPRISES HYDERABAD • LIVE MEDIA STORAGE & REAL-TIME CLOUD ACTIVE ⚡
         </div>
     </div>
 
@@ -233,8 +271,13 @@
 
         <div class="hero-card" id="heroBanner">
             <div class="hero-tag" id="t-tag">⚡ Enterprise Cloud ERP • Industrial Hub</div>
+            
+            <div class="menu-guide-banner" onclick="toggleHamburger()">
+                👉 <b>सारे 45 मॉड्यूल्स, सेटिंग्स और एडमिन लॉगिन के लिए यहाँ (☰ MENU) क्लिक करें</b> 👈
+            </div>
+
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
-            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with UPI QR Payment & WhatsApp Billing generator.</p>
+            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Camera/Gallery Media Upload, UPI QR (9030574216) & WhatsApp Billing.</p>
             
             <a href="javascript:void(0)" class="qa-btn-bill" onclick="openGetQuotation()">📋 Send Professional Bill & UPI (9030574216) via WhatsApp</a>
 
@@ -267,21 +310,16 @@
                 </div>
             </div>
 
-            <div class="block-header" id="catalog">📦 Live PP Bags Catalog & Rates</div>
-            <div class="catalog-grid">
+            <div class="block-header" id="catalog">📦 Live PP Bags Catalog & Rates (Real-Time Cloud)</div>
+            <div class="catalog-grid" id="liveCatalogContainer">
+                <!-- Dynamically synced from Firebase Storage & Firestore -->
                 <div class="item-card">
                     <div>
+                        <div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">Syncing Cloud...</div>
                         <h4>Rice PP Bags (50kg)</h4>
-                        <div class="price-tag">₹18.50 / pc (Live Sync)</div>
+                        <div class="price-tag">₹18.50 / pc</div>
                     </div>
                     <button onclick="generateAndSendBill('Rice PP Bags (50kg)', 18.50)">Send Bill & UPI 📤</button>
-                </div>
-                <div class="item-card">
-                    <div>
-                        <h4>Flour PP Bags (25kg)</h4>
-                        <div class="price-tag">₹12.00 / pc (Live Sync)</div>
-                    </div>
-                    <button onclick="generateAndSendBill('Flour PP Bags (25kg)', 12.00)">Send Bill & UPI 📤</button>
                 </div>
             </div>
         </div>
@@ -303,9 +341,9 @@
         let pendingModule = null;
 
         const translations = {
-            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud synchronization, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
-            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "लाइव फायरबेस क्लाउड सिंक, त्वरित रेट अपडेट और जीपीएस लॉजिस्टिक्स ट्रैकिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
-            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్, తక్షణ రేట్ అప్‌డేటింగ్ మరియు GPS లాజిస్టిక్స్ ట్రాకింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
+            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Camera/Gallery Media Upload, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
+            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "कैमरा और गैलरी मीडिया अपलोड, लाइव फायरबेस क्लाउड सिंक और त्वरित रेट अपडेट के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
+            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "కెమెరా & గ్యాలరీ మీడియా అప్‌లోడ్, లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
         };
 
         function setLanguage(lang) {
@@ -333,7 +371,7 @@
 
             if(custName && custPhone && bagType && rate && qty) {
                 let totalAmount = rate * qty;
-                let billText = `*📄 AS ENTERPRISES - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216@paytm (or 9030574216)%0A• *Direct GPay / PhonePe / Paytm:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
+                let billText = `*📄 AS ENTERPRISES - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Direct GPay / PhonePe / Paytm:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
                 
                 let waUrl = `https://wa.me/${custPhone}?text=${billText}`;
                 window.open(waUrl, '_blank');
@@ -436,17 +474,17 @@
             let content = "";
 
             if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager (Firebase Storage Connected)";
-                desc = "Upload product photos/videos directly to Firebase Storage bucket and update wholesale pricing live.";
+                title = "Live Rate & Product Manager (Camera & Storage Upload)";
+                desc = "Take photo/video from camera or pick from gallery, set wholesale price, and publish live to Firebase Cloud.";
                 content = `
                     <div class="form-panel">
                         <label>Product Catalog Name:</label>
                         <input type="text" id="newProdName" placeholder="e.g. Fertilizer PP Bags (50kg)">
                         <label>Wholesale Price (₹):</label>
                         <input type="number" id="newProdPrice" placeholder="19.50">
-                        <label>Upload Media to Firebase Storage:</label>
-                        <input type="file" id="newProdMedia" accept="image/*,video/*">
-                        <button class="primary-btn" onclick="uploadProductToFirebaseStorage()">Upload & Publish Live</button>
+                        <label>Capture / Select Image or Video (Camera/Gallery):</label>
+                        <input type="file" id="mediaFileInput" accept="image/*,video/*" capture="environment" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff;">
+                        <button class="primary-btn" onclick="uploadMediaAndPublishProduct()">📸 Upload Media & Publish Live</button>
                     </div>
                 `;
             } else if(id === 'customers') {
@@ -466,7 +504,6 @@
                         <thead><tr><th>Customer Name</th><th>Phone</th><th>City</th><th>Action</th></tr></thead>
                         <tbody id="customerTableBody">
                             <tr><td>Sri Venkateswara Agro</td><td>6301456725</td><td>Hyderabad</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
-                            <tr><td>Hyderabad Grain Stores</td><td>9848098480</td><td>Secunderabad</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
                         </tbody>
                     </table>
                 `;
@@ -487,7 +524,6 @@
                         <thead><tr><th>Manufacturer Partner</th><th>Phone</th><th>Grade</th><th>Action</th></tr></thead>
                         <tbody id="mfgTableBody">
                             <tr><td>Reliance Polymer Granules</td><td>9700011223</td><td>HDPE Grade-A</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
-                            <tr><td>Haldia Petrochemicals</td><td>9888877665</td><td>PP Tape Extrusion</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
                         </tbody>
                     </table>
                 `;
@@ -522,21 +558,52 @@
             alert('Entry deleted successfully from database.');
         }
 
+        async function uploadMediaAndPublishProduct() {
+            let name = document.getElementById('newProdName').value;
+            let price = document.getElementById('newProdPrice').value;
+            let fileInput = document.getElementById('mediaFileInput');
+
+            if(!name || !price) {
+                alert('Please enter product name and wholesale price.');
+                return;
+            }
+
+            let mediaUrl = "";
+            if(fileInput && fileInput.files[0]) {
+                let file = fileInput.files[0];
+                alert('Uploading media to Firebase Storage bucket... Please wait.');
+                try {
+                    let storageRef = window.ref(window.storage, 'products/' + Date.now() + '_' + file.name);
+                    let snapshot = await window.uploadBytes(storageRef, file);
+                    mediaUrl = await window.getDownloadURL(snapshot.ref);
+                } catch(e) {
+                    alert('Storage Upload Notice: ' + e.message + '\nPublishing product with text details.');
+                }
+            }
+
+            try {
+                await window.addDoc(window.colProducts, { 
+                    name: name, 
+                    price: Number(price), 
+                    mediaUrl: mediaUrl, 
+                    timestamp: new Date() 
+                });
+                alert('Success! Product & Media published live to Firebase Cloud Database.');
+                goBackToHome();
+            } catch(e) {
+                alert('Error publishing to Firebase: ' + e.message);
+            }
+        }
+
         async function addCustomerToDirectory() {
             let name = document.getElementById('newCustName').value;
             let phone = document.getElementById('newCustPhone').value;
             let loc = document.getElementById('newCustLoc').value;
             if(name && phone && loc) {
                 try {
-                    await addDoc(window.colCustomers, { name: name, phone: phone, location: loc, timestamp: new Date() });
-                    let tbody = document.getElementById('customerTableBody');
-                    let tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${name}</td><td>${phone}</td><td>${loc}</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td>`;
-                    tbody.appendChild(tr);
-                    document.getElementById('newCustName').value = '';
-                    document.getElementById('newCustPhone').value = '';
-                    document.getElementById('newCustLoc').value = '';
+                    await window.addDoc(window.colCustomers, { name: name, phone: phone, location: loc, timestamp: new Date() });
                     alert('Customer successfully added and synced to Firebase Cloud!');
+                    goBackToHome();
                 } catch(e) {
                     alert('Error saving to Firebase: ' + e.message);
                 }
@@ -551,15 +618,9 @@
             let grade = document.getElementById('newMfgGrade').value;
             if(name && phone && grade) {
                 try {
-                    await addDoc(window.colManufacturers, { name: name, phone: phone, grade: grade, timestamp: new Date() });
-                    let tbody = document.getElementById('mfgTableBody');
-                    let tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${name}</td><td>${phone}</td><td>${grade}</td><td><button onclick="deleteRow(this)" style="padding:6px 10px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td>`;
-                    tbody.appendChild(tr);
-                    document.getElementById('newMfgName').value = '';
-                    document.getElementById('newMfgPhone').value = '';
-                    document.getElementById('newMfgGrade').value = '';
+                    await window.addDoc(window.colManufacturers, { name: name, phone: phone, grade: grade, timestamp: new Date() });
                     alert('Manufacturer successfully added and synced to Firebase Cloud!');
+                    goBackToHome();
                 } catch(e) {
                     alert('Error saving to Firebase: ' + e.message);
                 }
@@ -568,15 +629,19 @@
             }
         }
 
-        async function uploadProductToFirebaseStorage() {
-            let name = document.getElementById('newProdName').value;
-            let price = document.getElementById('newProdPrice').value;
-            
-            if(name && price) {
-                alert('Success! "' + name + '" priced at ₹' + price + ' has been published live to Firebase Cloud Database & Storage Bucket.');
-                goBackToHome();
+        async function saveUniversalModuleData(modId) {
+            let val1 = document.getElementById('uniInput1').value;
+            let val2 = document.getElementById('uniInput2').value;
+            if(val1 && val2) {
+                try {
+                    await window.addDoc(window.colUniversal, { module: modId, param: val1, value: val2, timestamp: new Date() });
+                    alert('Data successfully saved and synced to Firebase Cloud!');
+                    goBackToHome();
+                } catch(e) {
+                    alert('Error saving to Firebase: ' + e.message);
+                }
             } else {
-                alert('Please enter a valid product name and price.');
+                alert('Please fill out all fields.');
             }
         }
 
