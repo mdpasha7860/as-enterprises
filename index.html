@@ -3,70 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Enterprises - PP Bags ERP Pro (45 Modules Live)</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Live)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background-color: #0b0f19; color: #ffffff; line-height: 1.25; }
-        header { background: #0b0f19; border-bottom: 1px solid #1f2937; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        body { background-color: #0b0f19; color: #ffffff; line-height: 1.5; padding-bottom: 50px; font-size: 15px; }
+        
+        header { background: #0b0f19; border-bottom: 1px solid #1f2937; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-box { background: #f97316; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 6px; font-size: 16px; }
+        .logo-box { background: #f97316; color: #fff; font-weight: bold; padding: 8px 12px; border-radius: 6px; font-size: 18px; }
         .brand-title { font-size: 16px; font-weight: bold; color: #ffffff; }
-        .brand-sub { font-size: 11px; color: #fb923c; }
-        .header-actions { display: flex; align-items: center; gap: 8px; }
-        .lang-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        .icon-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .brand-sub { font-size: 12px; color: #fb923c; }
+        .header-actions { display: flex; align-items: center; gap: 8px; position: relative; }
         
-        .ticker-bar { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: bold; font-size: 11px; padding: 6px 10px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lang-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .icon-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 16px; }
         
-        .hero-banner { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); padding: 20px 15px; border-bottom: 2px solid #f97316; }
-        .badge { background: rgba(249, 115, 22, 0.2); border: 1px solid #f97316; color: #fb923c; font-size: 11px; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-weight: bold; }
-        .hero-banner h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; color: #ffffff; }
-        .hero-banner p { font-size: 13px; color: #9ca3af; margin-bottom: 15px; }
+        /* Dropdown Menu for Three Dots */
+        .dropdown-menu { display: none; position: absolute; right: 0; top: 45px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 1100; }
+        .dropdown-item { padding: 12px 15px; font-size: 14px; border-bottom: 1px solid #374151; cursor: pointer; color: #fff; }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+
+        .ticker-bar { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: bold; font-size: 12px; padding: 8px 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .btn-primary { background: #f97316; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; }
-        .btn-secondary { background: #1f2937; color: #fff; border: 1px solid #374151; width: 100%; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .hero-banner { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); padding: 25px 15px; border-bottom: 2px solid #f97316; }
+        .badge { background: rgba(249, 115, 22, 0.2); border: 1px solid #f97316; color: #fb923c; font-size: 12px; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 12px; font-weight: bold; }
+        .hero-banner h1 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: #ffffff; }
+        .hero-banner p { font-size: 14px; color: #9ca3af; margin-bottom: 18px; }
+        
+        .btn-primary { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; }
+        .btn-secondary { background: #1f2937; color: #fff; border: 1px solid #374151; width: 100%; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; text-align: center; display: block; text-decoration: none; }
         
         .container { padding: 15px; max-width: 600px; margin: 0 auto; }
+        
         .back-nav { display: none; margin-bottom: 15px; }
-        .back-nav button { background: #374151; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .back-nav button { background: #f97316; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; text-align: center; }
         
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .metric-card { background: #111827; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; }
-        .metric-card p { font-size: 11px; color: #9ca3af; margin-bottom: 4px; }
-        .metric-card h3 { font-size: 18px; font-weight: bold; color: #34d399; }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .metric-card { background: #111827; border: 1px solid #1f2937; padding: 15px; border-radius: 8px; }
+        .metric-card p { font-size: 13px; color: #9ca3af; margin-bottom: 6px; }
+        .metric-card h3 { font-size: 19px; font-weight: bold; color: #34d399; }
         
-        .section-title { font-size: 15px; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: #f97316; }
+        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: #f97316; }
         
-        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .product-card { background: #111827; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-card h4 { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-        .product-card .price { font-size: 12px; color: #fb923c; font-weight: bold; margin-bottom: 10px; }
-        .product-card button { background: #2563eb; color: #fff; border: none; padding: 6px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .product-card { background: #111827; border: 1px solid #1f2937; padding: 15px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card h4 { font-size: 14px; font-weight: bold; margin-bottom: 6px; }
+        .product-card .price { font-size: 13px; color: #fb923c; font-weight: bold; margin-bottom: 12px; }
+        .product-card button { background: #2563eb; color: #fff; border: none; padding: 8px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer; }
         
-        .modules-container { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 10px; margin-bottom: 20px; max-height: 350px; overflow-y: auto; }
-        .module-item { padding: 10px 8px; border-bottom: 1px solid #1f2937; font-size: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .modules-container { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 10px; margin-bottom: 25px; max-height: 380px; overflow-y: auto; }
+        .module-item { padding: 12px 10px; border-bottom: 1px solid #1f2937; font-size: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .module-item:last-child { border-bottom: none; }
         .module-item:hover { background: rgba(249, 115, 22, 0.1); }
-        .module-tag { background: #1f2937; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+        .module-tag { background: #1f2937; color: #34d399; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
         
-        .footer-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .call-btn { background: #065f46; color: #fff; text-align: center; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .wa-btn { background: #059669; color: #fff; text-align: center; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .footer-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; margin-bottom: 30px; }
+        .call-btn { background: #065f46; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .wa-btn { background: #059669; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
-        .module-view { display: none; background: #111827; border: 1px solid #1f2937; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .module-view h3 { font-size: 16px; margin-bottom: 10px; color: #f97316; }
-        .module-view p { font-size: 13px; color: #d1d5db; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-        th, td { border: 1px solid #374151; padding: 8px; text-align: left; }
+        .module-view { display: none; background: #111827; border: 1px solid #1f2937; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+        .module-view h3 { font-size: 18px; margin-bottom: 12px; color: #f97316; }
+        .module-view p { font-size: 14px; color: #d1d5db; margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+        th, td { border: 1px solid #374151; padding: 10px; text-align: left; }
         th { background: #1f2937; color: #f97316; }
-        .admin-form { background: #1f2937; padding: 12px; border-radius: 6px; margin-top: 10px; }
-        .admin-form input, .admin-form select { width: 100%; padding: 8px; margin-bottom: 8px; background: #111827; border: 1px solid #374151; color: #fff; border-radius: 4px; font-size: 12px; }
+        .admin-form { background: #1f2937; padding: 15px; border-radius: 6px; margin-top: 12px; }
+        .admin-form input, .admin-form select { width: 100%; padding: 10px; margin-bottom: 10px; background: #111827; border: 1px solid #374151; color: #fff; border-radius: 4px; font-size: 14px; }
     </style>
 
-    <!-- Firebase SDK & Real-time Integration -->
+    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAXP0_3MC3YXVbZLDmhgz",
@@ -80,12 +89,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        console.log("Firebase Live Database Connected Successfully for AS Enterprises!");
-
         window.db = db;
-        window.collection = collection;
-        window.addDoc = addDoc;
-        window.getDocs = getDocs;
     </script>
 </head>
 <body>
@@ -94,37 +98,46 @@
         <div class="logo-area">
             <div class="logo-box">AS</div>
             <div>
-                <div class="brand-title">AS ENTERPRISES</div>
-                <div class="brand-sub">Hyderabad • PP Bags ERP Pro (Live)</div>
+                <div class="brand-title" id="t-brand">AS ENTERPRISES</div>
+                <div class="brand-sub" id="t-sub">Hyderabad • PP Bags ERP Pro</div>
             </div>
         </div>
         <div class="header-actions">
-            <button class="lang-btn" onclick="switchLang('EN')">EN</button>
-            <button class="lang-btn" onclick="switchLang('HI')">HI</button>
-            <button class="lang-btn" onclick="switchLang('TE')">TE</button>
+            <button class="lang-btn" onclick="setLanguage('EN')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('HI')">HI</button>
             <button class="icon-btn" onclick="openCart()">🛒</button>
-            <button class="icon-btn" onclick="toggleMenu()">☰</button>
+            <button class="icon-btn" onclick="toggleSettingsMenu(event)">⋮</button>
+            
+            <!-- Three-Dot Settings Popup Menu -->
+            <div class="dropdown-menu" id="settingsDropdown">
+                <div class="dropdown-item" onclick="openModule('admin_rates')">⚙️ Live Rate Manager</div>
+                <div class="dropdown-item" onclick="openModule('warehouse')">🏭 Warehouse Sync</div>
+                <div class="dropdown-item" onclick="openModule('ledger')">📒 Customer Ledger</div>
+                <div class="dropdown-item" onclick="openModule('gps')">🚚 GPS Fleet Track</div>
+                <div class="dropdown-item" onclick="setLanguage('TE')">🌐 తెలుగు (Telugu)</div>
+            </div>
         </div>
     </header>
 
-    <div class="ticker-bar">
-        ⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking & Real-time Rate Control ⚡
-    </div>
-
-    <div class="hero-banner" id="heroBanner">
-        <div class="badge">⚡ Real-Time Cloud ERP • Hyderabad Manufacturing Hub</div>
-        <h1>Build Stronger.<br>Order Smarter.</h1>
-        <p>Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud sync, instant rate updating, and GPS logistics tracking.</p>
-        <a href="#products" class="btn-primary">Browse Live Products & Rates →</a>
-        <button class="btn-secondary" onclick="openModule('ledger')">Customer Khata & Udhaar Ledger</button>
+    <div class="ticker-bar" id="t-ticker">
+        ⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking ⚡
     </div>
 
     <div class="container">
         <div class="back-nav" id="backNav">
-            <button onclick="goBackToHome()">← Back to Dashboard</button>
+            <button onclick="goBackToHome()">← Back to Dashboard Overview</button>
+        </div>
+
+        <div class="hero-banner" id="heroBanner">
+            <div class="badge" id="t-badge">⚡ Real-Time Cloud ERP • Hyderabad Manufacturing Hub</div>
+            <h1 id="t-h1">Build Stronger.<br>Order Smarter.</h1>
+            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud sync, instant rate updating, and GPS logistics tracking.</p>
+            <a href="#products" class="btn-primary" id="t-btn1">Browse Live Products & Rates →</a>
+            <button class="btn-secondary" onclick="openModule('ledger')" id="t-btn2">Customer Khata & Udhaar Ledger</button>
         </div>
 
         <div id="mainDashboard">
+            <div style="margin-top: 15px;"></div>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <p>Total Live Orders</p>
@@ -225,9 +238,63 @@
     </div>
 
     <script>
-        function switchLang(lang) { alert('Language switched to: ' + lang); }
+        const translations = {
+            EN: {
+                sub: "Hyderabad • PP Bags ERP Pro",
+                ticker: "⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking ⚡",
+                badge: "⚡ Real-Time Cloud ERP • Hyderabad Manufacturing Hub",
+                h1: "Build Stronger.<br>Order Smarter.",
+                desc: "Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud sync, instant rate updating, and GPS logistics tracking.",
+                btn1: "Browse Live Products & Rates →",
+                btn2: "Customer Khata & Udhaar Ledger"
+            },
+            HI: {
+                sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो",
+                ticker: "⚡ लाइव क्लाउड सिंक सक्रिय: चावल के कट्टे (50 किग्रा) @ ₹18.50/pc • जीपीएस फ्लीट ट्रैकिंग ⚡",
+                badge: "⚡ रियल-टाइम क्लाउड ईआरपी • हैदराबाद मैन्युफैक्चरिंग हब",
+                h1: "मजबूत बनाएं।<br>स्मार्ट ऑर्डर करें।",
+                desc: "लाइव फायरबेस क्लाउड सिंक, त्वरित रेट अपडेट और जीपीएस लॉजिस्टिक्स ट्रैकिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।",
+                btn1: "लाइव उत्पाद और दरें देखें →",
+                btn2: "ग्राहक खाता और उधार लेजर"
+            },
+            TE: {
+                sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో",
+                ticker: "⚡ లైవ్ క్లౌడ్ సింక్ యాక్టివ్: రైస్ PP బ్యాగ్స్ (50కి.జీ) @ ₹18.50/pc • GPS ఫ్లీట్ ట్రాకింగ్ ⚡",
+                badge: "⚡ రియల్-టైమ్ క్లౌడ్ ERP • హైదరాబాద్ తయారీ కేంద్రం",
+                h1: "బలంగా నిర్మించండి.<br>స్మార్ట్‌గా ఆర్డర్ చేయండి.",
+                desc: "లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్, తక్షణ రేట్ అప్‌డేటింగ్ మరియు GPS లాజిస్టిక్స్ ట్రాకింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.",
+                btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →",
+                btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('t-sub').innerText = translations[lang].sub;
+            document.getElementById('t-ticker').innerText = translations[lang].ticker;
+            document.getElementById('t-badge').innerText = translations[lang].badge;
+            document.getElementById('t-h1').innerHTML = translations[lang].h1;
+            document.getElementById('t-desc').innerText = translations[lang].desc;
+            document.getElementById('t-btn1').innerText = translations[lang].btn1;
+            document.getElementById('t-btn2').innerText = translations[lang].btn2;
+            closeSettingsMenu();
+        }
+
+        function toggleSettingsMenu(event) {
+            event.stopPropagation();
+            let menu = document.getElementById('settingsDropdown');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function closeSettingsMenu() {
+            document.getElementById('settingsDropdown').style.display = 'none';
+        }
+
+        window.onclick = function() {
+            closeSettingsMenu();
+        }
+
         function openCart() { alert('Your active PP Bags cart is live and synchronized.'); }
-        function toggleMenu() { alert('Opening Enterprise Modules Navigation.'); }
+        
         function placeOrder(product, price) {
             let qty = prompt('Enter quantity for ' + product + ' (Min 1000 pcs):', '1000');
             if (qty) {
@@ -235,7 +302,9 @@
                 alert('Order placed successfully on Firebase Cloud!\nProduct: ' + product + '\nQty: ' + qty + '\nTotal: ₹' + total);
             }
         }
+
         function openModule(id) {
+            closeSettingsMenu();
             document.getElementById('mainDashboard').style.display = 'none';
             document.getElementById('heroBanner').style.display = 'none';
             document.getElementById('backNav').style.display = 'block';
@@ -280,6 +349,7 @@
             document.getElementById('viewContent').innerHTML = content;
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
+
         function publishProductUpdate() {
             let name = document.getElementById('newProdName').value;
             let price = document.getElementById('newProdPrice').value;
@@ -290,6 +360,7 @@
                 alert('Please enter valid product name and price.');
             }
         }
+
         function goBackToHome() {
             document.getElementById('mainDashboard').style.display = 'block';
             document.getElementById('heroBanner').style.display = 'block';
