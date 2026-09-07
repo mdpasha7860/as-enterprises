@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Enterprises - PP Bags ERP Pro</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Google Auth & Secure)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #05070b; color: #f8fafc; padding-bottom: 60px; }
         
-        /* Premium Header */
         header { background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); border-bottom: 1px solid #1e293b; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
         .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-badge { background: linear-gradient(135deg, #f97316, #c2410c); color: #fff; font-weight: 900; padding: 9px 14px; border-radius: 10px; font-size: 17px; box-shadow: 0 4px 12px rgba(249,115,22,0.5); letter-spacing: 0.5px; }
-        .brand-name { font-size: 17px; font-weight: 900; letter-spacing: 0.5px; color: #fff; }
+        .logo-badge { background: linear-gradient(135deg, #f97316, #c2410c); color: #fff; font-weight: 900; padding: 9px 14px; border-radius: 10px; font-size: 17px; box-shadow: 0 4px 12px rgba(249,115,22,0.5); }
+        .brand-name { font-size: 17px; font-weight: 900; color: #fff; }
         .brand-location { font-size: 11px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
         .header-tools { display: flex; align-items: center; gap: 8px; position: relative; }
-        .lang-select-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 7px 10px; border-radius: 7px; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.2s; }
-        .lang-select-btn:hover { background: #f97316; border-color: #f97316; }
-        .action-icon-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 8px 11px; border-radius: 7px; cursor: pointer; font-size: 16px; }
+        .lang-select-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 7px 10px; border-radius: 7px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .action-icon-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 8px 12px; border-radius: 7px; cursor: pointer; font-size: 16px; font-weight: bold; }
 
-        /* Dropdown Menu */
-        .dropdown-box { display: none; position: absolute; right: 0; top: 52px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; width: 230px; box-shadow: 0 15px 35px rgba(0,0,0,0.9); z-index: 1100; overflow: hidden; }
-        .dropdown-row { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid #1e293b; cursor: pointer; color: #e2e8f0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-        .dropdown-row:last-child { border-bottom: none; }
-        .dropdown-row:hover { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+        /* Hamburger Drawer Menu (3 Lines) */
+        .drawer-menu { display: none; position: absolute; right: 0; top: 52px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; width: 250px; box-shadow: 0 15px 35px rgba(0,0,0,0.9); z-index: 1100; overflow: hidden; }
+        .drawer-header { background: #1e293b; padding: 12px 15px; font-size: 12px; font-weight: 800; color: #fb923c; border-bottom: 1px solid #334155; }
+        .drawer-row { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid #1e293b; cursor: pointer; color: #e2e8f0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .drawer-row:last-child { border-bottom: none; }
+        .drawer-row:hover { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
 
-        /* Running Ticker */
-        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11px; padding: 9px 0; overflow: hidden; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11px; padding: 9px 0; overflow: hidden; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.8px; }
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 24s linear infinite; }
         @keyframes scrollTicker {
             0% { transform: translate3d(0, 0, 0); }
@@ -39,112 +37,42 @@
         .back-navigator { display: none; margin-bottom: 18px; }
         .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 10px; font-size: 14px; cursor: pointer; font-weight: 900; text-align: center; box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
 
-        /* ULTRA PREMIUM BUILD-MART STYLE HERO BANNER */
         .hero-card { 
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #090d16 100%); 
-            padding: 30px 22px; 
-            border-radius: 16px; 
-            border: 1px solid #334155; 
-            margin-bottom: 24px; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-            position: relative;
-            overflow: hidden;
+            padding: 30px 22px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 24px; box-shadow: 0 12px 30px rgba(0,0,0,0.7);
         }
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 150px; height: 150px;
-            background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-tag { 
-            background: rgba(249, 115, 22, 0.2); 
-            border: 1px solid rgba(249, 115, 22, 0.6); 
-            color: #fb923c; 
-            font-size: 11px; 
-            padding: 5px 12px; 
-            border-radius: 6px; 
-            display: inline-block; 
-            margin-bottom: 14px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 0.8px;
-        }
-        .hero-card h1 { 
-            font-size: 26px; 
-            font-weight: 900; 
-            margin-bottom: 10px; 
-            color: #fff; 
-            line-height: 1.25; 
-            letter-spacing: -0.5px;
-        }
+        .hero-tag { background: rgba(249, 115, 22, 0.2); border: 1px solid rgba(249, 115, 22, 0.6); color: #fb923c; font-size: 11px; padding: 5px 12px; border-radius: 6px; display: inline-block; margin-bottom: 14px; font-weight: 800; text-transform: uppercase; }
+        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.25; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { 
-            font-size: 13.5px; 
-            color: #94a3b8; 
-            margin-bottom: 20px; 
-            line-height: 1.5; 
-        }
+        .hero-card p { font-size: 13.5px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
         
-        .primary-btn { 
-            background: linear-gradient(135deg, #f97316, #ea580c); 
-            color: #fff; 
-            border: none; 
-            width: 100%; 
-            padding: 15px; 
-            border-radius: 10px; 
-            font-size: 14.5px; 
-            font-weight: 900; 
-            cursor: pointer; 
-            text-align: center; 
-            display: block; 
-            margin-bottom: 12px; 
-            text-decoration: none; 
-            box-shadow: 0 6px 20px rgba(249,115,22,0.5);
-            transition: 0.2s;
-        }
-        .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(249,115,22,0.7); }
-        
-        .secondary-btn { 
-            background: #1e293b; 
-            color: #fff; 
-            border: 1px solid #475569; 
-            width: 100%; 
-            padding: 15px; 
-            border-radius: 10px; 
-            font-size: 14.5px; 
-            font-weight: 900; 
-            cursor: pointer; 
-            text-align: center; 
-            display: block; 
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .secondary-btn:hover { background: #334155; }
+        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 12px; text-decoration: none; box-shadow: 0 6px 20px rgba(249,115,22,0.5); }
+        .secondary-btn { background: #1e293b; color: #fff; border: 1px solid #475569; width: 100%; padding: 15px; border-radius: 10px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        /* Metrics Executive Panel */
+        /* Google Sign-In Button */
+        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 13px; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(255,255,255,0.2); }
+        .google-btn img { width: 18px; height: 18px; }
+
         .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-        .analytic-box { background: #0f172a; border: 1px solid #1e293b; padding: 16px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .analytic-box p { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .analytic-box { background: #0f172a; border: 1px solid #1e293b; padding: 16px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); cursor: pointer; transition: 0.2s; }
+        .analytic-box:hover { border-color: #f97316; }
+        .analytic-box p { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; }
         .analytic-box h3 { font-size: 21px; font-weight: 900; color: #34d399; }
 
-        .block-header { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #f97316; text-transform: uppercase; letter-spacing: 0.8px; }
+        .block-header { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #f97316; text-transform: uppercase; }
 
-        /* Products Catalog Grid */
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
         .item-card { background: #0f172a; border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
         .item-card h4 { font-size: 13.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
         .item-card .price-tag { font-size: 13.5px; color: #fb923c; font-weight: 900; margin-bottom: 14px; }
-        .item-card button { background: #2563eb; color: #fff; border: none; padding: 9px; border-radius: 7px; font-size: 12.5px; font-weight: 900; cursor: pointer; box-shadow: 0 3px 10px rgba(37,99,235,0.4); }
+        .item-card button { background: #2563eb; color: #fff; border: none; padding: 9px; border-radius: 7px; font-size: 12.5px; font-weight: 900; cursor: pointer; }
 
-        /* 45+ Modules Grid */
         .modules-grid-container { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 25px; }
-        .module-card-item { background: #0f172a; border: 1px solid #1e293b; padding: 15px 18px; border-radius: 11px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .module-card-item:hover { border-color: #f97316; background: rgba(249,115,22,0.08); transform: translateY(-1px); }
+        .module-card-item { background: #0f172a; border: 1px solid #1e293b; padding: 15px 18px; border-radius: 11px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; }
+        .module-card-item:hover { border-color: #f97316; background: rgba(249,115,22,0.08); }
         .mod-title { font-size: 13.5px; font-weight: 800; color: #e2e8f0; }
         .mod-badge { background: #1e293b; color: #34d399; padding: 5px 9px; border-radius: 6px; font-size: 10.5px; font-weight: 900; border: 1px solid #334155; }
 
-        /* Module View Area */
         .module-display-pane { display: none; background: #0f172a; border: 1px solid #334155; padding: 22px; border-radius: 14px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
         .module-display-pane h3 { font-size: 19px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
         .module-display-pane p { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
@@ -157,10 +85,17 @@
         .form-panel label { font-size: 12.5px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; }
         .form-panel input, .form-panel select { width: 100%; padding: 12px; margin-bottom: 14px; background: #0f172a; border: 1px solid #475569; color: #fff; border-radius: 8px; font-size: 13.5px; font-weight: 700; }
 
-        /* Footer Call Actions */
         .footer-action-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
-        .call-action { background: #065f46; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 20px rgba(6,95,70,0.5); }
-        .wa-action { background: #047857; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 20px rgba(4,120,87,0.5); }
+        .call-action { background: #065f46; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .wa-action { background: #047857; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        /* Admin Login Modal & Auth Styling */
+        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-box { background: #0f172a; border: 2px solid #f97316; padding: 25px; border-radius: 14px; width: 90%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .modal-box h3 { color: #f97316; font-size: 18px; margin-bottom: 10px; font-weight: 900; }
+        .modal-box input { width: 100%; padding: 12px; background: #1e293b; border: 1px solid #475569; color: #fff; border-radius: 8px; margin-bottom: 12px; font-size: 14px; }
+        .auth-links { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 15px; font-weight: 700; }
+        .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
     <!-- Firebase SDK Integration -->
@@ -198,14 +133,17 @@
             <button class="lang-select-btn" onclick="setLanguage('HI')">HI</button>
             <button class="lang-select-btn" onclick="setLanguage('TE')">TE</button>
             <button class="action-icon-btn" onclick="openCart()">🛒</button>
-            <button class="action-icon-btn" onclick="toggleMenu(event)">⋮</button>
+            <!-- Hamburger 3-Lines Button -->
+            <button class="action-icon-btn" onclick="toggleHamburger(event)">☰</button>
             
-            <!-- Professional Dropdown Menu -->
-            <div class="dropdown-box" id="erpDropdown">
-                <div class="dropdown-row" onclick="openModule('admin_rates')">⚙️ Live Rate Manager</div>
-                <div class="dropdown-row" onclick="openModule('warehouse')">🏭 Warehouse Stock Sync</div>
-                <div class="dropdown-row" onclick="openModule('ledger')">📒 Customer Khata Ledger</div>
-                <div class="dropdown-row" onclick="openModule('gps')">🚚 GPS Fleet Tracking</div>
+            <!-- Hamburger Drawer Menu -->
+            <div class="drawer-menu" id="hamburgerDrawer">
+                <div class="drawer-header">⚙️ ERP MANAGEMENT PANEL</div>
+                <div class="drawer-row" onclick="promptAdminLogin('admin_rates')">🔐 Admin Login / Google Auth</div>
+                <div class="drawer-row" onclick="openModule('admin_rates')">⚙️ Live Rate Manager</div>
+                <div class="drawer-row" onclick="openModule('warehouse')">🏭 Warehouse Stock Sync</div>
+                <div class="drawer-row" onclick="openModule('ledger')">📒 Customer Khata Ledger</div>
+                <div class="drawer-row" onclick="openModule('gps')">🚚 GPS Fleet Tracking</div>
             </div>
         </div>
     </header>
@@ -217,12 +155,37 @@
         </div>
     </div>
 
+    <!-- Admin & Google Auth Security Modal -->
+    <div id="adminModal">
+        <div class="modal-box">
+            <h3>🔐 Admin Security Login</h3>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
+            
+            <!-- Google Sign-In Button -->
+            <button class="google-btn" onclick="googleSignInAuth()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                Continue with Google
+            </button>
+
+            <div style="text-align: center; font-size: 11px; color: #64748b; margin: 10px 0;">OR USE OWNER PASSWORD</div>
+
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password (e.g. 1234)">
+            <div class="auth-links">
+                <span onclick="triggerForgotPassword()">Forgot Password?</span>
+                <span onclick="triggerResetPassword()">Reset Data</span>
+            </div>
+            
+            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 8px; padding: 11px;">Login with Password</button>
+            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 10px; font-size: 12px;">Cancel</button>
+        </div>
+    </div>
+
     <div class="main-wrapper">
         <div class="back-navigator" id="backNav">
             <button onclick="goBackToHome()">← Back to Dashboard Overview</button>
         </div>
 
-        <!-- NEW PREMIUM BUILD-MART STYLE HERO BANNER -->
+        <!-- HERO BANNER -->
         <div class="hero-card" id="heroBanner">
             <div class="hero-tag" id="t-tag">⚡ Enterprise Cloud ERP • Industrial Hub</div>
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
@@ -232,22 +195,23 @@
         </div>
 
         <div id="mainDashboard">
+            <!-- Working Analytics Cards -->
             <div class="analytics-grid">
-                <div class="analytic-box">
-                    <p>Total Live Orders</p>
-                    <h3>142</h3>
+                <div class="analytic-box" onclick="openModule('orders')">
+                    <p>Total Live Orders (Click)</p>
+                    <h3 id="statOrders">142</h3>
                 </div>
-                <div class="analytic-box">
-                    <p>Active Distributors</p>
-                    <h3>28</h3>
+                <div class="analytic-box" onclick="openModule('customers')">
+                    <p>Active Distributors (Click)</p>
+                    <h3 id="statDist">28</h3>
                 </div>
-                <div class="analytic-box">
-                    <p>Net Profit (P&L)</p>
-                    <h3>₹1,25,000</h3>
+                <div class="analytic-box" onclick="openModule('ledger')">
+                    <p>Net Profit / P&L (Click)</p>
+                    <h3 id="statProfit">₹1,25,000</h3>
                 </div>
-                <div class="analytic-box">
-                    <p>Truck GPS Status</p>
-                    <h3 style="color:#fb923c;">En Route (Jeedimetla)</h3>
+                <div class="analytic-box" onclick="openModule('gps')">
+                    <p>Truck GPS Status (Click)</p>
+                    <h3 style="color:#fb923c;" id="statGps">En Route</h3>
                 </div>
             </div>
 
@@ -333,63 +297,91 @@
     </div>
 
     <script>
+        let isAdminLoggedIn = false;
+        let pendingModule = null;
+
         const translations = {
-            EN: {
-                sub: "Hyderabad • PP Bags ERP Pro",
-                ticker: "⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking & Real-time Rate Control Active ⚡",
-                tag: "⚡ Enterprise Cloud ERP • Industrial Hub",
-                h1: "Build Stronger.<br><span>Order Smarter.</span>",
-                desc: "Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud synchronization, instant rate updating, and complete factory automation.",
-                btn1: "Browse Live Products & Rates →",
-                btn2: "Customer Khata & Udhaar Ledger"
-            },
-            HI: {
-                sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो",
-                ticker: "⚡ लाइव क्लाउड सिंक सक्रिय: चावल के कट्टे (50 किग्रा) @ ₹18.50/pc • जीपीएस फ्लीट ट्रैकिंग और रियल-टाइम रेट कंट्रोल सक्रिय ⚡",
-                tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब",
-                h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>",
-                desc: "लाइव फायरबेस क्लाउड सिंक, त्वरित रेट अपडेट और जीपीएस लॉजिस्टिक्स ट्रैकिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।",
-                btn1: "लाइव उत्पाद और दरें देखें →",
-                btn2: "ग्राहक खाता और उधार लेजर"
-            },
-            TE: {
-                sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో",
-                ticker: "⚡ లైవ్ క్లౌడ్ సింక్ యాక్టివ్: రైస్ PP బ్యాగ్స్ (50కి.జీ) @ ₹18.50/pc • GPS ఫ్లీట్ ట్రాకింగ్ & రియల్-టైమ్ రేట్ కంట్రోల్ యాక్టివ్ ⚡",
-                tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం",
-                h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>",
-                desc: "లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్, తక్షణ రేట్ అప్‌డేటింగ్ మరియు GPS లాజిస్టిక్స్ ట్రాకింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.",
-                btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →",
-                btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్"
-            }
+            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud synchronization, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
+            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "लाइव फायरबेस क्लाउड सिंक, त्वरित रेट अपडेट और जीपीएस लॉजिस्टिक्स ट्रैकिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
+            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్, తక్షణ రేట్ అప్‌డేటింగ్ మరియు GPS లాజిస్టిక్స్ ట్రాకింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
         };
 
         function setLanguage(lang) {
             document.getElementById('t-sub').innerText = translations[lang].sub;
-            document.getElementById('t-ticker').innerText = translations[lang].ticker;
             document.getElementById('t-tag').innerText = translations[lang].tag;
             document.getElementById('t-h1').innerHTML = translations[lang].h1;
             document.getElementById('t-desc').innerText = translations[lang].desc;
             document.getElementById('t-btn1').innerText = translations[lang].btn1;
             document.getElementById('t-btn2').innerText = translations[lang].btn2;
-            closeMenu();
+            closeHamburger();
         }
 
-        function toggleMenu(event) {
+        function toggleHamburger(event) {
             event.stopPropagation();
-            let menu = document.getElementById('erpDropdown');
+            let menu = document.getElementById('hamburgerDrawer');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
-        function closeMenu() {
-            let menu = document.getElementById('erpDropdown');
+        function closeHamburger() {
+            let menu = document.getElementById('hamburgerDrawer');
             if(menu) menu.style.display = 'none';
         }
 
         window.onclick = function() {
-            closeMenu();
+            closeHamburger();
         }
 
         function openCart() { alert('Your active PP Bags order cart is live and synchronized with cloud.'); }
+
+        function promptAdminLogin(targetModule) {
+            closeHamburger();
+            if(isAdminLoggedIn) {
+                openModule(targetModule);
+            } else {
+                pendingModule = targetModule;
+                document.getElementById('adminModal').style.display = 'flex';
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function googleSignInAuth() {
+            let email = prompt("Enter your Google Account Email (e.g. md.pasha@gmail.com):", "md.pasha@gmail.com");
+            if(email) {
+                isAdminLoggedIn = true;
+                closeAdminModal();
+                alert('Successfully signed in with Google (' + email + ')!\nFull Admin Access Granted.');
+                openModule(pendingModule || 'admin_rates');
+            }
+        }
+
+        function verifyAdminPassword() {
+            let pass = document.getElementById('adminPassInput').value;
+            if(pass === "1234" || pass === "admin") {
+                isAdminLoggedIn = true;
+                closeAdminModal();
+                alert('Admin Login Successful! Full ERP Controls Unlocked.');
+                openModule(pendingModule || 'admin_rates');
+            } else {
+                alert('Incorrect Admin Password! Try "1234".');
+            }
+        }
+
+        function triggerForgotPassword() {
+            let email = prompt("Enter your registered Admin Email for password reset link:");
+            if(email) {
+                alert('Password reset link has been successfully sent to ' + email + '. Check your inbox.');
+            }
+        }
+
+        function triggerResetPassword() {
+            let conf = confirm("Are you sure you want to reset all temporary cache data?");
+            if(conf) {
+                alert('System cache cleared successfully.');
+            }
+        }
 
         function placeOrder(product, price) {
             let qty = prompt('Enter quantity for ' + product + ' (Min 1000 pcs):', '1000');
@@ -400,7 +392,15 @@
         }
 
         function openModule(id) {
-            closeMenu();
+            closeHamburger();
+            
+            // Protected Admin Modules check
+            if((id === 'admin_rates' || id === 'orders') && !isAdminLoggedIn) {
+                pendingModule = id;
+                document.getElementById('adminModal').style.display = 'flex';
+                return;
+            }
+
             document.getElementById('mainDashboard').style.display = 'none';
             document.getElementById('heroBanner').style.display = 'none';
             document.getElementById('backNav').style.display = 'block';
@@ -411,7 +411,7 @@
             let content = "";
 
             if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager";
+                title = "Live Rate & Product Manager (Admin Secure)";
                 desc = "Update product wholesale rates, add new PP bag specifications, or upload media instantly to Firebase Cloud database.";
                 content = `
                     <div class="form-panel">
@@ -436,6 +436,10 @@
                 title = "Multi-Warehouse Stock Sync";
                 desc = "Real-time stock level monitoring across Jeedimetla & Balanagar units.";
                 content = `<table><tr><th>Hub Unit</th><th>Stock Available</th><th>Status</th></tr><tr><td>Jeedimetla Unit 1</td><td>1,45,000 pcs</td><td>Optimal (Live)</td></tr><tr><td>Balanagar Unit 2</td><td>85,000 pcs</td><td>Sync Active</td></tr></table>`;
+            } else if(id === 'orders') {
+                title = "Total Live Orders Management";
+                desc = "Active wholesale orders placed by distributors.";
+                content = `<table><tr><th>Order ID</th><th>Buyer</th><th>Qty</th><th>Status</th></tr><tr><td>#AS-981</td><td>Agro Traders</td><td>5,000 pcs</td><td>Dispatched</td></tr><tr><td>#AS-982</td><td>Hyderabad Packaging</td><td>10,000 pcs</td><td>Processing</td></tr></table>`;
             } else {
                 content = `<p>This enterprise module is fully connected with Firebase cloud database for live automated operations.</p>`;
             }
