@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - PP Bags ERP Pro (Flexible Choice Upload)</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Final Ready)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -119,12 +119,13 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        window.db = getFirestore(app);
+        const db = getFirestore(app);
         
-        window.colCustomers = collection(window.db, "as_enterprises_customers");
-        window.colManufacturers = collection(window.db, "as_enterprises_manufacturers");
-        window.colProducts = collection(window.db, "as_enterprises_products");
-        window.colUniversal = collection(window.db, "as_enterprises_universal_modules");
+        window.colCustomers = collection(db, "as_enterprises_customers");
+        window.colManufacturers = collection(db, "as_enterprises_manufacturers");
+        window.colProducts = collection(db, "as_enterprises_products");
+        window.colUniversal = collection(db, "as_enterprises_universal_modules");
+        window.globalAddDoc = addDoc;
 
         // Real-time listener for instant catalog updates
         onSnapshot(window.colProducts, (snapshot) => {
@@ -563,7 +564,7 @@
 
             let processPublish = async (mediaUrl) => {
                 try {
-                    await window.addDoc(window.colProducts, { 
+                    await window.globalAddDoc(window.colProducts, { 
                         name: name, 
                         price: Number(price), 
                         mediaUrl: mediaUrl || "", 
@@ -595,7 +596,7 @@
             let loc = document.getElementById('newCustLoc').value;
             if(name && phone && loc) {
                 try {
-                    await window.addDoc(window.colCustomers, { name: name, phone: phone, location: loc, timestamp: new Date() });
+                    await window.globalAddDoc(window.colCustomers, { name: name, phone: phone, location: loc, timestamp: new Date() });
                     alert('Customer successfully added and synced to Firebase Cloud!');
                     goBackToHome();
                 } catch(e) {
@@ -612,7 +613,7 @@
             let grade = document.getElementById('newMfgGrade').value;
             if(name && phone && grade) {
                 try {
-                    await window.addDoc(window.colManufacturers, { name: name, phone: phone, grade: grade, timestamp: new Date() });
+                    await window.globalAddDoc(window.colManufacturers, { name: name, phone: phone, grade: grade, timestamp: new Date() });
                     alert('Manufacturer successfully added and synced to Firebase Cloud!');
                     goBackToHome();
                 } catch(e) {
@@ -628,7 +629,7 @@
             let val2 = document.getElementById('uniInput2').value;
             if(val1 && val2) {
                 try {
-                    await window.addDoc(window.colUniversal, { module: modId, param: val1, value: val2, timestamp: new Date() });
+                    await window.globalAddDoc(window.colUniversal, { module: modId, param: val1, value: val2, timestamp: new Date() });
                     alert('Data successfully saved and synced to Firebase Cloud!');
                     goBackToHome();
                 } catch(e) {
