@@ -77,7 +77,7 @@
         .item-card h4 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
         .item-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         .item-card .price-tag { font-size: 14px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
-        .item-card button { background: #2563eb; color: #fff; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; }
+        .item-card button { background: #2563eb; color: #fff; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; margin-bottom: 6px; }
 
         .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 20px; border-radius: 12px; margin-bottom: 24px; width: 100%; }
         .module-display-pane h3 { font-size: 19px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
@@ -106,7 +106,7 @@
     <!-- Firebase SDK & Safe Execution Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAXP0_3MC3YXVbZLDmhgz",
@@ -126,19 +126,20 @@
         window.getDocsFunc = getDocs;
         window.deleteDocFunc = deleteDoc;
         window.docFunc = doc;
+        window.updateDocFunc = updateDoc;
         window.colCustomersRef = collection(db, "as_enterprises_customers");
         window.colManufacturersRef = collection(db, "as_enterprises_manufacturers");
         window.colProductsRef = collection(db, "as_enterprises_products");
         window.colUniversalRef = collection(db, "as_enterprises_universal_modules");
         window.colOrdersRef = collection(db, "as_enterprises_orders");
 
-        // Real-time listener for instant catalog sync & Live Counters
+        // Real-time listener for live catalog sync & Admin view
         onSnapshot(window.colProductsRef, (snapshot) => {
             let container = document.getElementById('liveCatalogContainer');
             if(container) {
                 let html = '';
                 if(snapshot.docs.length === 0) {
-                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Open Menu -> Rate Manager to add products with instant image capture.</p>';
+                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Open Menu -> Rate Manager to add products.</p>';
                 } else {
                     snapshot.forEach((docSnap) => {
                         let p = docSnap.data();
@@ -151,9 +152,10 @@
                                     <h4>${p.name}</h4>
                                     <div class="price-tag">₹${p.price} / pc (Live Cloud)</div>
                                 </div>
-                                <div style="display:flex; gap:6px;">
-                                    <button style="flex:1;" onclick="generateAndSendBill('${p.name}', ${p.price})">Send Bill 📤</button>
-                                    <button style="background:#dc2626; padding:8px;" onclick="deleteCloudItem('as_enterprises_products', '${docId}')">🗑️</button>
+                                <div>
+                                    <button style="width:100%; background:#059669; margin-bottom:6px;" onclick="promptCustomerOrder('${p.name}', ${p.price})">🛒 Order Now</button>
+                                    <button style="width:100%; background:#2563eb; margin-bottom:6px;" onclick="generateAndSendBill('${p.name}', ${p.price})">Send Bill 📤</button>
+                                    <button style="width:100%; background:#dc2626; padding:8px;" onclick="deleteCloudItem('as_enterprises_products', '${docId}')">🗑️ Delete Product</button>
                                 </div>
                             </div>
                         `;
@@ -202,8 +204,8 @@
         </div>
         <div class="drawer-grid">
             <div class="drawer-item" onclick="promptAdminLogin('admin_rates')"><span>🔐 Admin Login / Google Auth</span><span>Secure</span></div>
-            <div class="drawer-item" onclick="openModule('admin_rates')"><span>1. Dashboard & Live Rate Manager</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('orders')"><span>2. Admin Orders (Approve/Delete)</span><span>Live</span></div>
+            <div class="drawer-item" onclick="openModule('admin_rates')"><span>1. Dashboard & Live Rate Manager (Add Item)</span><span>Live</span></div>
+            <div class="drawer-item" onclick="promptAdminLogin('orders')"><span>2. Admin Orders (Approve/Delete)</span><span>Live</span></div>
             <div class="drawer-item" onclick="openModule('manufacturer')"><span>3. Approved Manufacturer Directory</span><span>Live Sync</span></div>
             <div class="drawer-item" onclick="openModule('customers')"><span>4. Customer Directory & Lists</span><span>Live Sync</span></div>
             <div class="drawer-item" onclick="openModule('ledger')"><span>5. Customer Khata & Udhaar Ledger</span><span>Live</span></div>
@@ -241,7 +243,7 @@
             <div class="drawer-item" onclick="openModule('legal')"><span>37. Labour Compliance & Factory License Registry</span><span>Registry</span></div>
             <div class="drawer-item" onclick="openModule('rfi')"><span>38. RFID Bag Pallet Tracking System</span><span>System</span></div>
             <div class="drawer-item" onclick="openModule('analytics')"><span>39. Predictive Profitability Analytics</span><span>Analytics</span></div>
-            <div class="drawer-item" onclick="openModule('backup')"><span>40. Cloud Auto-Backup & Disaster Recovery</span><span>Cloud</span></div>
+            <div class="drawer-item" onclick="openModule('backup')"><span>40. Cloud Auto-Backup & Disaster Recovery (.JSON)</span><span>Cloud</span></div>
             <div class="drawer-item" onclick="openModule('custom1')"><span>41. Multi-Plant Production Balancer</span><span>Balancer</span></div>
             <div class="drawer-item" onclick="openModule('custom2')"><span>42. Automated Quality Camera Inspection</span><span>AI</span></div>
             <div class="drawer-item" onclick="openModule('custom3')"><span>43. Dynamic Freight Cost Optimizer</span><span>Optimizer</span></div>
@@ -259,22 +261,22 @@
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security Login</h3>
-            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">Sign in securely with Google or owner pin (7860) to unlock ERP controls.</p>
             
             <button class="google-btn" onclick="googleSignInAuth()">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 Continue with Google
             </button>
 
-            <div style="text-align: center; font-size: 11px; color: #64748b; margin: 12px 0;">OR USE OWNER PASSWORD</div>
+            <div style="text-align: center; font-size: 11px; color: #64748b; margin: 12px 0;">OR USE OWNER PIN (7860)</div>
 
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Password">
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Pin">
             <div class="auth-links">
                 <span onclick="triggerForgotPassword()">Forgot Password?</span>
                 <span onclick="triggerFactoryResetPrompt()">Factory Reset</span>
             </div>
             
-            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 10px; padding: 13px;">Login with Password</button>
+            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 10px; padding: 13px;">Login with Pin</button>
             <button class="danger-btn" onclick="executeFactoryReset()">⚠️ Factory Data Reset (Wipe Cloud Cache)</button>
             <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 10px; font-size: 13.5px; margin-top: 8px;">Cancel</button>
         </div>
@@ -308,8 +310,8 @@
 
         <div id="mainDashboard">
             <div class="analytics-grid">
-                <div class="analytic-box" onclick="openModule('orders')">
-                    <p>Total Live Orders (Click)</p>
+                <div class="analytic-box" onclick="promptAdminLogin('orders')">
+                    <p>Total Live Orders (Click to View)</p>
                     <h3 id="statOrders">0</h3>
                 </div>
                 <div class="analytic-box" onclick="openModule('customers')">
@@ -376,6 +378,36 @@
 
         function openCart() { alert('Your active PP Bags order cart is live and synchronized with cloud.'); }
 
+        // Customer Direct Order Function (Saves directly to Firebase Orders)
+        async function promptCustomerOrder(productName, defaultRate) {
+            let custName = prompt("Enter Your Name / Business Name:");
+            let custPhone = prompt("Enter Your Phone Number:");
+            let qty = prompt('Enter Required Quantity for ' + productName + ' (Min 1000 pcs):', '1000');
+            
+            if(custName && custPhone && qty) {
+                let totalAmount = qty * defaultRate;
+                try {
+                    await window.myAddDocFunc(window.colOrdersRef, {
+                        customerName: custName,
+                        phone: custPhone,
+                        product: productName,
+                        quantity: Number(qty),
+                        rate: defaultRate,
+                        totalAmount: totalAmount,
+                        status: "Pending Approval",
+                        timestamp: new Date()
+                    });
+                    
+                    alert('Order Placed Successfully! Sent to AS Enterprises Admin Panel.');
+                    
+                    let orderText = `*📦 NEW PP BAGS ORDER - AS ENTERPRISES*%0A--------------------------------%0A*Customer:* ${custName}%0A*Phone:* ${custPhone}%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Total Amount:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment:* 9030574216%0A_Please approve my order. Thank you!_`;
+                    window.open(`https://wa.me/916301456725?text=${orderText}`, '_blank');
+                } catch(e) {
+                    alert('Error saving order: ' + e.message);
+                }
+            }
+        }
+
         function openGetQuotation() {
             let custName = prompt("Enter Customer / Business Name:");
             let custPhone = prompt("Enter Customer WhatsApp Number (e.g. 919848012345):");
@@ -385,13 +417,10 @@
 
             if(custName && custPhone && bagType && rate && qty) {
                 let totalAmount = rate * qty;
-                let billText = `*📄 AS ENTERPRISES - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Direct GPay / PhonePe / Paytm:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
+                let billText = `*📄 AS ENTERPRISES - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
                 
-                let waUrl = `https://wa.me/${custPhone}?text=${billText}`;
-                window.open(waUrl, '_blank');
-                alert('Official Bill with UPI Number (9030574216) & Bank Details generated successfully! Redirecting to WhatsApp.');
-            } else {
-                alert('Please fill out all quotation details.');
+                window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
+                alert('Official Bill with UPI Number generated successfully!');
             }
         }
 
@@ -400,11 +429,10 @@
             let qty = prompt('Enter quantity for ' + productName + ' (Min 1000 pcs):', '1000');
             if (custPhone && qty) {
                 let total = qty * defaultRate;
-                let billText = `*📄 AS ENTERPRISES - TAX INVOICE*%0A--------------------------------%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Unit Price:* ₹${defaultRate}%0A*Total Payable:* ₹${Number(total).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT DETAILS:*%0A• *UPI ID / Number:* 9030574216%0A• *SBI Bank A/C:* 38291023456%0A• *IFSC Code:* SBIN0001234%0A--------------------------------%0A*Status:* Processing • Call/Support: 6301456725`;
+                let billText = `*📄 AS ENTERPRISES - TAX INVOICE*%0A--------------------------------%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Unit Price:* ₹${defaultRate}%0A*Total Payable:* ₹${Number(total).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT DETAILS:*%0A• *UPI ID / Number:* 9030574216%0A• *SBI Bank A/C:* 38291023456%0A--------------------------------%0A*Status:* Processing • Support: 6301456725`;
                 
-                let waUrl = `https://wa.me/${custPhone}?text=${billText}`;
-                window.open(waUrl, '_blank');
-                alert('Invoice with UPI (9030574216) & Bank payment details ready to send via WhatsApp!');
+                window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
+                alert('Invoice ready to send via WhatsApp!');
             }
         }
 
@@ -414,7 +442,7 @@
                 openModule(targetModule);
             } else {
                 pendingModule = targetModule;
-                document.getElementById('adminPassInput').value = ''; // Reset input field
+                document.getElementById('adminPassInput').value = '';
                 document.getElementById('adminModal').style.display = 'flex';
             }
         }
@@ -424,44 +452,43 @@
         }
 
         function googleSignInAuth() {
-            let email = prompt("Enter your Google Account Email (e.g. md.pasha@gmail.com):", "md.pasha@gmail.com");
+            let email = prompt("Enter your Google Account Email:", "md.pasha@gmail.com");
             if(email) {
                 isAdminLoggedIn = true;
                 closeAdminModal();
-                alert('Successfully signed in with Google (' + email + ')!\nFull Admin Access Granted.');
+                alert('Successfully signed in with Google (' + email + ')!');
                 openModule(pendingModule || 'admin_rates');
             }
         }
 
         function verifyAdminPassword() {
             let pass = document.getElementById('adminPassInput').value;
-            // नया और गुप्त पिन 7860 सेट कर दिया गया है
             if(pass === "7860" || pass === "admin") {
                 isAdminLoggedIn = true;
                 closeAdminModal();
                 alert('Admin Login Successful! Full ERP Controls Unlocked.');
                 openModule(pendingModule || 'admin_rates');
             } else {
-                alert('Incorrect Admin Password! Access Denied.');
+                alert('Incorrect Admin Pin! Access Denied.');
             }
         }
 
         function triggerForgotPassword() {
             let email = prompt("Enter your registered Admin Email for password reset link:");
             if(email) {
-                alert('Password reset link has been successfully sent to ' + email + '. Check your inbox.');
+                alert('Password reset link has been successfully sent to ' + email + '.');
             }
         }
 
         function triggerFactoryResetPrompt() {
-            alert('Clicking "Factory Data Reset" will clear local storage cache and prepare the system for fresh initialization.');
+            alert('Clicking "Factory Data Reset" will clear local cache and prepare system for fresh initialization.');
         }
 
         async function executeFactoryReset() {
-            let conf = confirm("WARNING: This will wipe all local storage cache and session data for AS Enterprises ERP. Proceed?");
+            let conf = confirm("WARNING: This will wipe all local cache and session data. Proceed?");
             if(conf) {
                 localStorage.clear();
-                alert('Factory Data Reset complete. Local cache wiped successfully.');
+                alert('Factory Data Reset complete.');
                 closeAdminModal();
                 location.reload();
             }
@@ -490,9 +517,9 @@
                 document.body.appendChild(downloadAnchor);
                 downloadAnchor.click();
                 downloadAnchor.remove();
-                alert('Cloud Backup package generated and downloaded successfully!');
+                alert('Cloud Backup package downloaded successfully!');
             } catch(e) {
-                alert('Error generating backup package: ' + e.message);
+                alert('Error generating backup: ' + e.message);
             }
         }
 
@@ -501,14 +528,14 @@
             if(conf) {
                 try {
                     await window.deleteDocFunc(window.docFunc(window.myFirestoreDb, collectionName, docId));
-                    alert('Record deleted successfully from Cloud database.');
+                    alert('Record deleted successfully.');
                 } catch(e) {
                     alert('Error deleting record: ' + e.message);
                 }
             }
         }
 
-        function openModule(id) {
+        async function openModule(id) {
             let menu = document.getElementById('hamburgerDrawer');
             if(menu) menu.style.display = 'none';
             
@@ -528,33 +555,73 @@
             let content = "";
 
             if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager (Choose Camera or Gallery)";
-                desc = "Click below to choose between Camera or Gallery, set wholesale price, and publish instantly to Firebase Cloud.";
+                title = "Live Rate & Product Manager (Add Item / Camera or Gallery)";
+                desc = "Set wholesale price and publish products instantly to Firebase Cloud catalog.";
                 content = `
                     <div class="form-panel">
                         <label>Product Catalog Name:</label>
                         <input type="text" id="newProdName" placeholder="e.g. Fertilizer PP Bags (50kg)">
                         <label>Wholesale Price (₹):</label>
                         <input type="number" id="newProdPrice" placeholder="19.50">
-                        <label>Select Image (Gives Choice: Camera or Gallery):</label>
+                        <label>Select Image (Camera or Gallery):</label>
                         <input type="file" id="mediaFileInput" accept="image/*" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff; width:100%;">
                         <button class="primary-btn" onclick="uploadInstantProduct()">🚀 Publish Product & Image Live</button>
                     </div>
                 `;
+            } else if(id === 'orders') {
+                title = "Admin Orders (Approve / Delete)";
+                desc = "Real-time list of all customer orders placed from the website.";
+                
+                let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
+                let rowsHtml = "";
+                if(ordersSnap.docs.length === 0) {
+                    rowsHtml = `<tr><td colspan="6" style="text-align:center; color:#94a3b8;">No customer orders found yet.</td></tr>`;
+                } else {
+                    ordersSnap.forEach(d => {
+                        let o = d.data();
+                        let oId = d.id;
+                        rowsHtml += `
+                            <tr>
+                                <td><b>${o.customerName || 'N/A'}</b><br><small>${o.phone || ''}</small></td>
+                                <td>${o.product || 'PP Bags'}</td>
+                                <td>${o.quantity || 0} pcs</td>
+                                <td>₹${o.totalAmount || 0}</td>
+                                <td><span style="color:#fb923c; font-weight:bold;">${o.status || 'Pending'}</span></td>
+                                <td>
+                                    <button style="background:#059669; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="approveOrder('${oId}')">Approve</button>
+                                    <button style="background:#dc2626; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="deleteCloudItem('as_enterprises_orders', '${oId}'); openModule('orders');">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                content = `
+                    <div class="form-panel">
+                        <h4 style="color:#f97316; margin-bottom:10px;">📋 Live Customer Orders Table</h4>
+                        <table>
+                            <thead>
+                                <tr><th>Customer</th><th>Product</th><th>Qty</th><th>Total (₹)</th><th>Status</th><th>Action</th></tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
             } else if(id === 'backup') {
                 title = "Cloud Auto-Backup & Disaster Recovery";
-                desc = "Download complete enterprise data backup package as a secure JSON file, or run system maintenance.";
+                desc = "Download complete enterprise data backup package as a secure JSON file.";
                 content = `
                     <div class="form-panel">
                         <h4 style="color:#f97316; margin-bottom:10px;">📦 Enterprise Data Backup Archive</h4>
-                        <p style="font-size:13px; color:#94a3b8; margin-bottom:14px;">Generates a comprehensive backup archive of all live products, customer ledgers, orders, and manufacturer records stored in Firebase.</p>
                         <button class="primary-btn" onclick="downloadSystemBackupZip()">📥 Download Full Cloud Backup Package (.JSON)</button>
                         <button class="danger-btn" onclick="executeFactoryReset()" style="margin-top:14px;">⚠️ Execute Factory Data Reset</button>
                     </div>
                 `;
             } else if(id === 'customers') {
                 title = "Customer Directory & Management (Live Firebase)";
-                desc = "Add new wholesale buyers with phone numbers and details, or manage live records.";
+                desc = "Add new wholesale buyers with phone numbers and details.";
                 content = `
                     <div class="form-panel">
                         <label>Customer Name / Company:</label>
@@ -568,7 +635,7 @@
                 `;
             } else if(id === 'manufacturer') {
                 title = "Approved Manufacturer Directory (Live Firebase)";
-                desc = "Add raw material polymer/tape suppliers with phone numbers and grades.";
+                desc = "Add raw material polymer/tape suppliers.";
                 content = `
                     <div class="form-panel">
                         <label>Manufacturer / Supplier Name:</label>
@@ -599,6 +666,18 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
+        async function approveOrder(orderId) {
+            try {
+                await window.updateDocFunc(window.docFunc(window.myFirestoreDb, "as_enterprises_orders", orderId), {
+                    status: "Approved ✅"
+                });
+                alert('Order Approved Successfully!');
+                openModule('orders');
+            } catch(e) {
+                alert('Error approving order: ' + e.message);
+            }
+        }
+
         async function uploadInstantProduct() {
             let name = document.getElementById('newProdName').value;
             let price = document.getElementById('newProdPrice').value;
@@ -617,7 +696,7 @@
                         mediaUrl: mediaUrl || "", 
                         timestamp: new Date() 
                     });
-                    alert('Success! Product published instantly to Firebase Cloud and synced to all customers.');
+                    alert('Success! Product published instantly to Firebase Cloud.');
                     goBackToHome();
                 } catch(e) {
                     alert('Error saving to Cloud: ' + e.message);
@@ -628,8 +707,7 @@
                 let file = fileInput.files[0];
                 let reader = new FileReader();
                 reader.onload = async function(uploadEvent) {
-                    let base64String = uploadEvent.target.result;
-                    await processPublish(base64String);
+                    await processPublish(uploadEvent.target.result);
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -644,13 +722,13 @@
             if(name && phone && loc) {
                 try {
                     await window.myAddDocFunc(window.colCustomersRef, { name: name, phone: phone, location: loc, timestamp: new Date() });
-                    alert('Customer successfully added and synced to Firebase Cloud!');
+                    alert('Customer added successfully!');
                     goBackToHome();
                 } catch(e) {
                     alert('Error saving to Firebase: ' + e.message);
                 }
             } else {
-                alert('Please enter Name, Phone Number, and Location.');
+                alert('Please fill out all fields.');
             }
         }
 
@@ -661,13 +739,13 @@
             if(name && phone && grade) {
                 try {
                     await window.myAddDocFunc(window.colManufacturersRef, { name: name, phone: phone, grade: grade, timestamp: new Date() });
-                    alert('Manufacturer successfully added and synced to Firebase Cloud!');
+                    alert('Manufacturer added successfully!');
                     goBackToHome();
                 } catch(e) {
                     alert('Error saving to Firebase: ' + e.message);
                 }
             } else {
-                alert('Please enter Manufacturer Name, Phone Number, and Grade.');
+                alert('Please fill out all fields.');
             }
         }
 
@@ -677,7 +755,7 @@
             if(val1 && val2) {
                 try {
                     await window.myAddDocFunc(window.colUniversalRef, { module: modId, param: val1, value: val2, timestamp: new Date() });
-                    `Data successfully saved and synced to Firebase Cloud!`;
+                    alert('Data synced to Cloud successfully!');
                     goBackToHome();
                 } catch(e) {
                     alert('Error saving to Firebase: ' + e.message);
