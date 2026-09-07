@@ -13,9 +13,9 @@
         .logo-box { background: #f97316; color: #fff; font-weight: bold; padding: 8px 12px; border-radius: 6px; font-size: 18px; }
         .brand-title { font-size: 16px; font-weight: bold; color: #ffffff; }
         .brand-sub { font-size: 12px; color: #fb923c; }
-        .header-actions { display: flex; align-items: center; gap: 8px; position: relative; }
+        .header-actions { display: flex; align-items: center; gap: 6px; position: relative; }
         
-        .lang-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .lang-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
         .icon-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 16px; }
         
         /* Dropdown Menu for Three Dots */
@@ -24,7 +24,13 @@
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
 
-        .ticker-bar { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: bold; font-size: 12px; padding: 8px 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        /* Running Ticker Animation */
+        .ticker-container { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: bold; font-size: 12px; padding: 8px 0; overflow: hidden; white-space: nowrap; }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: ticker 18s linear infinite; }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
         
         .hero-banner { background: linear-gradient(135deg, #111827 0%, #1f2937 100%); padding: 25px 15px; border-bottom: 2px solid #f97316; }
         .badge { background: rgba(249, 115, 22, 0.2); border: 1px solid #f97316; color: #fb923c; font-size: 12px; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 12px; font-weight: bold; }
@@ -105,6 +111,7 @@
         <div class="header-actions">
             <button class="lang-btn" onclick="setLanguage('EN')">EN</button>
             <button class="lang-btn" onclick="setLanguage('HI')">HI</button>
+            <button class="lang-btn" onclick="setLanguage('TE')">TE</button>
             <button class="icon-btn" onclick="openCart()">🛒</button>
             <button class="icon-btn" onclick="toggleSettingsMenu(event)">⋮</button>
             
@@ -114,13 +121,15 @@
                 <div class="dropdown-item" onclick="openModule('warehouse')">🏭 Warehouse Sync</div>
                 <div class="dropdown-item" onclick="openModule('ledger')">📒 Customer Ledger</div>
                 <div class="dropdown-item" onclick="openModule('gps')">🚚 GPS Fleet Track</div>
-                <div class="dropdown-item" onclick="setLanguage('TE')">🌐 తెలుగు (Telugu)</div>
             </div>
         </div>
     </header>
 
-    <div class="ticker-bar" id="t-ticker">
-        ⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking ⚡
+    <!-- Running Ticker Bar -->
+    <div class="ticker-container">
+        <div class="ticker-text" id="t-ticker">
+            ⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking & Real-time Rate Control Active ⚡
+        </div>
     </div>
 
     <div class="container">
@@ -241,7 +250,7 @@
         const translations = {
             EN: {
                 sub: "Hyderabad • PP Bags ERP Pro",
-                ticker: "⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking ⚡",
+                ticker: "⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking & Real-time Rate Control Active ⚡",
                 badge: "⚡ Real-Time Cloud ERP • Hyderabad Manufacturing Hub",
                 h1: "Build Stronger.<br>Order Smarter.",
                 desc: "Direct wholesale supply of Heavy Duty PP Bags with live Firebase Cloud sync, instant rate updating, and GPS logistics tracking.",
@@ -250,7 +259,7 @@
             },
             HI: {
                 sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो",
-                ticker: "⚡ लाइव क्लाउड सिंक सक्रिय: चावल के कट्टे (50 किग्रा) @ ₹18.50/pc • जीपीएस फ्लीट ट्रैकिंग ⚡",
+                ticker: "⚡ लाइव क्लाउड सिंक सक्रिय: चावल के कट्टे (50 किग्रा) @ ₹18.50/pc • जीपीएस फ्लीट ट्रैकिंग और रियल-टाइम रेट कंट्रोल सक्रिय ⚡",
                 badge: "⚡ रियल-टाइम क्लाउड ईआरपी • हैदराबाद मैन्युफैक्चरिंग हब",
                 h1: "मजबूत बनाएं।<br>स्मार्ट ऑर्डर करें।",
                 desc: "लाइव फायरबेस क्लाउड सिंक, त्वरित रेट अपडेट और जीपीएस लॉजिस्टिक्स ट्रैकिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।",
@@ -259,7 +268,7 @@
             },
             TE: {
                 sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో",
-                ticker: "⚡ లైవ్ క్లౌడ్ సింక్ యాక్టివ్: రైస్ PP బ్యాగ్స్ (50కి.జీ) @ ₹18.50/pc • GPS ఫ్లీట్ ట్రాకింగ్ ⚡",
+                ticker: "⚡ లైవ్ క్లౌడ్ సింక్ యాక్టివ్: రైస్ PP బ్యాగ్స్ (50కి.జీ) @ ₹18.50/pc • GPS ఫ్లీట్ ట్రాకింగ్ & రియల్-టైమ్ రేట్ కంట్రోల్ యాక్టివ్ ⚡",
                 badge: "⚡ రియల్-టైమ్ క్లౌడ్ ERP • హైదరాబాద్ తయారీ కేంద్రం",
                 h1: "బలంగా నిర్మించండి.<br>స్మార్ట్‌గా ఆర్డర్ చేయండి.",
                 desc: "లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్, తక్షణ రేట్ అప్‌డేటింగ్ మరియు GPS లాజిస్టిక్స్ ట్రాకింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.",
