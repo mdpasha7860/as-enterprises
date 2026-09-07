@@ -8,27 +8,30 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 60px; overflow-x: hidden; width: 100%; }
         
-        header { background: #0c0c0e; border-bottom: 1px solid #1c1c22; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-badge { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 900; padding: 9px 14px; border-radius: 8px; font-size: 17px; }
-        .brand-name { font-size: 16px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
-        .brand-location { font-size: 11px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
+        header { background: #0c0c0e; border-bottom: 1px solid #1c1c22; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .logo-group { display: flex; align-items: center; gap: 10px; }
+        .logo-badge { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 8px; font-size: 16px; }
+        .brand-name { font-size: 15px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+        .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
-        .header-tools { display: flex; align-items: center; gap: 8px; position: relative; }
-        .lang-select-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 7px 10px; border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; }
-        .action-icon-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 17px; font-weight: bold; }
+        .header-tools { display: flex; align-items: center; gap: 6px; position: relative; }
+        .lang-select-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 6px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .action-icon-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: bold; }
+        
+        /* Prominent Menu Button Styling */
+        .menu-btn { background: #f97316 !important; color: #fff !important; border: 1px solid #ea580c !important; }
 
         /* Full Screen 45 Options Settings Drawer */
         .drawer-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #08080a; z-index: 2500; overflow-y: auto; padding: 20px; }
         .drawer-top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f97316; padding-bottom: 15px; margin-bottom: 20px; }
-        .drawer-top-bar h2 { color: #f97316; font-size: 18px; font-weight: 900; }
-        .close-drawer-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 8px 14px; border-radius: 6px; font-weight: 900; cursor: pointer; font-size: 14px; }
+        .drawer-top-bar h2 { color: #f97316; font-size: 17px; font-weight: 900; }
+        .close-drawer-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 8px 14px; border-radius: 6px; font-weight: 900; cursor: pointer; font-size: 13px; }
         
         .drawer-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .drawer-item { background: #0c0c0e; border: 1px solid #1c1c22; padding: 15px; border-radius: 8px; font-size: 13.5px; font-weight: 800; color: #e2e8f0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .drawer-item { background: #0c0c0e; border: 1px solid #1c1c22; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: 800; color: #e2e8f0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .drawer-item:hover { border-color: #f97316; background: rgba(249,115,22,0.1); color: #fb923c; }
 
-        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11.5px; padding: 9px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; }
+        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11px; padding: 8px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; }
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 24s linear infinite; }
         @keyframes scrollTicker {
             0% { transform: translate3d(0, 0, 0); }
@@ -38,60 +41,62 @@
         .main-wrapper { padding: 15px; max-width: 100%; width: 100%; margin: 0 auto; }
         
         .back-navigator { display: none; margin-bottom: 15px; width: 100%; }
-        .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 900; text-align: center; }
+        .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 900; text-align: center; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
 
-        /* Larger, Prominent Hero Banner with Correct Spelling */
         .hero-card { 
             background: #0c0c0e; 
-            padding: 28px 20px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 16px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            padding: 26px 18px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 16px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 11.5px; padding: 5px 12px; border-radius: 6px; display: inline-block; margin-bottom: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .hero-card h1 { font-size: 30px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.2; letter-spacing: -0.5px; }
+        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 11px; padding: 5px 12px; border-radius: 6px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
+        .hero-card h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: #fff; line-height: 1.2; letter-spacing: -0.5px; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 14.5px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
+        .hero-card p { font-size: 13.5px; color: #94a3b8; margin-bottom: 18px; line-height: 1.4; }
         
-        /* Quick Action Buttons Right Under Hero */
-        .quick-action-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; width: 100%; }
-        .qa-btn-call { background: #065f46; color: #fff; padding: 11px 6px; border-radius: 8px; font-size: 12px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #047857; }
-        .qa-btn-wa { background: #047857; color: #fff; padding: 11px 6px; border-radius: 8px; font-size: 12px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #059669; }
-        .qa-btn-quote { background: #f97316; color: #fff; padding: 11px 6px; border-radius: 8px; font-size: 12px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #ea580c; }
+        .quick-action-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 18px; width: 100%; }
+        .qa-btn-call { background: #065f46; color: #fff; padding: 11px 4px; border-radius: 8px; font-size: 11.5px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #047857; }
+        .qa-btn-wa { background: #047857; color: #fff; padding: 11px 4px; border-radius: 8px; font-size: 11.5px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #059669; }
+        .qa-btn-quote { background: #f97316; color: #fff; padding: 11px 4px; border-radius: 8px; font-size: 11.5px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #ea580c; }
 
-        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 15px; border-radius: 8px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 12px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
-        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 15px; border-radius: 8px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
+        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 13px; border-radius: 8px; font-size: 13.5px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
         .google-btn img { width: 16px; height: 16px; }
 
-        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; width: 100%; }
-        .analytic-box { background: #0c0c0e; border: 1px solid #1c1c22; padding: 16px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; }
-        .analytic-box p { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; }
-        .analytic-box h3 { font-size: 19px; font-weight: 900; color: #34d399; }
+        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; width: 100%; }
+        .analytic-box { background: #0c0c0e; border: 1px solid #1c1c22; padding: 15px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; }
+        .analytic-box p { font-size: 10.5px; color: #94a3b8; margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
+        .analytic-box h3 { font-size: 18px; font-weight: 900; color: #34d399; }
 
-        .block-header { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #f97316; text-transform: uppercase; }
+        .block-header { font-size: 14.5px; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; color: #f97316; text-transform: uppercase; }
 
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
-        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 16px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
-        .item-card h4 { font-size: 13.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
-        .item-card .price-tag { font-size: 13.5px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
-        .item-card button { background: #2563eb; color: #fff; border: none; padding: 9px; border-radius: 6px; font-size: 12px; font-weight: 900; cursor: pointer; }
+        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; width: 100%; }
+        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 15px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-card h4 { font-size: 13px; font-weight: 900; margin-bottom: 5px; color: #fff; }
+        .item-card .price-tag { font-size: 13px; color: #fb923c; font-weight: 900; margin-bottom: 10px; }
+        .item-card button { background: #2563eb; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 11.5px; font-weight: 900; cursor: pointer; }
 
-        .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 20px; border-radius: 12px; margin-bottom: 24px; width: 100%; }
-        .module-display-pane h3 { font-size: 18px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
-        .module-display-pane p { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
+        .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 12px; margin-bottom: 22px; width: 100%; }
+        .module-display-pane h3 { font-size: 17px; margin-bottom: 8px; color: #f97316; font-weight: 900; }
+        .module-display-pane p { font-size: 13px; color: #94a3b8; margin-bottom: 14px; line-height: 1.4; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
-        th, td { border: 1px solid #2a2a35; padding: 10px; text-align: left; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11.5px; }
+        th, td { border: 1px solid #2a2a35; padding: 9px; text-align: left; }
         th { background: #16161c; color: #f97316; font-weight: 900; }
         
-        .form-panel { background: #16161c; padding: 18px; border-radius: 8px; margin-top: 14px; border: 1px solid #2a2a35; width: 100%; }
-        .form-panel label { font-size: 12px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; }
-        .form-panel input, .form-panel select { width: 100%; padding: 11px; margin-bottom: 14px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 13.5px; font-weight: 700; }
+        .form-panel { background: #16161c; padding: 16px; border-radius: 8px; margin-top: 12px; border: 1px solid #2a2a35; width: 100%; }
+        .form-panel label { font-size: 11.5px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 5px; }
+        .form-panel input, .form-panel select { width: 100%; padding: 10px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 13px; font-weight: 700; }
+
+        .footer-action-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; width: 100%; }
+        .call-action { background: #065f46; color: #fff !important; text-align: center; padding: 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .wa-action { background: #047857; color: #fff !important; text-align: center; padding: 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
         #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 22px; border-radius: 12px; width: 90%; max-width: 360px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-        .modal-box h3 { color: #f97316; font-size: 17px; margin-bottom: 10px; font-weight: 900; }
-        .modal-box input { width: 100%; padding: 11px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; margin-bottom: 12px; font-size: 13.5px; }
-        .auth-links { display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 14px; font-weight: 700; }
+        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 20px; border-radius: 12px; width: 90%; max-width: 350px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .modal-box h3 { color: #f97316; font-size: 16px; margin-bottom: 8px; font-weight: 900; }
+        .modal-box input { width: 100%; padding: 10px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
+        .auth-links { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 12px; font-weight: 700; }
         .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
@@ -128,7 +133,8 @@
             <button class="lang-select-btn" onclick="setLanguage('HI')">HI</button>
             <button class="lang-select-btn" onclick="setLanguage('TE')">TE</button>
             <button class="action-icon-btn" onclick="openCart()">🛒</button>
-            <button class="action-icon-btn" onclick="toggleHamburger()">☰</button>
+            <!-- Fixed Hamburger Menu Button -->
+            <button class="action-icon-btn menu-btn" onclick="toggleHamburger()">☰ MENU</button>
         </div>
     </header>
 
@@ -197,14 +203,14 @@
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security Login</h3>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
+            <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 10px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
             
             <button class="google-btn" onclick="googleSignInAuth()">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 Continue with Google
             </button>
 
-            <div style="text-align: center; font-size: 10.5px; color: #64748b; margin: 10px 0;">OR USE OWNER PASSWORD</div>
+            <div style="text-align: center; font-size: 10px; color: #64748b; margin: 8px 0;">OR USE OWNER PASSWORD</div>
 
             <input type="password" id="adminPassInput" placeholder="Enter Admin Password (e.g. 1234)">
             <div class="auth-links">
@@ -212,8 +218,8 @@
                 <span onclick="triggerResetPassword()">Reset Data</span>
             </div>
             
-            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 8px; padding: 11px;">Login with Password</button>
-            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 9px; font-size: 12px;">Cancel</button>
+            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 6px; padding: 10px;">Login with Password</button>
+            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 8px; font-size: 11.5px;">Cancel</button>
         </div>
     </div>
 
@@ -222,7 +228,7 @@
             <button onclick="goBackToHome()">← Back to Dashboard Overview</button>
         </div>
 
-        <!-- HERO BANNER WITH BOLD SMARTER SPELLING -->
+        <!-- HERO BANNER -->
         <div class="hero-card" id="heroBanner">
             <div class="hero-tag" id="t-tag">⚡ Enterprise Cloud ERP • Industrial Hub</div>
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
