@@ -2,106 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Enterprises - PP Bags ERP Pro (Google Auth & Secure)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AS Enterprises - PP Bags ERP Pro</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #05070b; color: #f8fafc; padding-bottom: 60px; }
+        body { background-color: #08080a; color: #f8fafc; padding-bottom: 60px; overflow-x: hidden; width: 100%; }
         
-        header { background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); border-bottom: 1px solid #1e293b; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
-        .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-badge { background: linear-gradient(135deg, #f97316, #c2410c); color: #fff; font-weight: 900; padding: 9px 14px; border-radius: 10px; font-size: 17px; box-shadow: 0 4px 12px rgba(249,115,22,0.5); }
-        .brand-name { font-size: 17px; font-weight: 900; color: #fff; }
-        .brand-location { font-size: 11px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
+        header { background: #0c0c0e; border-bottom: 1px solid #1c1c22; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .logo-group { display: flex; align-items: center; gap: 10px; }
+        .logo-badge { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 8px; font-size: 16px; }
+        .brand-name { font-size: 15px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+        .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
-        .header-tools { display: flex; align-items: center; gap: 8px; position: relative; }
-        .lang-select-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 7px 10px; border-radius: 7px; font-size: 11px; font-weight: 800; cursor: pointer; }
-        .action-icon-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 8px 12px; border-radius: 7px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .header-tools { display: flex; align-items: center; gap: 6px; position: relative; }
+        .lang-select-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 6px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .action-icon-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: bold; }
 
-        /* Hamburger Drawer Menu (3 Lines) */
-        .drawer-menu { display: none; position: absolute; right: 0; top: 52px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; width: 250px; box-shadow: 0 15px 35px rgba(0,0,0,0.9); z-index: 1100; overflow: hidden; }
-        .drawer-header { background: #1e293b; padding: 12px 15px; font-size: 12px; font-weight: 800; color: #fb923c; border-bottom: 1px solid #334155; }
-        .drawer-row { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid #1e293b; cursor: pointer; color: #e2e8f0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .drawer-menu { display: none; position: absolute; right: 0; top: 48px; background: #0c0c0e; border: 1px solid #2a2a35; border-radius: 10px; width: 230px; box-shadow: 0 15px 35px rgba(0,0,0,0.9); z-index: 1100; overflow: hidden; }
+        .drawer-header { background: #16161c; padding: 10px 12px; font-size: 11px; font-weight: 800; color: #fb923c; border-bottom: 1px solid #2a2a35; }
+        .drawer-row { padding: 12px 14px; font-size: 12.5px; border-bottom: 1px solid #16161c; cursor: pointer; color: #e2e8f0; font-weight: 700; display: flex; align-items: center; gap: 8px; }
         .drawer-row:last-child { border-bottom: none; }
         .drawer-row:hover { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
 
-        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11px; padding: 9px 0; overflow: hidden; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.8px; }
+        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 11px; padding: 8px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; }
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 24s linear infinite; }
         @keyframes scrollTicker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        .main-wrapper { padding: 18px; max-width: 700px; margin: 0 auto; }
+        .main-wrapper { padding: 12px; max-width: 100%; width: 100%; margin: 0 auto; }
         
-        .back-navigator { display: none; margin-bottom: 18px; }
-        .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 10px; font-size: 14px; cursor: pointer; font-weight: 900; text-align: center; box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
+        .back-navigator { display: none; margin-bottom: 12px; width: 100%; }
+        .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 13px; cursor: pointer; font-weight: 900; text-align: center; }
 
+        /* Full Width Clean Hero Banner */
         .hero-card { 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #090d16 100%); 
-            padding: 30px 22px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 24px; box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+            background: #0c0c0e; 
+            padding: 22px 16px; border-radius: 12px; border: 1px solid #1c1c22; margin-bottom: 16px; width: 100%; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
-        .hero-tag { background: rgba(249, 115, 22, 0.2); border: 1px solid rgba(249, 115, 22, 0.6); color: #fb923c; font-size: 11px; padding: 5px 12px; border-radius: 6px; display: inline-block; margin-bottom: 14px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.25; }
+        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
+        .hero-card h1 { font-size: 22px; font-weight: 900; margin-bottom: 8px; color: #fff; line-height: 1.2; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 13.5px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
+        .hero-card p { font-size: 12.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.4; }
         
-        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 12px; text-decoration: none; box-shadow: 0 6px 20px rgba(249,115,22,0.5); }
-        .secondary-btn { background: #1e293b; color: #fff; border: 1px solid #475569; width: 100%; padding: 15px; border-radius: 10px; font-size: 14.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 13px; border-radius: 8px; font-size: 13.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
+        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 13px; border-radius: 8px; font-size: 13.5px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        /* Google Sign-In Button */
-        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 13px; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(255,255,255,0.2); }
-        .google-btn img { width: 18px; height: 18px; }
+        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .google-btn img { width: 16px; height: 16px; }
 
-        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-        .analytic-box { background: #0f172a; border: 1px solid #1e293b; padding: 16px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); cursor: pointer; transition: 0.2s; }
-        .analytic-box:hover { border-color: #f97316; }
-        .analytic-box p { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; }
-        .analytic-box h3 { font-size: 21px; font-weight: 900; color: #34d399; }
+        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
+        .analytic-box { background: #0c0c0e; border: 1px solid #1c1c22; padding: 14px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; }
+        .analytic-box p { font-size: 10px; color: #94a3b8; margin-bottom: 4px; font-weight: 700; text-transform: uppercase; }
+        .analytic-box h3 { font-size: 18px; font-weight: 900; color: #34d399; }
 
-        .block-header { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #f97316; text-transform: uppercase; }
+        .block-header { font-size: 14px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: #f97316; text-transform: uppercase; }
 
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
-        .item-card { background: #0f172a; border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .item-card h4 { font-size: 13.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
-        .item-card .price-tag { font-size: 13.5px; color: #fb923c; font-weight: 900; margin-bottom: 14px; }
-        .item-card button { background: #2563eb; color: #fff; border: none; padding: 9px; border-radius: 7px; font-size: 12.5px; font-weight: 900; cursor: pointer; }
+        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; width: 100%; }
+        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 14px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-card h4 { font-size: 12.5px; font-weight: 900; margin-bottom: 4px; color: #fff; }
+        .item-card .price-tag { font-size: 12.5px; color: #fb923c; font-weight: 900; margin-bottom: 10px; }
+        .item-card button { background: #2563eb; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 11.5px; font-weight: 900; cursor: pointer; }
 
-        .modules-grid-container { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 25px; }
-        .module-card-item { background: #0f172a; border: 1px solid #1e293b; padding: 15px 18px; border-radius: 11px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; }
+        .modules-grid-container { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 20px; width: 100%; }
+        .module-card-item { background: #0c0c0e; border: 1px solid #1c1c22; padding: 13px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; width: 100%; }
         .module-card-item:hover { border-color: #f97316; background: rgba(249,115,22,0.08); }
-        .mod-title { font-size: 13.5px; font-weight: 800; color: #e2e8f0; }
-        .mod-badge { background: #1e293b; color: #34d399; padding: 5px 9px; border-radius: 6px; font-size: 10.5px; font-weight: 900; border: 1px solid #334155; }
+        .mod-title { font-size: 12.5px; font-weight: 800; color: #e2e8f0; }
+        .mod-badge { background: #16161c; color: #34d399; padding: 4px 8px; border-radius: 5px; font-size: 10px; font-weight: 900; border: 1px solid #2a2a35; }
 
-        .module-display-pane { display: none; background: #0f172a; border: 1px solid #334155; padding: 22px; border-radius: 14px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
-        .module-display-pane h3 { font-size: 19px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
-        .module-display-pane p { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
+        .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 12px; margin-bottom: 20px; width: 100%; }
+        .module-display-pane h3 { font-size: 17px; margin-bottom: 8px; color: #f97316; font-weight: 900; }
+        .module-display-pane p { font-size: 12.5px; color: #94a3b8; margin-bottom: 14px; line-height: 1.4; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12.5px; }
-        th, td { border: 1px solid #334155; padding: 11px; text-align: left; }
-        th { background: #1e293b; color: #f97316; font-weight: 900; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11.5px; }
+        th, td { border: 1px solid #2a2a35; padding: 9px; text-align: left; }
+        th { background: #16161c; color: #f97316; font-weight: 900; }
         
-        .form-panel { background: #1e293b; padding: 18px; border-radius: 10px; margin-top: 14px; border: 1px solid #334155; }
-        .form-panel label { font-size: 12.5px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; }
-        .form-panel input, .form-panel select { width: 100%; padding: 12px; margin-bottom: 14px; background: #0f172a; border: 1px solid #475569; color: #fff; border-radius: 8px; font-size: 13.5px; font-weight: 700; }
+        .form-panel { background: #16161c; padding: 15px; border-radius: 8px; margin-top: 12px; border: 1px solid #2a2a35; width: 100%; }
+        .form-panel label { font-size: 11.5px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 5px; }
+        .form-panel input, .form-panel select { width: 100%; padding: 10px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 12.5px; font-weight: 700; }
 
-        .footer-action-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
-        .call-action { background: #065f46; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .wa-action { background: #047857; color: #fff; text-align: center; padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .footer-action-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; width: 100%; }
+        .call-action { background: #065f46; color: #fff; text-align: center; padding: 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .wa-action { background: #047857; color: #fff; text-align: center; padding: 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
-        /* Admin Login Modal & Auth Styling */
         #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-box { background: #0f172a; border: 2px solid #f97316; padding: 25px; border-radius: 14px; width: 90%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-        .modal-box h3 { color: #f97316; font-size: 18px; margin-bottom: 10px; font-weight: 900; }
-        .modal-box input { width: 100%; padding: 12px; background: #1e293b; border: 1px solid #475569; color: #fff; border-radius: 8px; margin-bottom: 12px; font-size: 14px; }
-        .auth-links { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 15px; font-weight: 700; }
+        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 20px; border-radius: 12px; width: 90%; max-width: 350px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .modal-box h3 { color: #f97316; font-size: 16px; margin-bottom: 8px; font-weight: 900; }
+        .modal-box input { width: 100%; padding: 10px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
+        .auth-links { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 12px; font-weight: 700; }
         .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
-    <!-- Firebase SDK Integration -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAXP0_3MC3YXVbZLDmhgz",
@@ -114,8 +110,7 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        window.db = db;
+        window.db = getFirestore(app);
     </script>
 </head>
 <body>
@@ -133,10 +128,8 @@
             <button class="lang-select-btn" onclick="setLanguage('HI')">HI</button>
             <button class="lang-select-btn" onclick="setLanguage('TE')">TE</button>
             <button class="action-icon-btn" onclick="openCart()">🛒</button>
-            <!-- Hamburger 3-Lines Button -->
             <button class="action-icon-btn" onclick="toggleHamburger(event)">☰</button>
             
-            <!-- Hamburger Drawer Menu -->
             <div class="drawer-menu" id="hamburgerDrawer">
                 <div class="drawer-header">⚙️ ERP MANAGEMENT PANEL</div>
                 <div class="drawer-row" onclick="promptAdminLogin('admin_rates')">🔐 Admin Login / Google Auth</div>
@@ -148,26 +141,23 @@
         </div>
     </header>
 
-    <!-- Running Ticker Header -->
     <div class="ticker-frame">
         <div class="ticker-content" id="t-ticker">
             ⚡ LIVE CLOUD SYNC ACTIVE: Rice PP Bags (50kg) @ ₹18.50/pc • GPS Fleet Tracking & Real-time Rate Control Active ⚡
         </div>
     </div>
 
-    <!-- Admin & Google Auth Security Modal -->
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security Login</h3>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
+            <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 10px;">Sign in securely with Google or owner password to unlock ERP controls.</p>
             
-            <!-- Google Sign-In Button -->
             <button class="google-btn" onclick="googleSignInAuth()">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 Continue with Google
             </button>
 
-            <div style="text-align: center; font-size: 11px; color: #64748b; margin: 10px 0;">OR USE OWNER PASSWORD</div>
+            <div style="text-align: center; font-size: 10px; color: #64748b; margin: 8px 0;">OR USE OWNER PASSWORD</div>
 
             <input type="password" id="adminPassInput" placeholder="Enter Admin Password (e.g. 1234)">
             <div class="auth-links">
@@ -175,8 +165,8 @@
                 <span onclick="triggerResetPassword()">Reset Data</span>
             </div>
             
-            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 8px; padding: 11px;">Login with Password</button>
-            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 10px; font-size: 12px;">Cancel</button>
+            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 6px; padding: 10px;">Login with Password</button>
+            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 8px; font-size: 11.5px;">Cancel</button>
         </div>
     </div>
 
@@ -185,7 +175,6 @@
             <button onclick="goBackToHome()">← Back to Dashboard Overview</button>
         </div>
 
-        <!-- HERO BANNER -->
         <div class="hero-card" id="heroBanner">
             <div class="hero-tag" id="t-tag">⚡ Enterprise Cloud ERP • Industrial Hub</div>
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
@@ -195,7 +184,6 @@
         </div>
 
         <div id="mainDashboard">
-            <!-- Working Analytics Cards -->
             <div class="analytics-grid">
                 <div class="analytic-box" onclick="openModule('orders')">
                     <p>Total Live Orders (Click)</p>
@@ -283,7 +271,6 @@
             </div>
         </div>
 
-        <!-- Active Module Pane -->
         <div id="moduleViewContainer" class="module-display-pane">
             <h3 id="viewTitle">Module Title</h3>
             <p id="viewDesc">Module description and interactive tools go here.</p>
@@ -394,7 +381,6 @@
         function openModule(id) {
             closeHamburger();
             
-            // Protected Admin Modules check
             if((id === 'admin_rates' || id === 'orders') && !isAdminLoggedIn) {
                 pendingModule = id;
                 document.getElementById('adminModal').style.display = 'flex';
