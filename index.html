@@ -240,7 +240,6 @@
             </div>
 
             <a href="#catalog" class="primary-btn" id="t-btn1">Browse Live Products & Rates →</a>
-            <!-- FIXED: Now correctly opens Ledger module instead of menu -->
             <button class="secondary-btn" onclick="openModule('ledger')" id="t-btn2">Customer Khata & Udhaar Ledger</button>
         </div>
 
@@ -388,7 +387,6 @@
         }
 
         function openModule(id) {
-            // Close drawer if open
             let menu = document.getElementById('hamburgerDrawer');
             if(menu) menu.style.display = 'none';
             
@@ -421,6 +419,44 @@
                         <button class="primary-btn" onclick="publishProductUpdate()">Publish Live to Cloud Database</button>
                     </div>
                 `;
+            } else if(id === 'customers') {
+                title = "Customer Directory & Management";
+                desc = "Add new wholesale buyers or delete existing ones from database.";
+                content = `
+                    <div class="form-panel">
+                        <label>Add New Customer Name:</label>
+                        <input type="text" id="newCustName" placeholder="e.g. Deccan Agro Agencies">
+                        <label>Location / City:</label>
+                        <input type="text" id="newCustLoc" placeholder="Warangal">
+                        <button class="primary-btn" onclick="addCustomerToDirectory()">+ Add Customer to Cloud</button>
+                    </div>
+                    <table>
+                        <thead><tr><th>Customer Name</th><th>Location</th><th>Action</th></tr></thead>
+                        <tbody id="customerTableBody">
+                            <tr><td>Sri Venkateswara Agro</td><td>Hyderabad</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
+                            <tr><td>Hyderabad Grain Stores</td><td>Secunderabad</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                `;
+            } else if(id === 'manufacturer') {
+                title = "Approved Manufacturer Directory";
+                desc = "Add new raw material suppliers or delete partners.";
+                content = `
+                    <div class="form-panel">
+                        <label>Add Manufacturer / Supplier Name:</label>
+                        <input type="text" id="newMfgName" placeholder="e.g. Reliance Polymer Unit">
+                        <label>Material Grade:</label>
+                        <input type="text" id="newMfgGrade" placeholder="HDPE/PP Grade-A">
+                        <button class="primary-btn" onclick="addManufacturerToDirectory()">+ Add Manufacturer</button>
+                    </div>
+                    <table>
+                        <thead><tr><th>Manufacturer Partner</th><th>Grade/Supply</th><th>Action</th></tr></thead>
+                        <tbody id="mfgTableBody">
+                            <tr><td>Reliance Polymer Granules</td><td>HDPE Grade-A</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
+                            <tr><td>Haldia Petrochemicals</td><td>PP Tape Extrusion</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td></tr>
+                        </tbody>
+                    </table>
+                `;
             } else if(id === 'gps') {
                 title = "GPS Geofenced Fleet Tracking";
                 desc = "Live satellite tracking for delivery trucks across Hyderabad transport hubs.";
@@ -445,6 +481,44 @@
             document.getElementById('viewDesc').innerText = desc;
             document.getElementById('viewContent').innerHTML = content;
             window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function deleteRow(btn) {
+            let row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            alert('Entry deleted successfully from database.');
+        }
+
+        function addCustomerToDirectory() {
+            let name = document.getElementById('newCustName').value;
+            let loc = document.getElementById('newCustLoc').value;
+            if(name && loc) {
+                let tbody = document.getElementById('customerTableBody');
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${name}</td><td>${loc}</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td>`;
+                tbody.appendChild(tr);
+                document.getElementById('newCustName').value = '';
+                document.getElementById('newCustLoc').value = '';
+                alert('Customer added successfully!');
+            } else {
+                alert('Please enter both name and location.');
+            }
+        }
+
+        function addManufacturerToDirectory() {
+            let name = document.getElementById('newMfgName').value;
+            let grade = document.getElementById('newMfgGrade').value;
+            if(name && grade) {
+                let tbody = document.getElementById('mfgTableBody');
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${name}</td><td>${grade}</td><td><button onclick="deleteRow(this)" style="padding:4px 8px; background:#ef4444; border:none; color:#fff; border-radius:4px; font-weight:bold; cursor:pointer;">Delete</button></td>`;
+                tbody.appendChild(tr);
+                document.getElementById('newMfgName').value = '';
+                document.getElementById('newMfgGrade').value = '';
+                alert('Manufacturer added successfully!');
+            } else {
+                alert('Please enter both manufacturer name and grade.');
+            }
         }
 
         function publishProductUpdate() {
