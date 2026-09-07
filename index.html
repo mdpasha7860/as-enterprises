@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - PP Bags ERP Pro (Media Upload Live)</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Instant Media Sync)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -75,7 +75,7 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
         .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
         .item-card h4 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
-        .item-card img, .item-card video { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
+        .item-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         .item-card .price-tag { font-size: 14px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
         .item-card button { background: #2563eb; color: #fff; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; }
 
@@ -103,11 +103,10 @@
         .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
-    <!-- Firebase SDK & Live Storage Upload Engine -->
+    <!-- Firebase SDK & Instant Base64 Sync Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAXP0_3MC3YXVbZLDmhgz",
@@ -121,24 +120,19 @@
 
         const app = initializeApp(firebaseConfig);
         window.db = getFirestore(app);
-        window.storage = getStorage(app);
         
         window.colCustomers = collection(window.db, "as_enterprises_customers");
         window.colManufacturers = collection(window.db, "as_enterprises_manufacturers");
         window.colProducts = collection(window.db, "as_enterprises_products");
         window.colUniversal = collection(window.db, "as_enterprises_universal_modules");
-        
-        window.uploadBytes = uploadBytes;
-        window.ref = ref;
-        window.getDownloadURL = getDownloadURL;
 
-        // Real-time listener for live catalog & media sync
+        // Real-time listener for instant catalog updates
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogContainer');
             if(container) {
                 let html = '';
                 if(snapshot.docs.length === 0) {
-                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Use Admin Menu to add products with Camera/Gallery images.</p>';
+                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Open Menu -> Live Rate Manager to add products with instant image capture.</p>';
                 } else {
                     snapshot.forEach((docSnap) => {
                         let p = docSnap.data();
@@ -236,7 +230,7 @@
 
     <div class="ticker-frame">
         <div class="ticker-content" id="t-ticker">
-            ⚡ AS ENTERPRISES HYDERABAD • LIVE MEDIA STORAGE & REAL-TIME CLOUD ACTIVE ⚡
+            ⚡ AS ENTERPRISES HYDERABAD • INSTANT CLOUD SYNC & MEDIA UPLOAD ACTIVE • UPI: 9030574216 ⚡
         </div>
     </div>
 
@@ -277,7 +271,7 @@
             </div>
 
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
-            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Camera/Gallery Media Upload, UPI QR (9030574216) & WhatsApp Billing.</p>
+            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Instant Image Upload, UPI QR (9030574216) & WhatsApp Billing.</p>
             
             <a href="javascript:void(0)" class="qa-btn-bill" onclick="openGetQuotation()">📋 Send Professional Bill & UPI (9030574216) via WhatsApp</a>
 
@@ -312,7 +306,6 @@
 
             <div class="block-header" id="catalog">📦 Live PP Bags Catalog & Rates (Real-Time Cloud)</div>
             <div class="catalog-grid" id="liveCatalogContainer">
-                <!-- Dynamically synced from Firebase Storage & Firestore -->
                 <div class="item-card">
                     <div>
                         <div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">Syncing Cloud...</div>
@@ -341,9 +334,9 @@
         let pendingModule = null;
 
         const translations = {
-            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Camera/Gallery Media Upload, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
-            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "कैमरा और गैलरी मीडिया अपलोड, लाइव फायरबेस क्लाउड सिंक और त्वरित रेट अपडेट के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
-            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "కెమెరా & గ్యాలరీ మీడియా అప్‌లోడ్, లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
+            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Instant Image Upload, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
+            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "तुरंत इमेज अपलोड, लाइव फायरबेस क्लाउड सिंक और त्वरित रेट अपडेट के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
+            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "తక్షణ ఇమేజ్ అప్‌లోడ్, లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
         };
 
         function setLanguage(lang) {
@@ -474,17 +467,17 @@
             let content = "";
 
             if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager (Camera & Storage Upload)";
-                desc = "Take photo/video from camera or pick from gallery, set wholesale price, and publish live to Firebase Cloud.";
+                title = "Live Rate & Product Manager (Instant Instant Upload)";
+                desc = "Capture photo from camera or gallery, set wholesale price, and publish instantly to Cloud.";
                 content = `
                     <div class="form-panel">
                         <label>Product Catalog Name:</label>
                         <input type="text" id="newProdName" placeholder="e.g. Fertilizer PP Bags (50kg)">
                         <label>Wholesale Price (₹):</label>
                         <input type="number" id="newProdPrice" placeholder="19.50">
-                        <label>Capture / Select Image or Video (Camera/Gallery):</label>
-                        <input type="file" id="mediaFileInput" accept="image/*,video/*" capture="environment" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff;">
-                        <button class="primary-btn" onclick="uploadMediaAndPublishProduct()">📸 Upload Media & Publish Live</button>
+                        <label>Capture / Select Product Image (Camera/Gallery):</label>
+                        <input type="file" id="mediaFileInput" accept="image/*" capture="environment" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff;">
+                        <button class="primary-btn" onclick="uploadInstantProduct()">🚀 Publish Product & Image Live</button>
                     </div>
                 `;
             } else if(id === 'customers') {
@@ -558,7 +551,7 @@
             alert('Entry deleted successfully from database.');
         }
 
-        async function uploadMediaAndPublishProduct() {
+        async function uploadInstantProduct() {
             let name = document.getElementById('newProdName').value;
             let price = document.getElementById('newProdPrice').value;
             let fileInput = document.getElementById('mediaFileInput');
@@ -568,30 +561,31 @@
                 return;
             }
 
-            let mediaUrl = "";
+            let processPublish = async (mediaUrl) => {
+                try {
+                    await window.addDoc(window.colProducts, { 
+                        name: name, 
+                        price: Number(price), 
+                        mediaUrl: mediaUrl || "", 
+                        timestamp: new Date() 
+                    });
+                    alert('Success! Product published instantly to Firebase Cloud.');
+                    goBackToHome();
+                } catch(e) {
+                    alert('Error saving to Cloud: ' + e.message);
+                }
+            };
+
             if(fileInput && fileInput.files[0]) {
                 let file = fileInput.files[0];
-                alert('Uploading media to Firebase Storage bucket... Please wait.');
-                try {
-                    let storageRef = window.ref(window.storage, 'products/' + Date.now() + '_' + file.name);
-                    let snapshot = await window.uploadBytes(storageRef, file);
-                    mediaUrl = await window.getDownloadURL(snapshot.ref);
-                } catch(e) {
-                    alert('Storage Upload Notice: ' + e.message + '\nPublishing product with text details.');
-                }
-            }
-
-            try {
-                await window.addDoc(window.colProducts, { 
-                    name: name, 
-                    price: Number(price), 
-                    mediaUrl: mediaUrl, 
-                    timestamp: new Date() 
-                });
-                alert('Success! Product & Media published live to Firebase Cloud Database.');
-                goBackToHome();
-            } catch(e) {
-                alert('Error publishing to Firebase: ' + e.message);
+                let reader = new FileReader();
+                reader.onload = async function(uploadEvent) {
+                    let base64String = uploadEvent.target.result;
+                    await processPublish(base64String);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                await processPublish("");
             }
         }
 
