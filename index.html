@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - PP Bags ERP Pro (Instant Media Sync)</title>
+    <title>AS Enterprises - PP Bags ERP Pro (Flexible Choice Upload)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -103,7 +103,7 @@
         .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
     </style>
 
-    <!-- Firebase SDK & Instant Base64 Sync Engine -->
+    <!-- Firebase SDK & Real-Time Sync Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -230,7 +230,7 @@
 
     <div class="ticker-frame">
         <div class="ticker-content" id="t-ticker">
-            ⚡ AS ENTERPRISES HYDERABAD • INSTANT CLOUD SYNC & MEDIA UPLOAD ACTIVE • UPI: 9030574216 ⚡
+            ⚡ AS ENTERPRISES HYDERABAD • LIVE CHOICE UPLOAD (CAMERA / GALLERY) • UPI: 9030574216 ⚡
         </div>
     </div>
 
@@ -271,7 +271,7 @@
             </div>
 
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
-            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Instant Image Upload, UPI QR (9030574216) & WhatsApp Billing.</p>
+            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Choice Upload (Camera / Gallery), UPI QR (9030574216) & WhatsApp Billing.</p>
             
             <a href="javascript:void(0)" class="qa-btn-bill" onclick="openGetQuotation()">📋 Send Professional Bill & UPI (9030574216) via WhatsApp</a>
 
@@ -334,9 +334,9 @@
         let pendingModule = null;
 
         const translations = {
-            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Instant Image Upload, instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
-            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "तुरंत इमेज अपलोड, लाइव फायरबेस क्लाउड सिंक और त्वरित रेट अपडेट के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
-            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "తక్షణ ఇమేజ్ అప్‌లోడ్, లైవ్ ఫైర్‌బేస్ క్లౌడ్ సింక్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
+            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Choice Upload (Camera / Gallery), instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
+            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "कैमरा या गैलरी से चुनने के विकल्प (Choice) के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
+            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "కెమెరా లేదా గ్యాలరీ ఎంపికతో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
         };
 
         function setLanguage(lang) {
@@ -467,16 +467,16 @@
             let content = "";
 
             if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager (Instant Instant Upload)";
-                desc = "Capture photo from camera or gallery, set wholesale price, and publish instantly to Cloud.";
+                title = "Live Rate & Product Manager (Choose Camera or Gallery)";
+                desc = "Click below to choose between Camera or Gallery, set wholesale price, and publish instantly.";
                 content = `
                     <div class="form-panel">
                         <label>Product Catalog Name:</label>
                         <input type="text" id="newProdName" placeholder="e.g. Fertilizer PP Bags (50kg)">
                         <label>Wholesale Price (₹):</label>
                         <input type="number" id="newProdPrice" placeholder="19.50">
-                        <label>Capture / Select Product Image (Camera/Gallery):</label>
-                        <input type="file" id="mediaFileInput" accept="image/*" capture="environment" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff;">
+                        <label>Select Image (Gives Choice: Camera or Gallery):</label>
+                        <input type="file" id="mediaFileInput" accept="image/*" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff; width:100%;">
                         <button class="primary-btn" onclick="uploadInstantProduct()">🚀 Publish Product & Image Live</button>
                     </div>
                 `;
@@ -569,7 +569,7 @@
                         mediaUrl: mediaUrl || "", 
                         timestamp: new Date() 
                     });
-                    alert('Success! Product published instantly to Firebase Cloud.');
+                    alert('Success! Product published instantly to Firebase Cloud and synced to all customers.');
                     goBackToHome();
                 } catch(e) {
                     alert('Error saving to Cloud: ' + e.message);
