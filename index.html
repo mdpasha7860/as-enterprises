@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises - PP Bags ERP Pro (Cart & Production Final)</title>
+    <title>AS Enterprises PP Bags - ERP Pro</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -43,12 +43,9 @@
         .back-navigator { display: none; margin-bottom: 16px; width: 100%; }
         .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 16px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 900; text-align: center; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
 
-        .hero-card { 
-            background: #0c0c0e; 
-            padding: 28px 20px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 18px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
+        .hero-card { background: #0c0c0e; padding: 28px 20px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 18px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 12px; padding: 6px 14px; border-radius: 6px; display: inline-block; margin-bottom: 14px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 30px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.2; letter-spacing: -0.5px; }
+        .hero-card h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.2; letter-spacing: -0.5px; }
         .hero-card h1 span { color: #f97316; }
         .hero-card p { font-size: 15px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
         
@@ -79,7 +76,6 @@
         .item-card h4 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
         .item-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         .item-card .price-tag { font-size: 14px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
-        .item-card button { background: #2563eb; color: #fff; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; margin-bottom: 6px; }
 
         .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 20px; border-radius: 12px; margin-bottom: 24px; width: 100%; }
         .module-display-pane h3 { font-size: 19px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
@@ -135,21 +131,21 @@
         window.colUniversalRef = collection(db, "as_enterprises_universal_modules");
         window.colOrdersRef = collection(db, "as_enterprises_orders");
 
-        // Cart storage array
         window.shoppingCart = [];
 
-        // Real-time listener for live catalog sync & Admin view
         onSnapshot(window.colProductsRef, (snapshot) => {
             let container = document.getElementById('liveCatalogContainer');
             if(container) {
                 let html = '';
                 if(snapshot.docs.length === 0) {
-                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Open Menu -> Rate Manager to add products.</p>';
+                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Admin can add products via Menu.</p>';
                 } else {
                     snapshot.forEach((docSnap) => {
                         let p = docSnap.data();
                         let docId = docSnap.id;
                         let mediaHtml = p.mediaUrl ? `<img src="${p.mediaUrl}" alt="Product">` : `<div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">No Image</div>`;
+                        let adminDelBtn = window.isAdminLoggedIn ? `<button style="width:100%; background:#dc2626; padding:8px; margin-top:6px;" onclick="deleteCloudItem('as_enterprises_products', '${docId}')">🗑️ Delete Item</button>` : '';
+                        
                         html += `
                             <div class="item-card">
                                 <div>
@@ -160,7 +156,7 @@
                                 <div>
                                     <button style="width:100%; background:#059669; margin-bottom:6px;" onclick="addToCart('${p.name}', ${p.price})">🛒 Add to Cart</button>
                                     <button style="width:100%; background:#2563eb; margin-bottom:6px;" onclick="generateAndSendBill('${p.name}', ${p.price})">Send Bill 📤</button>
-                                    <button style="width:100%; background:#dc2626; padding:8px;" onclick="deleteCloudItem('as_enterprises_products', '${docId}')">🗑️ Delete</button>
+                                    ${adminDelBtn}
                                 </div>
                             </div>
                         `;
@@ -170,13 +166,11 @@
             }
         });
 
-        // Real-time listener for Live Orders count
         onSnapshot(window.colOrdersRef, (snapshot) => {
             let statOrders = document.getElementById('statOrders');
             if(statOrders) statOrders.innerText = snapshot.docs.length;
         });
 
-        // Real-time listener for Live Distributors count
         onSnapshot(window.colCustomersRef, (snapshot) => {
             let statDist = document.getElementById('statDist');
             if(statDist) statDist.innerText = snapshot.docs.length;
@@ -189,8 +183,8 @@
         <div class="logo-group">
             <div class="logo-badge">AS</div>
             <div>
-                <div class="brand-name" id="t-brand">AS ENTERPRISES</div>
-                <div class="brand-location" id="t-sub">Hyderabad • PP Bags ERP Pro</div>
+                <div class="brand-name" id="t-brand">AS ENTERPRISES PP BAGS</div>
+                <div class="brand-location" id="t-sub">Hyderabad • ERP Pro</div>
             </div>
         </div>
         <div class="header-tools">
@@ -198,11 +192,10 @@
             <button class="lang-select-btn" onclick="setLanguage('HI')">HI</button>
             <button class="lang-select-btn" onclick="setLanguage('TE')">TE</button>
             <button class="action-icon-btn" onclick="toggleCartDrawer()">🛒<span class="cart-badge" id="cartCount">0</span></button>
-            <button class="action-icon-btn menu-btn" onclick="toggleHamburger()">☰ MENU</button>
+            <button class="action-icon-btn menu-btn" onclick="handleMenuClick()">☰ MENU</button>
         </div>
     </header>
 
-    <!-- Shopping Cart Drawer -->
     <div class="cart-drawer" id="cartDrawer">
         <div class="drawer-top-bar">
             <h2>🛒 Your Active Order Cart (बुट्टी)</h2>
@@ -223,13 +216,12 @@
 
     <div class="drawer-menu" id="hamburgerDrawer">
         <div class="drawer-top-bar">
-            <h2>⚙️ AS ENTERPRISES - ALL 45 LIVE MODULES</h2>
+            <h2>⚙️ AS ENTERPRISES PP BAGS - 45 ADMIN MODULES</h2>
             <button class="close-drawer-btn" onclick="toggleHamburger()">✕ CLOSE</button>
         </div>
         <div class="drawer-grid">
-            <div class="drawer-item" onclick="promptAdminLogin('admin_rates')"><span>🔐 Admin Login / Google Auth</span><span>Secure</span></div>
             <div class="drawer-item" onclick="openModule('admin_rates')"><span>1. Dashboard & Live Rate Manager (Add Item)</span><span>Live</span></div>
-            <div class="drawer-item" onclick="promptAdminLogin('orders')"><span>2. Admin Orders (Approve/Delete)</span><span>Live</span></div>
+            <div class="drawer-item" onclick="openModule('orders')"><span>2. Admin Orders (Approve / Reject / Delete)</span><span>Live</span></div>
             <div class="drawer-item" onclick="openModule('manufacturer')"><span>3. Approved Manufacturer Directory</span><span>Live Sync</span></div>
             <div class="drawer-item" onclick="openModule('customers')"><span>4. Customer Directory & Lists</span><span>Live Sync</span></div>
             <div class="drawer-item" onclick="openModule('ledger')"><span>5. Customer Khata & Udhaar Ledger</span><span>Live</span></div>
@@ -273,19 +265,20 @@
             <div class="drawer-item" onclick="openModule('custom3')"><span>43. Dynamic Freight Cost Optimizer</span><span>Optimizer</span></div>
             <div class="drawer-item" onclick="openModule('custom4')"><span>44. Dealer Incentive & Commission Ledger</span><span>Ledger</span></div>
             <div class="drawer-item" onclick="openModule('custom5')"><span>45. Executive CEO Master Control Panel</span><span>Master</span></div>
+            <div class="drawer-item" style="background:#dc2626; justify-content:center;" onclick="adminLogout()"><span>🔒 Logout Admin Session</span></div>
         </div>
     </div>
 
     <div class="ticker-frame">
         <div class="ticker-content" id="t-ticker">
-            ⚡ AS ENTERPRISES HYDERABAD • PRODUCTION DEPLOY READY • UPI: 9030574216 ⚡
+            ⚡ AS ENTERPRISES PP BAGS HYDERABAD • PRODUCTION DEPLOY READY • UPI: 9030574216 ⚡
         </div>
     </div>
 
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security Login</h3>
-            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">Sign in securely with Google or owner pin (7860) to unlock ERP controls.</p>
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">Sign in with Google or Owner Pin (7860) to unlock 45 Admin Modules & Controls.</p>
             
             <button class="google-btn" onclick="googleSignInAuth()">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
@@ -312,10 +305,10 @@
         </div>
 
         <div class="hero-card" id="heroBanner">
-            <div class="hero-tag" id="t-tag">⚡ Enterprise Cloud ERP • Industrial Hub</div>
+            <div class="hero-tag" id="t-tag">⚡ AS Enterprises PP Bags • Industrial Hub</div>
             
-            <div class="menu-guide-banner" onclick="toggleHamburger()">
-                👉 <b>सारे 45 मॉड्यूल्स, सेटिंग्स और एडमिन लॉगिन के लिए यहाँ (☰ MENU) क्लिक करें</b> 👈
+            <div class="menu-guide-banner" onclick="handleMenuClick()">
+                👉 <b>एडमिन लॉगिन और सारे 45 मॉड्यूल्स के लिए यहाँ (☰ MENU) क्लिक करें</b> 👈
             </div>
 
             <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
@@ -329,24 +322,24 @@
             </div>
 
             <a href="#catalog" class="primary-btn" id="t-btn1">Browse Live Products & Rates →</a>
-            <button class="secondary-btn" onclick="openModule('ledger')" id="t-btn2">Customer Khata & Udhaar Ledger</button>
+            <button class="secondary-btn" onclick="openCustomerLedgerSecure()" id="t-btn2">Customer Khata & Udhaar Ledger</button>
         </div>
 
         <div id="mainDashboard">
             <div class="analytics-grid">
-                <div class="analytic-box" onclick="promptAdminLogin('orders')">
-                    <p>Total Live Orders (Click to View)</p>
+                <div class="analytic-box" onclick="handleProtectedAction('orders')">
+                    <p>Total Live Orders (Click to View/Approve)</p>
                     <h3 id="statOrders">0</h3>
                 </div>
-                <div class="analytic-box" onclick="openModule('customers')">
+                <div class="analytic-box" onclick="handleProtectedAction('customers')">
                     <p>Active Distributors (Click)</p>
                     <h3 id="statDist">0</h3>
                 </div>
-                <div class="analytic-box" onclick="openModule('ledger')">
+                <div class="analytic-box" onclick="handleProtectedAction('ledger')">
                     <p>Net Profit / P&L (Click)</p>
                     <h3 id="statProfit">₹0</h3>
                 </div>
-                <div class="analytic-box" onclick="openModule('gps')">
+                <div class="analytic-box" onclick="handleProtectedAction('gps')">
                     <p>Truck GPS Status (Click)</p>
                     <h3 style="color:#fb923c;" id="statGps">Active</h3>
                 </div>
@@ -377,13 +370,13 @@
     </div>
 
     <script>
-        let isAdminLoggedIn = false;
+        let isAdminLoggedIn = localStorage.getItem('as_admin_auth') === 'true';
         let pendingModule = null;
 
         const translations = {
-            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ Enterprise Cloud ERP • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Choice Upload (Camera / Gallery), instant rate updating, and complete factory automation.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
-            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एंटरप्राइज क्लाउड ईआरपी • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "कैमरा या गैलरी से चुनने के विकल्प (Choice) के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
-            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ ఎంటర్‌ప్రైజ్ క్లౌడ్ ERP • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "కెమెరా లేదా గ్యాలరీ ఎంపికతో హెవీ డ్యూటీ PP బ్యాగ్‌ల ప్రత్యక్ష టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
+            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ AS Enterprises PP Bags • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Instant Cloud Sync, UPI QR (9030574216) & WhatsApp Billing.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
+            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एएस एंटरप्राइजेज पीपी बैग्स • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "तत्काल क्लाउड सिंक, यूपीआई क्यूआर (9030574216) और व्हाट्सएप बिलिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
+            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ AS ఎంటర్‌ప్రైజ్ PP బ్యాగ్స్ • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "ఇన్‌స్టంట్ క్లౌడ్ సింక్, UPI QR (9030574216) & వాట్సాప్ బిల్లింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
         };
 
         function setLanguage(lang) {
@@ -395,6 +388,16 @@
             document.getElementById('t-btn2').innerText = translations[lang].btn2;
         }
 
+        function handleMenuClick() {
+            if (!isAdminLoggedIn) {
+                pendingModule = 'admin_rates';
+                document.getElementById('adminPassInput').value = '';
+                document.getElementById('adminModal').style.display = 'flex';
+            } else {
+                toggleHamburger();
+            }
+        }
+
         function toggleHamburger() {
             let menu = document.getElementById('hamburgerDrawer');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
@@ -404,6 +407,20 @@
             let drawer = document.getElementById('cartDrawer');
             drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
             renderCartItems();
+        }
+
+        function handleProtectedAction(targetModule) {
+            if (!isAdminLoggedIn) {
+                pendingModule = targetModule;
+                document.getElementById('adminPassInput').value = '';
+                document.getElementById('adminModal').style.display = 'flex';
+            } else {
+                openModule(targetModule);
+            }
+        }
+
+        function openCustomerLedgerSecure() {
+            handleProtectedAction('ledger');
         }
 
         function addToCart(productName, price) {
@@ -469,9 +486,9 @@
                     timestamp: new Date()
                 });
 
-                alert('Order Placed Successfully from Cart! Sent to AS Enterprises Admin Panel.');
+                alert('Order Placed Successfully from Cart! Sent to AS Enterprises PP Bags Admin Panel.');
                 
-                let orderText = `*📦 NEW CART ORDER - AS ENTERPRISES*%0A--------------------------------%0A*Customer:* ${custName}%0A*Phone:* ${custPhone}%0A*Items:* ${productSummary}%0A*Total Amount:* ₹${Number(totalOrderAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment:* 9030574216%0A_Please approve my order. Thank you!_`;
+                let orderText = `*📦 NEW CART ORDER - AS ENTERPRISES PP BAGS*%0A--------------------------------%0A*Customer:* ${custName}%0A*Phone:* ${custPhone}%0A*Items:* ${productSummary}%0A*Total Amount:* ₹${Number(totalOrderAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment:* 9030574216%0A_Please approve my order. Thank you!_`;
                 window.open(`https://wa.me/916301456725?text=${orderText}`, '_blank');
                 
                 window.shoppingCart = [];
@@ -491,7 +508,7 @@
 
             if(custName && custPhone && bagType && rate && qty) {
                 let totalAmount = rate * qty;
-                let billText = `*📄 AS ENTERPRISES - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
+                let billText = `*📄 AS ENTERPRISES PP BAGS - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
                 
                 window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
                 alert('Official Bill with UPI Number generated successfully!');
@@ -503,21 +520,10 @@
             let qty = prompt('Enter quantity for ' + productName + ' (Min 1000 pcs):', '1000');
             if (custPhone && qty) {
                 let total = qty * defaultRate;
-                let billText = `*📄 AS ENTERPRISES - TAX INVOICE*%0A--------------------------------%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Unit Price:* ₹${defaultRate}%0A*Total Payable:* ₹${Number(total).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT DETAILS:*%0A• *UPI ID / Number:* 9030574216%0A• *SBI Bank A/C:* 38291023456%0A--------------------------------%0A*Status:* Processing • Support: 6301456725`;
+                let billText = `*📄 AS ENTERPRISES PP BAGS - TAX INVOICE*%0A--------------------------------%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Unit Price:* ₹${defaultRate}%0A*Total Payable:* ₹${Number(total).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT DETAILS:*%0A• *UPI ID / Number:* 9030574216%0A• *SBI Bank A/C:* 38291023456%0A--------------------------------%0A*Status:* Processing • Support: 6301456725`;
                 
                 window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
                 alert('Invoice ready to send via WhatsApp!');
-            }
-        }
-
-        function promptAdminLogin(targetModule) {
-            toggleHamburger();
-            if(isAdminLoggedIn) {
-                openModule(targetModule);
-            } else {
-                pendingModule = targetModule;
-                document.getElementById('adminPassInput').value = '';
-                document.getElementById('adminModal').style.display = 'flex';
             }
         }
 
@@ -526,11 +532,14 @@
         }
 
         function googleSignInAuth() {
-            let email = prompt("Enter your Google Account Email:", "md.pasha@gmail.com");
+            // यहाँ पहले फिक्स ईमेल आईडी हटाई जा चुकी है, अब यूजर अपनी जीमेल आईडी खुद दर्ज कर सकता है
+            let email = prompt("Enter your Google Account Email to login as Admin:");
             if(email) {
                 isAdminLoggedIn = true;
+                localStorage.setItem('as_admin_auth', 'true');
                 closeAdminModal();
                 alert('Successfully signed in with Google (' + email + ')!');
+                toggleHamburger();
                 openModule(pendingModule || 'admin_rates');
             }
         }
@@ -539,12 +548,22 @@
             let pass = document.getElementById('adminPassInput').value;
             if(pass === "7860" || pass === "admin") {
                 isAdminLoggedIn = true;
+                localStorage.setItem('as_admin_auth', 'true');
                 closeAdminModal();
                 alert('Admin Login Successful! Full ERP Controls Unlocked.');
+                toggleHamburger();
                 openModule(pendingModule || 'admin_rates');
             } else {
                 alert('Incorrect Admin Pin! Access Denied.');
             }
+        }
+
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('as_admin_auth');
+            toggleHamburger();
+            alert('Admin session logged out successfully.');
+            goBackToHome();
         }
 
         function triggerForgotPassword() {
@@ -568,35 +587,6 @@
             }
         }
 
-        async function downloadSystemBackupZip() {
-            try {
-                let productsSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_products"));
-                let customersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_customers"));
-                let mfgSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_manufacturers"));
-                let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
-
-                let backupData = {
-                    company: "AS Enterprises Hyderabad",
-                    timestamp: new Date().toISOString(),
-                    products: productsSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    customers: customersSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    manufacturers: mfgSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    orders: ordersSnap.docs.map(d => ({id: d.id, ...d.data()}))
-                };
-
-                let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
-                let downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute("href", dataStr);
-                downloadAnchor.setAttribute("download", "AS_Enterprises_Cloud_Backup_" + new Date().toISOString().slice(0,10) + ".json");
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-                downloadAnchor.remove();
-                alert('Cloud Backup package downloaded successfully!');
-            } catch(e) {
-                alert('Error generating backup: ' + e.message);
-            }
-        }
-
         async function deleteCloudItem(collectionName, docId) {
             let conf = confirm("Are you sure you want to delete this record from Firebase Cloud?");
             if(conf) {
@@ -612,12 +602,6 @@
         async function openModule(id) {
             let menu = document.getElementById('hamburgerDrawer');
             if(menu) menu.style.display = 'none';
-            
-            if((id === 'admin_rates' || id === 'orders' || id === 'backup') && !isAdminLoggedIn) {
-                pendingModule = id;
-                document.getElementById('adminModal').style.display = 'flex';
-                return;
-            }
 
             document.getElementById('mainDashboard').style.display = 'none';
             document.getElementById('heroBanner').style.display = 'none';
@@ -625,7 +609,7 @@
             document.getElementById('moduleViewContainer').style.display = 'block';
 
             let title = "Enterprise Module " + id.toUpperCase();
-            let desc = "Real-time cloud database controls for AS Enterprises manufacturing operations.";
+            let desc = "Real-time cloud database controls for AS Enterprises PP Bags manufacturing operations.";
             let content = "";
 
             if(id === 'admin_rates') {
@@ -643,7 +627,7 @@
                     </div>
                 `;
             } else if(id === 'orders') {
-                title = "Admin Orders (Approve / Delete)";
+                title = "Admin Orders (Approve / Reject / Delete)";
                 desc = "Real-time list of all customer orders placed from the website cart.";
                 
                 let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
@@ -660,9 +644,10 @@
                                 <td>${o.product || 'PP Bags'}</td>
                                 <td>${o.quantity || 0} pcs</td>
                                 <td>₹${o.totalAmount || 0}</td>
-                                <td><span style="color:#fb923c; font-weight:bold;">${o.status || 'Pending'}</span></td>
+                                <td><span style="color:#fb923c; font-weight:bold;" id="status_${oId}">${o.status || 'Pending'}</span></td>
                                 <td>
-                                    <button style="background:#059669; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="approveOrder('${oId}')">Approve</button>
+                                    <button style="background:#059669; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="updateOrderStatus('${oId}', 'Approved ✅')">Approve</button>
+                                    <button style="background:#d97706; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="updateOrderStatus('${oId}', 'Rejected ❌')">Reject</button>
                                     <button style="background:#dc2626; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="deleteCloudItem('as_enterprises_orders', '${oId}'); openModule('orders');">Delete</button>
                                 </td>
                             </tr>
@@ -727,7 +712,7 @@
                 content = `
                     <div class="form-panel">
                         <h4 style="color:#f97316; margin-bottom:10px;">⚙️ ${id.toUpperCase()} Operations Panel</h4>
-                        <p style="color:#94a3b8; font-size:13.5px; margin-bottom:12px;">This module is successfully linked with AS Enterprises cloud infrastructure.</p>
+                        <p style="color:#94a3b8; font-size:13.5px; margin-bottom:12px;">This module is successfully linked with AS Enterprises PP Bags cloud infrastructure.</p>
                         <label>Record Detail / Description:</label>
                         <input type="text" id="uniInput1" placeholder="Enter Parameter / Reference">
                         <label>Numeric Value / ID:</label>
@@ -743,15 +728,15 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        async function approveOrder(orderId) {
+        async function updateOrderStatus(orderId, newStatus) {
             try {
                 await window.updateDocFunc(window.docFunc(window.myFirestoreDb, "as_enterprises_orders", orderId), {
-                    status: "Approved ✅"
+                    status: newStatus
                 });
-                alert('Order Approved Successfully!');
+                alert('Order status updated to: ' + newStatus);
                 openModule('orders');
             } catch(e) {
-                alert('Error approving order: ' + e.message);
+                alert('Error updating order status: ' + e.message);
             }
         }
 
@@ -795,10 +780,10 @@
         async function addCustomerToDirectory() {
             let name = document.getElementById('newCustName').value;
             let phone = document.getElementById('newCustPhone').value;
-            let loc = document.getElementById('newCustLoc').value;
-            if(name && phone && loc) {
+            let locInput = document.getElementById('newCustLoc').value;
+            if(name && phone && locInput) {
                 try {
-                    await window.myAddDocFunc(window.colCustomersRef, { name: name, phone: phone, location: loc, timestamp: new Date() });
+                    await window.myAddDocFunc(window.colCustomersRef, { name: name, phone: phone, location: locInput, timestamp: new Date() });
                     alert('Customer added successfully!');
                     goBackToHome();
                 } catch(e) {
@@ -839,6 +824,35 @@
                 }
             } else {
                 alert('Please fill out all fields.');
+            }
+        }
+
+        async function downloadSystemBackupZip() {
+            try {
+                let productsSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_products"));
+                let customersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_customers"));
+                let mfgSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_manufacturers"));
+                let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
+
+                let backupData = {
+                    company: "AS Enterprises PP Bags Hyderabad",
+                    timestamp: new Date().toISOString(),
+                    products: productsSnap.docs.map(d => ({id: d.id, ...d.data()})),
+                    customers: customersSnap.docs.map(d => ({id: d.id, ...d.data()})),
+                    manufacturers: mfgSnap.docs.map(d => ({id: d.id, ...d.data()})),
+                    orders: ordersSnap.docs.map(d => ({id: d.id, ...d.data()}))
+                };
+
+                let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+                let downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute("download", "AS_Enterprises_PP_Bags_Backup_" + new Date().toISOString().slice(0,10) + ".json");
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
+                alert('Cloud Backup package downloaded successfully!');
+            } catch(e) {
+                alert('Error generating backup: ' + e.message);
             }
         }
 
