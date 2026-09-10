@@ -3,102 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AS Enterprises PP Bags - ERP Pro</title>
+    <title>AS Enterprises - PP Woven Bags ERP Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #08080a; color: #f8fafc; padding-bottom: 70px; overflow-x: hidden; width: 100%; font-size: 15px; }
+        body { background-color: #08080a; color: #f8fafc; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
         
-        header { background: #0c0c0e; border-bottom: 1px solid #1c1c22; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-badge { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 900; padding: 9px 14px; border-radius: 8px; font-size: 18px; }
-        .brand-name { font-size: 17px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
-        .brand-location { font-size: 11px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
+        header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 6px; font-size: 16px; }
+        .brand-name { font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+        .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
-        .header-tools { display: flex; align-items: center; gap: 8px; position: relative; }
-        .lang-select-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 8px 10px; border-radius: 6px; font-size: 13px; font-weight: 800; cursor: pointer; }
-        .action-icon-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; position: relative; }
-        .cart-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 10px; }
-        
-        .menu-btn { background: #f97316 !important; color: #fff !important; border: 1px solid #ea580c !important; font-size: 14px !important; padding: 8px 14px !important; }
+        .header-tools { display: flex; align-items: center; gap: 6px; position: relative; }
+        .lang-btn { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 6px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .action-icon-btn { background: transparent; color: #fff; border: none; padding: 8px; cursor: pointer; font-size: 18px; position: relative; }
+        .cart-badge { position: absolute; top: 0; right: 0; background: #f97316; color: #fff; font-size: 10px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .menu-btn { background: #f97316 !important; color: #fff !important; padding: 8px 12px !important; border-radius: 999px !important; font-size: 13px !important; font-weight: 800 !important; border: none !important; }
 
-        .drawer-menu, .cart-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #08080a; z-index: 2500; overflow-y: auto; padding: 20px; }
-        .cart-drawer { left: auto; right: 0; max-width: 420px; border-left: 2px solid #f97316; background: #0c0c0e; }
-        .drawer-top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f97316; padding-bottom: 15px; margin-bottom: 20px; }
-        .drawer-top-bar h2 { color: #f97316; font-size: 18px; font-weight: 900; }
-        .close-drawer-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 10px 16px; border-radius: 6px; font-weight: 900; cursor: pointer; font-size: 14px; }
+        /* Gold Ticker */
+        .ticker-frame { background: linear-gradient(90deg, #b8860b 0%, #ffd700 25%, #fff1a8 50%, #ffd700 75%, #b8860b 100%); color: #071126; font-weight: 900; font-size: 11.5px; padding: 8px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 26s linear infinite; }
+        @keyframes scrollTicker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        .main-wrapper { padding: 16px; max-width: 600px; width: 100%; margin: 0 auto; }
         
-        .drawer-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        .drawer-item { background: #0c0c0e; border: 1px solid #1c1c22; padding: 16px; border-radius: 8px; font-size: 14.5px; font-weight: 800; color: #e2e8f0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .drawer-item:hover { border-color: #f97316; background: rgba(249,115,22,0.1); color: #fb923c; }
-
-        .ticker-frame { background: linear-gradient(90deg, #d97706, #f59e0b); color: #000; font-weight: 900; font-size: 12.5px; padding: 9px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; }
-        .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 24s linear infinite; }
-        @keyframes scrollTicker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
-
-        .main-wrapper { padding: 18px; max-width: 100%; width: 100%; margin: 0 auto; }
-        
-        .back-navigator { display: none; margin-bottom: 16px; width: 100%; }
-        .back-navigator button { background: #f97316; color: #fff; border: none; width: 100%; padding: 16px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 900; text-align: center; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
-
-        .hero-card { background: #0c0c0e; padding: 28px 20px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 18px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 12px; padding: 6px 14px; border-radius: 6px; display: inline-block; margin-bottom: 14px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; color: #fff; line-height: 1.2; letter-spacing: -0.5px; }
+        /* Hero Banner */
+        .hero-card { background: #0c0c0e; padding: 24px 18px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
+        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #fff; line-height: 1.15; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 15px; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
+        .hero-card p { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.4; }
         
-        .menu-guide-banner { background: rgba(249, 115, 22, 0.2); border: 1px dashed #f97316; color: #fed7aa; padding: 12px; border-radius: 8px; font-size: 13.5px; font-weight: 800; text-align: center; margin-bottom: 16px; cursor: pointer; }
+        .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
+        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        .quick-action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
-        .qa-btn-call { background: #065f46; color: #fff; padding: 13px 8px; border-radius: 8px; font-size: 13px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #047857; }
-        .qa-btn-wa { background: #047857; color: #fff; padding: 13px 8px; border-radius: 8px; font-size: 13px; font-weight: 900; text-align: center; text-decoration: none; border: 1px solid #059669; }
+        /* Quick Action Cards Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+        .card-tile { background: #16161c; border: 1px solid #2a2a35; padding: 12px 8px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .card-tile:hover { border-color: #f97316; transform: translateY(-2px); }
+        .card-tile div:first-child { font-size: 20px; margin-bottom: 4px; }
+        .card-tile div:last-child { font-size: 11px; font-weight: 800; color: #cbd5e1; }
+
+        /* Search Bar */
+        .search-box { background: #fff; border: 2px solid #08080a; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 700; color: #08080a; background: transparent; }
+
+        /* Catalog Grid */
+        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-img { height: 110px; background: #16161c; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; }
+        .item-body { padding: 12px; }
+        .item-tag { font-size: 9px; text-transform: uppercase; color: #f97316; font-weight: 900; margin-bottom: 3px; }
+        .item-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.2; height: 32px; overflow: hidden; }
+        .item-price { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+        .item-price span { font-size: 10px; color: #94a3b8; font-weight: 700; }
+        .buy-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 999px; font-size: 12px; font-weight: 900; cursor: pointer; }
+
+        /* Drawers & Modals */
+        .drawer { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 420px; height: 100%; background: #0c0c0e; z-index: 2500; overflow-y: auto; padding: 20px; border-left: 2px solid #f97316; box-shadow: -10px 0 30px rgba(0,0,0,0.9); }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f97316; padding-bottom: 12px; margin-bottom: 16px; }
+        .drawer-header h3 { color: #f97316; font-size: 17px; font-weight: 900; }
+        .close-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 6px 12px; border-radius: 6px; font-weight: 900; cursor: pointer; }
+
+        /* Admin Locked Modal */
+        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 24px; border-radius: 14px; width: 100%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .modal-box h3 { color: #f97316; font-size: 18px; margin-bottom: 8px; font-weight: 900; }
+        .modal-box input { width: 100%; padding: 12px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 8px; margin-bottom: 12px; font-size: 15px; font-weight: 700; outline: none; }
         
-        .qa-btn-bill { background: #2563eb; color: #fff; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: center; text-decoration: none; display: block; margin-bottom: 16px; border: 1px solid #1d4ed8; box-shadow: 0 4px 15px rgba(37,99,235,0.4); }
+        /* Floating Contact Buttons */
+        .float-btns { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 999; }
+        .float-btn { background: #059669; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .float-btn.wa { background: #25d366; }
 
-        .primary-btn { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; width: 100%; padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 12px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
-        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
-        .danger-btn { background: #dc2626; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; margin-top: 12px; }
-
-        .google-btn { background: #ffffff; color: #1f2937; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; }
-        .google-btn img { width: 18px; height: 18px; }
-
-        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; width: 100%; }
-        .analytic-box { background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; }
-        .analytic-box p { font-size: 12px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; }
-        .analytic-box h3 { font-size: 20px; font-weight: 900; color: #34d399; }
-
-        .block-header { font-size: 16px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #f97316; text-transform: uppercase; }
-
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
-        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: space-between; }
-        .item-card h4 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; color: #fff; }
-        .item-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
-        .item-card .price-tag { font-size: 14px; color: #fb923c; font-weight: 900; margin-bottom: 12px; }
-
-        .module-display-pane { display: none; background: #0c0c0e; border: 1px solid #1c1c22; padding: 20px; border-radius: 12px; margin-bottom: 24px; width: 100%; }
-        .module-display-pane h3 { font-size: 19px; margin-bottom: 10px; color: #f97316; font-weight: 900; }
-        .module-display-pane p { font-size: 14.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
+        .form-panel { background: #16161c; padding: 16px; border-radius: 12px; border: 1px solid #2a2a35; margin-bottom: 14px; }
+        .form-panel label { font-size: 12px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; text-transform: uppercase; }
+        .form-panel input, .form-panel select { width: 100%; padding: 10px 12px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 700; outline: none; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
-        th, td { border: 1px solid #2a2a35; padding: 11px; text-align: left; }
-        th { background: #16161c; color: #f97316; font-weight: 900; font-size: 13.5px; }
-        
-        .form-panel { background: #16161c; padding: 18px; border-radius: 8px; margin-top: 14px; border: 1px solid #2a2a35; width: 100%; }
-        .form-panel label { font-size: 13px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; }
-        .form-panel input, .form-panel select { width: 100%; padding: 12px; margin-bottom: 14px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 14.5px; font-weight: 700; }
-
-        .footer-action-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; width: 100%; }
-        .call-action { background: #065f46; color: #fff !important; text-align: center; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .wa-action { background: #047857; color: #fff !important; text-align: center; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 900; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 22px; border-radius: 12px; width: 92%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-        .modal-box h3 { color: #f97316; font-size: 18px; margin-bottom: 10px; font-weight: 900; }
-        .modal-box input { width: 100%; padding: 12px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; margin-bottom: 12px; font-size: 14.5px; }
-        .auth-links { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 14px; font-weight: 700; }
-        .auth-links span { color: #fb923c; cursor: pointer; text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+        th, td { border: 1px solid #2a2a35; padding: 8px; text-align: left; }
+        th { background: #16161c; color: #f97316; font-weight: 900; }
     </style>
 
     <!-- Firebase SDK & Safe Execution Engine -->
@@ -119,748 +105,381 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        window.myFirestoreDb = db;
-        window.myAddDocFunc = addDoc;
-        window.getDocsFunc = getDocs;
-        window.deleteDocFunc = deleteDoc;
-        window.docFunc = doc;
-        window.updateDocFunc = updateDoc;
-        window.colCustomersRef = collection(db, "as_enterprises_customers");
-        window.colManufacturersRef = collection(db, "as_enterprises_manufacturers");
-        window.colProductsRef = collection(db, "as_enterprises_products");
-        window.colUniversalRef = collection(db, "as_enterprises_universal_modules");
-        window.colOrdersRef = collection(db, "as_enterprises_orders");
+        window.myDb = db;
+        window.myAddDoc = addDoc;
+        window.myGetDocs = getDocs;
+        window.myDelDoc = deleteDoc;
+        window.myDoc = doc;
+        window.myUpdateDoc = updateDoc;
+        window.colProducts = collection(db, "as_enterprises_pp_products");
+        window.colOrders = collection(db, "as_enterprises_pp_orders");
 
-        window.shoppingCart = [];
+        window.appCart = [];
 
-        onSnapshot(window.colProductsRef, (snapshot) => {
-            let container = document.getElementById('liveCatalogContainer');
+        // Real-time catalog sync from Firebase
+        onSnapshot(window.colProducts, (snapshot) => {
+            let container = document.getElementById('liveCatalogGrid');
             if(container) {
                 let html = '';
-                if(snapshot.docs.length === 0) {
-                    html = '<p style="color:#94a3b8; font-size:13px; grid-column: span 2;">No products published yet. Admin can add products via Menu.</p>';
-                } else {
-                    snapshot.forEach((docSnap) => {
-                        let p = docSnap.data();
-                        let docId = docSnap.id;
-                        let mediaHtml = p.mediaUrl ? `<img src="${p.mediaUrl}" alt="Product">` : `<div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">No Image</div>`;
-                        let adminDelBtn = window.isAdminLoggedIn ? `<button style="width:100%; background:#dc2626; padding:8px; margin-top:6px;" onclick="deleteCloudItem('as_enterprises_products', '${docId}')">🗑️ Delete Item</button>` : '';
-                        
-                        html += `
-                            <div class="item-card">
-                                <div>
-                                    ${mediaHtml}
-                                    <h4>${p.name}</h4>
-                                    <div class="price-tag">₹${p.price} / pc (Live Cloud)</div>
-                                </div>
-                                <div>
-                                    <button style="width:100%; background:#059669; margin-bottom:6px;" onclick="addToCart('${p.name}', ${p.price})">🛒 Add to Cart</button>
-                                    <button style="width:100%; background:#2563eb; margin-bottom:6px;" onclick="generateAndSendBill('${p.name}', ${p.price})">Send Bill 📤</button>
-                                    ${adminDelBtn}
-                                </div>
-                            </div>
-                        `;
+                let defaultProducts = [
+                    { id: 1, name: "PP Woven Bag 50kg (Standard)", brand: "AS HeavyDuty", price: 14.50, stock: 10000, img: "" },
+                    { id: 2, name: "PP Rice Bag 26x38 (Printed)", brand: "AgroLine", price: 16.00, stock: 8000, img: "" },
+                    { id: 3, name: "Laminated PP Bag 50kg (Glossy)", brand: "Shree Pack", price: 19.50, stock: 5000, img: "" },
+                    { id: 4, name: "HDPE Fertilizer Bag", brand: "Kisan", price: 18.00, stock: 6000, img: "" }
+                ];
+
+                let allProds = defaultProducts;
+                if(snapshot.docs.length > 0) {
+                    snapshot.forEach(docSnap => {
+                        allProds.push({ id: docSnap.id, ...docSnap.data() });
                     });
                 }
+
+                allProds.forEach(p => {
+                    html += `
+                        <div class="item-card">
+                            <div class="item-img">
+                                ${p.img ? `<img src="${p.img}" alt="">` : '<span>PP Woven Bag</span>'}
+                            </div>
+                            <div class="item-body">
+                                <div class="item-tag">${p.brand || 'AS HeavyDuty'}</div>
+                                <div class="item-title">${p.name}</div>
+                                <div class="item-price">₹${p.price} <span>/ pc</span></div>
+                                <button class="buy-btn" onclick="addToAppCart('${p.name}', ${p.price})">+ Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                });
                 container.innerHTML = html;
             }
-        });
-
-        onSnapshot(window.colOrdersRef, (snapshot) => {
-            let statOrders = document.getElementById('statOrders');
-            if(statOrders) statOrders.innerText = snapshot.docs.length;
-        });
-
-        onSnapshot(window.colCustomersRef, (snapshot) => {
-            let statDist = document.getElementById('statDist');
-            if(statDist) statDist.innerText = snapshot.docs.length;
         });
     </script>
 </head>
 <body>
 
     <header>
-        <div class="logo-group">
+        <div class="logo-group" onclick="switchView('home')">
             <div class="logo-badge">AS</div>
             <div>
-                <div class="brand-name" id="t-brand">AS ENTERPRISES PP BAGS</div>
-                <div class="brand-location" id="t-sub">Hyderabad • ERP Pro</div>
+                <div class="brand-name">AS ENTERPRISES</div>
+                <div class="brand-location">PP Woven Bags Hub</div>
             </div>
         </div>
         <div class="header-tools">
-            <button class="lang-select-btn" onclick="setLanguage('EN')">EN</button>
-            <button class="lang-select-btn" onclick="setLanguage('HI')">HI</button>
-            <button class="lang-select-btn" onclick="setLanguage('TE')">TE</button>
+            <button class="lang-btn" onclick="setLang('EN')">EN</button>
+            <button class="lang-btn" onclick="setLang('HI')">HI</button>
+            <button class="lang-btn" onclick="setLang('TE')">TE</button>
             <button class="action-icon-btn" onclick="toggleCartDrawer()">🛒<span class="cart-badge" id="cartCount">0</span></button>
-            <button class="action-icon-btn menu-btn" onclick="handleMenuClick()">☰ MENU</button>
+            <button class="menu-btn" onclick="openAdminCheck()">⚙️ Admin</button>
         </div>
     </header>
 
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="drawer-top-bar">
-            <h2>🛒 Your Active Order Cart (बुट्टी)</h2>
-            <button class="close-drawer-btn" onclick="toggleCartDrawer()">✕ CLOSE</button>
-        </div>
-        <div id="cartItemsContainer" style="margin-bottom: 20px;">
-            <p style="color: #94a3b8; font-size: 14px;">Your cart is currently empty. Add products from catalog.</p>
-        </div>
-        <div id="cartCheckoutSection" style="display:none;" class="form-panel">
-            <h4 style="color:#f97316; margin-bottom:10px;">📋 Complete Your Order</h4>
-            <label>Your Name / Business Name:</label>
-            <input type="text" id="cartCustName" placeholder="e.g. Ramesh Traders">
-            <label>Your Phone Number:</label>
-            <input type="tel" id="cartCustPhone" placeholder="e.g. 9848012345">
-            <button class="primary-btn" onclick="submitCartOrder()">🚀 Place Final Order to Admin</button>
-        </div>
-    </div>
-
-    <div class="drawer-menu" id="hamburgerDrawer">
-        <div class="drawer-top-bar">
-            <h2>⚙️ AS ENTERPRISES PP BAGS - 45 ADMIN MODULES</h2>
-            <button class="close-drawer-btn" onclick="toggleHamburger()">✕ CLOSE</button>
-        </div>
-        <div class="drawer-grid">
-            <div class="drawer-item" onclick="openModule('admin_rates')"><span>1. Dashboard & Live Rate Manager (Add Item)</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('orders')"><span>2. Admin Orders (Approve / Reject / Delete)</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('manufacturer')"><span>3. Approved Manufacturer Directory</span><span>Live Sync</span></div>
-            <div class="drawer-item" onclick="openModule('customers')"><span>4. Customer Directory & Lists</span><span>Live Sync</span></div>
-            <div class="drawer-item" onclick="openModule('ledger')"><span>5. Customer Khata & Udhaar Ledger</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('warehouse')"><span>6. Multi-Warehouse Stock Sync</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('barcode')"><span>7. Barcode & QR Sticker Printer</span><span>Tool</span></div>
-            <div class="drawer-item" onclick="openModule('gst')"><span>8. GST E-Way Bill & E-Invoice API</span><span>API</span></div>
-            <div class="drawer-item" onclick="openModule('export')"><span>9. Multi-Currency Export Invoicing</span><span>API</span></div>
-            <div class="drawer-item" onclick="openModule('ai')"><span>10. AI Demand Forecasting Engine</span><span>AI</span></div>
-            <div class="drawer-item" onclick="openModule('biometric')"><span>11. Biometric / Facial Attendance</span><span>Sync</span></div>
-            <div class="drawer-item" onclick="openModule('fleet')"><span>12. Fleet Fuel & Maintenance Log</span><span>Log</span></div>
-            <div class="drawer-item" onclick="openModule('whatsapp')"><span>13. Meta WhatsApp Cloud API Bot</span><span>API</span></div>
-            <div class="drawer-item" onclick="openModule('gps')"><span>14. GPS Geofenced Fleet Tracking</span><span>Live</span></div>
-            <div class="drawer-item" onclick="openModule('payroll')"><span>15. Staff & Labor Payroll Ledger</span><span>Log</span></div>
-            <div class="drawer-item" onclick="openModule('qc')"><span>16. Quality Control & GSM Weight Audit</span><span>Audit</span></div>
-            <div class="drawer-item" onclick="openModule('polymer')"><span>17. Polymer Raw Material Granules Stock</span><span>Stock</span></div>
-            <div class="drawer-item" onclick="openModule('extrusion')"><span>18. Extrusion Machine Efficiency Monitor</span><span>Monitor</span></div>
-            <div class="drawer-item" onclick="openModule('loom')"><span>19. Circular Loom Production Tracker</span><span>Track</span></div>
-            <div class="drawer-item" onclick="openModule('laminating')"><span>20. PP Cloth Laminating & Coating Log</span><span>Log</span></div>
-            <div class="drawer-item" onclick="openModule('printing')"><span>21. Flexographic Printing Cylinder Manager</span><span>Manager</span></div>
-            <div class="drawer-item" onclick="openModule('cutting')"><span>22. Ultrasonic Cutting & Stitching Unit</span><span>Unit</span></div>
-            <div class="drawer-item" onclick="openModule('baling')"><span>23. Hydraulic Baling & Packaging Tracker</span><span>Tracker</span></div>
-            <div class="drawer-item" onclick="openModule('dispatch')"><span>24. Dispatch & Transport Gate Pass Manager</span><span>Manager</span></div>
-            <div class="drawer-item" onclick="openModule('maintenance')"><span>25. Machine Preventive Maintenance Scheduler</span><span>Scheduler</span></div>
-            <div class="drawer-item" onclick="openModule('power')"><span>26. Industrial Power Consumption & Solar Metering</span><span>Meter</span></div>
-            <div class="drawer-item" onclick="openModule('safety')"><span>27. Factory Safety & Fire Compliance Audit</span><span>Audit</span></div>
-            <div class="drawer-item" onclick="openModule('supplier')"><span>28. Raw Material Supplier Vendor Rating</span><span>Rating</span></div>
-            <div class="drawer-item" onclick="openModule('credit')"><span>29. Credit Risk & Overdue Payment Alarm</span><span>Alarm</span></div>
-            <div class="drawer-item" onclick="openModule('tax')"><span>30. TDS, TCS & GST Return Filing Vault</span><span>Vault</span></div>
-            <div class="drawer-item" onclick="openModule('audit')"><span>31. Internal Financial Audit Trail Log</span><span>Log</span></div>
-            <div class="drawer-item" onclick="openModule('crm')"><span>32. B2B Client Inquiry & Follow-up CRM</span><span>CRM</span></div>
-            <div class="drawer-item" onclick="openModule('tender')"><span>33. Government & FCI Tender Document Hub</span><span>Hub</span></div>
-            <div class="drawer-item" onclick="openModule('transport')"><span>34. Transporter Rate Negotiation Ledger</span><span>Ledger</span></div>
-            <div class="drawer-item" onclick="openModule('scrap')"><span>35. Plastic Scrap & Waste Recycling Unit</span><span>Unit</span></div>
-            <div class="drawer-item" onclick="openModule('insurance')"><span>36. Factory & Transit Insurance Policy Tracker</span><span>Tracker</span></div>
-            <div class="drawer-item" onclick="openModule('legal')"><span>37. Labour Compliance & Factory License Registry</span><span>Registry</span></div>
-            <div class="drawer-item" onclick="openModule('rfi')"><span>38. RFID Bag Pallet Tracking System</span><span>System</span></div>
-            <div class="drawer-item" onclick="openModule('analytics')"><span>39. Predictive Profitability Analytics</span><span>Analytics</span></div>
-            <div class="drawer-item" onclick="openModule('backup')"><span>40. Cloud Auto-Backup & Disaster Recovery (.JSON)</span><span>Cloud</span></div>
-            <div class="drawer-item" onclick="openModule('custom1')"><span>41. Multi-Plant Production Balancer</span><span>Balancer</span></div>
-            <div class="drawer-item" onclick="openModule('custom2')"><span>42. Automated Quality Camera Inspection</span><span>AI</span></div>
-            <div class="drawer-item" onclick="openModule('custom3')"><span>43. Dynamic Freight Cost Optimizer</span><span>Optimizer</span></div>
-            <div class="drawer-item" onclick="openModule('custom4')"><span>44. Dealer Incentive & Commission Ledger</span><span>Ledger</span></div>
-            <div class="drawer-item" onclick="openModule('custom5')"><span>45. Executive CEO Master Control Panel</span><span>Master</span></div>
-            <div class="drawer-item" style="background:#dc2626; justify-content:center;" onclick="adminLogout()"><span>🔒 Logout Admin Session</span></div>
-        </div>
-    </div>
-
+    <!-- Gold Ticker -->
     <div class="ticker-frame">
-        <div class="ticker-content" id="t-ticker">
-            ⚡ AS ENTERPRISES PP BAGS HYDERABAD • PRODUCTION DEPLOY READY • UPI: 9030574216 ⚡
-        </div>
-    </div>
-
-    <div id="adminModal">
-        <div class="modal-box">
-            <h3>🔐 Admin Security Login</h3>
-            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">Sign in with Google or Owner Pin (7860) to unlock 45 Admin Modules & Controls.</p>
-            
-            <button class="google-btn" onclick="googleSignInAuth()">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-                Continue with Google
-            </button>
-
-            <div style="text-align: center; font-size: 11px; color: #64748b; margin: 12px 0;">OR USE OWNER PIN (7860)</div>
-
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Pin">
-            <div class="auth-links">
-                <span onclick="triggerForgotPassword()">Forgot Password?</span>
-                <span onclick="triggerFactoryResetPrompt()">Factory Reset</span>
-            </div>
-            
-            <button class="primary-btn" onclick="verifyAdminPassword()" style="margin-bottom: 10px; padding: 13px;">Login with Pin</button>
-            <button class="danger-btn" onclick="executeFactoryReset()">⚠️ Factory Data Reset (Wipe Cloud Cache)</button>
-            <button class="secondary-btn" onclick="closeAdminModal()" style="padding: 10px; font-size: 13.5px; margin-top: 8px;">Cancel</button>
+        <div class="ticker-content" id="t-tick">
+            ★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★
         </div>
     </div>
 
     <div class="main-wrapper">
-        <div class="back-navigator" id="backNav">
-            <button onclick="goBackToHome()">← Back to Dashboard Overview</button>
-        </div>
-
-        <div class="hero-card" id="heroBanner">
-            <div class="hero-tag" id="t-tag">⚡ AS Enterprises PP Bags • Industrial Hub</div>
-            
-            <div class="menu-guide-banner" onclick="handleMenuClick()">
-                👉 <b>एडमिन लॉगिन और सारे 45 मॉड्यूल्स के लिए यहाँ (☰ MENU) क्लिक करें</b> 👈
+        
+        <!-- HOME VIEW -->
+        <div id="homeView">
+            <div class="hero-card">
+                <div class="hero-tag">⚡ Industrial Packaging Hub</div>
+                <h1>Industrial PP Bags.<br><span>Direct Wholesale.</span></h1>
+                <p>Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags, and Custom Printed Packaging.</p>
+                <button class="primary-btn" onclick="switchView('catalog')">Browse PP Bags & Rates →</button>
+                <button class="secondary-btn" onclick="switchView('estimator')">Calculate Bag Requirements 🧮</button>
             </div>
 
-            <h1 id="t-h1">Build Stronger.<br><span>Order Smarter.</span></h1>
-            <p id="t-desc">Direct wholesale supply of Heavy Duty PP Bags with Instant Cloud Sync, UPI QR (9030574216) & WhatsApp Billing.</p>
-            
-            <a href="javascript:void(0)" class="qa-btn-bill" onclick="openGetQuotation()">📋 Send Professional Bill & UPI (9030574216) via WhatsApp</a>
-
-            <div class="quick-action-grid">
-                <a href="tel:6301456725" class="qa-btn-call">📞 Call: 6301456725</a>
-                <a href="https://wa.me/916301456725" target="_blank" class="qa-btn-wa">💬 WhatsApp Us</a>
+            <div class="cards-grid">
+                <div class="card-tile" onclick="switchView('tracker')"><div>🚚</div><div id="lbl-s">Delivery</div></div>
+                <div class="card-tile" onclick="switchView('khata')"><div>📖</div><div id="lbl-w">Khata</div></div>
+                <div class="card-tile" onclick="switchView('catalog')"><div>✨</div><div id="lbl-g">Catalog</div></div>
+                <div class="card-tile" onclick="switchView('estimator')"><div>📐</div><div id="lbl-f">Estimate</div></div>
             </div>
 
-            <a href="#catalog" class="primary-btn" id="t-btn1">Browse Live Products & Rates →</a>
-            <button class="secondary-btn" onclick="openCustomerLedgerSecure()" id="t-btn2">Customer Khata & Udhaar Ledger</button>
-        </div>
-
-        <div id="mainDashboard">
-            <div class="analytics-grid">
-                <div class="analytic-box" onclick="handleProtectedAction('orders')">
-                    <p>Total Live Orders (Click to View/Approve)</p>
-                    <h3 id="statOrders">0</h3>
-                </div>
-                <div class="analytic-box" onclick="handleProtectedAction('customers')">
-                    <p>Active Distributors (Click)</p>
-                    <h3 id="statDist">0</h3>
-                </div>
-                <div class="analytic-box" onclick="handleProtectedAction('ledger')">
-                    <p>Net Profit / P&L (Click)</p>
-                    <h3 id="statProfit">₹0</h3>
-                </div>
-                <div class="analytic-box" onclick="handleProtectedAction('gps')">
-                    <p>Truck GPS Status (Click)</p>
-                    <h3 style="color:#fb923c;" id="statGps">Active</h3>
-                </div>
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" id="searchInput" placeholder="Search PP Bags, Rice Bags..." oninput="filterCatalog(this.value)">
             </div>
 
-            <div class="block-header" id="catalog">📦 Live PP Bags Catalog & Rates (Real-Time Cloud)</div>
-            <div class="catalog-grid" id="liveCatalogContainer">
-                <div class="item-card">
-                    <div>
-                        <div style="height:90px; background:#16161c; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:11px; border-radius:6px; margin-bottom:8px;">Connecting Firebase Cloud...</div>
-                        <h4>Loading Live Catalog...</h4>
-                        <div class="price-tag">₹0.00 / pc</div>
-                    </div>
-                </div>
+            <h3 style="font-size: 15px; font-weight: 900; margin-bottom: 12px; color: #f97316; text-transform: uppercase;">📦 Featured PP Bags Catalog</h3>
+            <div class="catalog-grid" id="liveCatalogGrid">
+                <!-- Injected via JS / Firebase -->
             </div>
         </div>
 
-        <div id="moduleViewContainer" class="module-display-pane">
-            <h3 id="viewTitle">Module Title</h3>
-            <p id="viewDesc">Module description and interactive tools go here.</p>
-            <div id="viewContent"></div>
+        <!-- CATALOG VIEW -->
+        <div id="catalogView" style="display:none;">
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <h2 style="font-size:22px; font-weight:900; margin-bottom:14px; color:#f97316;">Complete Bag Catalog</h2>
+            <div class="catalog-grid" id="fullCatalogGrid"></div>
         </div>
 
-        <div class="footer-action-bar">
-            <a href="tel:6301456725" class="call-action">📞 Call: 6301456725</a>
-            <a href="https://wa.me/916301456725" target="_blank" class="wa-action">💬 WhatsApp Us</a>
+        <!-- ESTIMATOR VIEW -->
+        <div id="estimatorView" style="display:none;">
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <div class="form-panel">
+                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Bag Requirement Calculator</h3>
+                <label>Bag Length (inch):</label>
+                <input type="number" id="estLen" placeholder="38">
+                <label>Bag Width (inch):</label>
+                <input type="number" id="estWid" placeholder="26">
+                <label>GSM (Weight quality):</label>
+                <input type="number" id="estGsm" placeholder="70">
+                <button class="primary-btn" onclick="calculateBags()">Calculate Requirement</button>
+                <div id="estResult" style="margin-top:12px; font-weight:900; color:#34d399; font-size:16px;"></div>
+            </div>
+        </div>
+
+        <!-- KHATA VIEW -->
+        <div id="khataView" style="display:none;">
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <div class="form-panel">
+                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📖 Wholesale Khata & Ledger</h3>
+                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Track distributor credits and advance payments.</p>
+                <label>Customer Name:</label>
+                <input type="text" id="khataName" placeholder="Ramesh Traders">
+                <label>Amount (₹):</label>
+                <input type="number" id="khataAmt" placeholder="50000">
+                <button class="primary-btn" onclick="alert('Khata Entry Saved Successfully!')">+ Record Credit / Debit</button>
+            </div>
+        </div>
+
+        <!-- TRACKER VIEW -->
+        <div id="trackerView" style="display:none;">
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <div class="form-panel" style="text-align:center; padding:30px;">
+                <h3 style="color:#f97316; margin-bottom:10px;">🚚 Live Transport & Delivery Tracker</h3>
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
+                <div style="background:#0c0c0e; padding:16px; border-radius:8px; font-weight:900; color:#34d399;">Status: Out for Delivery (ETA 2 Hours)</div>
+            </div>
+        </div>
+
+        <!-- ADMIN SECURE VIEW (LOCKED) -->
+        <div id="adminView" style="display:none;">
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Lock & Exit Admin</button>
+            <div class="form-panel" style="border-color:#f97316;">
+                <h2 style="color:#f97316; margin-bottom:12px; font-weight:900;">⚙️ Admin ERP & Invoice Maker</h2>
+                <div style="display:flex; gap:8px; margin-bottom:14px;">
+                    <button class="primary-btn" onclick="switchAdminTab('invoice')">📄 Invoice Maker</button>
+                    <button class="secondary-btn" onclick="switchAdminTab('products')">📦 Add Bag Item</button>
+                </div>
+
+                <div id="adminInvoiceTab">
+                    <label>Customer / Firm Name:</label>
+                    <input type="text" id="invCust" placeholder="Deccan Agencies">
+                    <label>WhatsApp Number:</label>
+                    <input type="tel" id="invPhone" placeholder="9848012345">
+                    <label>Bag Type / Requirement:</label>
+                    <input type="text" id="invBag" placeholder="5000 pcs PP Woven Bags 50kg">
+                    <label>Quantity (pcs):</label>
+                    <input type="number" id="invQty" placeholder="5000">
+                    <label>Rate per piece (₹):</label>
+                    <input type="number" id="invRate" placeholder="14.50">
+                    
+                    <button class="primary-btn" onclick="sendWhatsAppInvoice()">💬 Send WhatsApp PDF Bill & UPI (9030574216)</button>
+                </div>
+
+                <div id="adminProductTab" style="display:none;">
+                    <label>New Bag Name:</label>
+                    <input type="text" id="newBagName" placeholder="PP Woven Bag 25kg">
+                    <label>Price per piece (₹):</label>
+                    <input type="number" id="newBagPrice" placeholder="12.00">
+                    <button class="primary-btn" onclick="publishNewBag()">+ Publish Bag to Cloud</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CART DRAWER -->
+    <div class="drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>🛒 Active Cart (बुट्टी)</h3>
+            <button class="close-btn" onclick="toggleCartDrawer()">✕ CLOSE</button>
+        </div>
+        <div id="cartItemsContainer" style="margin-bottom: 20px;">
+            <p style="color:#94a3b8; font-size:13px;">Cart is empty.</p>
+        </div>
+        <div id="cartCheckoutDiv" style="display:none;" class="form-panel">
+            <label>Your Name:</label>
+            <input type="text" id="orderName" placeholder="Ramesh">
+            <label>Phone Number:</label>
+            <input type="tel" id="orderPhone" placeholder="9848012345">
+            <button class="primary-btn" onclick="submitCartOrder()">🚀 Place Order via WhatsApp</button>
         </div>
     </div>
 
-    <script>
-        let isAdminLoggedIn = localStorage.getItem('as_admin_auth') === 'true';
-        let pendingModule = null;
+    <!-- ADMIN PIN MODAL -->
+    <div id="adminModal">
+        <div class="modal-box">
+            <h3>🔐 Admin Security PIN</h3>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Enter 4-digit Owner Pin (default: 6301 or 7860)</p>
+            <input type="password" id="adminPinInput" placeholder="••••" maxlength="4">
+            <button class="primary-btn" onclick="verifyAdminPin()">Unlock Admin Panel</button>
+            <button class="secondary-btn" style="margin-top:8px; padding:10px;" onclick="closeAdminModal()">Cancel</button>
+        </div>
+    </div>
 
-        const translations = {
-            EN: { sub: "Hyderabad • PP Bags ERP Pro", tag: "⚡ AS Enterprises PP Bags • Industrial Hub", h1: "Build Stronger.<br><span>Order Smarter.</span>", desc: "Direct wholesale supply of Heavy Duty PP Bags with Instant Cloud Sync, UPI QR (9030574216) & WhatsApp Billing.", btn1: "Browse Live Products & Rates →", btn2: "Customer Khata & Udhaar Ledger" },
-            HI: { sub: "हैदराबाद • पीपी बैग्स ईआरपी प्रो", tag: "⚡ एएस एंटरप्राइजेज पीपी बैग्स • औद्योगिक हब", h1: "मजबूत बनाएं।<br><span>स्मार्ट ऑर्डर करें।</span>", desc: "तत्काल क्लाउड सिंक, यूपीआई क्यूआर (9030574216) और व्हाट्सएप बिलिंग के साथ भारी शुल्क वाले पीपी बैग की सीधी थोक आपूर्ति।", btn1: "लाइव उत्पाद और दरें देखें →", btn2: "ग्राहक खाता और उधार लेजर" },
-            TE: { sub: "హైదరాబాద్ • PP బ్యాగ్స్ ERP ప్రో", tag: "⚡ AS ఎంటర్‌ప్రైజ్ PP బ్యాగ్స్ • పారిశ్రామిక కేంద్రం", h1: "బలంగా నిర్మించండి.<br><span>స్మార్ట్‌గా ఆర్డర్ చేయండి.</span>", desc: "ఇన్‌స్టంట్ క్లౌడ్ సింక్, UPI QR (9030574216) & వాట్సాప్ బిల్లింగ్‌తో హెవీ డ్యూటీ PP బ్యాగ్‌ల టోకు సరఫరా.", btn1: "లైవ్ ఉత్పత్తులు & ధరలను వీక్షించండి →", btn2: "కస్టమర్ ఖాతా & ఉధార్ లెడ్జర్" }
+    <!-- FLOATING WHATSAPP & CALL -->
+    <div class="float-btns">
+        <a href="tel:6301456725" class="float-btn">📞</a>
+        <a href="https://wa.me/916301456725" target="_blank" class="float-btn wa">💬</a>
+    </div>
+
+    <script>
+        let currentLang = 'EN';
+        let cartList = [];
+
+        const tDict = {
+            EN: { s: "Delivery", w: "Khata", g: "Catalog", f: "Estimate" },
+            HI: { s: "डिलिवरी", w: "खाता", g: "कैटलॉग", f: "स्टीमेट" },
+            TE: { s: "డెలివరీ", w: "ఖాతా", g: "క్యాటలాగ్", f: "అంచనా" }
         };
 
-        function setLanguage(lang) {
-            document.getElementById('t-sub').innerText = translations[lang].sub;
-            document.getElementById('t-tag').innerText = translations[lang].tag;
-            document.getElementById('t-h1').innerHTML = translations[lang].h1;
-            document.getElementById('t-desc').innerText = translations[lang].desc;
-            document.getElementById('t-btn1').innerText = translations[lang].btn1;
-            document.getElementById('t-btn2').innerText = translations[lang].btn2;
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('lbl-s').innerText = tDict[lang].s;
+            document.getElementById('lbl-w').innerText = tDict[lang].w;
+            document.getElementById('lbl-g').innerText = tDict[lang].g;
+            document.getElementById('lbl-f').innerText = tDict[lang].f;
         }
 
-        function handleMenuClick() {
-            if (!isAdminLoggedIn) {
-                pendingModule = 'admin_rates';
-                document.getElementById('adminPassInput').value = '';
-                document.getElementById('adminModal').style.display = 'flex';
-            } else {
-                toggleHamburger();
-            }
-        }
-
-        function toggleHamburger() {
-            let menu = document.getElementById('hamburgerDrawer');
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        function switchView(viewName) {
+            ['homeView', 'catalogView', 'estimatorView', 'khataView', 'trackerView', 'adminView'].forEach(v => {
+                document.getElementById(v).style.display = 'none';
+            });
+            document.getElementById(viewName + 'View').style.display = 'block';
+            window.scrollTo({top:0, behavior:'smooth'});
         }
 
         function toggleCartDrawer() {
             let drawer = document.getElementById('cartDrawer');
             drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
-            renderCartItems();
+            renderCart();
         }
 
-        function handleProtectedAction(targetModule) {
-            if (!isAdminLoggedIn) {
-                pendingModule = targetModule;
-                document.getElementById('adminPassInput').value = '';
-                document.getElementById('adminModal').style.display = 'flex';
-            } else {
-                openModule(targetModule);
-            }
-        }
-
-        function openCustomerLedgerSecure() {
-            handleProtectedAction('ledger');
-        }
-
-        function addToCart(productName, price) {
-            let qty = prompt('Enter quantity for ' + productName + ' (Min 1000 pcs):', '1000');
+        function addToAppCart(name, price) {
+            let qty = prompt('Enter quantity for ' + name + ' (Min 100 pcs):', '1000');
             if(qty && Number(qty) > 0) {
-                window.shoppingCart.push({ name: productName, price: price, qty: Number(qty) });
-                document.getElementById('cartCount').innerText = window.shoppingCart.length;
-                alert(productName + ' added to your Cart (बुट्टी)!');
+                cartList.push({ name, price, qty: Number(qty) });
+                document.getElementById('cartCount').innerText = cartList.length;
+                alert(name + ' added to Cart!');
             }
         }
 
-        function renderCartItems() {
+        function renderCart() {
             let container = document.getElementById('cartItemsContainer');
-            let checkoutSec = document.getElementById('cartCheckoutSection');
-            if(window.shoppingCart.length === 0) {
-                container.innerHTML = '<p style="color:#94a3b8; font-size:14px;">Your cart is currently empty. Add products from catalog.</p>';
-                checkoutSec.style.display = 'none';
+            let checkoutDiv = document.getElementById('cartCheckoutDiv');
+            if(cartList.length === 0) {
+                container.innerHTML = '<p style="color:#94a3b8; font-size:13px;">Cart is empty.</p>';
+                checkoutDiv.style.display = 'none';
             } else {
                 let html = '';
-                let totalSum = 0;
-                window.shoppingCart.forEach((item, idx) => {
+                let total = 0;
+                cartList.forEach((item, idx) => {
                     let sub = item.price * item.qty;
-                    totalSum += sub;
+                    total += sub;
                     html += `
-                        <div style="background:#16161c; border:1px solid #2a2a35; padding:12px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="background:#16161c; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
                             <div>
-                                <h4 style="font-size:14px; color:#fff;">${item.name}</h4>
-                                <small style="color:#fb923c;">${item.qty} pcs @ ₹${item.price} = ₹${sub.toLocaleString('en-IN')}</small>
+                                <div style="font-size:13px; font-weight:bold; color:#fff;">${item.name}</div>
+                                <div style="font-size:11px; color:#fb923c;">${item.qty} pcs @ ₹${item.price} = ₹${sub.toLocaleString('en-IN')}</div>
                             </div>
-                            <button onclick="window.shoppingCart.splice(${idx}, 1); renderCartItems(); document.getElementById('cartCount').innerText = window.shoppingCart.length;" style="background:#dc2626; border:none; color:#fff; padding:6px 10px; border-radius:4px; cursor:pointer;">❌</button>
+                            <button onclick="cartList.splice(${idx},1); renderCart(); document.getElementById('cartCount').innerText=cartList.length;" style="background:#dc2626; border:none; color:#fff; padding:4px 8px; border-radius:4px; cursor:pointer;">❌</button>
                         </div>
                     `;
                 });
-                html += `<div style="font-size:16px; font-weight:900; color:#34d399; margin-top:14px; text-align:right;">Total Cart Value: ₹${totalSum.toLocaleString('en-IN')}</div>`;
+                html += `<div style="font-size:15px; font-weight:900; color:#34d399; text-align:right; margin-top:10px;">Total: ₹${total.toLocaleString('en-IN')}</div>`;
                 container.innerHTML = html;
-                checkoutSec.style.display = 'block';
+                checkoutDiv.style.display = 'block';
             }
         }
 
-        async function submitCartOrder() {
-            let custName = document.getElementById('cartCustName').value;
-            let custPhone = document.getElementById('cartCustPhone').value;
-            if(!custName || !custPhone) {
-                alert('Please enter your Name and Phone Number.');
-                return;
-            }
-            if(window.shoppingCart.length === 0) {
-                alert('Your cart is empty.');
-                return;
-            }
+        function submitCartOrder() {
+            let name = document.getElementById('orderName').value;
+            let phone = document.getElementById('orderPhone').value;
+            if(!name || !phone) { alert('Enter Name & Phone'); return; }
+            let total = cartList.reduce((s, i) => s + (i.price * i.qty), 0);
+            let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
+            
+            let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI:* 9030574216`;
+            window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
+            cartList = [];
+            document.getElementById('cartCount').innerText = '0';
+            toggleCartDrawer();
+        }
 
-            let totalOrderAmount = window.shoppingCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            let productSummary = window.shoppingCart.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
-
-            try {
-                await window.myAddDocFunc(window.colOrdersRef, {
-                    customerName: custName,
-                    phone: custPhone,
-                    product: productSummary,
-                    quantity: window.shoppingCart.reduce((s, i) => s + i.qty, 0),
-                    totalAmount: totalOrderAmount,
-                    status: "Pending Approval",
-                    timestamp: new Date()
-                });
-
-                alert('Order Placed Successfully from Cart! Sent to AS Enterprises PP Bags Admin Panel.');
-                
-                let orderText = `*📦 NEW CART ORDER - AS ENTERPRISES PP BAGS*%0A--------------------------------%0A*Customer:* ${custName}%0A*Phone:* ${custPhone}%0A*Items:* ${productSummary}%0A*Total Amount:* ₹${Number(totalOrderAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment:* 9030574216%0A_Please approve my order. Thank you!_`;
-                window.open(`https://wa.me/916301456725?text=${orderText}`, '_blank');
-                
-                window.shoppingCart = [];
-                document.getElementById('cartCount').innerText = '0';
-                toggleCartDrawer();
-            } catch(e) {
-                alert('Error submitting order: ' + e.message);
+        function calculateBags() {
+            let l = parseFloat(document.getElementById('estLen').value) || 0;
+            let w = parseFloat(document.getElementById('estWid').value) || 0;
+            let g = parseFloat(document.getElementById('estGsm').value) || 0;
+            if(l && w) {
+                let est = Math.ceil(l * w * 1.5);
+                document.getElementById('estResult').innerText = `Estimated Requirement: ~${est} pcs (Quality GSM: ${g || 70})`;
+            } else {
+                alert('Enter dimensions');
             }
         }
 
-        function openGetQuotation() {
-            let custName = prompt("Enter Customer / Business Name:");
-            let custPhone = prompt("Enter Customer WhatsApp Number (e.g. 919848012345):");
-            let bagType = prompt("Enter PP Bag Type & Requirement (e.g. 5000 Rice Bags 50kg):");
-            let rate = prompt("Enter Agreed Rate per piece (₹):", "18.50");
-            let qty = prompt("Enter Quantity (pcs):", "5000");
-
-            if(custName && custPhone && bagType && rate && qty) {
-                let totalAmount = rate * qty;
-                let billText = `*📄 AS ENTERPRISES PP BAGS - OFFICIAL INVOICE* 📦%0A--------------------------------%0A*Customer:* ${custName}%0A*Requirement:* ${bagType}%0A*Quantity:* ${qty} pcs%0A*Rate:* ₹${rate} / pc%0A*Total Payable:* ₹${Number(totalAmount).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT OPTIONS:*%0A• *UPI ID / Number:* 9030574216%0A• *Bank Account:* State Bank of India (SBI)%0A  A/C No: 38291023456%0A  IFSC Code: SBIN0001234%0A--------------------------------%0A*Delivery Hub:* Hyderabad / Balanagar%0A*Support/Call:* 6301456725%0A_Please share payment screenshot after transfer. Thank you!_`;
-                
-                window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
-                alert('Official Bill with UPI Number generated successfully!');
-            }
-        }
-
-        function generateAndSendBill(productName, defaultRate) {
-            let custPhone = prompt("Enter Customer WhatsApp Number (e.g. 919848012345):");
-            let qty = prompt('Enter quantity for ' + productName + ' (Min 1000 pcs):', '1000');
-            if (custPhone && qty) {
-                let total = qty * defaultRate;
-                let billText = `*📄 AS ENTERPRISES PP BAGS - TAX INVOICE*%0A--------------------------------%0A*Product:* ${productName}%0A*Quantity:* ${qty} pcs%0A*Unit Price:* ₹${defaultRate}%0A*Total Payable:* ₹${Number(total).toLocaleString('en-IN')}%0A--------------------------------%0A*💳 PAYMENT DETAILS:*%0A• *UPI ID / Number:* 9030574216%0A• *SBI Bank A/C:* 38291023456%0A--------------------------------%0A*Status:* Processing • Support: 6301456725`;
-                
-                window.open(`https://wa.me/${custPhone}?text=${billText}`, '_blank');
-                alert('Invoice ready to send via WhatsApp!');
-            }
+        function openAdminCheck() {
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminModal').style.display = 'flex';
         }
 
         function closeAdminModal() {
             document.getElementById('adminModal').style.display = 'none';
         }
 
-        function googleSignInAuth() {
-            let email = prompt("Enter your Google Account Email to login as Admin:");
-            if(email) {
-                isAdminLoggedIn = true;
-                localStorage.setItem('as_admin_auth', 'true');
+        function verifyAdminPin() {
+            let pin = document.getElementById('adminPinInput').value;
+            if(pin === '6301' || pin === '7860') {
                 closeAdminModal();
-                alert('Successfully signed in with Google (' + email + ')!');
-                toggleHamburger();
-                openModule(pendingModule || 'admin_rates');
-            }
-        }
-
-        function verifyAdminPassword() {
-            let pass = document.getElementById('adminPassInput').value;
-            if(pass === "7860" || pass === "admin") {
-                isAdminLoggedIn = true;
-                localStorage.setItem('as_admin_auth', 'true');
-                closeAdminModal();
-                alert('Admin Login Successful! Full ERP Controls Unlocked.');
-                toggleHamburger();
-                openModule(pendingModule || 'admin_rates');
+                switchView('admin');
             } else {
-                alert('Incorrect Admin Pin! Access Denied.');
+                alert('Incorrect PIN! Try 6301');
             }
         }
 
-        function adminLogout() {
-            isAdminLoggedIn = false;
-            localStorage.removeItem('as_admin_auth');
-            toggleHamburger();
-            alert('Admin session logged out successfully.');
-            goBackToHome();
-        }
-
-        function triggerForgotPassword() {
-            let email = prompt("Enter your registered Admin Email for password reset link:");
-            if(email) {
-                alert('Password reset link has been successfully sent to ' + email + '.');
-            }
-        }
-
-        function triggerFactoryResetPrompt() {
-            alert('Clicking "Factory Data Reset" will clear local cache and prepare system for fresh initialization.');
-        }
-
-        async function executeFactoryReset() {
-            let conf = confirm("WARNING: This will wipe all local cache and session data. Proceed?");
-            if(conf) {
-                localStorage.clear();
-                alert('Factory Data Reset complete.');
-                closeAdminModal();
-                location.reload();
-            }
-        }
-
-        async function deleteCloudItem(collectionName, docId) {
-            let conf = confirm("Are you sure you want to delete this record from Firebase Cloud?");
-            if(conf) {
-                try {
-                    await window.deleteDocFunc(window.docFunc(window.myFirestoreDb, collectionName, docId));
-                    alert('Record deleted successfully.');
-                } catch(e) {
-                    alert('Error deleting record: ' + e.message);
-                }
-            }
-        }
-
-        async function openModule(id) {
-            let menu = document.getElementById('hamburgerDrawer');
-            if(menu) menu.style.display = 'none';
-
-            document.getElementById('mainDashboard').style.display = 'none';
-            document.getElementById('heroBanner').style.display = 'none';
-            document.getElementById('backNav').style.display = 'block';
-            document.getElementById('moduleViewContainer').style.display = 'block';
-
-            let title = "Enterprise Module " + id.toUpperCase();
-            let desc = "Real-time cloud database controls for AS Enterprises PP Bags manufacturing operations.";
-            let content = "";
-
-            if(id === 'admin_rates') {
-                title = "Live Rate & Product Manager (Add Item / Camera or Gallery)";
-                desc = "Set wholesale price and publish products instantly to Firebase Cloud catalog.";
-                content = `
-                    <div class="form-panel">
-                        <label>Product Catalog Name:</label>
-                        <input type="text" id="newProdName" placeholder="e.g. Fertilizer PP Bags (50kg)">
-                        <label>Wholesale Price (₹):</label>
-                        <input type="number" id="newProdPrice" placeholder="19.50">
-                        <label>Select Image (Camera or Gallery):</label>
-                        <input type="file" id="mediaFileInput" accept="image/*" style="background:#08080a; padding:10px; border-radius:6px; margin-bottom:12px; color:#fff; width:100%;">
-                        <button class="primary-btn" onclick="uploadInstantProduct()">🚀 Publish Product & Image Live</button>
-                    </div>
-                `;
-            } else if(id === 'orders') {
-                title = "Admin Orders (Approve / Reject / Delete)";
-                desc = "Real-time list of all customer orders placed from the website cart.";
-                
-                let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
-                let rowsHtml = "";
-                if(ordersSnap.docs.length === 0) {
-                    rowsHtml = `<tr><td colspan="6" style="text-align:center; color:#94a3b8;">No customer cart orders found yet.</td></tr>`;
-                } else {
-                    ordersSnap.forEach(d => {
-                        let o = d.data();
-                        let oId = d.id;
-                        rowsHtml += `
-                            <tr>
-                                <td><b>${o.customerName || 'N/A'}</b><br><small>${o.phone || ''}</small></td>
-                                <td>${o.product || 'PP Bags'}</td>
-                                <td>${o.quantity || 0} pcs</td>
-                                <td>₹${o.totalAmount || 0}</td>
-                                <td><span style="color:#fb923c; font-weight:bold;" id="status_${oId}">${o.status || 'Pending'}</span></td>
-                                <td>
-                                    <button style="background:#059669; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="updateOrderStatus('${oId}', 'Approved ✅')">Approve</button>
-                                    <button style="background:#d97706; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:4px;" onclick="updateOrderStatus('${oId}', 'Rejected ❌')">Reject</button>
-                                    <button style="background:#dc2626; border:none; color:#fff; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="deleteCloudItem('as_enterprises_orders', '${oId}'); openModule('orders');">Delete</button>
-                                </td>
-                            </tr>
-                        `;
-                    });
-                }
-
-                content = `
-                    <div class="form-panel">
-                        <h4 style="color:#f97316; margin-bottom:10px;">📋 Live Customer Cart Orders Table</h4>
-                        <table>
-                            <thead>
-                                <tr><th>Customer</th><th>Product</th><th>Qty</th><th>Total (₹)</th><th>Status</th><th>Action</th></tr>
-                            </thead>
-                            <tbody>
-                                ${rowsHtml}
-                            </tbody>
-                        </table>
-                    </div>
-                `;
-            } else if(id === 'backup') {
-                title = "Cloud Auto-Backup & Disaster Recovery";
-                desc = "Download complete enterprise data backup package as a secure JSON file.";
-                content = `
-                    <div class="form-panel">
-                        <h4 style="color:#f97316; margin-bottom:10px;">📦 Enterprise Data Backup Archive</h4>
-                        <button class="primary-btn" onclick="downloadSystemBackupZip()">📥 Download Full Cloud Backup Package (.JSON)</button>
-                        <button class="danger-btn" onclick="executeFactoryReset()" style="margin-top:14px;">⚠️ Execute Factory Data Reset</button>
-                    </div>
-                `;
-            } else if(id === 'customers') {
-                title = "Customer Directory & Management (Live Firebase)";
-                desc = "Add new wholesale buyers with phone numbers and details.";
-                content = `
-                    <div class="form-panel">
-                        <label>Customer Name / Company:</label>
-                        <input type="text" id="newCustName" placeholder="e.g. Deccan Agro Agencies">
-                        <label>Phone / Contact Number:</label>
-                        <input type="tel" id="newCustPhone" placeholder="e.g. 9848012345">
-                        <label>City / Location:</label>
-                        <input type="text" id="newCustLoc" placeholder="Warangal">
-                        <button class="primary-btn" onclick="addCustomerToDirectory()">+ Add Customer to Cloud</button>
-                    </div>
-                `;
-            } else if(id === 'manufacturer') {
-                title = "Approved Manufacturer Directory (Live Firebase)";
-                desc = "Add raw material polymer/tape suppliers.";
-                content = `
-                    <div class="form-panel">
-                        <label>Manufacturer / Supplier Name:</label>
-                        <input type="text" id="newMfgName" placeholder="e.g. Reliance Polymer Unit">
-                        <label>Contact Phone Number:</label>
-                        <input type="tel" id="newMfgPhone" placeholder="e.g. 9700012345">
-                        <label>Material Grade / Supply:</label>
-                        <input type="text" id="newMfgGrade" placeholder="HDPE/PP Grade-A">
-                        <button class="primary-btn" onclick="addManufacturerToDirectory()">+ Add Manufacturer</button>
-                    </div>
-                `;
+        function switchAdminTab(tab) {
+            if(tab === 'invoice') {
+                document.getElementById('adminInvoiceTab').style.display = 'block';
+                document.getElementById('adminProductTab').style.display = 'none';
             } else {
-                title = "ERP Module: " + id.toUpperCase() + " (Cloud Active)";
-                desc = "Fully operational industrial control unit connected with Firebase real-time database.";
-                content = `
-                    <div class="form-panel">
-                        <h4 style="color:#f97316; margin-bottom:10px;">⚙️ ${id.toUpperCase()} Operations Panel</h4>
-                        <p style="color:#94a3b8; font-size:13.5px; margin-bottom:12px;">This module is successfully linked with AS Enterprises PP Bags cloud infrastructure.</p>
-                        <label>Record Detail / Description:</label>
-                        <input type="text" id="uniInput1" placeholder="Enter Parameter / Reference">
-                        <label>Numeric Value / ID:</label>
-                        <input type="text" id="uniInput2" placeholder="Enter Value / ID">
-                        <button class="primary-btn" onclick="saveUniversalModuleData('${id}')">Save & Sync to Cloud</button>
-                    </div>
-                `;
+                document.getElementById('adminInvoiceTab').style.display = 'none';
+                document.getElementById('adminProductTab').style.display = 'block';
             }
-
-            document.getElementById('viewTitle').innerText = title;
-            document.getElementById('viewDesc').innerText = desc;
-            document.getElementById('viewContent').innerHTML = content;
-            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        async function updateOrderStatus(orderId, newStatus) {
+        function sendWhatsAppInvoice() {
+            let cust = document.getElementById('invCust').value;
+            let phone = document.getElementById('invPhone').value;
+            let bag = document.getElementById('invBag').value;
+            let qty = document.getElementById('invQty').value;
+            let rate = document.getElementById('invRate').value;
+
+            if(!cust || !phone || !bag || !qty || !rate) { alert('Fill all fields'); return; }
+            let total = qty * rate;
+            let msg = `*📄 AS ENTERPRISES PP BAGS - TAX INVOICE*%0A--------------------------------%0A*Customer:* ${cust}%0A*Requirement:* ${bag}%0A*Qty:* ${qty} pcs @ ₹${rate}%0A*Total Payable:* ₹${total.toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment Number:* 9030574216%0A*Support:* 6301456725`;
+            window.open(`https://wa.me/91${phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
+        }
+
+        async function publishNewBag() {
+            let name = document.getElementById('newBagName').value;
+            let price = document.getElementById('newBagPrice').value;
+            if(!name || !price) { alert('Enter name & price'); return; }
             try {
-                await window.updateDocFunc(window.docFunc(window.myFirestoreDb, "as_enterprises_orders", orderId), {
-                    status: newStatus
-                });
-                alert('Order status updated to: ' + newStatus);
-                openModule('orders');
+                await window.myAddDoc(window.colProducts, { name: name, price: Number(price), brand: "AS Woven", stock: 5000, timestamp: new Date() });
+                alert('Bag published live to Firebase!');
+                document.getElementById('newBagName').value = '';
+                document.getElementById('newBagPrice').value = '';
+                switchView('home');
             } catch(e) {
-                alert('Error updating order status: ' + e.message);
+                alert('Error: ' + e.message);
             }
-        }
-
-        async function uploadInstantProduct() {
-            let name = document.getElementById('newProdName').value;
-            let price = document.getElementById('newProdPrice').value;
-            let fileInput = document.getElementById('mediaFileInput');
-
-            if(!name || !price) {
-                alert('Please enter product name and wholesale price.');
-                return;
-            }
-
-            let processPublish = async (mediaUrl) => {
-                try {
-                    await window.myAddDocFunc(window.colProductsRef, { 
-                        name: name, 
-                        price: Number(price), 
-                        mediaUrl: mediaUrl || "", 
-                        timestamp: new Date() 
-                    });
-                    alert('Success! Product published instantly to Firebase Cloud.');
-                    goBackToHome();
-                } catch(e) {
-                    alert('Error saving to Cloud: ' + e.message);
-                }
-            };
-
-            if(fileInput && fileInput.files[0]) {
-                let file = fileInput.files[0];
-                let reader = new FileReader();
-                reader.onload = async function(uploadEvent) {
-                    await processPublish(uploadEvent.target.result);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                await processPublish("");
-            }
-        }
-
-        async function addCustomerToDirectory() {
-            let name = document.getElementById('newCustName').value;
-            let phone = document.getElementById('newCustPhone').value;
-            let locInput = document.getElementById('newCustLoc').value;
-            if(name && phone && locInput) {
-                try {
-                    await window.myAddDocFunc(window.colCustomersRef, { name: name, phone: phone, location: locInput, timestamp: new Date() });
-                    alert('Customer added successfully!');
-                    goBackToHome();
-                } catch(e) {
-                    alert('Error saving to Firebase: ' + e.message);
-                }
-            } else {
-                alert('Please fill out all fields.');
-            }
-        }
-
-        async function addManufacturerToDirectory() {
-            let name = document.getElementById('newMfgName').value;
-            let phone = document.getElementById('newMfgPhone').value;
-            let grade = document.getElementById('newMfgGrade').value;
-            if(name && phone && grade) {
-                try {
-                    await window.myAddDocFunc(window.colManufacturersRef, { name: name, phone: phone, grade: grade, timestamp: new Date() });
-                    alert('Manufacturer added successfully!');
-                    goBackToHome();
-                } catch(e) {
-                    alert('Error saving to Firebase: ' + e.message);
-                }
-            } else {
-                alert('Please fill out all fields.');
-            }
-        }
-
-        async function saveUniversalModuleData(modId) {
-            let val1 = document.getElementById('uniInput1').value;
-            let val2 = document.getElementById('uniInput2').value;
-            if(val1 && val2) {
-                try {
-                    await window.myAddDocFunc(window.colUniversalRef, { module: modId, param: val1, value: val2, timestamp: new Date() });
-                    alert('Data synced to Cloud successfully!');
-                    goBackToHome();
-                } catch(e) {
-                    alert('Error saving to Firebase: ' + e.message);
-                }
-            } else {
-                alert('Please fill out all fields.');
-            }
-        }
-
-        async function downloadSystemBackupZip() {
-            try {
-                let productsSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_products"));
-                let customersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_customers"));
-                let mfgSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_manufacturers"));
-                let ordersSnap = await window.getDocsFunc(collection(window.myFirestoreDb, "as_enterprises_orders"));
-
-                let backupData = {
-                    company: "AS Enterprises PP Bags Hyderabad",
-                    timestamp: new Date().toISOString(),
-                    products: productsSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    customers: customersSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    manufacturers: mfgSnap.docs.map(d => ({id: d.id, ...d.data()})),
-                    orders: ordersSnap.docs.map(d => ({id: d.id, ...d.data()}))
-                };
-
-                let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
-                let downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute("href", dataStr);
-                downloadAnchor.setAttribute("download", "AS_Enterprises_PP_Bags_Backup_" + new Date().toISOString().slice(0,10) + ".json");
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-                downloadAnchor.remove();
-                alert('Cloud Backup package downloaded successfully!');
-            } catch(e) {
-                alert('Error generating backup: ' + e.message);
-            }
-        }
-
-        function goBackToHome() {
-            document.getElementById('mainDashboard').style.display = 'block';
-            document.getElementById('heroBanner').style.display = 'block';
-            document.getElementById('backNav').style.display = 'none';
-            document.getElementById('moduleViewContainer').style.display = 'none';
-            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
