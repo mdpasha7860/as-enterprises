@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AS Enterprises - PP Woven Bags ERP Pro</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
@@ -153,6 +152,34 @@
                 container.innerHTML = html;
             }
         });
+
+        // Real-time Orders Sync for Admin Dashboard Badge/List
+        onSnapshot(window.colOrders, (snapshot) => {
+            let container = document.getElementById('adminOrdersTableBody');
+            if(container) {
+                let html = '';
+                if(snapshot.docs.length === 0) {
+                    html = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No new orders found.</td></tr>`;
+                } else {
+                    snapshot.forEach(docSnap => {
+                        let ord = docSnap.data();
+                        let ordId = docSnap.id;
+                        html += `
+                            <tr>
+                                <td><b>${ord.name}</b><br><small>${ord.phone}</small></td>
+                                <td>${ord.itemsSummary}</td>
+                                <td>₹${ord.total}</td>
+                                <td><span style="color:#fb923c;">${ord.status || 'Pending'}</span></td>
+                                <td>
+                                    <button style="background:#2563eb; color:#fff; border:none; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Make Bill</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+                container.innerHTML = html;
+            }
+        });
     </script>
 </head>
 <body>
@@ -265,7 +292,8 @@
                 <h2 style="color:#f97316; margin-bottom:12px; font-weight:900;">⚙️ Admin ERP & Invoice Maker</h2>
                 <div style="display:flex; gap:8px; margin-bottom:14px;">
                     <button class="primary-btn" onclick="switchAdminTab('invoice')">📄 Invoice Maker</button>
-                    <button class="secondary-btn" onclick="switchAdminTab('products')">📦 Add Bag Item</button>
+                    <button class="secondary-btn" onclick="switchAdminTab('orders')">📦 Live Orders</button>
+                    <button class="secondary-btn" onclick="switchAdminTab('products')">➕ Add Bag</button>
                 </div>
 
                 <div id="adminInvoiceTab">
@@ -281,6 +309,18 @@
                     <input type="number" id="invRate" placeholder="14.50">
                     
                     <button class="primary-btn" onclick="sendWhatsAppInvoice()">💬 Send WhatsApp PDF Bill & UPI (9030574216)</button>
+                </div>
+
+                <div id="adminOrdersTab" style="display:none;">
+                    <h3 style="color:#fff; font-size:14px; margin-bottom:8px;">Customer Orders Panel</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="adminOrdersTableBody">
+                            <tr><td colspan="5" style="text-align:center; color:#94a3b8;">Loading orders...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div id="adminProductTab" style="display:none;">
@@ -317,7 +357,7 @@
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security PIN</h3>
-            <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Enter 4-digit Owner Pin (default: 6301 or 7860)</p>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Enter 4-digit Owner Pin to access controls.</p>
             <input type="password" id="adminPinInput" placeholder="••••" maxlength="4">
             <button class="primary-btn" onclick="verifyAdminPin()">Unlock Admin Panel</button>
             <button class="secondary-btn" style="margin-top:8px; padding:10px;" onclick="closeAdminModal()">Cancel</button>
@@ -399,18 +439,33 @@
             }
         }
 
-        function submitCartOrder() {
+        async function submitCartOrder() {
             let name = document.getElementById('orderName').value;
             let phone = document.getElementById('orderPhone').value;
             if(!name || !phone) { alert('Enter Name & Phone'); return; }
             let total = cartList.reduce((s, i) => s + (i.price * i.qty), 0);
             let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
             
-            let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI:* 9030574216`;
-            window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
-            cartList = [];
-            document.getElementById('cartCount').innerText = '0';
-            toggleCartDrawer();
+            try {
+                // Save directly to Firebase Orders collection
+                await window.myAddDoc(window.colOrders, {
+                    name: name,
+                    phone: phone,
+                    itemsSummary: summary,
+                    total: total,
+                    status: "Pending",
+                    timestamp: new Date()
+                });
+
+                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI:* 9030574216`;
+                window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
+                cartList = [];
+                document.getElementById('cartCount').innerText = '0';
+                toggleCartDrawer();
+                alert('Order placed successfully & sent to Admin Panel!');
+            } catch(e) {
+                alert('Error placing order: ' + e.message);
+            }
         }
 
         function calculateBags() {
@@ -440,18 +495,25 @@
                 closeAdminModal();
                 switchView('admin');
             } else {
-                alert('Incorrect PIN! Try 6301');
+                alert('Incorrect PIN!'); // पिन नंबर हाइड कर दिया गया है ताकि किसी को दिखे नहीं
             }
         }
 
         function switchAdminTab(tab) {
-            if(tab === 'invoice') {
-                document.getElementById('adminInvoiceTab').style.display = 'block';
-                document.getElementById('adminProductTab').style.display = 'none';
-            } else {
-                document.getElementById('adminInvoiceTab').style.display = 'none';
-                document.getElementById('adminProductTab').style.display = 'block';
-            }
+            ['adminInvoiceTab', 'adminOrdersTab', 'adminProductTab'].forEach(t => {
+                document.getElementById(t).style.display = 'none';
+            });
+            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1) + 'Tab').style.display = 'block';
+        }
+
+        function loadOrderIntoInvoice(name, phone, itemsSummary, totalAmt) {
+            switchAdminTab('invoice');
+            document.getElementById('invCust').value = name;
+            document.getElementById('invPhone').value = phone;
+            document.getElementById('invBag').value = itemsSummary;
+            document.getElementById('invQty').value = '1000';
+            document.getElementById('invRate').value = Math.round(totalAmt / 1000) || 15;
+            alert('Order loaded into Billing Panel! You can now send invoice.');
         }
 
         function sendWhatsAppInvoice() {
@@ -463,7 +525,7 @@
 
             if(!cust || !phone || !bag || !qty || !rate) { alert('Fill all fields'); return; }
             let total = qty * rate;
-            let msg = `*📄 AS ENTERPRISES PP BAGS - TAX INVOICE*%0A--------------------------------%0A*Customer:* ${cust}%0A*Requirement:* ${bag}%0A*Qty:* ${qty} pcs @ ₹${rate}%0A*Total Payable:* ₹${total.toLocaleString('en-IN')}%0A--------------------------------%0A*💳 UPI Payment Number:* 9030574216%0A*Support:* 6301456725`;
+            let msg = `*📄 AS ENTERPRISES PP BAGS - TAX INVOICE*%0A--------------------------------%0A*Customer:* ${cust}%0A*Requirement:* ${bag}%0A*Qty:* ${qty} pcs @ ₹${rate}%0A*Total Payable:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI Payment Number:* 9030574216%0A*Support:* 6301456725`;
             window.open(`https://wa.me/91${phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
         }
 
@@ -472,7 +534,7 @@
             let price = document.getElementById('newBagPrice').value;
             if(!name || !price) { alert('Enter name & price'); return; }
             try {
-                await window.myAddDoc(window.colProducts, { name: name, price: Number(price), brand: "AS Woven", stock: 5000, timestamp: new Date() });
+                window.myAddDoc(window.colProducts, { name: name, price: Number(price), brand: "AS Woven", stock: 5000, timestamp: new Date() });
                 alert('Bag published live to Firebase!');
                 document.getElementById('newBagName').value = '';
                 document.getElementById('newBagPrice').value = '';
