@@ -27,15 +27,16 @@
 
         .main-wrapper { padding: 16px; max-width: 600px; width: 100%; margin: 0 auto; }
         
-        /* Hero Banner */
-        .hero-card { background: #0c0c0e; padding: 24px 18px; border-radius: 14px; border: 1px solid #1c1c22; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .hero-tag { background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #fff; line-height: 1.15; }
+        /* Modern Smart White Hero Banner */
+        .hero-card { background: #ffffff; color: #0f172a; padding: 26px 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .hero-tag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
+        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; line-height: 1.4; }
+        .hero-card p { font-size: 13.5px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
         
         .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
         .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
+        .hero-card .secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
 
         /* Quick Action Cards Grid */
         .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
@@ -51,10 +52,12 @@
         /* Catalog Grid */
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
         .item-card { background: #0c0c0e; border: 1px solid #1c1c22; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-        .item-img { height: 110px; background: #16161c; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
+        .item-img { height: 120px; background: #16161c; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; }
         .item-body { padding: 12px; }
         .item-tag { font-size: 9px; text-transform: uppercase; color: #f97316; font-weight: 900; margin-bottom: 3px; }
-        .item-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.2; height: 32px; overflow: hidden; }
+        .item-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 4px; line-height: 1.2; height: 32px; overflow: hidden; }
+        .item-specs { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; }
         .item-price { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 10px; }
         .item-price span { font-size: 10px; color: #94a3b8; font-weight: 700; }
         .buy-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 999px; font-size: 12px; font-weight: 900; cursor: pointer; }
@@ -78,9 +81,9 @@
 
         .form-panel { background: #16161c; padding: 16px; border-radius: 12px; border: 1px solid #2a2a35; margin-bottom: 14px; }
         .form-panel label { font-size: 12px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; text-transform: uppercase; }
-        .form-panel input, .form-panel select { width: 100%; padding: 10px 12px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 700; outline: none; }
+        .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 700; outline: none; }
         
-        /* Admin Grid Dashboard Buttons matching screenshot */
+        /* Admin Grid Dashboard Buttons */
         .admin-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
         .admin-tile { background: #1f1f28; border: 1px solid #3f3f4e; padding: 12px; border-radius: 8px; text-align: center; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; }
         .admin-tile:hover { border-color: #f97316; background: #2a2a38; }
@@ -88,6 +91,10 @@
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
         th, td { border: 1px solid #2a2a35; padding: 8px; text-align: left; }
         th { background: #16161c; color: #f97316; font-weight: 900; }
+
+        /* Printable Invoice Modal */
+        #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; overflow-y: auto; padding: 20px; }
+        .invoice-paper { background: #ffffff; color: #000000; max-width: 500px; margin: 20px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 
     <!-- Firebase SDK & Live Cloud Synchronization -->
@@ -119,21 +126,22 @@
         window.colInvoices = collection(db, "as_enterprises_saved_invoices");
         window.colKhata = collection(db, "as_enterprises_worker_khata");
         window.colExpenses = collection(db, "as_enterprises_expenses");
-        window.colCustomers = collection(db, "as_enterprises_customers");
+        window.colCustomers = collection(db, "as_enterprises_customers_directory");
+        window.colManufacturers = collection(db, "as_enterprises_manufacturers_directory");
 
         window.appCart = [];
 
-        // Real-time Catalog Sync
+        // Real-time Catalog & Inventory Sync
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogGrid');
             let fullContainer = document.getElementById('fullCatalogGrid');
             let inventoryContainer = document.getElementById('inventoryTableBody');
             
             let defaultProducts = [
-                { id: 1, name: "PP Woven Bag 50kg (Standard)", brand: "AS HeavyDuty", price: 14.50, stock: 10000 },
-                { id: 2, name: "PP Rice Bag 26x38 (Printed)", brand: "AgroLine", price: 16.00, stock: 8000 },
-                { id: 3, name: "Laminated PP Bag 50kg (Glossy)", brand: "Shree Pack", price: 19.50, stock: 5000 },
-                { id: 4, name: "HDPE Fertilizer Bag", brand: "Kisan", price: 18.00, stock: 6000 }
+                { id: 1, name: "PP Woven Bag 50kg (Standard)", brand: "AS HeavyDuty", size: "24 x 36 inch", gsm: "70 GSM", price: 14.50, stock: 10000, img: "" },
+                { id: 2, name: "PP Rice Bag 26x38 (Printed)", brand: "AgroLine", size: "26 x 38 inch", gsm: "80 GSM", price: 16.00, stock: 8000, img: "" },
+                { id: 3, name: "Laminated PP Bag 50kg (Glossy)", brand: "Shree Pack", size: "24 x 40 inch", gsm: "90 GSM", price: 19.50, stock: 5000, img: "" },
+                { id: 4, name: "HDPE Fertilizer Bag", brand: "Kisan", size: "22 x 35 inch", gsm: "75 GSM", price: 18.00, stock: 6000, img: "" }
             ];
 
             let allProds = defaultProducts;
@@ -148,10 +156,13 @@
             allProds.forEach(p => {
                 html += `
                     <div class="item-card">
-                        <div class="item-img"><span>PP Woven Bag</span></div>
+                        <div class="item-img">
+                            ${p.img ? `<img src="${p.img}" alt="bag">` : '<span>PP Woven Bag</span>'}
+                        </div>
                         <div class="item-body">
                             <div class="item-tag">${p.brand || 'AS HeavyDuty'}</div>
                             <div class="item-title">${p.name}</div>
+                            <div class="item-specs">📏 ${p.size || 'Standard'} | ⚖️ ${p.gsm || '70 GSM'}</div>
                             <div class="item-price">₹${p.price} <span>/ pc</span></div>
                             <button class="buy-btn" onclick="addToAppCart('${p.name}', ${p.price})">+ Add to Cart</button>
                         </div>
@@ -159,16 +170,67 @@
                 `;
                 invHtml += `
                     <tr>
-                        <td><b>${p.name}</b></td>
+                        <td><b>${p.name}</b><br><small>${p.brand || 'AS'}</small></td>
+                        <td>${p.size || '-'} / ${p.gsm || '-'}</td>
                         <td>₹${p.price}</td>
                         <td>${p.stock || 5000} pcs</td>
-                        <td><span style="color:#34d399;">Active</span></td>
                     </tr>
                 `;
             });
             if(container) container.innerHTML = html;
             if(fullContainer) fullContainer.innerHTML = html;
             if(inventoryContainer) inventoryContainer.innerHTML = invHtml;
+        });
+
+        // Real-time Manufacturers List Sync
+        onSnapshot(window.colManufacturers, (snapshot) => {
+            let container = document.getElementById('manufacturerTableBody');
+            let selectDropdown = document.getElementById('newBagBrand');
+            if(container) {
+                let html = '';
+                let selectHtml = `<option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>`;
+                if(snapshot.docs.length === 0) {
+                    html = `<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No manufacturers added yet.</td></tr>`;
+                } else {
+                    snapshot.forEach(docSnap => {
+                        let m = docSnap.data();
+                        html += `
+                            <tr>
+                                <td><b>${m.name}</b></td>
+                                <td>📞 ${m.phone}</td>
+                                <td>📍 ${m.address}</td>
+                                <td><span style="color:#34d399;">Active</span></td>
+                            </tr>
+                        `;
+                        selectHtml += `<option value="${m.name}">${m.name} (Manufacturer)</option>`;
+                    });
+                }
+                container.innerHTML = html;
+                if(selectDropdown) selectDropdown.innerHTML = selectHtml;
+            }
+        });
+
+        // Real-time Customers Directory Sync
+        onSnapshot(window.colCustomers, (snapshot) => {
+            let container = document.getElementById('customersTableBody');
+            if(container) {
+                let html = '';
+                if(snapshot.docs.length === 0) {
+                    html = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No customers registered in directory.</td></tr>`;
+                } else {
+                    snapshot.forEach(docSnap => {
+                        let c = docSnap.data();
+                        html += `
+                            <tr>
+                                <td><b>${c.name}</b></td>
+                                <td>📞 ${c.phone}</td>
+                                <td>📍 ${c.address}</td>
+                            </tr>
+                        `;
+                    });
+                }
+                container.innerHTML = html;
+            }
         });
 
         // Real-time Orders Sync
@@ -181,10 +243,9 @@
                 } else {
                     snapshot.forEach(docSnap => {
                         let ord = docSnap.data();
-                        let ordId = docSnap.id;
                         html += `
                             <tr>
-                                <td><b>${ord.name}</b><br><small>${ord.phone}</small></td>
+                                <td><b>${ord.name}</b><br><small>📞 ${ord.phone}</small></td>
                                 <td>${ord.itemsSummary}</td>
                                 <td>₹${ord.total}</td>
                                 <td><span style="color:#fb923c;">${ord.status || 'Pending'}</span></td>
@@ -211,8 +272,8 @@
                         let inv = docSnap.data();
                         html += `
                             <tr>
-                                <td><b>${inv.customer}</b><br><small>${inv.phone}</small></td>
-                                <td>${inv.bagDetails} (${inv.qty} pcs)</td>
+                                <td><b>${inv.customer}</b><br><small>📞 ${inv.phone}</small></td>
+                                <td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td>
                                 <td>₹${inv.totalAmount}</td>
                                 <td style="color:#34d399; font-weight:bold;">Generated</td>
                             </tr>
@@ -306,7 +367,7 @@
 
     <div class="main-wrapper">
         
-        <!-- HOME VIEW -->
+        <!-- HOME VIEW (Smart Clean White Hero Banner) -->
         <div id="homeView">
             <div class="hero-card">
                 <div class="hero-tag">⚡ Industrial Packaging Hub</div>
@@ -329,9 +390,7 @@
             </div>
 
             <h3 style="font-size: 15px; font-weight: 900; margin-bottom: 12px; color: #f97316; text-transform: uppercase;">📦 Featured PP Bags Catalog</h3>
-            <div class="catalog-grid" id="liveCatalogGrid">
-                <!-- Injected via Firebase -->
-            </div>
+            <div class="catalog-grid" id="liveCatalogGrid"></div>
         </div>
 
         <!-- CATALOG VIEW -->
@@ -381,7 +440,7 @@
             </div>
         </div>
 
-        <!-- ADMIN SECURE DASHBOARD VIEW (Matches Screenshot) -->
+        <!-- ADMIN SECURE DASHBOARD VIEW -->
         <div id="adminView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Lock & Exit Admin</button>
             
@@ -393,7 +452,7 @@
 
                 <button class="primary-btn" style="background:#16a34a; margin-bottom:14px;" onclick="window.open('https://wa.me/916301456725?text=Rate%20Sheet%20Request', '_blank')">📋 Share Rate Sheet</button>
 
-                <!-- Admin Tile Grid matching user screenshot -->
+                <!-- Admin Tile Grid -->
                 <div class="admin-grid-dash">
                     <div class="admin-tile" onclick="switchAdminTab('invoice')">📄 Multi-GST Bill Maker</div>
                     <div class="admin-tile" onclick="switchAdminTab('savedInvoices')">📁 Saved Invoices & Reports</div>
@@ -402,7 +461,8 @@
                     <div class="admin-tile" onclick="switchAdminTab('orders')">🛒 Orders</div>
                     <div class="admin-tile" onclick="switchAdminTab('workers')">👷 Workers</div>
                     <div class="admin-tile" onclick="switchAdminTab('workerKhata')">👷‍♂️ Worker Khata</div>
-                    <div class="admin-tile" onclick="switchAdminTab('customers')">👥 Customers</div>
+                    <div class="admin-tile" onclick="switchAdminTab('customers')">👥 Customers Directory</div>
+                    <div class="admin-tile" onclick="switchAdminTab('manufacturers')">🏭 Manufacturers</div>
                     <div class="admin-tile" onclick="switchAdminTab('expenses')">💸 Expenses</div>
                     <div class="admin-tile" onclick="switchAdminTab('addItem')">➕ Add Item</div>
                     <div class="admin-tile" style="grid-column: span 2;" onclick="switchAdminTab('settings')">⚙️ Bank & Settings</div>
@@ -410,7 +470,7 @@
 
                 <!-- 1. MULTI-GST BILL MAKER TAB -->
                 <div id="adminInvoiceTab" class="admin-sub-tab" style="margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker & WhatsApp PDF</h3>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker & Live Tax Invoice</h3>
                     <label>Customer / Firm Name:</label>
                     <input type="text" id="invCust" placeholder="Deccan Agencies">
                     <label>WhatsApp Number:</label>
@@ -427,14 +487,14 @@
                         <option value="12">12% GST</option>
                         <option value="18">18% GST</option>
                     </select>
-                    <button class="primary-btn" onclick="generateAndSaveInvoice()">💬 Save & Send WhatsApp Tax Invoice</button>
+                    <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Invoice, PDF & WhatsApp</button>
                 </div>
 
                 <!-- 2. SAVED INVOICES TAB -->
                 <div id="adminSavedInvoicesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Saved Invoices & Reports</h3>
                     <table>
-                        <thead><tr><th>Customer</th><th>Details</th><th>Total</th><th>Status</th></tr></thead>
+                        <thead><tr><th>Customer</th><th>Details & Time</th><th>Total</th><th>Status</th></tr></thead>
                         <tbody id="savedInvoicesTableBody">
                             <tr><td colspan="4" style="text-align:center; color:#94a3b8;">Loading...</td></tr>
                         </tbody>
@@ -446,16 +506,16 @@
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Today's Business Day Report</h3>
                     <div style="background:#0c0c0e; padding:14px; border-radius:8px; font-size:13px; line-height:1.6;">
                         <p style="color:#34d399; font-weight:900;">• Total Dispatches Today: 2 Trucks (15,000 Bags)</p>
-                        <p style="color:#34d399; font-weight:900;">• Live UPI Receipts: Verified</p>
+                        <p style="color:#34d399; font-weight:900;">• Real-Time UPI Receipts & Timestamps: Verified</p>
                         <p style="color:#94a3b8;">All inventory and ledger records sync automatically with Firebase cloud.</p>
                     </div>
                 </div>
 
                 <!-- 4. INVENTORY & PHOTOS TAB -->
                 <div id="adminInventoryTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Live Inventory & Stock</h3>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Live Inventory & Photos</h3>
                     <table>
-                        <thead><tr><th>Item Name</th><th>Price/pc</th><th>Stock</th><th>Status</th></tr></thead>
+                        <thead><tr><th>Item Name</th><th>Size / GSM</th><th>Price/pc</th><th>Stock</th></tr></thead>
                         <tbody id="inventoryTableBody">
                             <tr><td colspan="4" style="text-align:center;">Loading inventory...</td></tr>
                         </tbody>
@@ -466,7 +526,7 @@
                 <div id="adminOrdersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Live Customer Orders</h3>
                     <table>
-                        <thead><tr><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+                        <thead><tr><th>Customer & Phone</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
                         <tbody id="adminOrdersTableBody">
                             <tr><td colspan="5" style="text-align:center; color:#94a3b8;">Loading orders...</td></tr>
                         </tbody>
@@ -498,17 +558,40 @@
                     </table>
                 </div>
 
-                <!-- 8. CUSTOMERS TAB -->
+                <!-- 8. CUSTOMERS DIRECTORY TAB (Private Admin Only) -->
                 <div id="adminCustomersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Distributor Customers Directory</h3>
-                    <label>Firm Name:</label>
-                    <input type="text" id="custFirm" placeholder="Hyderabad Packaging Corp">
-                    <label>Phone:</label>
-                    <input type="tel" id="custMob" placeholder="9848011223">
-                    <button class="primary-btn" onclick="saveCustomerDirectory()">+ Save Customer</button>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Private Customers Directory</h3>
+                    <p style="font-size:11px; color:#94a3b8; margin-bottom:10px;">(Yeh list sirf Admin panel mein dikhegi, customer screen par nahi)</p>
+                    <label>Customer / Firm Name:</label>
+                    <input type="text" id="dirCustName" placeholder="Balaji Traders">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="dirCustPhone" placeholder="9848011223">
+                    <label>Complete Address:</label>
+                    <textarea id="dirCustAddress" placeholder="Grain Market, Hyderabad" style="width:100%; padding:10px; background:#0c0c0e; border:1px solid #2a2a35; color:#fff; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer to Private Directory</button>
+                    <table>
+                        <thead><tr><th>Customer Name</th><th>Phone</th><th>Address</th></tr></thead>
+                        <tbody id="customersTableBody"><tr><td colspan="3" style="text-align:center;">Loading directory...</td></tr></tbody>
+                    </table>
                 </div>
 
-                <!-- 9. EXPENSES TAB -->
+                <!-- 9. MANUFACTURERS TAB (Private Admin Only) -->
+                <div id="adminManufacturersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Manufacturers Directory</h3>
+                    <label>Manufacturer / Mill Name:</label>
+                    <input type="text" id="mfgName" placeholder="Shree Poly Polymers">
+                    <label>Contact Phone Number:</label>
+                    <input type="tel" id="mfgPhone" placeholder="9988776655">
+                    <label>Factory / Mill Address:</label>
+                    <textarea id="mfgAddress" placeholder="Industrial Area, Phase-2, Hyderabad" style="width:100%; padding:10px; background:#0c0c0e; border:1px solid #2a2a35; color:#fff; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <button class="primary-btn" onclick="saveManufacturerData()">+ Save Manufacturer</button>
+                    <table>
+                        <thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Status</th></tr></thead>
+                        <tbody id="manufacturerTableBody"><tr><td colspan="4" style="text-align:center;">Loading manufacturers...</td></tr></tbody>
+                    </table>
+                </div>
+
+                <!-- 10. EXPENSES TAB -->
                 <div id="adminExpensesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Business Expenses Tracker</h3>
                     <label>Expense Title / Reason:</label>
@@ -523,29 +606,98 @@
                     </table>
                 </div>
 
-                <!-- 10. ADD ITEM TAB -->
+                <!-- 11. ADD ITEM TAB (Connected with Manufacturer List) -->
                 <div id="adminAddItemTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Add New Bag to Cloud Catalog</h3>
                     <label>New Bag Name:</label>
                     <input type="text" id="newBagName" placeholder="PP Woven Bag 25kg">
+                    
+                    <label>Select Manufacturer / Brand:</label>
+                    <select id="newBagBrand">
+                        <option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>
+                    </select>
+
+                    <label>Bag Size (e.g. 24 x 36 inch):</label>
+                    <input type="text" id="newBagSize" placeholder="24 x 36 inch">
+
+                    <label>GSM (e.g. 70 GSM):</label>
+                    <input type="text" id="newBagGsm" placeholder="70 GSM">
+
                     <label>Price per piece (₹):</label>
                     <input type="number" id="newBagPrice" placeholder="12.00">
-                    <button class="primary-btn" onclick="publishNewBag()">+ Publish Bag to Cloud</button>
+
+                    <label>Bag Photo (Upload Image / Paste Image Link):</label>
+                    <input type="file" id="newBagImgFile" accept="image/*" style="margin-bottom:6px;" onchange="convertImageToBase64(this)">
+                    <input type="text" id="newBagImgUrl" placeholder="Or paste image URL here">
+
+                    <button class="primary-btn" onclick="publishNewBag()">+ Publish Item with Full Specs</button>
                 </div>
 
-                <!-- 11. BANK & SETTINGS TAB -->
+                <!-- 12. BANK & SETTINGS TAB -->
                 <div id="adminSettingsTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Bank Account & UPI Settings</h3>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Bank Account & UPI QR Settings</h3>
                     <label>Business UPI ID:</label>
-                    <input type="text" value="9030574216@upi" readonly style="background:#16161c;">
-                    <label>Bank Name:</label>
-                    <input type="text" value="HDFC Bank - Current Account" readonly style="background:#16161c;">
-                    <p style="color:#34d399; font-size:12px; font-weight:bold; margin-top:6px;">✔ Connected to AS Enterprises Cloud Gateway.</p>
+                    <input type="text" id="bankUpi" value="9030574216@upi" readonly style="background:#16161c;">
+                    <label>Bank Name & Account:</label>
+                    <input type="text" id="bankName" value="HDFC Bank - A/C: 50200012345678 (IFSC: HDFC0001234)" readonly style="background:#16161c;">
+                    <label>UPI QR Code Link / Image:</label>
+                    <input type="text" id="bankQr" value="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" readonly style="background:#16161c;">
+                    <div style="text-align:center; margin-top:12px;">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="UPI QR Code" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
+                        <p style="color:#34d399; font-size:12px; font-weight:bold; margin-top:6px;">✔ Live UPI QR Code Active for Invoices.</p>
+                    </div>
                 </div>
 
             </div>
         </div>
 
+    </div>
+
+    <!-- PRINTABLE INVOICE PREVIEW MODAL -->
+    <div id="invoicePreviewModal">
+        <div class="invoice-paper" id="printableArea">
+            <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:10px; margin-bottom:12px;">
+                <h2 style="color:#0A1931; font-size:20px; font-weight:900;">AS ENTERPRISES</h2>
+                <p style="font-size:11px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
+                <p style="font-size:10px; color:#777;" id="modalTimestamp">Date & Time: --</p>
+            </div>
+            <div style="font-size:12px; margin-bottom:12px; line-height:1.5;">
+                <p><b>Customer:</b> <span id="mCustName">--</span></p>
+                <p><b>Phone:</b> <span id="mCustPhone">--</span></p>
+                <p><b>Requirement:</b> <span id="mBagDesc">--</span></p>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px;">
+                <thead>
+                    <tr style="background:#f1f5f9; color:#000;">
+                        <th style="border:1px solid #ccc; padding:6px;">Qty</th>
+                        <th style="border:1px solid #ccc; padding:6px;">Rate</th>
+                        <th style="border:1px solid #ccc; padding:6px;">GST</th>
+                        <th style="border:1px solid #ccc; padding:6px;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border:1px solid #ccc; padding:6px;" id="mQty">--</td>
+                        <td style="border:1px solid #ccc; padding:6px;" id="mRate">--</td>
+                        <td style="border:1px solid #ccc; padding:6px;" id="mGst">--</td>
+                        <td style="border:1px solid #ccc; padding:6px; font-weight:bold;" id="mTotal">--</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align:center; margin-bottom:12px;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:90px; height:90px;">
+                <p style="font-size:10px; font-weight:bold; color:#333; margin-top:4px;">Scan & Pay via UPI (9030574216)</p>
+            </div>
+            <div style="font-size:10px; color:#555; border-top:1px dashed #ccc; padding-top:8px; margin-bottom:14px;">
+                <p><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
+                <p><b>Support:</b> 6301456725</p>
+            </div>
+        </div>
+        <div style="max-width:500px; margin:0 auto; display:flex; gap:10px;">
+            <button class="primary-btn" onclick="window.print()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
+            <button class="primary-btn" onclick="sendInvoiceToWhatsApp()" style="background:#25d366;">💬 Send via WhatsApp</button>
+            <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
+        </div>
     </div>
 
     <!-- CART DRAWER -->
@@ -558,9 +710,9 @@
             <p style="color:#94a3b8; font-size:13px;">Cart is empty.</p>
         </div>
         <div id="cartCheckoutDiv" style="display:none;" class="form-panel">
-            <label>Your Name:</label>
-            <input type="text" id="orderName" placeholder="Ramesh">
-            <label>Phone Number:</label>
+            <label>Your Name / Firm Name:</label>
+            <input type="text" id="orderName" placeholder="Ramesh Traders">
+            <label>Phone Number (Mandatory):</label>
             <input type="tel" id="orderPhone" placeholder="9848012345">
             <button class="primary-btn" onclick="submitCartOrder()">🚀 Place Order via WhatsApp</button>
         </div>
@@ -586,6 +738,8 @@
     <script>
         let currentLang = 'EN';
         let cartList = [];
+        let uploadedImageBase64 = "";
+        let globalCurrentInvoiceData = null;
 
         const tDict = {
             EN: { s: "Delivery", w: "Khata", g: "Catalog", f: "Estimate" },
@@ -655,7 +809,7 @@
         async function submitCartOrder() {
             let name = document.getElementById('orderName').value;
             let phone = document.getElementById('orderPhone').value;
-            if(!name || !phone) { alert('Enter Name & Phone'); return; }
+            if(!name || !phone) { alert('Please enter Customer Name and Phone Number!'); return; }
             let total = cartList.reduce((s, i) => s + (i.price * i.qty), 0);
             let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
             
@@ -669,12 +823,12 @@
                     timestamp: new Date()
                 });
 
-                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI:* 9030574216`;
+                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI Pay:* 9030574216`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
                 cartList = [];
                 document.getElementById('cartCount').innerText = '0';
                 toggleCartDrawer();
-                alert('Order placed successfully & saved to Firebase Admin!');
+                alert('Order placed successfully with customer details & sent to Admin Panel!');
             } catch(e) {
                 alert('Error: ' + e.message);
             }
@@ -724,10 +878,10 @@
             document.getElementById('invBag').value = itemsSummary;
             document.getElementById('invQty').value = '1000';
             document.getElementById('invRate').value = Math.round(totalAmt / 1000) || 15;
-            alert('Order loaded into Bill Maker!');
+            alert('Order loaded into Tax Invoice Maker!');
         }
 
-        async function generateAndSaveInvoice() {
+        async function generateAndShowInvoiceModal() {
             let cust = document.getElementById('invCust').value;
             let phone = document.getElementById('invPhone').value;
             let bag = document.getElementById('invBag').value;
@@ -735,11 +889,28 @@
             let rate = Number(document.getElementById('invRate').value);
             let gst = Number(document.getElementById('invGst').value);
 
-            if(!cust || !phone || !bag || !qty || !rate) { alert('Fill all fields'); return; }
+            if(!cust || !phone || !bag || !qty || !rate) { alert('Fill all fields properly'); return; }
             let subtotal = qty * rate;
             let tax = subtotal * (gst / 100);
             let total = subtotal + tax;
+            let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
+            globalCurrentInvoiceData = { cust, phone, bag, qty, rate, gst, total, nowStr };
+
+            // Fill Modal
+            document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
+            document.getElementById('mCustName').innerText = cust;
+            document.getElementById('mCustPhone').innerText = phone;
+            document.getElementById('mBagDesc').innerText = bag;
+            document.getElementById('mQty').innerText = qty + " pcs";
+            document.getElementById('mRate').innerText = "₹" + rate;
+            document.getElementById('mGst').innerText = gst + "% (₹" + tax.toFixed(2) + ")";
+            document.getElementById('mTotal').innerText = "₹" + total.toLocaleString('en-IN');
+
+            // Show Modal
+            document.getElementById('invoicePreviewModal').style.display = 'block';
+
+            // Save to Firebase
             try {
                 await window.myAddDoc(window.colInvoices, {
                     customer: cust,
@@ -749,15 +920,21 @@
                     rate: rate,
                     gstPercent: gst,
                     totalAmount: total,
+                    timestampStr: nowStr,
                     timestamp: new Date()
                 });
+            } catch(e) { console.error(e); }
+        }
 
-                let msg = `*📄 AS ENTERPRISES TAX INVOICE*%0A*Customer:* ${cust}%0A*Bag:* ${bag}%0A*Qty:* ${qty} @ ₹${rate}%0A*GST (${gst}%):* ₹${tax.toFixed(2)}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI:* 9030574216`;
-                window.open(`https://wa.me/91${phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
-                alert('Invoice Saved to Firebase & WhatsApp triggered!');
-            } catch(e) {
-                alert('Error saving invoice: ' + e.message);
-            }
+        function closeInvoiceModal() {
+            document.getElementById('invoicePreviewModal').style.display = 'none';
+        }
+
+        function sendInvoiceToWhatsApp() {
+            if(!globalCurrentInvoiceData) return;
+            let d = globalCurrentInvoiceData;
+            let msg = `*📄 AS ENTERPRISES TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Requirement:* ${d.bag}%0A*Qty:* ${d.qty} pcs @ ₹${d.rate}%0A*GST (${d.gst}%):* ₹${(d.qty*d.rate*(d.gst/100)).toFixed(2)}%0A*💰 Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0AHDFC Bank - A/C: 50200012345678%0AIFSC: HDFC0001234%0A*💳 UPI ID / QR:* 9030574216@upi%0A*📞 Support:* 6301456725`;
+            window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
         }
 
         async function savePublicKhata() {
@@ -786,15 +963,31 @@
             } catch(e) { alert('Error: ' + e.message); }
         }
 
-        async function saveCustomerDirectory() {
-            let firm = document.getElementById('custFirm').value;
-            let mob = document.getElementById('custMob').value;
-            if(!firm || !mob) { alert('Enter firm name & mobile'); return; }
+        async function saveCustomerDirectoryData() {
+            let name = document.getElementById('dirCustName').value;
+            let phone = document.getElementById('dirCustPhone').value;
+            let address = document.getElementById('dirCustAddress').value;
+            if(!name || !phone) { alert('Enter Customer Name and Phone Number'); return; }
             try {
-                await window.myAddDoc(window.colCustomers, { firmName: firm, phone: mob, timestamp: new Date() });
-                alert('Customer Saved to Directory!');
-                document.getElementById('custFirm').value = '';
-                document.getElementById('custMob').value = '';
+                await window.myAddDoc(window.colCustomers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
+                alert('Customer Saved to Private Directory!');
+                document.getElementById('dirCustName').value = '';
+                document.getElementById('dirCustPhone').value = '';
+                document.getElementById('dirCustAddress').value = '';
+            } catch(e) { alert('Error: ' + e.message); }
+        }
+
+        async function saveManufacturerData() {
+            let name = document.getElementById('mfgName').value;
+            let phone = document.getElementById('mfgPhone').value;
+            let address = document.getElementById('mfgAddress').value;
+            if(!name || !phone) { alert('Enter Manufacturer Name & Phone'); return; }
+            try {
+                await window.myAddDoc(window.colManufacturers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
+                alert('Manufacturer Saved Successfully & Added to Item Brands List!');
+                document.getElementById('mfgName').value = '';
+                document.getElementById('mfgPhone').value = '';
+                document.getElementById('mfgAddress').value = '';
             } catch(e) { alert('Error: ' + e.message); }
         }
 
@@ -810,15 +1003,48 @@
             } catch(e) { alert('Error: ' + e.message); }
         }
 
+        function convertImageToBase64(element) {
+            let file = element.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                    document.getElementById('newBagImgUrl').value = "[Image Attached]";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         async function publishNewBag() {
             let name = document.getElementById('newBagName').value;
+            let brand = document.getElementById('newBagBrand').value;
+            let size = document.getElementById('newBagSize').value;
+            let gsm = document.getElementById('newBagGsm').value;
             let price = document.getElementById('newBagPrice').value;
-            if(!name || !price) { alert('Enter name & price'); return; }
+            let imgUrl = document.getElementById('newBagImgUrl').value;
+
+            if(!name || !price) { alert('Enter bag name and price!'); return; }
+            
+            let finalImg = (imgUrl && imgUrl !== "[Image Attached]") ? imgUrl : uploadedImageBase64;
+
             try {
-                await window.myAddDoc(window.colProducts, { name: name, price: Number(price), brand: "AS Woven", stock: 5000, timestamp: new Date() });
-                alert('Bag published live to Firebase & Catalog!');
+                await window.myAddDoc(window.colProducts, { 
+                    name: name, 
+                    brand: brand, 
+                    size: size || "Standard", 
+                    gsm: gsm || "70 GSM", 
+                    price: Number(price), 
+                    img: finalImg,
+                    stock: 5000, 
+                    timestamp: new Date() 
+                });
+                alert('New Bag published live with Size, GSM, Brand & Photo to Firebase Catalog!');
                 document.getElementById('newBagName').value = '';
+                document.getElementById('newBagSize').value = '';
+                document.getElementById('newBagGsm').value = '';
                 document.getElementById('newBagPrice').value = '';
+                document.getElementById('newBagImgUrl').value = '';
+                uploadedImageBase64 = "";
                 switchView('home');
             } catch(e) {
                 alert('Error: ' + e.message);
