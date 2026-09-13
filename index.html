@@ -6,10 +6,10 @@
     <title>AS Enterprises - PP Woven Bags ERP Pro</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #08080a; color: #f8fafc; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
+        body { background-color: #ffffff; color: #0f172a; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
         
-        /* Force Hide Netlify Badge */
-        #netlify-badge, iframe[src*="netlify"], div[style*="z-index: 2147483647"], a[href*="netlify.com"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+        /* Force Hide Netlify Badge Everywhere */
+        #netlify-badge, iframe[src*="netlify"], div[style*="z-index: 2147483647"], a[href*="netlify.com"], [id*="netlify"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
         header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
         .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -28,69 +28,68 @@
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 26s linear infinite; }
         @keyframes scrollTicker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
-        .main-wrapper { padding: 16px; max-width: 100%; width: 100%; margin: 0 auto; }
+        .main-wrapper { padding: 16px; max-width: 100%; width: 100%; margin: 0 auto; background: #ffffff; min-height: 90vh; }
         
         /* Full Width Edge-to-Edge White Hero Banner */
-        .hero-card { background: #ffffff; color: #0f172a; padding: 28px 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); width: 100%; }
+        .hero-card { background: #ffffff; color: #0f172a; padding: 28px 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 100%; }
         .hero-tag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
         .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
         .hero-card h1 span { color: #f97316; }
         .hero-card p { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
         
-        .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
-        .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
-        .hero-card .secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
+        .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.3); }
+        .secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
         /* Quick Action Cards Grid */
         .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; width: 100%; }
-        .card-tile { background: #16161c; border: 1px solid #2a2a35; padding: 12px 8px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .card-tile { background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 8px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; color: #0f172a; }
         .card-tile:hover { border-color: #f97316; transform: translateY(-2px); }
         .card-tile div:first-child { font-size: 20px; margin-bottom: 4px; }
-        .card-tile div:last-child { font-size: 11px; font-weight: 800; color: #cbd5e1; }
+        .card-tile div:last-child { font-size: 11px; font-weight: 800; color: #334155; }
 
         /* Search Bar */
-        .search-box { background: #fff; border: 2px solid #08080a; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 100%; }
-        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 700; color: #08080a; background: transparent; }
+        .search-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 100%; }
+        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 700; color: #0f172a; background: transparent; }
 
         /* Catalog Grid */
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
-        .item-card { background: #0c0c0e; border: 1px solid #1c1c22; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-        .item-img { height: 120px; background: #16161c; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
+        .item-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .item-img { height: 120px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
         .item-img img { width: 100%; height: 100%; object-fit: cover; }
         .item-body { padding: 12px; }
         .item-tag { font-size: 9px; text-transform: uppercase; color: #f97316; font-weight: 900; margin-bottom: 3px; }
-        .item-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 4px; line-height: 1.2; height: 32px; overflow: hidden; }
-        .item-specs { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 700; }
-        .item-price { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 10px; }
-        .item-price span { font-size: 10px; color: #94a3b8; font-weight: 700; }
+        .item-title { font-size: 13px; font-weight: 900; color: #0f172a; margin-bottom: 4px; line-height: 1.2; height: 32px; overflow: hidden; }
+        .item-specs { font-size: 11px; color: #475569; margin-bottom: 6px; font-weight: 700; }
+        .item-price { font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 10px; }
+        .item-price span { font-size: 10px; color: #475569; font-weight: 700; }
         .buy-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 999px; font-size: 12px; font-weight: 900; cursor: pointer; }
 
         /* Drawers & Modals */
-        .drawer { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 420px; height: 100%; background: #0c0c0e; z-index: 2500; overflow-y: auto; padding: 20px; border-left: 2px solid #f97316; box-shadow: -10px 0 30px rgba(0,0,0,0.9); }
+        .drawer { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 420px; height: 100%; background: #ffffff; z-index: 2500; overflow-y: auto; padding: 20px; border-left: 2px solid #f97316; box-shadow: -10px 0 30px rgba(0,0,0,0.2); color: #0f172a; }
         .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f97316; padding-bottom: 12px; margin-bottom: 16px; }
         .drawer-header h3 { color: #f97316; font-size: 17px; font-weight: 900; }
-        .close-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 6px 12px; border-radius: 6px; font-weight: 900; cursor: pointer; }
+        .close-btn { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 6px; font-weight: 900; cursor: pointer; }
 
         /* Secure Admin PIN Modal */
-        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; padding: 16px; }
-        .modal-box { background: #ffffff; border: 2px solid #f97316; padding: 28px 20px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: center; color: #0f172a; }
+        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 16px; }
+        .modal-box { background: #ffffff; border: 2px solid #f97316; padding: 28px 20px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: center; color: #0f172a; }
         .modal-box h3 { color: #0f172a; font-size: 20px; margin-bottom: 8px; font-weight: 900; }
         .modal-box p { color: #475569; font-size: 13px; margin-bottom: 16px; font-weight: 600; }
         .modal-box input { width: 100%; padding: 14px; background: #f8fafc; border: 2px solid #cbd5e1; color: #0f172a; border-radius: 12px; margin-bottom: 16px; font-size: 18px; font-weight: 800; text-align: center; outline: none; letter-spacing: 4px; }
         
         /* Floating Contact Buttons */
         .float-btns { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 999; }
-        .float-btn { background: #059669; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .float-btn { background: #059669; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .float-btn.wa { background: #25d366; }
 
         /* Clean Professional White Admin Panel Background */
-        .admin-panel-container { background: #ffffff; color: #0f172a; padding: 24px; border-radius: 16px; border: 2px solid #f97316; margin-bottom: 14px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .admin-panel-container { background: #ffffff; color: #0f172a; padding: 24px; border-radius: 16px; border: 2px solid #f97316; margin-bottom: 14px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .admin-panel-container label { font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px; text-transform: uppercase; }
         .admin-panel-container input, .admin-panel-container select, .admin-panel-container textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
         
-        .form-panel { background: #16161c; padding: 20px; border-radius: 16px; border: 1px solid #2a2a35; margin-bottom: 14px; width: 100%; }
-        .form-panel label { font-size: 12px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; text-transform: uppercase; }
-        .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
+        .form-panel { background: #ffffff; padding: 20px; border-radius: 16px; border: 1px solid #cbd5e1; margin-bottom: 14px; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); color: #0f172a; }
+        .form-panel label { font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px; text-transform: uppercase; }
+        .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
 
         /* Admin Rounded Pill Grid Dashboard Buttons */
         .admin-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
@@ -102,10 +101,10 @@
         th { background: #f1f5f9; color: #0f172a; font-weight: 900; }
 
         /* Full Screen Printable Invoice Modal */
-        #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 4000; overflow-y: auto; padding: 10px; }
-        .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 4000; overflow-y: auto; padding: 10px; }
+        .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
-        /* Print fix: Print ONLY printableArea and prevent multiple copies */
+        /* Print fix: Print ONLY printableArea cleanly */
         @media print {
             body * { visibility: hidden; }
             #invoicePreviewModal, #invoicePreviewModal * { visibility: visible; }
@@ -191,8 +190,8 @@
                 `;
             });
 
-            if(container) container.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
-            if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
+            if(container) container.innerHTML = html || '<p style="color:#64748b;">No items in catalog.</p>';
+            if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#64748b;">No items in catalog.</p>';
             if(inventoryContainer) inventoryContainer.innerHTML = invHtml || '<tr><td colspan="4" style="text-align:center;">No inventory found.</td></tr>';
         });
 
@@ -272,7 +271,7 @@
                             <td><b>${ord.name}</b><br><small>📞 ${ord.phone}</small></td>
                             <td>${ord.itemsSummary}</td>
                             <td>₹${ord.total}</td>
-                            <td><span style="color:#fb923c;">${ord.status || 'Pending'}</span></td>
+                            <td><span style="color:#d97706; font-weight:bold;">${ord.status || 'Pending'}</span></td>
                             <td>
                                 <button style="background:#2563eb; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button>
                                 <button style="background:#dc2626; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Delete</button>
@@ -280,7 +279,7 @@
                         </tr>
                     `;
                 });
-                container.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:#475569;">No new orders found.</td></tr>';
+                container.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:#64748b;">No new orders found.</td></tr>';
             }
         });
 
@@ -303,7 +302,7 @@
                         </tr>
                     `;
                 });
-                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#475569;">No saved invoices yet.</td></tr>';
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#64748b;">No saved invoices yet.</td></tr>';
             }
         });
 
@@ -415,19 +414,25 @@
             <div class="catalog-grid" id="fullCatalogGrid"></div>
         </div>
 
-        <!-- ESTIMATOR VIEW -->
+        <!-- ESTIMATOR VIEW (Super Simple Kilo to Bags Calculator) -->
         <div id="estimatorView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel">
-                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Bag Requirement Calculator</h3>
+                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Simple Kilo to Bags Calculator</h3>
+                <p style="font-size:12px; color:#cbd5e1; margin-bottom:14px;">Jaaniye 1 किलो, 50 किलो या 100 किलो कपड़े में कितने बैग बनेंगे!</p>
+                
                 <label>Bag Length (inch):</label>
-                <input type="number" id="estLen" placeholder="38">
+                <input type="number" id="estLen" placeholder="36">
+                
                 <label>Bag Width (inch):</label>
-                <input type="number" id="estWid" placeholder="26">
-                <label>GSM (Weight quality):</label>
-                <input type="number" id="estGsm" placeholder="70">
-                <button class="primary-btn" onclick="calculateBags()">Calculate Requirement</button>
-                <div id="estResult" style="margin-top:12px; font-weight:900; color:#34d399; font-size:16px;"></div>
+                <input type="number" id="estWid" placeholder="24">
+                
+                <label>GSM (Weight quality e.g. 70, 100, 120):</label>
+                <input type="number" id="estGsm" placeholder="120">
+                
+                <button class="primary-btn" onclick="calculateBagsSimple()">Calculate Bags per Kg / 50Kg / 100Kg</button>
+                
+                <div id="estResult" style="margin-top:14px; font-weight:800; color:#34d399; font-size:14px; line-height:1.6; background:#0c0c0e; padding:12px; border-radius:8px;"></div>
             </div>
         </div>
 
@@ -436,7 +441,7 @@
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel">
                 <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📖 Wholesale Khata & Ledger</h3>
-                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Track distributor credits and advance payments.</p>
+                <p style="font-size:12px; color:#cbd5e1; margin-bottom:12px;">Track distributor credits and advance payments.</p>
                 <label>Customer Name:</label>
                 <input type="text" id="khataName" placeholder="Ramesh Traders">
                 <label>Amount (₹):</label>
@@ -450,7 +455,7 @@
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel" style="text-align:center; padding:30px;">
                 <h3 style="color:#f97316; margin-bottom:10px;">🚚 Live Transport & Delivery Tracker</h3>
-                <p style="font-size:13px; color:#94a3b8; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
+                <p style="font-size:13px; color:#cbd5e1; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
                 <div style="background:#0c0c0e; padding:16px; border-radius:8px; font-weight:900; color:#34d399;">Status: Out for Delivery (ETA 2 Hours)</div>
             </div>
         </div>
@@ -483,25 +488,40 @@
                     <div class="admin-tile" style="grid-column: span 2;" onclick="switchAdminTab('settings')">⚙️ Bank & Settings</div>
                 </div>
 
-                <!-- 1. MULTI-GST BILL MAKER TAB -->
+                <!-- 1. MULTI-GST BILL MAKER TAB (With Multi-Item Support) -->
                 <div id="adminInvoiceTab" class="admin-sub-tab" style="margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker & Live Tax Invoice</h3>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker (Multi-Item Support)</h3>
+                    
                     <label>Customer / Firm Name:</label>
                     <input type="text" id="invCust" placeholder="Deccan Agencies">
                     <label>WhatsApp Number:</label>
                     <input type="tel" id="invPhone" placeholder="9848012345">
-                    <label>Bag Type / Requirement:</label>
-                    <input type="text" id="invBag" placeholder="5000 pcs PP Woven Bags 50kg">
-                    <label>Quantity (pcs):</label>
-                    <input type="number" id="invQty" placeholder="5000">
-                    <label>Rate per piece (₹):</label>
-                    <input type="number" id="invRate" placeholder="14.50">
+
+                    <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px;">
+                        <h4 style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:8px;">Add Items to Bill (e.g. 24x30, 24x40, 50kg bags)</h4>
+                        <label>Item / Bag Description:</label>
+                        <input type="text" id="addItemDesc" placeholder="24 x 30 inch PP Woven Bag">
+                        <label>Quantity (pcs):</label>
+                        <input type="number" id="addItemQty" placeholder="5000">
+                        <label>Rate per piece (₹):</label>
+                        <input type="number" id="addItemRate" placeholder="14.50">
+                        <button class="primary-btn" style="padding:10px; font-size:12px; margin-top:4px;" onclick="addBillItemRow()">+ Add Item to Current Bill</button>
+                    </div>
+
+                    <table style="margin-bottom:12px;">
+                        <thead><tr><th>Item</th><th>Qty @ Rate</th><th>Amount</th><th>Action</th></tr></thead>
+                        <tbody id="billItemsTableBody">
+                            <tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet. Add items above.</td></tr>
+                        </tbody>
+                    </table>
+
                     <label>GST Rate (%):</label>
                     <select id="invGst">
                         <option value="5">5% GST</option>
                         <option value="12">12% GST</option>
                         <option value="18">18% GST</option>
                     </select>
+
                     <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Full Screen Invoice, PDF & WhatsApp</button>
                 </div>
 
@@ -709,26 +729,25 @@
             <div style="font-size:13px; margin-bottom:14px; line-height:1.6;">
                 <p><b>Customer:</b> <span id="mCustName">--</span></p>
                 <p><b>Phone:</b> <span id="mCustPhone">--</span></p>
-                <p><b>Requirement:</b> <span id="mBagDesc">--</span></p>
             </div>
             <table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:14px; color:#000;">
                 <thead>
                     <tr style="background:#f1f5f9; color:#000;">
+                        <th style="border:1px solid #ccc; padding:8px;">Item Description</th>
                         <th style="border:1px solid #ccc; padding:8px;">Qty</th>
                         <th style="border:1px solid #ccc; padding:8px;">Rate</th>
-                        <th style="border:1px solid #ccc; padding:8px;">GST</th>
                         <th style="border:1px solid #ccc; padding:8px;">Total</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td style="border:1px solid #ccc; padding:8px;" id="mQty">--</td>
-                        <td style="border:1px solid #ccc; padding:8px;" id="mRate">--</td>
-                        <td style="border:1px solid #ccc; padding:8px;" id="mGst">--</td>
-                        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;" id="mTotal">--</td>
-                    </tr>
+                <tbody id="modalItemsTableBody">
+                    <!-- Injected multi items -->
                 </tbody>
             </table>
+            <div style="text-align:right; font-size:13px; margin-bottom:14px; line-height:1.5;">
+                <p>Subtotal: <span id="mSubtotal">₹0</span></p>
+                <p>GST (<span id="mGstPercent">5</span>%): <span id="mTaxAmount">₹0</span></p>
+                <p style="font-size:15px; font-weight:bold; color:#0A1931;">Grand Total: <span id="mGrandTotal">₹0</span></p>
+            </div>
             <div style="text-align:center; margin-bottom:14px;">
                 <img id="mQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:110px; height:110px;">
                 <p style="font-size:11px; font-weight:bold; color:#333; margin-top:4px;" id="mUpiText">Scan & Pay via UPI (9030574216@upi)</p>
@@ -739,7 +758,7 @@
             </div>
         </div>
         <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;">
-            <button class="primary-btn" onclick="window.print()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
+            <button class="primary-btn" onclick="printInvoiceClean()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
             <button class="primary-btn" onclick="sendInvoiceToWhatsApp()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
         </div>
@@ -752,7 +771,7 @@
             <button class="close-btn" onclick="toggleCartDrawer()">✕ CLOSE</button>
         </div>
         <div id="cartItemsContainer" style="margin-bottom: 20px;">
-            <p style="color:#94a3b8; font-size:13px;">Cart is empty.</p>
+            <p style="color:#64748b; font-size:13px;">Cart is empty.</p>
         </div>
         <div id="cartCheckoutDiv" style="display:none;" class="form-panel">
             <label>Your Name / Firm Name:</label>
@@ -780,14 +799,14 @@
     </div>
 
     <script>
-        // JS MutationObserver to aggressively remove Netlify Badge
-        const observer = new MutationObserver((mutations) => {
-            document.querySelectorAll('iframe[src*="netlify"], #netlify-badge, a[href*="netlify.com"], div[style*="z-index: 2147483647"]').forEach(el => el.remove());
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
+        // Aggressively remove Netlify Badge
+        setInterval(() => {
+            document.querySelectorAll('iframe[src*="netlify"], #netlify-badge, a[href*="netlify.com"], div[style*="z-index: 2147483647"], [id*="netlify"]').forEach(el => el.remove());
+        }, 500);
 
         let currentLang = 'EN';
         let cartList = [];
+        let billMultiItems = [];
         let uploadedImageBase64 = "";
         let globalCurrentInvoiceData = null;
 
@@ -870,7 +889,7 @@
             let container = document.getElementById('cartItemsContainer');
             let checkoutDiv = document.getElementById('cartCheckoutDiv');
             if(cartList.length === 0) {
-                container.innerHTML = '<p style="color:#94a3b8; font-size:13px;">Cart is empty.</p>';
+                container.innerHTML = '<p style="color:#64748b; font-size:13px;">Cart is empty.</p>';
                 checkoutDiv.style.display = 'none';
             } else {
                 let html = '';
@@ -879,16 +898,16 @@
                     let sub = item.price * item.qty;
                     total += sub;
                     html += `
-                        <div style="background:#16161c; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; color:#0f172a;">
                             <div>
-                                <div style="font-size:13px; font-weight:bold; color:#fff;">${item.name}</div>
-                                <div style="font-size:11px; color:#fb923c;">${item.qty} pcs @ ₹${item.price} = ₹${sub.toLocaleString('en-IN')}</div>
+                                <div style="font-size:13px; font-weight:bold;">${item.name}</div>
+                                <div style="font-size:11px; color:#c2410c;">${item.qty} pcs @ ₹${item.price} = ₹${sub.toLocaleString('en-IN')}</div>
                             </div>
                             <button onclick="cartList.splice(${idx},1); renderCart(); document.getElementById('cartCount').innerText=cartList.length;" style="background:#dc2626; border:none; color:#fff; padding:4px 8px; border-radius:4px; cursor:pointer;">❌</button>
                         </div>
                     `;
                 });
-                html += `<div style="font-size:15px; font-weight:900; color:#34d399; text-align:right; margin-top:10px;">Total: ₹${total.toLocaleString('en-IN')}</div>`;
+                html += `<div style="font-size:15px; font-weight:900; color:#047857; text-align:right; margin-top:10px;">Total: ₹${total.toLocaleString('en-IN')}</div>`;
                 container.innerHTML = html;
                 checkoutDiv.style.display = 'block';
             }
@@ -949,18 +968,67 @@
             }
         }
 
-        function calculateBags() {
+        // Multi-Item Bill Maker Functions
+        function addBillItemRow() {
+            let desc = document.getElementById('addItemDesc').value;
+            let qty = Number(document.getElementById('addItemQty').value);
+            let rate = Number(document.getElementById('addItemRate').value);
+
+            if(!desc || !qty || !rate) {
+                alert("Kripya item description, quantity aur rate sahi se bharein!");
+                return;
+            }
+
+            billMultiItems.push({ desc, qty, rate, amount: qty * rate });
+            document.getElementById('addItemDesc').value = '';
+            document.getElementById('addItemQty').value = '';
+            document.getElementById('addItemRate').value = '';
+            renderBillMultiItemsTable();
+        }
+
+        function renderBillMultiItemsTable() {
+            let tbody = document.getElementById('billItemsTableBody');
+            if(billMultiItems.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet. Add items above.</td></tr>';
+                return;
+            }
+            let html = '';
+            billMultiItems.forEach((item, idx) => {
+                html += `
+                    <tr>
+                        <td><b>${item.desc}</b></td>
+                        <td>${item.qty} pcs @ ₹${item.rate}</td>
+                        <td>₹${item.amount.toLocaleString('en-IN')}</td>
+                        <td><button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px; cursor:pointer;" onclick="billMultiItems.splice(${idx},1); renderBillMultiItemsTable();">✕</button></td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Extremely Easy & Clear Calculator: 1 Kg, 50 Kg, 100 Kg bags estimation
+        function calculateBagsSimple() {
             let l = parseFloat(document.getElementById('estLen').value) || 0;
             let w = parseFloat(document.getElementById('estWid').value) || 0;
-            let g = parseFloat(document.getElementById('estGsm').value) || 0;
-            if(l && w) {
-                // Correct calculation logic: Based on standard PP woven bag weight & area sizing
-                let bagWeightGrams = (l * w * 2 * g) / 1550; // standard conversion factor
-                let est = Math.round(1000 / (bagWeightGrams || 5)); // Estimated pcs per kg or standard batch scale
-                if(est < 50) est = Math.ceil(l * w * 1.5); // fallback realistic scale
-                document.getElementById('estResult').innerText = `Estimated Requirement: ~${est} pcs (Quality GSM: ${g || 70})`;
+            let gsm = parseFloat(document.getElementById('estGsm').value) || 0;
+
+            if(l > 0 && w > 0 && gsm > 0) {
+                let areaSqMeters = (l * 0.0254) * (w * 0.0254) * 2;
+                let weightPerBagGrams = areaSqMeters * gsm;
+                
+                let bagsPerKg = Math.round(1000 / weightPerBagGrams);
+                let bagsPer50Kg = bagsPerKg * 50;
+                let bagsPer100Kg = bagsPerKg * 100;
+
+                document.getElementById('estResult').innerHTML = `
+                    💡 <b>Aasan Ganit (Easy Calculation):</b><br>
+                    • 1 Kg kapde mein: <b>~${bagsPerKg} pcs</b> bag banenge<br>
+                    • 50 Kg kapde mein: <b>~${bagsPer50Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
+                    • 100 Kg kapde mein: <b>~${bagsPer100Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
+                    <small style="color:#cbd5e1;">(Har ek bag ka vajan lagbhag ${weightPerBagGrams.toFixed(1)} gram hoga)</small>
+                `;
             } else {
-                alert('Please enter valid length and width');
+                alert('Kripya Length, Width aur GSM sahi se bharein!');
             }
         }
 
@@ -989,38 +1057,50 @@
             switchAdminTab('invoice');
             document.getElementById('invCust').value = name;
             document.getElementById('invPhone').value = phone;
-            document.getElementById('invBag').value = itemsSummary;
-            document.getElementById('invQty').value = '1000';
-            document.getElementById('invRate').value = Math.round(totalAmt / 1000) || 15;
-            alert('Order loaded into Tax Invoice Maker!');
+            billMultiItems = [{ desc: itemsSummary, qty: 1000, rate: Math.round(totalAmt/1000) || 15, amount: totalAmt }];
+            renderBillMultiItemsTable();
+            alert('Order loaded into Multi-Item Tax Invoice Maker!');
         }
 
         async function generateAndShowInvoiceModal() {
             let cust = document.getElementById('invCust').value;
             let phone = document.getElementById('invPhone').value;
-            let bag = document.getElementById('invBag').value;
-            let qty = Number(document.getElementById('invQty').value);
-            let rate = Number(document.getElementById('invRate').value);
             let gst = Number(document.getElementById('invGst').value);
 
-            if(!cust || !phone || !bag || !qty || !rate) { alert('Fill all fields properly'); return; }
-            let subtotal = qty * rate;
+            if(!cust || !phone || billMultiItems.length === 0) {
+                alert('Kripya Customer name, phone aur kam se kam ek item zaroor add karein!');
+                return;
+            }
+
+            let subtotal = billMultiItems.reduce((s, i) => s + i.amount, 0);
             let tax = subtotal * (gst / 100);
             let total = subtotal + tax;
             let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
-            globalCurrentInvoiceData = { cust, phone, bag, qty, rate, gst, total, nowStr };
+            globalCurrentInvoiceData = { cust, phone, items: [...billMultiItems], subtotal, gst, tax, total, nowStr };
 
-            // Fill Modal with dynamic bank settings
+            // Fill Modal
             document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
             document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
             document.getElementById('mCustName').innerText = cust;
             document.getElementById('mCustPhone').innerText = phone;
-            document.getElementById('mBagDesc').innerText = bag;
-            document.getElementById('mQty').innerText = qty + " pcs";
-            document.getElementById('mRate').innerText = "₹" + rate;
-            document.getElementById('mGst').innerText = gst + "% (₹" + tax.toFixed(2) + ")";
-            document.getElementById('mTotal').innerText = "₹" + total.toLocaleString('en-IN');
+
+            let tbodyHtml = '';
+            billMultiItems.forEach(i => {
+                tbodyHtml += `
+                    <tr>
+                        <td style="border:1px solid #ccc; padding:8px;">${i.desc}</td>
+                        <td style="border:1px solid #ccc; padding:8px;">${i.qty} pcs</td>
+                        <td style="border:1px solid #ccc; padding:8px;">₹${i.rate}</td>
+                        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;">₹${i.amount.toLocaleString('en-IN')}</td>
+                    </tr>
+                `;
+            });
+            document.getElementById('modalItemsTableBody').innerHTML = tbodyHtml;
+            document.getElementById('mSubtotal').innerText = "₹" + subtotal.toLocaleString('en-IN');
+            document.getElementById('mGstPercent').innerText = gst;
+            document.getElementById('mTaxAmount').innerText = "₹" + tax.toFixed(2);
+            document.getElementById('mGrandTotal').innerText = "₹" + total.toLocaleString('en-IN');
             
             let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=${bankConfig.upi}&pn=AS%20Enterprises`;
             document.getElementById('mQrImg').src = qrUrl;
@@ -1031,14 +1111,13 @@
             document.getElementById('invoicePreviewModal').style.display = 'block';
 
             // Save to Firebase
+            let summaryStr = billMultiItems.map(i => `${i.desc} (${i.qty} pcs)`).join(', ');
             try {
                 await window.myAddDoc(window.colInvoices, {
                     customer: cust,
                     phone: phone,
-                    bagDetails: bag,
-                    qty: qty,
-                    rate: rate,
-                    gstPercent: gst,
+                    bagDetails: summaryStr,
+                    qty: billMultiItems.reduce((s,i)=>s+i.qty,0),
                     totalAmount: total,
                     timestampStr: nowStr,
                     timestamp: new Date()
@@ -1050,10 +1129,15 @@
             document.getElementById('invoicePreviewModal').style.display = 'none';
         }
 
+        function printInvoiceClean() {
+            window.print();
+        }
+
         function sendInvoiceToWhatsApp() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
-            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Requirement:* ${d.bag}%0A*Qty:* ${d.qty} pcs @ ₹${d.rate}%0A*GST (${d.gst}%):* ₹${(d.qty*d.rate*(d.gst/100)).toFixed(2)}%0A*💰 Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
+            let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('%0A');
+            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST (${d.gst}%):* ₹${d.tax.toFixed(2)}%0A*💰 Grand Total:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
             window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
         }
 
