@@ -28,11 +28,11 @@
         .main-wrapper { padding: 16px; max-width: 100%; width: 100%; margin: 0 auto; }
         
         /* Modern Smart Full Width White Hero Banner */
-        .hero-card { background: #ffffff; color: #0f172a; padding: 30px 24px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); width: 100%; }
+        .hero-card { background: #ffffff; color: #0f172a; padding: 24px 16px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); width: 100%; }
         .hero-tag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
+        .hero-card h1 { font-size: 24px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
+        .hero-card p { font-size: 13.5px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
         
         .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
         .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
@@ -68,11 +68,12 @@
         .drawer-header h3 { color: #f97316; font-size: 17px; font-weight: 900; }
         .close-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; padding: 6px 12px; border-radius: 6px; font-weight: 900; cursor: pointer; }
 
-        /* Admin Locked Modal */
-        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-box { background: #0c0c0e; border: 2px solid #f97316; padding: 24px; border-radius: 14px; width: 100%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-        .modal-box h3 { color: #f97316; font-size: 18px; margin-bottom: 8px; font-weight: 900; }
-        .modal-box input { width: 100%; padding: 12px; background: #16161c; border: 1px solid #2a2a35; color: #fff; border-radius: 8px; margin-bottom: 12px; font-size: 15px; font-weight: 700; outline: none; }
+        /* Secure Admin PIN Modal */
+        #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; padding: 16px; }
+        .modal-box { background: #ffffff; border: 2px solid #f97316; padding: 28px 20px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: center; color: #0f172a; }
+        .modal-box h3 { color: #0f172a; font-size: 20px; margin-bottom: 8px; font-weight: 900; }
+        .modal-box p { color: #475569; font-size: 13px; margin-bottom: 16px; font-weight: 600; }
+        .modal-box input { width: 100%; padding: 14px; background: #f8fafc; border: 2px solid #cbd5e1; color: #0f172a; border-radius: 12px; margin-bottom: 16px; font-size: 18px; font-weight: 800; text-align: center; outline: none; letter-spacing: 4px; }
         
         /* Floating Contact Buttons */
         .float-btns { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 999; }
@@ -125,6 +126,7 @@
         window.colOrders = collection(db, "as_enterprises_pp_orders");
         window.colInvoices = collection(db, "as_enterprises_saved_invoices");
         window.colKhata = collection(db, "as_enterprises_worker_khata");
+        window.colWorkers = collection(db, "as_enterprises_workers_directory");
         window.colExpenses = collection(db, "as_enterprises_expenses");
         window.colCustomers = collection(db, "as_enterprises_customers_directory");
         window.colManufacturers = collection(db, "as_enterprises_manufacturers_directory");
@@ -175,6 +177,26 @@
             if(container) container.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
             if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
             if(inventoryContainer) inventoryContainer.innerHTML = invHtml || '<tr><td colspan="4" style="text-align:center;">No inventory found.</td></tr>';
+        });
+
+        // Real-time Workers Directory Sync
+        onSnapshot(window.colWorkers, (snapshot) => {
+            let container = document.getElementById('workersTableBody');
+            if(container) {
+                let html = '';
+                snapshot.forEach(docSnap => {
+                    let w = { id: docSnap.id, ...docSnap.data() };
+                    html += `
+                        <tr>
+                            <td><b>${w.name}</b></td>
+                            <td>📞 ${w.phone}</td>
+                            <td>📍 ${w.address}</td>
+                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_workers_directory', '${w.id}')">Delete</button></td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No workers added.</td></tr>';
+            }
         });
 
         // Real-time Manufacturers List Sync with Delete Support
@@ -509,12 +531,20 @@
                     </table>
                 </div>
 
-                <!-- 6. WORKERS TAB -->
+                <!-- 6. WORKERS TAB (With Phone & Address Support) -->
                 <div id="adminWorkersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Workers Attendance & Management</h3>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Workers Attendance & Directory</h3>
                     <label>Worker Name:</label>
                     <input type="text" id="workerNameInput" placeholder="Raju (Loader)">
-                    <button class="primary-btn" onclick="alert('Worker Registered Successfully!')">+ Add Worker</button>
+                    <label>Phone Number:</label>
+                    <input type="tel" id="workerPhoneInput" placeholder="9848011223">
+                    <label>Complete Address:</label>
+                    <textarea id="workerAddressInput" placeholder="Hyderabad" style="width:100%; padding:10px; background:#0c0c0e; border:1px solid #2a2a35; color:#fff; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:60px;"></textarea>
+                    <button class="primary-btn" onclick="saveWorkerData()">+ Register Worker</button>
+                    <table>
+                        <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
+                        <tbody id="workersTableBody"><tr><td colspan="4" style="text-align:center;">Loading workers...</td></tr></tbody>
+                    </table>
                 </div>
 
                 <!-- 7. WORKER KHATA TAB -->
@@ -582,7 +612,7 @@
                     </table>
                 </div>
 
-                <!-- 11. ADD ITEM TAB (With Printed / Non-Printed Option) -->
+                <!-- 11. ADD ITEM TAB -->
                 <div id="adminAddItemTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Add New Bag to Cloud Catalog</h3>
                     <label>New Bag Name:</label>
@@ -700,14 +730,13 @@
         </div>
     </div>
 
-    <!-- ADMIN PIN MODAL -->
+    <!-- SECURE ADMIN PIN MODAL (No Cancel Button) -->
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security PIN</h3>
-            <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Enter 4-digit Owner Pin to access controls.</p>
+            <p>Enter 4-digit Owner Pin to access controls.</p>
             <input type="password" id="adminPinInput" placeholder="••••" maxlength="4">
-            <button class="primary-btn" onclick="verifyAdminPin()">Unlock Admin Panel</button>
-            <button class="secondary-btn" style="margin-top:8px; padding:10px;" onclick="closeAdminModal()">Cancel</button>
+            <button class="primary-btn" onclick="verifyAdminPin()" style="margin-bottom:0;">Unlock Admin Panel</button>
         </div>
     </div>
 
@@ -860,14 +889,10 @@
             document.getElementById('adminModal').style.display = 'flex';
         }
 
-        function closeAdminModal() {
-            document.getElementById('adminModal').style.display = 'none';
-        }
-
         function verifyAdminPin() {
             let pin = document.getElementById('adminPinInput').value;
             if(pin === '6301' || pin === '7860') {
-                closeAdminModal();
+                document.getElementById('adminModal').style.display = 'none';
                 switchView('admin');
             } else {
                 alert('Incorrect PIN!');
@@ -972,6 +997,20 @@
             } catch(e) { alert('Error: ' + e.message); }
         }
 
+        async function saveWorkerData() {
+            let name = document.getElementById('workerNameInput').value;
+            let phone = document.getElementById('workerPhoneInput').value;
+            let address = document.getElementById('workerAddressInput').value;
+            if(!name || !phone) { alert('Enter Worker Name and Phone Number'); return; }
+            try {
+                await window.myAddDoc(window.colWorkers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
+                alert('Worker Registered Successfully!');
+                document.getElementById('workerNameInput').value = '';
+                document.getElementById('workerPhoneInput').value = '';
+                document.getElementById('workerAddressInput').value = '';
+            } catch(e) { alert('Error: ' + e.message); }
+        }
+
         async function saveCustomerDirectoryData() {
             let name = document.getElementById('dirCustName').value;
             let phone = document.getElementById('dirCustPhone').value;
@@ -1049,7 +1088,7 @@
                     stock: 5000, 
                     timestamp: new Date() 
                 });
-                alert('New Bag published live with Printed/Non-Printed option to Firebase Catalog!');
+                alert('New Bag published live with Size, GSM, Brand & Photo to Firebase Catalog!');
                 document.getElementById('newBagName').value = '';
                 document.getElementById('newBagSize').value = '';
                 document.getElementById('newBagGsm').value = '';
