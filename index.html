@@ -104,11 +104,12 @@
         #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 4000; overflow-y: auto; padding: 10px; }
         .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
-        /* PERFECT PRINT / PDF FIX: Hide everything except printableArea */
+        /* STRICT SINGLE-PAGE PRINT / PDF FIX */
         @media print {
             body * { visibility: hidden !important; }
             #printableArea, #printableArea * { visibility: visible !important; }
-            #printableArea { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 10px; background: #ffffff !important; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; max-height: 100vh; margin: 0; padding: 10px; background: #ffffff !important; }
+            @page { size: auto; margin: 5mm; }
             .no-print { display: none !important; }
         }
     </style>
@@ -258,22 +259,25 @@
             }
         });
 
-        // Real-time Orders Sync with Delete Support
+        // Real-time Orders Sync with Approve/Reject Support
         onSnapshot(window.colOrders, (snapshot) => {
             let container = document.getElementById('adminOrdersTableBody');
             if(container) {
                 let html = '';
                 snapshot.forEach(docSnap => {
                     let ord = { id: docSnap.id, ...docSnap.data() };
+                    let statusColor = ord.status === 'Approved' ? '#047857' : (ord.status === 'Rejected' ? '#dc2626' : '#d97706');
                     html += `
                         <tr>
                             <td><b>${ord.name}</b><br><small>📞 ${ord.phone}</small></td>
                             <td>${ord.itemsSummary}</td>
                             <td>₹${ord.total}</td>
-                            <td><span style="color:#d97706; font-weight:bold;">${ord.status || 'Pending'}</span></td>
+                            <td><span style="color:${statusColor}; font-weight:bold;">${ord.status || 'Pending'}</span></td>
                             <td>
-                                <button style="background:#2563eb; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button>
-                                <button style="background:#dc2626; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Delete</button>
+                                <button style="background:#2563eb; color:#fff; border:none; padding:4px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button><br>
+                                <button style="background:#16a34a; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Approved')">✔</button>
+                                <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Rejected')">✖</button>
+                                <button style="background:#64748b; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Del</button>
                             </td>
                         </tr>
                     `;
@@ -359,21 +363,22 @@
             <div class="logo-badge">AS</div>
             <div>
                 <div class="brand-name" id="headerCompanyName">AS ENTERPRISES</div>
-                <div class="brand-location">PP Woven Bags Hub</div>
+                <div class="brand-location" data-tr="brand_sub">PP Woven Bags Hub</div>
             </div>
         </div>
         <div class="header-tools">
+            <button class="lang-btn" onclick="location.reload()" title="Refresh Page">🔄 Refresh</button>
             <button class="lang-btn" onclick="setLang('EN')">EN</button>
             <button class="lang-btn" onclick="setLang('HI')">HI</button>
             <button class="lang-btn" onclick="setLang('TE')">TE</button>
             <button class="action-icon-btn" onclick="toggleCartDrawer()">🛒<span class="cart-badge" id="cartCount">0</span></button>
-            <button class="menu-btn" onclick="openAdminCheck()">⚙️ Admin</button>
+            <button class="menu-btn" onclick="openAdminCheck()" data-tr="admin_btn">⚙️ Admin</button>
         </div>
     </header>
 
     <!-- Gold Ticker -->
     <div class="ticker-frame no-print">
-        <div class="ticker-content" id="t-tick">
+        <div class="ticker-content" id="t-tick" data-tr="ticker_text">
             ★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★
         </div>
     </div>
@@ -383,18 +388,18 @@
         <!-- HOME VIEW -->
         <div id="homeView">
             <div class="hero-card">
-                <div class="hero-tag">⚡ Industrial Packaging Hub</div>
-                <h1>Industrial PP Bags.<br><span>Direct Wholesale.</span></h1>
-                <p>Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags, and Custom Printed Packaging.</p>
-                <button class="primary-btn" onclick="switchView('catalog')">Browse PP Bags & Rates →</button>
-                <button class="secondary-btn" onclick="switchView('estimator')">Calculate Bag Requirements 🧮</button>
+                <div class="hero-tag" data-tr="hero_tag">⚡ Industrial Packaging Hub</div>
+                <h1 data-tr="hero_title">Industrial PP Bags.<br><span>Direct Wholesale.</span></h1>
+                <p data-tr="hero_desc">Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags, and Custom Printed Packaging.</p>
+                <button class="primary-btn" onclick="switchView('catalog')" data-tr="btn_catalog">Browse PP Bags & Rates →</button>
+                <button class="secondary-btn" onclick="switchView('estimator')" data-tr="btn_calc">Calculate Bag Requirements 🧮</button>
             </div>
 
             <div class="cards-grid">
-                <div class="card-tile" onclick="switchView('tracker')"><div>🚚</div><div id="lbl-s">Delivery</div></div>
-                <div class="card-tile" onclick="switchView('khata')"><div>📖</div><div id="lbl-w">Khata</div></div>
-                <div class="card-tile" onclick="switchView('catalog')"><div>✨</div><div id="lbl-g">Catalog</div></div>
-                <div class="card-tile" onclick="switchView('estimator')"><div>📐</div><div id="lbl-f">Estimate</div></div>
+                <div class="card-tile" onclick="switchView('tracker')"><div>🚚</div><div id="lbl-s" data-tr="nav_delivery">Delivery</div></div>
+                <div class="card-tile" onclick="switchView('khata')"><div>📖</div><div id="lbl-w" data-tr="nav_khata">Khata</div></div>
+                <div class="card-tile" onclick="switchView('catalog')"><div>✨</div><div id="lbl-g" data-tr="nav_catalog">Catalog</div></div>
+                <div class="card-tile" onclick="switchView('estimator')"><div>📐</div><div id="lbl-f" data-tr="nav_estimate">Estimate</div></div>
             </div>
 
             <div class="search-box">
@@ -402,20 +407,20 @@
                 <input type="text" id="searchInput" placeholder="Search PP Bags, Rice Bags..." oninput="filterCatalog(this.value)">
             </div>
 
-            <h3 style="font-size: 15px; font-weight: 900; margin-bottom: 12px; color: #f97316; text-transform: uppercase;">📦 Featured PP Bags Catalog</h3>
+            <h3 style="font-size: 15px; font-weight: 900; margin-bottom: 12px; color: #f97316; text-transform: uppercase;" data-tr="featured_catalog">📦 Featured PP Bags Catalog</h3>
             <div class="catalog-grid" id="liveCatalogGrid"></div>
         </div>
 
         <!-- CATALOG VIEW -->
         <div id="catalogView" style="display:none;">
-            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
-            <h2 style="font-size:22px; font-weight:900; margin-bottom:14px; color:#f97316;">Complete Bag Catalog</h2>
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
+            <h2 style="font-size:22px; font-weight:900; margin-bottom:14px; color:#f97316;" data-tr="complete_catalog">Complete Bag Catalog</h2>
             <div class="catalog-grid" id="fullCatalogGrid"></div>
         </div>
 
         <!-- ESTIMATOR VIEW (Super Simple Kilo to Bags Calculator) -->
         <div id="estimatorView" style="display:none;">
-            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel">
                 <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Simple Kilo to Bags Calculator</h3>
                 <p style="font-size:12px; color:#334155; margin-bottom:14px;">Jaaniye 1 किलो, 50 किलो या 100 किलो कपड़े में कितने बैग बनेंगे!</p>
@@ -437,9 +442,9 @@
 
         <!-- KHATA VIEW -->
         <div id="khataView" style="display:none;">
-            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel">
-                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📖 Wholesale Khata & Ledger</h3>
+                <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;" data-tr="wholesaler_khata">📖 Wholesale Khata & Ledger</h3>
                 <p style="font-size:12px; color:#334155; margin-bottom:12px;">Track distributor credits and advance payments.</p>
                 <label>Customer Name:</label>
                 <input type="text" id="khataName" placeholder="Ramesh Traders">
@@ -451,7 +456,7 @@
 
         <!-- TRACKER VIEW -->
         <div id="trackerView" style="display:none;">
-            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
+            <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel" style="text-align:center; padding:30px;">
                 <h3 style="color:#f97316; margin-bottom:10px;">🚚 Live Transport & Delivery Tracker</h3>
                 <p style="font-size:13px; color:#334155; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
@@ -487,9 +492,9 @@
                     <div class="admin-tile" style="grid-column: span 2;" onclick="switchAdminTab('settings')">⚙️ Bank & Settings</div>
                 </div>
 
-                <!-- 1. MULTI-GST BILL MAKER TAB (With Multi-Item Support) -->
+                <!-- 1. MULTI-GST BILL MAKER TAB (With Multi-Item & Advance Plus/Minus Support) -->
                 <div id="adminInvoiceTab" class="admin-sub-tab" style="margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker (Multi-Item Support)</h3>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker (Multi-Item & Advance)</h3>
                     
                     <label>Customer / Firm Name:</label>
                     <input type="text" id="invCust" placeholder="Deccan Agencies">
@@ -513,6 +518,9 @@
                             <tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet. Add items above.</td></tr>
                         </tbody>
                     </table>
+
+                    <label>Advance Amount Received (₹) [Minus]:</label>
+                    <input type="number" id="invAdvance" value="0" placeholder="0">
 
                     <label>GST Rate (%):</label>
                     <select id="invGst">
@@ -556,9 +564,9 @@
                     </table>
                 </div>
 
-                <!-- 5. ORDERS TAB -->
+                <!-- 5. ORDERS TAB (With Approve / Reject) -->
                 <div id="adminOrdersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Customer Orders</h3>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Customer Orders (Approve / Reject)</h3>
                     <table>
                         <thead><tr><th>Customer & Phone</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
                         <tbody id="adminOrdersTableBody">
@@ -717,41 +725,42 @@
 
     </div>
 
-    <!-- FULL SCREEN PRINTABLE INVOICE PREVIEW MODAL -->
+    <!-- FULL SCREEN STRICT SINGLE-PAGE PRINTABLE INVOICE PREVIEW MODAL -->
     <div id="invoicePreviewModal">
         <div class="invoice-paper" id="printableArea">
-            <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:10px; margin-bottom:12px;">
-                <h2 style="color:#0A1931; font-size:22px; font-weight:900;" id="invModalCompanyName">AS ENTERPRISES</h2>
-                <p style="font-size:12px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
-                <p style="font-size:11px; color:#777;" id="modalTimestamp">Date & Time: --</p>
+            <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:6px; margin-bottom:8px;">
+                <h2 style="color:#0A1931; font-size:18px; font-weight:900;" id="invModalCompanyName">AS ENTERPRISES</h2>
+                <p style="font-size:10px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
+                <p style="font-size:9px; color:#777;" id="modalTimestamp">Date & Time: --</p>
             </div>
-            <div style="font-size:13px; margin-bottom:14px; line-height:1.6;">
+            <div style="font-size:11px; margin-bottom:8px; line-height:1.4;">
                 <p><b>Customer:</b> <span id="mCustName">--</span></p>
                 <p><b>Phone:</b> <span id="mCustPhone">--</span></p>
             </div>
-            <table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:14px; color:#000;">
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:8px; color:#000;">
                 <thead>
                     <tr style="background:#f1f5f9; color:#000;">
-                        <th style="border:1px solid #ccc; padding:8px;">Item Description</th>
-                        <th style="border:1px solid #ccc; padding:8px;">Qty</th>
-                        <th style="border:1px solid #ccc; padding:8px;">Rate</th>
-                        <th style="border:1px solid #ccc; padding:8px;">Total</th>
+                        <th style="border:1px solid #ccc; padding:4px;">Item Description</th>
+                        <th style="border:1px solid #ccc; padding:4px;">Qty</th>
+                        <th style="border:1px solid #ccc; padding:4px;">Rate</th>
+                        <th style="border:1px solid #ccc; padding:4px;">Total</th>
                     </tr>
                 </thead>
                 <tbody id="modalItemsTableBody">
                     <!-- Injected multi items -->
                 </tbody>
             </table>
-            <div style="text-align:right; font-size:13px; margin-bottom:14px; line-height:1.5;">
+            <div style="text-align:right; font-size:11px; margin-bottom:8px; line-height:1.4;">
                 <p>Subtotal: <span id="mSubtotal">₹0</span></p>
                 <p>GST (<span id="mGstPercent">5</span>%): <span id="mTaxAmount">₹0</span></p>
-                <p style="font-size:15px; font-weight:bold; color:#0A1931;">Grand Total: <span id="mGrandTotal">₹0</span></p>
+                <p>Advance Paid (-): <span id="mAdvanceAmount" style="color:#dc2626; font-weight:bold;">₹0</span></p>
+                <p style="font-size:13px; font-weight:bold; color:#0A1931;">Grand Total Payable: <span id="mGrandTotal">₹0</span></p>
             </div>
-            <div style="text-align:center; margin-bottom:14px;">
-                <img id="mQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:110px; height:110px;">
-                <p style="font-size:11px; font-weight:bold; color:#333; margin-top:4px;" id="mUpiText">Scan & Pay via UPI (9030574216@upi)</p>
+            <div style="text-align:center; margin-bottom:8px;">
+                <img id="mQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:80px; height:80px;">
+                <p style="font-size:9px; font-weight:bold; color:#333; margin-top:2px;" id="mUpiText">Scan & Pay via UPI (9030574216@upi)</p>
             </div>
-            <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:8px; margin-bottom:16px;">
+            <div style="font-size:9px; color:#555; border-top:1px dashed #ccc; padding-top:4px; margin-bottom:6px;">
                 <p id="mBankText"><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
                 <p><b>Support:</b> 6301456725</p>
             </div>
@@ -809,6 +818,79 @@
         let uploadedImageBase64 = "";
         let globalCurrentInvoiceData = null;
 
+        // Translation Dictionary (EN, HI, TE)
+        const tr = {
+            EN: {
+                brand_sub: "PP Woven Bags Hub",
+                admin_btn: "⚙️ Admin",
+                ticker_text: "★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★",
+                hero_tag: "⚡ Industrial Packaging Hub",
+                hero_title: "Industrial PP Bags.<br><span>Direct Wholesale.</span>",
+                hero_desc: "Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags, and Custom Printed Packaging.",
+                btn_catalog: "Browse PP Bags & Rates →",
+                btn_calc: "Calculate Bag Requirements 🧮",
+                nav_delivery: "Delivery",
+                nav_khata: "Khata",
+                nav_catalog: "Catalog",
+                nav_estimate: "Estimate",
+                featured_catalog: "📦 Featured PP Bags Catalog",
+                back_home: "← Back to Home",
+                complete_catalog: "Complete Bag Catalog",
+                wholesaler_khata: "📖 Wholesale Khata & Ledger"
+            },
+            HI: {
+                brand_sub: "पीपी वोवेन बैग्स हब",
+                admin_btn: "⚙️ एडमिन",
+                ticker_text: "★ हैदराबाद में उसी दिन डिलीवरी • थोक रेट • भारी शुल्क पीपी वोवेन बैग • यूपीआई: 9030574216 ★",
+                hero_tag: "⚡ औद्योगिक पैकेजिंग हब",
+                hero_title: "औद्योगिक पीपी बैग।<br><span>प्रत्यक्ष थोक मूल्य।</span>",
+                hero_desc: "भारी शुल्क पीपी वोवेन बैग, लैमिनेटेड बैग और कस्टम प्रिंटेड पैकेजिंग का प्रत्यक्ष थोक निर्माण और आपूर्ति।",
+                btn_catalog: "पीपी बैग और रेट देखें →",
+                btn_calc: "बैग की आवश्यकता गणना करें 🧮",
+                nav_delivery: "डिलिवरी",
+                nav_khata: "खाता",
+                nav_catalog: "कैटलॉग",
+                nav_estimate: "स्टीमेट",
+                featured_catalog: "📦 प्रमुख पीपी बैग कैटलॉग",
+                back_home: "← होम पर वापस जाएं",
+                complete_catalog: "पूर्ण बैग कैटलॉग",
+                wholesaler_khata: "📖 थोक खाता और लेजर"
+            },
+            TE: {
+                brand_sub: "PP వೋವೆನ್ బ్యాగ్స్ హబ్",
+                admin_btn: "⚙️ అడ్మిన్",
+                ticker_text: "★ హైదరాబాద్ అంతటా అదే రోజు డెలివరీ • హోల్‌సేల్ ధరలు • హెవీ డ్యూటీ PP వోవెన్ బ్యాగ్స్ • UPI: 9030574216 ★",
+                hero_tag: "⚡ ఇండస్ట్రియల్ ప్యాకేజింగ్ హబ్",
+                hero_title: "ఇండస్ట్రియల్ PP బ్యాగ్స్.<br><span>డైరెక్ట్ హోల్‌సేల్.</span>",
+                hero_desc: "హెవీ డ్యూటీ PP వోవెన్ బ్యాగ్స్, లామినేటెడ్ బ్యాగ్స్ మరియు కస్టమ్ ప్రింటెడ్ ప్యాకేజింగ్ యొక్క ప్రత్యక్ష హోల్‌సేల్ తయారీ మరియు సరఫరా.",
+                btn_catalog: "PP బ్యాగ్స్ & రేట్లు చూడండి →",
+                btn_calc: "బ్యాగ్ అవసరాన్ని లెక్కించండి 🧮",
+                nav_delivery: "డెలివరీ",
+                nav_khata: "ఖాతా",
+                nav_catalog: "క్యాటలాగ్",
+                nav_estimate: "అంచనా",
+                featured_catalog: "📦 ఫీచర్డ్ PP బ్యాగ్స్ క్యాటలాగ్",
+                back_home: "← హోమ్‌కి వెళ్లండి",
+                complete_catalog: "పూర్తి బ్యాగ్ క్యాటలాగ్",
+                wholesaler_khata: "📖 హోల్‌సేల్ ఖాతా & లెడ్జర్"
+            }
+        };
+
+        function setLang(lang) {
+            currentLang = lang;
+            let dict = tr[lang];
+            document.querySelectorAll('[data-tr]').forEach(el => {
+                let key = el.getAttribute('data-tr');
+                if(dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+            document.getElementById('lbl-s').innerText = dict.nav_delivery;
+            document.getElementById('lbl-w').innerText = dict.nav_khata;
+            document.getElementById('lbl-g').innerText = dict.nav_catalog;
+            document.getElementById('lbl-f').innerText = dict.nav_estimate;
+        }
+
         // Load Bank Config from LocalStorage
         let bankConfig = JSON.parse(localStorage.getItem('as_bank_config')) || {
             companyName: "AS ENTERPRISES",
@@ -845,20 +927,6 @@
             document.getElementById('headerCompanyName').innerText = bankConfig.companyName;
             updateQrPreviews();
             alert("Bank & Company Settings Saved Successfully!");
-        }
-
-        const tDict = {
-            EN: { s: "Delivery", w: "Khata", g: "Catalog", f: "Estimate" },
-            HI: { s: "डिलिवरी", w: "खाता", g: "कैटलॉग", f: "स्टीमेट" },
-            TE: { s: "డెలివరీ", w: "ఖాతా", g: "క్యాటలాగ్", f: "అంచనా" }
-        };
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.getElementById('lbl-s').innerText = tDict[lang].s;
-            document.getElementById('lbl-w').innerText = tDict[lang].w;
-            document.getElementById('lbl-g').innerText = tDict[lang].g;
-            document.getElementById('lbl-f').innerText = tDict[lang].f;
         }
 
         function switchView(viewName) {
@@ -948,6 +1016,17 @@
                 } catch(e) {
                     alert('Error deleting record: ' + e.message);
                 }
+            }
+        }
+
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_orders", orderId), {
+                    status: newStatus
+                });
+                alert("Order status updated to: " + newStatus);
+            } catch(e) {
+                alert("Error updating order status: " + e.message);
             }
         }
 
@@ -1065,6 +1144,7 @@
             let cust = document.getElementById('invCust').value;
             let phone = document.getElementById('invPhone').value;
             let gst = Number(document.getElementById('invGst').value);
+            let advance = Number(document.getElementById('invAdvance').value) || 0;
 
             if(!cust || !phone || billMultiItems.length === 0) {
                 alert('Kripya Customer name, phone aur kam se kam ek item zaroor add karein!');
@@ -1073,10 +1153,11 @@
 
             let subtotal = billMultiItems.reduce((s, i) => s + i.amount, 0);
             let tax = subtotal * (gst / 100);
-            let total = subtotal + tax;
+            let totalBeforeAdvance = subtotal + tax;
+            let total = totalBeforeAdvance - advance;
             let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
-            globalCurrentInvoiceData = { cust, phone, items: [...billMultiItems], subtotal, gst, tax, total, nowStr };
+            globalCurrentInvoiceData = { cust, phone, items: [...billMultiItems], subtotal, gst, tax, advance, total, nowStr };
 
             // Fill Modal
             document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
@@ -1088,10 +1169,10 @@
             billMultiItems.forEach(i => {
                 tbodyHtml += `
                     <tr>
-                        <td style="border:1px solid #ccc; padding:8px;">${i.desc}</td>
-                        <td style="border:1px solid #ccc; padding:8px;">${i.qty} pcs</td>
-                        <td style="border:1px solid #ccc; padding:8px;">₹${i.rate}</td>
-                        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;">₹${i.amount.toLocaleString('en-IN')}</td>
+                        <td style="border:1px solid #ccc; padding:6px;">${i.desc}</td>
+                        <td style="border:1px solid #ccc; padding:6px;">${i.qty} pcs</td>
+                        <td style="border:1px solid #ccc; padding:6px;">₹${i.rate}</td>
+                        <td style="border:1px solid #ccc; padding:6px; font-weight:bold;">₹${i.amount.toLocaleString('en-IN')}</td>
                     </tr>
                 `;
             });
@@ -1099,9 +1180,10 @@
             document.getElementById('mSubtotal').innerText = "₹" + subtotal.toLocaleString('en-IN');
             document.getElementById('mGstPercent').innerText = gst;
             document.getElementById('mTaxAmount').innerText = "₹" + tax.toFixed(2);
+            document.getElementById('mAdvanceAmount').innerText = "- ₹" + advance.toLocaleString('en-IN');
             document.getElementById('mGrandTotal').innerText = "₹" + total.toLocaleString('en-IN');
             
-            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=${bankConfig.upi}&pn=AS%20Enterprises`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=${bankConfig.upi}&pn=AS%20Enterprises`;
             document.getElementById('mQrImg').src = qrUrl;
             document.getElementById('mUpiText').innerText = "Scan & Pay via UPI (" + bankConfig.upi + ")";
             document.getElementById('mBankText').innerHTML = `<b>Bank:</b> ${bankConfig.bankName} | A/C: ${bankConfig.accountNo} | IFSC: ${bankConfig.ifsc}`;
@@ -1136,7 +1218,7 @@
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
             let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('%0A');
-            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST (${d.gst}%):* ₹${d.tax.toFixed(2)}%0A*💰 Grand Total:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
+            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST (${d.gst}%):* ₹${d.tax.toFixed(2)}%0A*Advance Paid (-):* ₹${d.advance}%0A*💰 Grand Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
             window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
         }
 
