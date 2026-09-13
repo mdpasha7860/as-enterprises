@@ -104,12 +104,11 @@
         #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 4000; overflow-y: auto; padding: 10px; }
         .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
-        /* Print fix: Print ONLY printableArea cleanly */
+        /* PERFECT PRINT / PDF FIX: Hide everything except printableArea */
         @media print {
-            body * { visibility: hidden; }
-            #invoicePreviewModal, #invoicePreviewModal * { visibility: visible; }
-            #invoicePreviewModal { position: absolute; left: 0; top: 0; width: 100%; height: auto; background: white; padding: 0; }
-            .invoice-paper { box-shadow: none; margin: 0; max-width: 100%; }
+            body * { visibility: hidden !important; }
+            #printableArea, #printableArea * { visibility: visible !important; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 10px; background: #ffffff !important; }
             .no-print { display: none !important; }
         }
     </style>
@@ -355,7 +354,7 @@
 </head>
 <body>
 
-    <header>
+    <header class="no-print">
         <div class="logo-group" onclick="switchView('home')">
             <div class="logo-badge">AS</div>
             <div>
@@ -373,7 +372,7 @@
     </header>
 
     <!-- Gold Ticker -->
-    <div class="ticker-frame">
+    <div class="ticker-frame no-print">
         <div class="ticker-content" id="t-tick">
             ★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★
         </div>
@@ -419,7 +418,7 @@
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel">
                 <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Simple Kilo to Bags Calculator</h3>
-                <p style="font-size:12px; color:#cbd5e1; margin-bottom:14px;">Jaaniye 1 किलो, 50 किलो या 100 किलो कपड़े में कितने बैग बनेंगे!</p>
+                <p style="font-size:12px; color:#334155; margin-bottom:14px;">Jaaniye 1 किलो, 50 किलो या 100 किलो कपड़े में कितने बैग बनेंगे!</p>
                 
                 <label>Bag Length (inch):</label>
                 <input type="number" id="estLen" placeholder="36">
@@ -432,7 +431,7 @@
                 
                 <button class="primary-btn" onclick="calculateBagsSimple()">Calculate Bags per Kg / 50Kg / 100Kg</button>
                 
-                <div id="estResult" style="margin-top:14px; font-weight:800; color:#34d399; font-size:14px; line-height:1.6; background:#0c0c0e; padding:12px; border-radius:8px;"></div>
+                <div id="estResult" style="margin-top:14px; font-weight:800; color:#047857; font-size:14px; line-height:1.6; background:#f1f5f9; padding:12px; border-radius:8px;"></div>
             </div>
         </div>
 
@@ -441,7 +440,7 @@
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel">
                 <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📖 Wholesale Khata & Ledger</h3>
-                <p style="font-size:12px; color:#cbd5e1; margin-bottom:12px;">Track distributor credits and advance payments.</p>
+                <p style="font-size:12px; color:#334155; margin-bottom:12px;">Track distributor credits and advance payments.</p>
                 <label>Customer Name:</label>
                 <input type="text" id="khataName" placeholder="Ramesh Traders">
                 <label>Amount (₹):</label>
@@ -455,8 +454,8 @@
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Back to Home</button>
             <div class="form-panel" style="text-align:center; padding:30px;">
                 <h3 style="color:#f97316; margin-bottom:10px;">🚚 Live Transport & Delivery Tracker</h3>
-                <p style="font-size:13px; color:#cbd5e1; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
-                <div style="background:#0c0c0e; padding:16px; border-radius:8px; font-weight:900; color:#34d399;">Status: Out for Delivery (ETA 2 Hours)</div>
+                <p style="font-size:13px; color:#334155; margin-bottom:16px;">Your dispatch truck is en route across Hyderabad.</p>
+                <div style="background:#f1f5f9; padding:16px; border-radius:8px; font-weight:900; color:#047857;">Status: Out for Delivery (ETA 2 Hours)</div>
             </div>
         </div>
 
@@ -719,7 +718,7 @@
     </div>
 
     <!-- FULL SCREEN PRINTABLE INVOICE PREVIEW MODAL -->
-    <div id="invoicePreviewModal" class="no-print">
+    <div id="invoicePreviewModal">
         <div class="invoice-paper" id="printableArea">
             <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:10px; margin-bottom:12px;">
                 <h2 style="color:#0A1931; font-size:22px; font-weight:900;" id="invModalCompanyName">AS ENTERPRISES</h2>
@@ -757,7 +756,7 @@
                 <p><b>Support:</b> 6301456725</p>
             </div>
         </div>
-        <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;">
+        <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;" class="no-print">
             <button class="primary-btn" onclick="printInvoiceClean()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
             <button class="primary-btn" onclick="sendInvoiceToWhatsApp()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
@@ -1025,7 +1024,7 @@
                     • 1 Kg kapde mein: <b>~${bagsPerKg} pcs</b> bag banenge<br>
                     • 50 Kg kapde mein: <b>~${bagsPer50Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
                     • 100 Kg kapde mein: <b>~${bagsPer100Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
-                    <small style="color:#cbd5e1;">(Har ek bag ka vajan lagbhag ${weightPerBagGrams.toFixed(1)} gram hoga)</small>
+                    <small style="color:#334155;">(Har ek bag ka vajan lagbhag ${weightPerBagGrams.toFixed(1)} gram hoga)</small>
                 `;
             } else {
                 alert('Kripya Length, Width aur GSM sahi se bharein!');
