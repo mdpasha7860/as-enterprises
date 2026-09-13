@@ -10,7 +10,7 @@
         
         header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
         .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 6px; font-size: 16px; }
+        .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 8px; font-size: 16px; }
         .brand-name { font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
         .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
@@ -25,32 +25,32 @@
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 26s linear infinite; }
         @keyframes scrollTicker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
-        .main-wrapper { padding: 16px; max-width: 600px; width: 100%; margin: 0 auto; }
+        .main-wrapper { padding: 16px; max-width: 100%; width: 100%; margin: 0 auto; }
         
-        /* Modern Smart White Hero Banner */
-        .hero-card { background: #ffffff; color: #0f172a; padding: 26px 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        /* Modern Smart Full Width White Hero Banner */
+        .hero-card { background: #ffffff; color: #0f172a; padding: 30px 24px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); width: 100%; }
         .hero-tag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
-        .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
+        .hero-card h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
         .hero-card h1 span { color: #f97316; }
-        .hero-card p { font-size: 13.5px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
+        .hero-card p { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.4; font-weight: 500; }
         
         .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.4); }
         .secondary-btn { background: #16161c; color: #fff; border: 1px solid #2a2a35; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
         .hero-card .secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
 
         /* Quick Action Cards Grid */
-        .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; width: 100%; }
         .card-tile { background: #16161c; border: 1px solid #2a2a35; padding: 12px 8px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
         .card-tile:hover { border-color: #f97316; transform: translateY(-2px); }
         .card-tile div:first-child { font-size: 20px; margin-bottom: 4px; }
         .card-tile div:last-child { font-size: 11px; font-weight: 800; color: #cbd5e1; }
 
         /* Search Bar */
-        .search-box { background: #fff; border: 2px solid #08080a; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .search-box { background: #fff; border: 2px solid #08080a; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 100%; }
         .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 700; color: #08080a; background: transparent; }
 
         /* Catalog Grid */
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
         .item-card { background: #0c0c0e; border: 1px solid #1c1c22; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
         .item-img { height: 120px; background: #16161c; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
         .item-img img { width: 100%; height: 100%; object-fit: cover; }
@@ -79,22 +79,22 @@
         .float-btn { background: #059669; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .float-btn.wa { background: #25d366; }
 
-        .form-panel { background: #16161c; padding: 16px; border-radius: 12px; border: 1px solid #2a2a35; margin-bottom: 14px; }
+        .form-panel { background: #16161c; padding: 20px; border-radius: 16px; border: 1px solid #2a2a35; margin-bottom: 14px; width: 100%; }
         .form-panel label { font-size: 12px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 6px; text-transform: uppercase; }
-        .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 700; outline: none; }
+        .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #0c0c0e; border: 1px solid #2a2a35; color: #fff; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
         
-        /* Admin Grid Dashboard Buttons */
-        .admin-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-        .admin-tile { background: #1f1f28; border: 1px solid #3f3f4e; padding: 12px; border-radius: 8px; text-align: center; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; }
-        .admin-tile:hover { border-color: #f97316; background: #2a2a38; }
+        /* Admin Rounded Pill Grid Dashboard Buttons */
+        .admin-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
+        .admin-tile { background: linear-gradient(135deg, #1f1f28 0%, #16161c 100%); border: 1px solid #3f3f4e; padding: 14px 12px; border-radius: 999px; text-align: center; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .admin-tile:hover { border-color: #f97316; background: #2a2a38; transform: translateY(-2px); }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
         th, td { border: 1px solid #2a2a35; padding: 8px; text-align: left; }
         th { background: #16161c; color: #f97316; font-weight: 900; }
 
-        /* Printable Invoice Modal */
-        #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; overflow-y: auto; padding: 20px; }
-        .invoice-paper { background: #ffffff; color: #000000; max-width: 500px; margin: 20px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* Full Screen Printable Invoice Modal */
+        #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 4000; overflow-y: auto; padding: 10px; }
+        .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 
     <!-- Firebase SDK & Live Cloud Synchronization -->
@@ -131,156 +131,140 @@
 
         window.appCart = [];
 
-        // Real-time Catalog & Inventory Sync
+        // Real-time Catalog & Inventory Sync with Delete & Edit Support
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogGrid');
             let fullContainer = document.getElementById('fullCatalogGrid');
             let inventoryContainer = document.getElementById('inventoryTableBody');
             
-            let defaultProducts = [
-                { id: 1, name: "PP Woven Bag 50kg (Standard)", brand: "AS HeavyDuty", size: "24 x 36 inch", gsm: "70 GSM", price: 14.50, stock: 10000, img: "" },
-                { id: 2, name: "PP Rice Bag 26x38 (Printed)", brand: "AgroLine", size: "26 x 38 inch", gsm: "80 GSM", price: 16.00, stock: 8000, img: "" },
-                { id: 3, name: "Laminated PP Bag 50kg (Glossy)", brand: "Shree Pack", size: "24 x 40 inch", gsm: "90 GSM", price: 19.50, stock: 5000, img: "" },
-                { id: 4, name: "HDPE Fertilizer Bag", brand: "Kisan", size: "22 x 35 inch", gsm: "75 GSM", price: 18.00, stock: 6000, img: "" }
-            ];
-
-            let allProds = defaultProducts;
-            if(snapshot.docs.length > 0) {
-                snapshot.forEach(docSnap => {
-                    allProds.push({ id: docSnap.id, ...docSnap.data() });
-                });
-            }
-
             let html = '';
             let invHtml = '';
-            allProds.forEach(p => {
+
+            snapshot.forEach(docSnap => {
+                let p = { id: docSnap.id, ...docSnap.data() };
+                let typeBadge = p.printType ? `[${p.printType}]` : '[Standard]';
+                
                 html += `
                     <div class="item-card">
                         <div class="item-img">
                             ${p.img ? `<img src="${p.img}" alt="bag">` : '<span>PP Woven Bag</span>'}
                         </div>
                         <div class="item-body">
-                            <div class="item-tag">${p.brand || 'AS HeavyDuty'}</div>
+                            <div class="item-tag">${p.brand || 'AS HeavyDuty'} ${typeBadge}</div>
                             <div class="item-title">${p.name}</div>
                             <div class="item-specs">📏 ${p.size || 'Standard'} | ⚖️ ${p.gsm || '70 GSM'}</div>
                             <div class="item-price">₹${p.price} <span>/ pc</span></div>
-                            <button class="buy-btn" onclick="addToAppCart('${p.name}', ${p.price})">+ Add to Cart</button>
+                            <button class="buy-btn" onclick="addToAppCart('${p.name} (${typeBadge})', ${p.price})">+ Add to Cart</button>
                         </div>
                     </div>
                 `;
+
                 invHtml += `
                     <tr>
-                        <td><b>${p.name}</b><br><small>${p.brand || 'AS'}</small></td>
-                        <td>${p.size || '-'} / ${p.gsm || '-'}</td>
-                        <td>₹${p.price}</td>
+                        <td><b>${p.name}</b><br><small>${p.brand || 'AS'} | ${typeBadge}</small></td>
+                        <td>${p.size || '-'} / ${p.gsm || '-'}<br><b>₹${p.price}</b></td>
                         <td>${p.stock || 5000} pcs</td>
+                        <td>
+                            <button style="background:#2563eb; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="editProduct('${p.id}', '${p.name}', ${p.price})">Edit</button>
+                            <button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_products', '${p.id}')">Delete</button>
+                        </td>
                     </tr>
                 `;
             });
-            if(container) container.innerHTML = html;
-            if(fullContainer) fullContainer.innerHTML = html;
-            if(inventoryContainer) inventoryContainer.innerHTML = invHtml;
+
+            if(container) container.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
+            if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#94a3b8;">No items in catalog.</p>';
+            if(inventoryContainer) inventoryContainer.innerHTML = invHtml || '<tr><td colspan="4" style="text-align:center;">No inventory found.</td></tr>';
         });
 
-        // Real-time Manufacturers List Sync
+        // Real-time Manufacturers List Sync with Delete Support
         onSnapshot(window.colManufacturers, (snapshot) => {
             let container = document.getElementById('manufacturerTableBody');
             let selectDropdown = document.getElementById('newBagBrand');
             if(container) {
                 let html = '';
                 let selectHtml = `<option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>`;
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No manufacturers added yet.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let m = docSnap.data();
-                        html += `
-                            <tr>
-                                <td><b>${m.name}</b></td>
-                                <td>📞 ${m.phone}</td>
-                                <td>📍 ${m.address}</td>
-                                <td><span style="color:#34d399;">Active</span></td>
-                            </tr>
-                        `;
-                        selectHtml += `<option value="${m.name}">${m.name} (Manufacturer)</option>`;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let m = { id: docSnap.id, ...docSnap.data() };
+                    html += `
+                        <tr>
+                            <td><b>${m.name}</b></td>
+                            <td>📞 ${m.phone}</td>
+                            <td>📍 ${m.address}</td>
+                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_manufacturers_directory', '${m.id}')">Delete</button></td>
+                        </tr>
+                    `;
+                    selectHtml += `<option value="${m.name}">${m.name} (Manufacturer)</option>`;
+                });
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No manufacturers added.</td></tr>';
                 if(selectDropdown) selectDropdown.innerHTML = selectHtml;
             }
         });
 
-        // Real-time Customers Directory Sync
+        // Real-time Customers Directory Sync with Delete Support
         onSnapshot(window.colCustomers, (snapshot) => {
             let container = document.getElementById('customersTableBody');
             if(container) {
                 let html = '';
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No customers registered in directory.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let c = docSnap.data();
-                        html += `
-                            <tr>
-                                <td><b>${c.name}</b></td>
-                                <td>📞 ${c.phone}</td>
-                                <td>📍 ${c.address}</td>
-                            </tr>
-                        `;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let c = { id: docSnap.id, ...docSnap.data() };
+                    html += `
+                        <tr>
+                            <td><b>${c.name}</b></td>
+                            <td>📞 ${c.phone}</td>
+                            <td>📍 ${c.address}</td>
+                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_customers_directory', '${c.id}')">Delete</button></td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No customers found.</td></tr>';
             }
         });
 
-        // Real-time Orders Sync
+        // Real-time Orders Sync with Delete Support
         onSnapshot(window.colOrders, (snapshot) => {
             let container = document.getElementById('adminOrdersTableBody');
             if(container) {
                 let html = '';
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No new orders found.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let ord = docSnap.data();
-                        html += `
-                            <tr>
-                                <td><b>${ord.name}</b><br><small>📞 ${ord.phone}</small></td>
-                                <td>${ord.itemsSummary}</td>
-                                <td>₹${ord.total}</td>
-                                <td><span style="color:#fb923c;">${ord.status || 'Pending'}</span></td>
-                                <td>
-                                    <button style="background:#2563eb; color:#fff; border:none; padding:6px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button>
-                                </td>
-                            </tr>
-                        `;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let ord = { id: docSnap.id, ...docSnap.data() };
+                    html += `
+                        <tr>
+                            <td><b>${ord.name}</b><br><small>📞 ${ord.phone}</small></td>
+                            <td>${ord.itemsSummary}</td>
+                            <td>₹${ord.total}</td>
+                            <td><span style="color:#fb923c;">${ord.status || 'Pending'}</span></td>
+                            <td>
+                                <button style="background:#2563eb; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button>
+                                <button style="background:#dc2626; color:#fff; border:none; padding:5px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No new orders found.</td></tr>';
             }
         });
 
-        // Real-time Saved Invoices Sync
+        // Real-time Saved Invoices Sync with Delete Support
         onSnapshot(window.colInvoices, (snapshot) => {
             let container = document.getElementById('savedInvoicesTableBody');
             if(container) {
                 let html = '';
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No saved invoices yet.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let inv = docSnap.data();
-                        html += `
-                            <tr>
-                                <td><b>${inv.customer}</b><br><small>📞 ${inv.phone}</small></td>
-                                <td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td>
-                                <td>₹${inv.totalAmount}</td>
-                                <td style="color:#34d399; font-weight:bold;">Generated</td>
-                            </tr>
-                        `;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let inv = { id: docSnap.id, ...docSnap.data() };
+                    html += `
+                        <tr>
+                            <td><b>${inv.customer}</b><br><small>📞 ${inv.phone}</small></td>
+                            <td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td>
+                            <td>₹${inv.totalAmount}</td>
+                            <td>
+                                <span style="color:#34d399; font-weight:bold;">Saved</span><br>
+                                <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:4px;" onclick="deleteRecord('as_enterprises_saved_invoices', '${inv.id}')">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No saved invoices yet.</td></tr>';
             }
         });
 
@@ -291,22 +275,18 @@
             if(container) {
                 let html = '';
                 let totalKhata = 0;
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No worker khata records.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let k = docSnap.data();
-                        totalKhata += Number(k.amount || 0);
-                        html += `
-                            <tr>
-                                <td><b>${k.workerName}</b></td>
-                                <td>₹${k.amount}</td>
-                                <td>${k.note || 'Advance / Wages'}</td>
-                            </tr>
-                        `;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let k = { id: docSnap.id, ...docSnap.data() };
+                    totalKhata += Number(k.amount || 0);
+                    html += `
+                        <tr>
+                            <td><b>${k.workerName}</b></td>
+                            <td>₹${k.amount}</td>
+                            <td>${k.note || 'Advance'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_worker_khata', '${k.id}')">✕</button></td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="3" style="text-align:center;">No records.</td></tr>';
                 if(sumBox) sumBox.innerText = `Total Outstanding / Advanced: ₹${totalKhata.toLocaleString('en-IN')}`;
             }
         });
@@ -318,22 +298,18 @@
             if(container) {
                 let html = '';
                 let totalExp = 0;
-                if(snapshot.docs.length === 0) {
-                    html = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No expenses recorded.</td></tr>`;
-                } else {
-                    snapshot.forEach(docSnap => {
-                        let e = docSnap.data();
-                        totalExp += Number(e.amount || 0);
-                        html += `
-                            <tr>
-                                <td><b>${e.title}</b></td>
-                                <td>₹${e.amount}</td>
-                                <td>${e.category || 'General'}</td>
-                            </tr>
-                        `;
-                    });
-                }
-                container.innerHTML = html;
+                snapshot.forEach(docSnap => {
+                    let e = { id: docSnap.id, ...docSnap.data() };
+                    totalExp += Number(e.amount || 0);
+                    html += `
+                        <tr>
+                            <td><b>${e.title}</b></td>
+                            <td>₹${e.amount}</td>
+                            <td>${e.category || 'General'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_expenses', '${e.id}')">✕</button></td>
+                        </tr>
+                    `;
+                });
+                container.innerHTML = html || '<tr><td colspan="3" style="text-align:center;">No expenses.</td></tr>';
                 if(sumBox) sumBox.innerText = `Total Expenses: ₹${totalExp.toLocaleString('en-IN')}`;
             }
         });
@@ -367,7 +343,7 @@
 
     <div class="main-wrapper">
         
-        <!-- HOME VIEW (Smart Clean White Hero Banner) -->
+        <!-- HOME VIEW -->
         <div id="homeView">
             <div class="hero-card">
                 <div class="hero-tag">⚡ Industrial Packaging Hub</div>
@@ -452,7 +428,7 @@
 
                 <button class="primary-btn" style="background:#16a34a; margin-bottom:14px;" onclick="window.open('https://wa.me/916301456725?text=Rate%20Sheet%20Request', '_blank')">📋 Share Rate Sheet</button>
 
-                <!-- Admin Tile Grid -->
+                <!-- Admin Rounded Pill Grid Tiles -->
                 <div class="admin-grid-dash">
                     <div class="admin-tile" onclick="switchAdminTab('invoice')">📄 Multi-GST Bill Maker</div>
                     <div class="admin-tile" onclick="switchAdminTab('savedInvoices')">📁 Saved Invoices & Reports</div>
@@ -487,14 +463,14 @@
                         <option value="12">12% GST</option>
                         <option value="18">18% GST</option>
                     </select>
-                    <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Invoice, PDF & WhatsApp</button>
+                    <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Full Screen Invoice, PDF & WhatsApp</button>
                 </div>
 
                 <!-- 2. SAVED INVOICES TAB -->
                 <div id="adminSavedInvoicesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Saved Invoices & Reports</h3>
                     <table>
-                        <thead><tr><th>Customer</th><th>Details & Time</th><th>Total</th><th>Status</th></tr></thead>
+                        <thead><tr><th>Customer</th><th>Details & Time</th><th>Total</th><th>Action</th></tr></thead>
                         <tbody id="savedInvoicesTableBody">
                             <tr><td colspan="4" style="text-align:center; color:#94a3b8;">Loading...</td></tr>
                         </tbody>
@@ -513,9 +489,9 @@
 
                 <!-- 4. INVENTORY & PHOTOS TAB -->
                 <div id="adminInventoryTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Live Inventory & Photos</h3>
+                    <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Live Inventory & Photos (Edit/Delete)</h3>
                     <table>
-                        <thead><tr><th>Item Name</th><th>Size / GSM</th><th>Price/pc</th><th>Stock</th></tr></thead>
+                        <thead><tr><th>Item</th><th>Size/GSM/Rate</th><th>Stock</th><th>Action</th></tr></thead>
                         <tbody id="inventoryTableBody">
                             <tr><td colspan="4" style="text-align:center;">Loading inventory...</td></tr>
                         </tbody>
@@ -558,7 +534,7 @@
                     </table>
                 </div>
 
-                <!-- 8. CUSTOMERS DIRECTORY TAB (Private Admin Only) -->
+                <!-- 8. CUSTOMERS DIRECTORY TAB -->
                 <div id="adminCustomersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Private Customers Directory</h3>
                     <p style="font-size:11px; color:#94a3b8; margin-bottom:10px;">(Yeh list sirf Admin panel mein dikhegi, customer screen par nahi)</p>
@@ -568,14 +544,14 @@
                     <input type="tel" id="dirCustPhone" placeholder="9848011223">
                     <label>Complete Address:</label>
                     <textarea id="dirCustAddress" placeholder="Grain Market, Hyderabad" style="width:100%; padding:10px; background:#0c0c0e; border:1px solid #2a2a35; color:#fff; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
-                    <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer to Private Directory</button>
+                    <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer to Directory</button>
                     <table>
-                        <thead><tr><th>Customer Name</th><th>Phone</th><th>Address</th></tr></thead>
-                        <tbody id="customersTableBody"><tr><td colspan="3" style="text-align:center;">Loading directory...</td></tr></tbody>
+                        <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
+                        <tbody id="customersTableBody"><tr><td colspan="4" style="text-align:center;">Loading directory...</td></tr></tbody>
                     </table>
                 </div>
 
-                <!-- 9. MANUFACTURERS TAB (Private Admin Only) -->
+                <!-- 9. MANUFACTURERS TAB -->
                 <div id="adminManufacturersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Manufacturers Directory</h3>
                     <label>Manufacturer / Mill Name:</label>
@@ -586,7 +562,7 @@
                     <textarea id="mfgAddress" placeholder="Industrial Area, Phase-2, Hyderabad" style="width:100%; padding:10px; background:#0c0c0e; border:1px solid #2a2a35; color:#fff; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
                     <button class="primary-btn" onclick="saveManufacturerData()">+ Save Manufacturer</button>
                     <table>
-                        <thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Status</th></tr></thead>
+                        <thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
                         <tbody id="manufacturerTableBody"><tr><td colspan="4" style="text-align:center;">Loading manufacturers...</td></tr></tbody>
                     </table>
                 </div>
@@ -606,12 +582,18 @@
                     </table>
                 </div>
 
-                <!-- 11. ADD ITEM TAB (Connected with Manufacturer List) -->
+                <!-- 11. ADD ITEM TAB (With Printed / Non-Printed Option) -->
                 <div id="adminAddItemTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#f97316; font-size:15px; margin-bottom:10px;">Add New Bag to Cloud Catalog</h3>
                     <label>New Bag Name:</label>
                     <input type="text" id="newBagName" placeholder="PP Woven Bag 25kg">
                     
+                    <label>Print Type:</label>
+                    <select id="newBagPrintType">
+                        <option value="Printed">Printed</option>
+                        <option value="Non-Printed">Non-Printed</option>
+                    </select>
+
                     <label>Select Manufacturer / Brand:</label>
                     <select id="newBagBrand">
                         <option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>
@@ -653,47 +635,47 @@
 
     </div>
 
-    <!-- PRINTABLE INVOICE PREVIEW MODAL -->
+    <!-- FULL SCREEN PRINTABLE INVOICE PREVIEW MODAL -->
     <div id="invoicePreviewModal">
         <div class="invoice-paper" id="printableArea">
             <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:10px; margin-bottom:12px;">
-                <h2 style="color:#0A1931; font-size:20px; font-weight:900;">AS ENTERPRISES</h2>
-                <p style="font-size:11px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
-                <p style="font-size:10px; color:#777;" id="modalTimestamp">Date & Time: --</p>
+                <h2 style="color:#0A1931; font-size:22px; font-weight:900;">AS ENTERPRISES</h2>
+                <p style="font-size:12px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
+                <p style="font-size:11px; color:#777;" id="modalTimestamp">Date & Time: --</p>
             </div>
-            <div style="font-size:12px; margin-bottom:12px; line-height:1.5;">
+            <div style="font-size:13px; margin-bottom:14px; line-height:1.6;">
                 <p><b>Customer:</b> <span id="mCustName">--</span></p>
                 <p><b>Phone:</b> <span id="mCustPhone">--</span></p>
                 <p><b>Requirement:</b> <span id="mBagDesc">--</span></p>
             </div>
-            <table style="width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px;">
+            <table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:14px;">
                 <thead>
                     <tr style="background:#f1f5f9; color:#000;">
-                        <th style="border:1px solid #ccc; padding:6px;">Qty</th>
-                        <th style="border:1px solid #ccc; padding:6px;">Rate</th>
-                        <th style="border:1px solid #ccc; padding:6px;">GST</th>
-                        <th style="border:1px solid #ccc; padding:6px;">Total</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Qty</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Rate</th>
+                        <th style="border:1px solid #ccc; padding:8px;">GST</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="border:1px solid #ccc; padding:6px;" id="mQty">--</td>
-                        <td style="border:1px solid #ccc; padding:6px;" id="mRate">--</td>
-                        <td style="border:1px solid #ccc; padding:6px;" id="mGst">--</td>
-                        <td style="border:1px solid #ccc; padding:6px; font-weight:bold;" id="mTotal">--</td>
+                        <td style="border:1px solid #ccc; padding:8px;" id="mQty">--</td>
+                        <td style="border:1px solid #ccc; padding:8px;" id="mRate">--</td>
+                        <td style="border:1px solid #ccc; padding:8px;" id="mGst">--</td>
+                        <td style="border:1px solid #ccc; padding:8px; font-weight:bold;" id="mTotal">--</td>
                     </tr>
                 </tbody>
             </table>
-            <div style="text-align:center; margin-bottom:12px;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:90px; height:90px;">
-                <p style="font-size:10px; font-weight:bold; color:#333; margin-top:4px;">Scan & Pay via UPI (9030574216)</p>
+            <div style="text-align:center; margin-bottom:14px;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:110px; height:110px;">
+                <p style="font-size:11px; font-weight:bold; color:#333; margin-top:4px;">Scan & Pay via UPI (9030574216)</p>
             </div>
-            <div style="font-size:10px; color:#555; border-top:1px dashed #ccc; padding-top:8px; margin-bottom:14px;">
+            <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:8px; margin-bottom:16px;">
                 <p><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
                 <p><b>Support:</b> 6301456725</p>
             </div>
         </div>
-        <div style="max-width:500px; margin:0 auto; display:flex; gap:10px;">
+        <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;">
             <button class="primary-btn" onclick="window.print()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
             <button class="primary-btn" onclick="sendInvoiceToWhatsApp()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
@@ -834,6 +816,33 @@
             }
         }
 
+        async function deleteRecord(collectionName, docId) {
+            if(confirm('Are you sure you want to delete this record?')) {
+                try {
+                    await window.myDelDoc(window.myDoc(window.myDb, collectionName, docId));
+                    alert('Record deleted successfully!');
+                } catch(e) {
+                    alert('Error deleting record: ' + e.message);
+                }
+            }
+        }
+
+        async function editProduct(id, currentName, currentPrice) {
+            let newName = prompt("Edit Item Name:", currentName);
+            let newPrice = prompt("Edit Price per piece (₹):", currentPrice);
+            if(newName && newPrice) {
+                try {
+                    await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_products", id), {
+                        name: newName,
+                        price: Number(newPrice)
+                    });
+                    alert("Item updated successfully!");
+                } catch(e) {
+                    alert("Error updating: " + e.message);
+                }
+            }
+        }
+
         function calculateBags() {
             let l = parseFloat(document.getElementById('estLen').value) || 0;
             let w = parseFloat(document.getElementById('estWid').value) || 0;
@@ -897,7 +906,7 @@
 
             globalCurrentInvoiceData = { cust, phone, bag, qty, rate, gst, total, nowStr };
 
-            // Fill Modal
+            // Fill Full Screen Modal
             document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
             document.getElementById('mCustName').innerText = cust;
             document.getElementById('mCustPhone').innerText = phone;
@@ -970,7 +979,7 @@
             if(!name || !phone) { alert('Enter Customer Name and Phone Number'); return; }
             try {
                 await window.myAddDoc(window.colCustomers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
-                alert('Customer Saved to Private Directory!');
+                alert('Customer Saved to Directory!');
                 document.getElementById('dirCustName').value = '';
                 document.getElementById('dirCustPhone').value = '';
                 document.getElementById('dirCustAddress').value = '';
@@ -1017,6 +1026,7 @@
 
         async function publishNewBag() {
             let name = document.getElementById('newBagName').value;
+            let printType = document.getElementById('newBagPrintType').value;
             let brand = document.getElementById('newBagBrand').value;
             let size = document.getElementById('newBagSize').value;
             let gsm = document.getElementById('newBagGsm').value;
@@ -1030,6 +1040,7 @@
             try {
                 await window.myAddDoc(window.colProducts, { 
                     name: name, 
+                    printType: printType,
                     brand: brand, 
                     size: size || "Standard", 
                     gsm: gsm || "70 GSM", 
@@ -1038,7 +1049,7 @@
                     stock: 5000, 
                     timestamp: new Date() 
                 });
-                alert('New Bag published live with Size, GSM, Brand & Photo to Firebase Catalog!');
+                alert('New Bag published live with Printed/Non-Printed option to Firebase Catalog!');
                 document.getElementById('newBagName').value = '';
                 document.getElementById('newBagSize').value = '';
                 document.getElementById('newBagGsm').value = '';
