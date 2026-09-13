@@ -8,6 +8,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #08080a; color: #f8fafc; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
         
+        /* Hide Netlify Badge */
+        #netlify-badge, iframe[src*="netlify"], div[style*="z-index: 2147483647"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+
         header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
         .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 8px; font-size: 16px; }
@@ -101,6 +104,15 @@
         /* Full Screen Printable Invoice Modal */
         #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 4000; overflow-y: auto; padding: 10px; }
         .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        /* Print fix: Print ONLY printableArea and prevent multiple copies */
+        @media print {
+            body * { visibility: hidden; }
+            #invoicePreviewModal, #invoicePreviewModal * { visibility: visible; }
+            #invoicePreviewModal { position: absolute; left: 0; top: 0; width: 100%; height: auto; background: white; padding: 0; }
+            .invoice-paper { box-shadow: none; margin: 0; max-width: 100%; }
+            .no-print { display: none !important; }
+        }
     </style>
 
     <!-- Firebase SDK & Live Cloud Synchronization -->
@@ -268,7 +280,7 @@
                         </tr>
                     `;
                 });
-                container.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No new orders found.</td></tr>';
+                container.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:#475569;">No new orders found.</td></tr>';
             }
         });
 
@@ -285,13 +297,13 @@
                             <td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td>
                             <td>₹${inv.totalAmount}</td>
                             <td>
-                                <span style="color:#34d399; font-weight:bold;">Saved</span><br>
+                                <span style="color:#047857; font-weight:bold;">Saved</span><br>
                                 <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:4px;" onclick="deleteRecord('as_enterprises_saved_invoices', '${inv.id}')">Delete</button>
                             </td>
                         </tr>
                     `;
                 });
-                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No saved invoices yet.</td></tr>';
+                container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#475569;">No saved invoices yet.</td></tr>';
             }
         });
 
@@ -348,7 +360,7 @@
         <div class="logo-group" onclick="switchView('home')">
             <div class="logo-badge">AS</div>
             <div>
-                <div class="brand-name">AS ENTERPRISES</div>
+                <div class="brand-name" id="headerCompanyName">AS ENTERPRISES</div>
                 <div class="brand-location">PP Woven Bags Hub</div>
             </div>
         </div>
@@ -650,19 +662,32 @@
                     <button class="primary-btn" onclick="publishNewBag()">+ Publish Item with Full Specs</button>
                 </div>
 
-                <!-- 12. BANK & SETTINGS TAB (With Factory Data Reset) -->
+                <!-- 12. BANK & EDITABLE SETTINGS TAB -->
                 <div id="adminSettingsTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Bank Account & System Settings</h3>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Editable Bank Account & Company Settings</h3>
+                    
+                    <label>Company / Firm Name:</label>
+                    <input type="text" id="setCompanyName" value="AS ENTERPRISES">
+
+                    <label>Bank Name:</label>
+                    <input type="text" id="setBankName" value="HDFC Bank">
+
+                    <label>Account Number:</label>
+                    <input type="text" id="setAccountNo" value="50200012345678">
+
+                    <label>IFSC Code:</label>
+                    <input type="text" id="setIfsc" value="HDFC0001234">
+
                     <label>Business UPI ID:</label>
-                    <input type="text" id="bankUpi" value="9030574216@upi" readonly style="background:#f1f5f9;">
-                    <label>Bank Name & Account:</label>
-                    <input type="text" id="bankName" value="HDFC Bank - A/C: 50200012345678 (IFSC: HDFC0001234)" readonly style="background:#f1f5f9;">
-                    <label>UPI QR Code Link / Image:</label>
-                    <input type="text" id="bankQr" value="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" readonly style="background:#f1f5f9;">
-                    <div style="text-align:center; margin-top:12px; margin-bottom:16px;">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="UPI QR Code" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
+                    <input type="text" id="setUpi" value="9030574216@upi">
+
+                    <button class="primary-btn" onclick="saveBankSettings()">💾 Save Bank & Company Settings</button>
+
+                    <div style="text-align:center; margin-top:16px; margin-bottom:16px;">
+                        <img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="UPI QR Code" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
                         <p style="color:#047857; font-size:12px; font-weight:bold; margin-top:6px;">✔ Live UPI QR Code Active for Invoices.</p>
                     </div>
+
                     <hr style="border:0; border-top:1px solid #cbd5e1; margin:16px 0;">
                     <h4 style="color:#dc2626; font-size:14px; margin-bottom:8px;">⚠️ Danger Zone</h4>
                     <button class="primary-btn" style="background:#dc2626;" onclick="factoryDataReset()">⚠️ Factory Data Reset (Clear Local Cache)</button>
@@ -674,10 +699,10 @@
     </div>
 
     <!-- FULL SCREEN PRINTABLE INVOICE PREVIEW MODAL -->
-    <div id="invoicePreviewModal">
+    <div id="invoicePreviewModal" class="no-print">
         <div class="invoice-paper" id="printableArea">
             <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:10px; margin-bottom:12px;">
-                <h2 style="color:#0A1931; font-size:22px; font-weight:900;">AS ENTERPRISES</h2>
+                <h2 style="color:#0A1931; font-size:22px; font-weight:900;" id="invModalCompanyName">AS ENTERPRISES</h2>
                 <p style="font-size:12px; color:#555; font-weight:700;">PP Woven Bags Hub • Hyderabad, Telangana</p>
                 <p style="font-size:11px; color:#777;" id="modalTimestamp">Date & Time: --</p>
             </div>
@@ -705,11 +730,11 @@
                 </tbody>
             </table>
             <div style="text-align:center; margin-bottom:14px;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:110px; height:110px;">
-                <p style="font-size:11px; font-weight:bold; color:#333; margin-top:4px;">Scan & Pay via UPI (9030574216)</p>
+                <img id="mQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:110px; height:110px;">
+                <p style="font-size:11px; font-weight:bold; color:#333; margin-top:4px;" id="mUpiText">Scan & Pay via UPI (9030574216@upi)</p>
             </div>
             <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:8px; margin-bottom:16px;">
-                <p><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
+                <p id="mBankText"><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
                 <p><b>Support:</b> 6301456725</p>
             </div>
         </div>
@@ -759,6 +784,44 @@
         let cartList = [];
         let uploadedImageBase64 = "";
         let globalCurrentInvoiceData = null;
+
+        // Load Bank Config from LocalStorage
+        let bankConfig = JSON.parse(localStorage.getItem('as_bank_config')) || {
+            companyName: "AS ENTERPRISES",
+            bankName: "HDFC Bank",
+            accountNo: "50200012345678",
+            ifsc: "HDFC0001234",
+            upi: "9030574216@upi"
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('headerCompanyName').innerText = bankConfig.companyName;
+            document.getElementById('setCompanyName').value = bankConfig.companyName;
+            document.getElementById('setBankName').value = bankConfig.bankName;
+            document.getElementById('setAccountNo').value = bankConfig.accountNo;
+            document.getElementById('setIfsc').value = bankConfig.ifsc;
+            document.getElementById('setUpi').value = bankConfig.upi;
+            updateQrPreviews();
+        });
+
+        function updateQrPreviews() {
+            let upi = document.getElementById('setUpi').value || bankConfig.upi;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=${upi}&pn=AS%20Enterprises`;
+            document.getElementById('setQrPreview').src = qrUrl;
+        }
+
+        function saveBankSettings() {
+            bankConfig.companyName = document.getElementById('setCompanyName').value;
+            bankConfig.bankName = document.getElementById('setBankName').value;
+            bankConfig.accountNo = document.getElementById('setAccountNo').value;
+            bankConfig.ifsc = document.getElementById('setIfsc').value;
+            bankConfig.upi = document.getElementById('setUpi').value;
+
+            localStorage.setItem('as_bank_config', JSON.stringify(bankConfig));
+            document.getElementById('headerCompanyName').innerText = bankConfig.companyName;
+            updateQrPreviews();
+            alert("Bank & Company Settings Saved Successfully!");
+        }
 
         const tDict = {
             EN: { s: "Delivery", w: "Khata", g: "Catalog", f: "Estimate" },
@@ -842,7 +905,7 @@
                     timestamp: new Date()
                 });
 
-                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI Pay:* 9030574216`;
+                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI Pay:* ${bankConfig.upi}`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
                 cartList = [];
                 document.getElementById('cartCount').innerText = '0';
@@ -885,8 +948,7 @@
             let w = parseFloat(document.getElementById('estWid').value) || 0;
             let g = parseFloat(document.getElementById('estGsm').value) || 0;
             if(l && w) {
-                // Correct calculation logic for PP Woven Bags requirement
-                let areaSqInch = l * w * 2; // Both sides
+                let areaSqInch = l * w * 2;
                 let est = Math.ceil((areaSqInch * g) / 1500) || Math.ceil(l * w * 1.2);
                 document.getElementById('estResult').innerText = `Estimated Requirement: ~${est} pcs (Quality GSM: ${g || 70})`;
             } else {
@@ -941,7 +1003,8 @@
 
             globalCurrentInvoiceData = { cust, phone, bag, qty, rate, gst, total, nowStr };
 
-            // Fill Full Screen Modal
+            // Fill Modal with dynamic bank settings
+            document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
             document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
             document.getElementById('mCustName').innerText = cust;
             document.getElementById('mCustPhone').innerText = phone;
@@ -950,6 +1013,11 @@
             document.getElementById('mRate').innerText = "₹" + rate;
             document.getElementById('mGst').innerText = gst + "% (₹" + tax.toFixed(2) + ")";
             document.getElementById('mTotal').innerText = "₹" + total.toLocaleString('en-IN');
+            
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=${bankConfig.upi}&pn=AS%20Enterprises`;
+            document.getElementById('mQrImg').src = qrUrl;
+            document.getElementById('mUpiText').innerText = "Scan & Pay via UPI (" + bankConfig.upi + ")";
+            document.getElementById('mBankText').innerHTML = `<b>Bank:</b> ${bankConfig.bankName} | A/C: ${bankConfig.accountNo} | IFSC: ${bankConfig.ifsc}`;
 
             // Show Modal
             document.getElementById('invoicePreviewModal').style.display = 'block';
@@ -977,7 +1045,7 @@
         function sendInvoiceToWhatsApp() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
-            let msg = `*📄 AS ENTERPRISES TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Requirement:* ${d.bag}%0A*Qty:* ${d.qty} pcs @ ₹${d.rate}%0A*GST (${d.gst}%):* ₹${(d.qty*d.rate*(d.gst/100)).toFixed(2)}%0A*💰 Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0AHDFC Bank - A/C: 50200012345678%0AIFSC: HDFC0001234%0A*💳 UPI ID / QR:* 9030574216@upi%0A*📞 Support:* 6301456725`;
+            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Requirement:* ${d.bag}%0A*Qty:* ${d.qty} pcs @ ₹${d.rate}%0A*GST (${d.gst}%):* ₹${(d.qty*d.rate*(d.gst/100)).toFixed(2)}%0A*💰 Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
             window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
         }
 
