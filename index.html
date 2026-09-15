@@ -8,7 +8,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #ffffff; color: #0f172a; padding-bottom: 80px; overflow-x: hidden; width: 100%; font-size: 15px; }
         
-        /* Force Hide Netlify Badge Everywhere */
         #netlify-badge, iframe[src*="netlify"], div[style*="z-index: 2147483647"], a[href*="netlify.com"], [id*="netlify"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
         header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
@@ -17,20 +16,18 @@
         .brand-name { font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
         .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
-        .header-tools { display: flex; align-items: center; gap: 6px; position: relative; }
-        .lang-btn { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 6px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; }
-        .action-icon-btn { background: transparent; color: #fff; border: none; padding: 8px; cursor: pointer; font-size: 18px; position: relative; }
+        .header-tools { display: flex; align-items: center; gap: 4px; position: relative; }
+        .lang-btn { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 6px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .action-icon-btn { background: transparent; color: #fff; border: none; padding: 6px; cursor: pointer; font-size: 18px; position: relative; }
         .cart-badge { position: absolute; top: 0; right: 0; background: #f97316; color: #fff; font-size: 10px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .menu-btn { background: #f97316 !important; color: #fff !important; padding: 8px 12px !important; border-radius: 999px !important; font-size: 13px !important; font-weight: 800 !important; border: none !important; }
+        .menu-btn { background: #f97316 !important; color: #fff !important; padding: 6px 10px !important; border-radius: 999px !important; font-size: 12px !important; font-weight: 800 !important; border: none !important; white-space: nowrap; }
 
-        /* Gold Ticker */
         .ticker-frame { background: linear-gradient(90deg, #b8860b 0%, #ffd700 25%, #fff1a8 50%, #ffd700 75%, #b8860b 100%); color: #071126; font-weight: 900; font-size: 11.5px; padding: 8px 0; width: 100%; overflow: hidden; white-space: nowrap; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .ticker-content { display: inline-block; padding-left: 100%; animation: scrollTicker 26s linear infinite; }
         @keyframes scrollTicker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
         .main-wrapper { padding: 16px; max-width: 100%; width: 100%; margin: 0 auto; background: #ffffff; min-height: 90vh; }
         
-        /* Full Width Edge-to-Edge White Hero Banner */
         .hero-card { background: #ffffff; color: #0f172a; padding: 28px 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 100%; }
         .hero-tag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; font-size: 11px; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
         .hero-card h1 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: #0f172a; line-height: 1.15; }
@@ -40,18 +37,15 @@
         .primary-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; box-shadow: 0 4px 15px rgba(249,115,22,0.3); }
         .secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; width: 100%; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer; text-align: center; display: block; text-decoration: none; }
 
-        /* Quick Action Cards Grid */
         .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; width: 100%; }
         .card-tile { background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px 8px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; color: #0f172a; }
         .card-tile:hover { border-color: #f97316; transform: translateY(-2px); }
         .card-tile div:first-child { font-size: 20px; margin-bottom: 4px; }
         .card-tile div:last-child { font-size: 11px; font-weight: 800; color: #334155; }
 
-        /* Search Bar */
         .search-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 999px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 100%; }
         .search-box input { border: none; outline: none; width: 100%; font-size: 14px; font-weight: 700; color: #0f172a; background: transparent; }
 
-        /* Catalog Grid */
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; width: 100%; }
         .item-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .item-img { height: 120px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 11px; overflow: hidden; }
@@ -64,25 +58,21 @@
         .item-price span { font-size: 10px; color: #475569; font-weight: 700; }
         .buy-btn { background: #f97316; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 999px; font-size: 12px; font-weight: 900; cursor: pointer; }
 
-        /* Drawers & Modals */
         .drawer { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 420px; height: 100%; background: #ffffff; z-index: 2500; overflow-y: auto; padding: 20px; border-left: 2px solid #f97316; box-shadow: -10px 0 30px rgba(0,0,0,0.2); color: #0f172a; }
         .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f97316; padding-bottom: 12px; margin-bottom: 16px; }
         .drawer-header h3 { color: #f97316; font-size: 17px; font-weight: 900; }
         .close-btn { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 6px; font-weight: 900; cursor: pointer; }
 
-        /* Secure Admin PIN Modal */
         #adminModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 16px; }
         .modal-box { background: #ffffff; border: 2px solid #f97316; padding: 28px 20px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: center; color: #0f172a; }
         .modal-box h3 { color: #0f172a; font-size: 20px; margin-bottom: 8px; font-weight: 900; }
         .modal-box p { color: #475569; font-size: 13px; margin-bottom: 16px; font-weight: 600; }
         .modal-box input { width: 100%; padding: 14px; background: #f8fafc; border: 2px solid #cbd5e1; color: #0f172a; border-radius: 12px; margin-bottom: 16px; font-size: 18px; font-weight: 800; text-align: center; outline: none; letter-spacing: 4px; }
         
-        /* Floating Contact Buttons */
         .float-btns { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 999; }
         .float-btn { background: #059669; color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .float-btn.wa { background: #25d366; }
 
-        /* Clean Professional White Admin Panel Background */
         .admin-panel-container { background: #ffffff; color: #0f172a; padding: 24px; border-radius: 16px; border: 2px solid #f97316; margin-bottom: 14px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .admin-panel-container label { font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px; text-transform: uppercase; }
         .admin-panel-container input, .admin-panel-container select, .admin-panel-container textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
@@ -91,7 +81,6 @@
         .form-panel label { font-size: 12px; font-weight: 800; color: #334155; display: block; margin-bottom: 6px; text-transform: uppercase; }
         .form-panel input, .form-panel select, .form-panel textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 10px; font-size: 14px; font-weight: 700; outline: none; }
 
-        /* Admin Rounded Pill Grid Dashboard Buttons */
         .admin-grid-dash { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; width: 100%; }
         .admin-tile { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border: 1px solid #cbd5e1; padding: 14px 12px; border-radius: 999px; text-align: center; color: #0f172a; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .admin-tile:hover { border-color: #f97316; background: #fff7ed; transform: translateY(-2px); }
@@ -100,11 +89,9 @@
         th, td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; }
         th { background: #f1f5f9; color: #0f172a; font-weight: 900; }
 
-        /* Full Screen Printable Invoice Modal */
         #invoicePreviewModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 4000; overflow-y: auto; padding: 10px; }
         .invoice-paper { background: #ffffff; color: #000000; width: 100%; max-width: 600px; margin: 10px auto; padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
-        /* STRICT SINGLE-PAGE PRINT / PDF FIX */
         @media print {
             body * { visibility: hidden !important; }
             #printableArea, #printableArea * { visibility: visible !important; }
@@ -149,7 +136,7 @@
 
         window.appCart = [];
 
-        // Real-time Catalog & Inventory Sync with Delete & Edit Support
+        // Real-time Catalog & Inventory Sync with Loading State Fix
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogGrid');
             let fullContainer = document.getElementById('fullCatalogGrid');
@@ -190,8 +177,8 @@
                 `;
             });
 
-            if(container) container.innerHTML = html || '<p style="color:#64748b;">No items in catalog.</p>';
-            if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#64748b;">No items in catalog.</p>';
+            if(container) container.innerHTML = html || '<p style="color:#64748b; padding:10px;">Loading Catalog...</p>';
+            if(fullContainer) fullContainer.innerHTML = html || '<p style="color:#64748b; padding:10px;">Loading Catalog...</p>';
             if(inventoryContainer) inventoryContainer.innerHTML = invHtml || '<tr><td colspan="4" style="text-align:center;">No inventory found.</td></tr>';
         });
 
@@ -367,7 +354,7 @@
             </div>
         </div>
         <div class="header-tools">
-            <button class="lang-btn" onclick="location.reload()" title="Refresh Page">🔄 Refresh</button>
+            <button class="lang-btn" onclick="location.reload()" title="Refresh Page">🔄</button>
             <button class="lang-btn" onclick="setLang('EN')">EN</button>
             <button class="lang-btn" onclick="setLang('HI')">HI</button>
             <button class="lang-btn" onclick="setLang('TE')">TE</button>
@@ -376,7 +363,6 @@
         </div>
     </header>
 
-    <!-- Gold Ticker -->
     <div class="ticker-frame no-print">
         <div class="ticker-content" id="t-tick" data-tr="ticker_text">
             ★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★
@@ -385,7 +371,6 @@
 
     <div class="main-wrapper">
         
-        <!-- HOME VIEW -->
         <div id="homeView">
             <div class="hero-card">
                 <div class="hero-tag" data-tr="hero_tag">⚡ Industrial Packaging Hub</div>
@@ -411,14 +396,12 @@
             <div class="catalog-grid" id="liveCatalogGrid"></div>
         </div>
 
-        <!-- CATALOG VIEW -->
         <div id="catalogView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <h2 style="font-size:22px; font-weight:900; margin-bottom:14px; color:#f97316;" data-tr="complete_catalog">Complete Bag Catalog</h2>
             <div class="catalog-grid" id="fullCatalogGrid"></div>
         </div>
 
-        <!-- ESTIMATOR VIEW (Super Simple Kilo to Bags Calculator) -->
         <div id="estimatorView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel">
@@ -440,7 +423,6 @@
             </div>
         </div>
 
-        <!-- KHATA VIEW -->
         <div id="khataView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel">
@@ -454,7 +436,6 @@
             </div>
         </div>
 
-        <!-- TRACKER VIEW -->
         <div id="trackerView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')" data-tr="back_home">← Back to Home</button>
             <div class="form-panel" style="text-align:center; padding:30px;">
@@ -464,7 +445,6 @@
             </div>
         </div>
 
-        <!-- ADMIN SECURE DASHBOARD VIEW -->
         <div id="adminView" style="display:none;">
             <button class="secondary-btn" style="margin-bottom:14px;" onclick="switchView('home')">← Lock & Exit Admin</button>
             
@@ -476,7 +456,6 @@
 
                 <button class="primary-btn" style="background:#16a34a; margin-bottom:14px;" onclick="window.open('https://wa.me/916301456725?text=Rate%20Sheet%20Request', '_blank')">📋 Share Rate Sheet</button>
 
-                <!-- Admin Rounded Pill Grid Tiles -->
                 <div class="admin-grid-dash">
                     <div class="admin-tile" onclick="switchAdminTab('invoice')">📄 Multi-GST Bill Maker</div>
                     <div class="admin-tile" onclick="switchAdminTab('savedInvoices')">📁 Saved Invoices & Reports</div>
@@ -492,7 +471,6 @@
                     <div class="admin-tile" style="grid-column: span 2;" onclick="switchAdminTab('settings')">⚙️ Bank & Settings</div>
                 </div>
 
-                <!-- 1. MULTI-GST BILL MAKER TAB (With Multi-Item & Advance Plus/Minus Support) -->
                 <div id="adminInvoiceTab" class="admin-sub-tab" style="margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker (Multi-Item & Advance)</h3>
                     
@@ -502,7 +480,7 @@
                     <input type="tel" id="invPhone" placeholder="9848012345">
 
                     <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px;">
-                        <h4 style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:8px;">Add Items to Bill (e.g. 24x30, 24x40, 50kg bags)</h4>
+                        <h4 style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:8px;">Add Items to Bill</h4>
                         <label>Item / Bag Description:</label>
                         <input type="text" id="addItemDesc" placeholder="24 x 30 inch PP Woven Bag">
                         <label>Quantity (pcs):</label>
@@ -532,7 +510,6 @@
                     <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Full Screen Invoice, PDF & WhatsApp</button>
                 </div>
 
-                <!-- 2. SAVED INVOICES TAB -->
                 <div id="adminSavedInvoicesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Saved Invoices & Reports</h3>
                     <table>
@@ -543,17 +520,14 @@
                     </table>
                 </div>
 
-                <!-- 3. DAY REPORT TAB -->
                 <div id="adminDayReportTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Today's Business Day Report</h3>
                     <div style="background:#f1f5f9; padding:14px; border-radius:8px; font-size:13px; line-height:1.6; color:#0f172a;">
                         <p style="color:#047857; font-weight:900;">• Total Dispatches Today: 2 Trucks (15,000 Bags)</p>
                         <p style="color:#047857; font-weight:900;">• Real-Time UPI Receipts & Timestamps: Verified</p>
-                        <p style="color:#475569;">All inventory and ledger records sync automatically with Firebase cloud.</p>
                     </div>
                 </div>
 
-                <!-- 4. INVENTORY & PHOTOS TAB -->
                 <div id="adminInventoryTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Inventory & Photos (Edit/Delete)</h3>
                     <table>
@@ -564,7 +538,6 @@
                     </table>
                 </div>
 
-                <!-- 5. ORDERS TAB (With Approve / Reject) -->
                 <div id="adminOrdersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Customer Orders (Approve / Reject)</h3>
                     <table>
@@ -575,11 +548,10 @@
                     </table>
                 </div>
 
-                <!-- 6. WORKERS TAB -->
                 <div id="adminWorkersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Workers Attendance & Directory</h3>
                     <label>Worker Name:</label>
-                    <input type="text" id="workerNameInput" placeholder="Raju (Loader)">
+                    <input type="text" id="workerNameInput" placeholder="Raju">
                     <label>Phone Number:</label>
                     <input type="tel" id="workerPhoneInput" placeholder="9848011223">
                     <label>Complete Address:</label>
@@ -591,7 +563,6 @@
                     </table>
                 </div>
 
-                <!-- 7. WORKER KHATA TAB -->
                 <div id="adminWorkerKhataTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Worker Khata & Advance Ledger</h3>
                     <label>Worker Name:</label>
@@ -599,7 +570,7 @@
                     <label>Advance/Payment Amount (₹):</label>
                     <input type="number" id="wkAmt" placeholder="2000">
                     <label>Note:</label>
-                    <input type="text" id="wkNote" placeholder="Weekly Khata Advance">
+                    <input type="text" id="wkNote" placeholder="Advance">
                     <button class="primary-btn" onclick="saveWorkerKhataEntry()">+ Save Worker Khata</button>
                     <div id="totalWorkerKhataSum" style="margin-top:10px; font-weight:900; color:#047857;"></div>
                     <table>
@@ -608,32 +579,29 @@
                     </table>
                 </div>
 
-                <!-- 8. CUSTOMERS DIRECTORY TAB -->
                 <div id="adminCustomersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Private Customers Directory</h3>
-                    <p style="font-size:11px; color:#475569; margin-bottom:10px;">(Yeh list sirf Admin panel mein dikhegi, customer screen par nahi)</p>
                     <label>Customer / Firm Name:</label>
                     <input type="text" id="dirCustName" placeholder="Balaji Traders">
                     <label>Phone Number:</label>
                     <input type="tel" id="dirCustPhone" placeholder="9848011223">
                     <label>Complete Address:</label>
-                    <textarea id="dirCustAddress" placeholder="Grain Market, Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
-                    <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer to Directory</button>
+                    <textarea id="dirCustAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer</button>
                     <table>
                         <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
                         <tbody id="customersTableBody"><tr><td colspan="4" style="text-align:center;">Loading directory...</td></tr></tbody>
                     </table>
                 </div>
 
-                <!-- 9. MANUFACTURERS TAB -->
                 <div id="adminManufacturersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Manufacturers Directory</h3>
-                    <label>Manufacturer / Mill Name:</label>
-                    <input type="text" id="mfgName" placeholder="Shree Poly Polymers">
-                    <label>Contact Phone Number:</label>
+                    <label>Manufacturer Name:</label>
+                    <input type="text" id="mfgName" placeholder="Shree Poly">
+                    <label>Contact Phone:</label>
                     <input type="tel" id="mfgPhone" placeholder="9988776655">
-                    <label>Factory / Mill Address:</label>
-                    <textarea id="mfgAddress" placeholder="Industrial Area, Phase-2, Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <label>Factory Address:</label>
+                    <textarea id="mfgAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
                     <button class="primary-btn" onclick="saveManufacturerData()">+ Save Manufacturer</button>
                     <table>
                         <thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
@@ -641,11 +609,10 @@
                     </table>
                 </div>
 
-                <!-- 10. EXPENSES TAB -->
                 <div id="adminExpensesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Business Expenses Tracker</h3>
-                    <label>Expense Title / Reason:</label>
-                    <input type="text" id="expTitle" placeholder="Transport Fuel / Loading Charge">
+                    <label>Expense Title:</label>
+                    <input type="text" id="expTitle" placeholder="Transport Fuel">
                     <label>Amount (₹):</label>
                     <input type="number" id="expAmt" placeholder="1500">
                     <button class="primary-btn" onclick="saveBusinessExpense()">+ Record Expense</button>
@@ -656,11 +623,10 @@
                     </table>
                 </div>
 
-                <!-- 11. ADD ITEM TAB -->
                 <div id="adminAddItemTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Add New Bag to Cloud Catalog</h3>
                     <label>New Bag Name:</label>
-                    <input type="text" id="newBagName" placeholder="PP Woven Bag 25kg">
+                    <input type="text" id="newBagName" placeholder="PP Woven Bag">
                     
                     <label>Print Type:</label>
                     <select id="newBagPrintType">
@@ -668,32 +634,31 @@
                         <option value="Non-Printed">Non-Printed</option>
                     </select>
 
-                    <label>Select Manufacturer / Brand:</label>
+                    <label>Brand:</label>
                     <select id="newBagBrand">
                         <option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>
                     </select>
 
-                    <label>Bag Size (e.g. 24 x 36 inch):</label>
+                    <label>Size:</label>
                     <input type="text" id="newBagSize" placeholder="24 x 36 inch">
 
-                    <label>GSM (e.g. 70 GSM):</label>
+                    <label>GSM:</label>
                     <input type="text" id="newBagGsm" placeholder="70 GSM">
 
                     <label>Price per piece (₹):</label>
                     <input type="number" id="newBagPrice" placeholder="12.00">
 
-                    <label>Bag Photo (Upload Image / Paste Image Link):</label>
+                    <label>Bag Photo:</label>
                     <input type="file" id="newBagImgFile" accept="image/*" style="margin-bottom:6px;" onchange="convertImageToBase64(this)">
-                    <input type="text" id="newBagImgUrl" placeholder="Or paste image URL here">
+                    <input type="text" id="newBagImgUrl" placeholder="Or image URL">
 
-                    <button class="primary-btn" onclick="publishNewBag()">+ Publish Item with Full Specs</button>
+                    <button class="primary-btn" onclick="publishNewBag()">+ Publish Item</button>
                 </div>
 
-                <!-- 12. BANK & EDITABLE SETTINGS TAB -->
                 <div id="adminSettingsTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Editable Bank Account & Company Settings</h3>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Settings</h3>
                     
-                    <label>Company / Firm Name:</label>
+                    <label>Company Name:</label>
                     <input type="text" id="setCompanyName" value="AS ENTERPRISES">
 
                     <label>Bank Name:</label>
@@ -705,19 +670,14 @@
                     <label>IFSC Code:</label>
                     <input type="text" id="setIfsc" value="HDFC0001234">
 
-                    <label>Business UPI ID:</label>
+                    <label>UPI ID:</label>
                     <input type="text" id="setUpi" value="9030574216@upi">
 
-                    <button class="primary-btn" onclick="saveBankSettings()">💾 Save Bank & Company Settings</button>
+                    <button class="primary-btn" onclick="saveBankSettings()">💾 Save Settings</button>
 
                     <div style="text-align:center; margin-top:16px; margin-bottom:16px;">
-                        <img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="UPI QR Code" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
-                        <p style="color:#047857; font-size:12px; font-weight:bold; margin-top:6px;">✔ Live UPI QR Code Active for Invoices.</p>
+                        <img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
                     </div>
-
-                    <hr style="border:0; border-top:1px solid #cbd5e1; margin:16px 0;">
-                    <h4 style="color:#dc2626; font-size:14px; margin-bottom:8px;">⚠️ Danger Zone</h4>
-                    <button class="primary-btn" style="background:#dc2626;" onclick="factoryDataReset()">⚠️ Factory Data Reset (Clear Local Cache)</button>
                 </div>
 
             </div>
@@ -725,7 +685,6 @@
 
     </div>
 
-    <!-- FULL SCREEN STRICT SINGLE-PAGE PRINTABLE INVOICE PREVIEW MODAL -->
     <div id="invoicePreviewModal">
         <div class="invoice-paper" id="printableArea">
             <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:6px; margin-bottom:8px;">
@@ -746,9 +705,7 @@
                         <th style="border:1px solid #ccc; padding:4px;">Total</th>
                     </tr>
                 </thead>
-                <tbody id="modalItemsTableBody">
-                    <!-- Injected multi items -->
-                </tbody>
+                <tbody id="modalItemsTableBody"></tbody>
             </table>
             <div style="text-align:right; font-size:11px; margin-bottom:8px; line-height:1.4;">
                 <p>Subtotal: <span id="mSubtotal">₹0</span></p>
@@ -760,10 +717,6 @@
                 <img id="mQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="width:80px; height:80px;">
                 <p style="font-size:9px; font-weight:bold; color:#333; margin-top:2px;" id="mUpiText">Scan & Pay via UPI (9030574216@upi)</p>
             </div>
-            <div style="font-size:9px; color:#555; border-top:1px dashed #ccc; padding-top:4px; margin-bottom:6px;">
-                <p id="mBankText"><b>Bank:</b> HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234</p>
-                <p><b>Support:</b> 6301456725</p>
-            </div>
         </div>
         <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;" class="no-print">
             <button class="primary-btn" onclick="printInvoiceClean()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
@@ -772,10 +725,9 @@
         </div>
     </div>
 
-    <!-- CART DRAWER -->
     <div class="drawer" id="cartDrawer">
         <div class="drawer-header">
-            <h3>🛒 Active Cart (बुट्टी)</h3>
+            <h3>🛒 Active Cart</h3>
             <button class="close-btn" onclick="toggleCartDrawer()">✕ CLOSE</button>
         </div>
         <div id="cartItemsContainer" style="margin-bottom: 20px;">
@@ -790,24 +742,21 @@
         </div>
     </div>
 
-    <!-- SECURE ADMIN PIN MODAL -->
     <div id="adminModal">
         <div class="modal-box">
             <h3>🔐 Admin Security PIN</h3>
-            <p>Enter 4-digit Owner Pin to access controls.</p>
+            <p>Enter 4-digit Owner Pin</p>
             <input type="password" id="adminPinInput" placeholder="••••" maxlength="4">
-            <button class="primary-btn" onclick="verifyAdminPin()" style="margin-bottom:0;">Unlock Admin Panel</button>
+            <button class="primary-btn" onclick="verifyAdminPin()" style="margin-bottom:0;">Unlock</button>
         </div>
     </div>
 
-    <!-- FLOATING WHATSAPP & CALL -->
     <div class="float-btns">
         <a href="tel:6301456725" class="float-btn">📞</a>
         <a href="https://wa.me/916301456725" target="_blank" class="float-btn wa">💬</a>
     </div>
 
     <script>
-        // Aggressively remove Netlify Badge
         setInterval(() => {
             document.querySelectorAll('iframe[src*="netlify"], #netlify-badge, a[href*="netlify.com"], div[style*="z-index: 2147483647"], [id*="netlify"]').forEach(el => el.remove());
         }, 500);
@@ -818,62 +767,10 @@
         let uploadedImageBase64 = "";
         let globalCurrentInvoiceData = null;
 
-        // Translation Dictionary (EN, HI, TE)
         const tr = {
-            EN: {
-                brand_sub: "PP Woven Bags Hub",
-                admin_btn: "⚙️ Admin",
-                ticker_text: "★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★",
-                hero_tag: "⚡ Industrial Packaging Hub",
-                hero_title: "Industrial PP Bags.<br><span>Direct Wholesale.</span>",
-                hero_desc: "Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags, and Custom Printed Packaging.",
-                btn_catalog: "Browse PP Bags & Rates →",
-                btn_calc: "Calculate Bag Requirements 🧮",
-                nav_delivery: "Delivery",
-                nav_khata: "Khata",
-                nav_catalog: "Catalog",
-                nav_estimate: "Estimate",
-                featured_catalog: "📦 Featured PP Bags Catalog",
-                back_home: "← Back to Home",
-                complete_catalog: "Complete Bag Catalog",
-                wholesaler_khata: "📖 Wholesale Khata & Ledger"
-            },
-            HI: {
-                brand_sub: "पीपी वोवेन बैग्स हब",
-                admin_btn: "⚙️ एडमिन",
-                ticker_text: "★ हैदराबाद में उसी दिन डिलीवरी • थोक रेट • भारी शुल्क पीपी वोवेन बैग • यूपीआई: 9030574216 ★",
-                hero_tag: "⚡ औद्योगिक पैकेजिंग हब",
-                hero_title: "औद्योगिक पीपी बैग।<br><span>प्रत्यक्ष थोक मूल्य।</span>",
-                hero_desc: "भारी शुल्क पीपी वोवेन बैग, लैमिनेटेड बैग और कस्टम प्रिंटेड पैकेजिंग का प्रत्यक्ष थोक निर्माण और आपूर्ति।",
-                btn_catalog: "पीपी बैग और रेट देखें →",
-                btn_calc: "बैग की आवश्यकता गणना करें 🧮",
-                nav_delivery: "डिलिवरी",
-                nav_khata: "खाता",
-                nav_catalog: "कैटलॉग",
-                nav_estimate: "स्टीमेट",
-                featured_catalog: "📦 प्रमुख पीपी बैग कैटलॉग",
-                back_home: "← होम पर वापस जाएं",
-                complete_catalog: "पूर्ण बैग कैटलॉग",
-                wholesaler_khata: "📖 थोक खाता और लेजर"
-            },
-            TE: {
-                brand_sub: "PP వೋವೆನ್ బ్యాగ్స్ హబ్",
-                admin_btn: "⚙️ అడ్మిన్",
-                ticker_text: "★ హైదరాబాద్ అంతటా అదే రోజు డెలివరీ • హోల్‌సేల్ ధరలు • హెవీ డ్యూటీ PP వోవెన్ బ్యాగ్స్ • UPI: 9030574216 ★",
-                hero_tag: "⚡ ఇండస్ట్రియల్ ప్యాకేజింగ్ హబ్",
-                hero_title: "ఇండస్ట్రియల్ PP బ్యాగ్స్.<br><span>డైరెక్ట్ హోల్‌సేల్.</span>",
-                hero_desc: "హెవీ డ్యూటీ PP వోవెన్ బ్యాగ్స్, లామినేటెడ్ బ్యాగ్స్ మరియు కస్టమ్ ప్రింటెడ్ ప్యాకేజింగ్ యొక్క ప్రత్యక్ష హోల్‌సేల్ తయారీ మరియు సరఫరా.",
-                btn_catalog: "PP బ్యాగ్స్ & రేట్లు చూడండి →",
-                btn_calc: "బ్యాగ్ అవసరాన్ని లెక్కించండి 🧮",
-                nav_delivery: "డెలివరీ",
-                nav_khata: "ఖాతా",
-                nav_catalog: "క్యాటలాగ్",
-                nav_estimate: "అంచనా",
-                featured_catalog: "📦 ఫీచర్డ్ PP బ్యాగ్స్ క్యాటలాగ్",
-                back_home: "← హోమ్‌కి వెళ్లండి",
-                complete_catalog: "పూర్తి బ్యాగ్ క్యాటలాగ్",
-                wholesaler_khata: "📖 హోల్‌సేల్ ఖాతా & లెడ్జర్"
-            }
+            EN: { brand_sub: "PP Woven Bags Hub", admin_btn: "⚙️ Admin", ticker_text: "★ SAME-DAY DELIVERY ACROSS HYDERABAD • WHOLESALE RATES • HEAVY DUTY PP WOVEN BAGS • UPI: 9030574216 ★", hero_tag: "⚡ Industrial Packaging Hub", hero_title: "Industrial PP Bags.<br><span>Direct Wholesale.</span>", hero_desc: "Direct wholesale manufacturing and supply of Heavy Duty PP Woven Bags, Laminated Bags.", btn_catalog: "Browse PP Bags & Rates →", btn_calc: "Calculate Bag Requirements 🧮", nav_delivery: "Delivery", nav_khata: "Khata", nav_catalog: "Catalog", nav_estimate: "Estimate", featured_catalog: "📦 Featured PP Bags Catalog", back_home: "← Back to Home", complete_catalog: "Complete Bag Catalog", wholesaler_khata: "📖 Wholesale Khata & Ledger" },
+            HI: { brand_sub: "पीपी वोवेन बैग्स हब", admin_btn: "⚙️ एडमिन", ticker_text: "★ हैदराबाद में उसी दिन डिलीवरी • थोक रेट • भारी शुल्क पीपी वोवेन बैग • यूपीआई: 9030574216 ★", hero_tag: "⚡ औद्योगिक पैकेजिंग हब", hero_title: "औद्योगिक पीपी बैग।<br><span>प्रत्यक्ष थोक मूल्य।</span>", hero_desc: "भारी शुल्क पीपी वोवेन बैग, लैमिनेटेड बैग का प्रत्यक्ष निर्माण।", btn_catalog: "पीपी बैग और रेट देखें →", btn_calc: "बैग की आवश्यकता गणना करें 🧮", nav_delivery: "डिलिवरी", nav_khata: "खाता", nav_catalog: "कैटलॉग", nav_estimate: "स्टीमेट", featured_catalog: "📦 प्रमुख पीपी बैग कैटलॉग", back_home: "← होम पर वापस जाएं", complete_catalog: "पूर्ण बैग कैटलॉग", wholesaler_khata: "📖 थोक खाता और लेजर" },
+            TE: { brand_sub: "PP వోవెన్ బ్యాగ్స్ హబ్", admin_btn: "⚙️ అడ్మిన్", ticker_text: "★ హైదరాబాద్ అంతటా అదే రోజు డెలివరీ • హోల్‌సేల్ ధరలు • UPI: 9030574216 ★", hero_tag: "⚡ ఇండస్ట్రియల్ ప్యాకేజింగ్ హబ్", hero_title: "ఇండస్ట్రియల్ PP బ్యాగ్స్.<br><span>డైరెక్ట్ హోల్‌సేల్.</span>", hero_desc: "హెవీ డ్యూటీ PP వోవెన్ బ్యాగ్స్ తయారీ మరియు సరఫరా.", btn_catalog: "PP బ్యాగ్స్ & రేట్లు చూడండి →", btn_calc: "బ్యాగ్ అవసరాన్ని లెక్కించండి 🧮", nav_delivery: "డెలివరీ", nav_khata: "ఖాతా", nav_catalog: "క్యాటలాగ్", nav_estimate: "అంచనా", featured_catalog: "📦 ఫీచర్డ్ PP బ్యాగ్స్ క్యాటలాగ్", back_home: "← హోమ్‌కి వెళ్లండి", complete_catalog: "పూర్తి బ్యాగ్ క్యాటలాగ్", wholesaler_khata: "📖 హోల్‌సేల్ ఖాతా & లెడ్జర్" }
         };
 
         function setLang(lang) {
@@ -881,9 +778,7 @@
             let dict = tr[lang];
             document.querySelectorAll('[data-tr]').forEach(el => {
                 let key = el.getAttribute('data-tr');
-                if(dict[key]) {
-                    el.innerHTML = dict[key];
-                }
+                if(dict[key]) el.innerHTML = dict[key];
             });
             document.getElementById('lbl-s').innerText = dict.nav_delivery;
             document.getElementById('lbl-w').innerText = dict.nav_khata;
@@ -891,14 +786,7 @@
             document.getElementById('lbl-f').innerText = dict.nav_estimate;
         }
 
-        // Load Bank Config from LocalStorage
-        let bankConfig = JSON.parse(localStorage.getItem('as_bank_config')) || {
-            companyName: "AS ENTERPRISES",
-            bankName: "HDFC Bank",
-            accountNo: "50200012345678",
-            ifsc: "HDFC0001234",
-            upi: "9030574216@upi"
-        };
+        let bankConfig = JSON.parse(localStorage.getItem('as_bank_config')) || { companyName: "AS ENTERPRISES", bankName: "HDFC Bank", accountNo: "50200012345678", ifsc: "HDFC0001234", upi: "9030574216@upi" };
 
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('headerCompanyName').innerText = bankConfig.companyName;
@@ -907,14 +795,7 @@
             document.getElementById('setAccountNo').value = bankConfig.accountNo;
             document.getElementById('setIfsc').value = bankConfig.ifsc;
             document.getElementById('setUpi').value = bankConfig.upi;
-            updateQrPreviews();
         });
-
-        function updateQrPreviews() {
-            let upi = document.getElementById('setUpi').value || bankConfig.upi;
-            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=${upi}&pn=AS%20Enterprises`;
-            document.getElementById('setQrPreview').src = qrUrl;
-        }
 
         function saveBankSettings() {
             bankConfig.companyName = document.getElementById('setCompanyName').value;
@@ -922,17 +803,13 @@
             bankConfig.accountNo = document.getElementById('setAccountNo').value;
             bankConfig.ifsc = document.getElementById('setIfsc').value;
             bankConfig.upi = document.getElementById('setUpi').value;
-
             localStorage.setItem('as_bank_config', JSON.stringify(bankConfig));
             document.getElementById('headerCompanyName').innerText = bankConfig.companyName;
-            updateQrPreviews();
-            alert("Bank & Company Settings Saved Successfully!");
+            alert("Settings Saved Successfully!");
         }
 
         function switchView(viewName) {
-            ['homeView', 'catalogView', 'estimatorView', 'khataView', 'trackerView', 'adminView'].forEach(v => {
-                document.getElementById(v).style.display = 'none';
-            });
+            ['homeView', 'catalogView', 'estimatorView', 'khataView', 'trackerView', 'adminView'].forEach(v => { document.getElementById(v).style.display = 'none'; });
             document.getElementById(viewName + 'View').style.display = 'block';
             window.scrollTo({top:0, behavior:'smooth'});
         }
@@ -965,7 +842,7 @@
                     let sub = item.price * item.qty;
                     total += sub;
                     html += `
-                        <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; color:#0f172a;">
+                        <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
                             <div>
                                 <div style="font-size:13px; font-weight:bold;">${item.name}</div>
                                 <div style="font-size:11px; color:#c2410c;">${item.qty} pcs @ ₹${item.price} = ₹${sub.toLocaleString('en-IN')}</div>
@@ -983,80 +860,46 @@
         async function submitCartOrder() {
             let name = document.getElementById('orderName').value;
             let phone = document.getElementById('orderPhone').value;
-            if(!name || !phone) { alert('Please enter Customer Name and Phone Number!'); return; }
+            if(!name || !phone) { alert('Enter Name and Phone!'); return; }
             let total = cartList.reduce((s, i) => s + (i.price * i.qty), 0);
             let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
-            
             try {
-                await window.myAddDoc(window.colOrders, {
-                    name: name,
-                    phone: phone,
-                    itemsSummary: summary,
-                    total: total,
-                    status: "Pending",
-                    timestamp: new Date()
-                });
-
-                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}%0A*💳 UPI Pay:* ${bankConfig.upi}`;
+                await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
+                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
                 cartList = [];
                 document.getElementById('cartCount').innerText = '0';
                 toggleCartDrawer();
-                alert('Order placed successfully with customer details & sent to Admin Panel!');
-            } catch(e) {
-                alert('Error: ' + e.message);
-            }
+                alert('Order placed successfully!');
+            } catch(e) { alert('Error: ' + e.message); }
         }
 
         async function deleteRecord(collectionName, docId) {
-            if(confirm('Are you sure you want to delete this record?')) {
-                try {
-                    await window.myDelDoc(window.myDoc(window.myDb, collectionName, docId));
-                    alert('Record deleted successfully!');
-                } catch(e) {
-                    alert('Error deleting record: ' + e.message);
-                }
+            if(confirm('Delete record?')) {
+                try { await window.myDelDoc(window.myDoc(window.myDb, collectionName, docId)); alert('Deleted successfully!'); }
+                catch(e) { alert('Error: ' + e.message); }
             }
         }
 
         async function updateOrderStatus(orderId, newStatus) {
-            try {
-                await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_orders", orderId), {
-                    status: newStatus
-                });
-                alert("Order status updated to: " + newStatus);
-            } catch(e) {
-                alert("Error updating order status: " + e.message);
-            }
+            try { await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_orders", orderId), { status: newStatus }); alert("Status updated to: " + newStatus); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function editProduct(id, currentName, currentPrice) {
             let newName = prompt("Edit Item Name:", currentName);
-            let newPrice = prompt("Edit Price per piece (₹):", currentPrice);
+            let newPrice = prompt("Edit Price (₹):", currentPrice);
             if(newName && newPrice) {
-                try {
-                    await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_products", id), {
-                        name: newName,
-                        price: Number(newPrice)
-                    });
-                    alert("Item updated successfully!");
-                } catch(e) {
-                    alert("Error updating: " + e.message);
-                }
+                try { await window.myUpdateDoc(window.myDoc(window.myDb, "as_enterprises_pp_products", id), { name: newName, price: Number(newPrice) }); alert("Updated!"); }
+                catch(e) { alert('Error: ' + e.message); }
             }
         }
 
-        // Multi-Item Bill Maker Functions
         function addBillItemRow() {
             let desc = document.getElementById('addItemDesc').value;
             let qty = Number(document.getElementById('addItemQty').value);
             let rate = Number(document.getElementById('addItemRate').value);
-
-            if(!desc || !qty || !rate) {
-                alert("Kripya item description, quantity aur rate sahi se bharein!");
-                return;
-            }
-
+            if(!desc || !qty || !rate) { alert('Fill all item fields!'); return; }
             billMultiItems.push({ desc, qty, rate, amount: qty * rate });
             document.getElementById('addItemDesc').value = '';
             document.getElementById('addItemQty').value = '';
@@ -1066,63 +909,31 @@
 
         function renderBillMultiItemsTable() {
             let tbody = document.getElementById('billItemsTableBody');
-            if(billMultiItems.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet. Add items above.</td></tr>';
-                return;
-            }
+            if(billMultiItems.length === 0) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No items added.</td></tr>'; return; }
             let html = '';
             billMultiItems.forEach((item, idx) => {
-                html += `
-                    <tr>
-                        <td><b>${item.desc}</b></td>
-                        <td>${item.qty} pcs @ ₹${item.rate}</td>
-                        <td>₹${item.amount.toLocaleString('en-IN')}</td>
-                        <td><button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px; cursor:pointer;" onclick="billMultiItems.splice(${idx},1); renderBillMultiItemsTable();">✕</button></td>
-                    </tr>
-                `;
+                html += `<tr><td><b>${item.desc}</b></td><td>${item.qty} pcs @ ₹${item.rate}</td><td>₹${item.amount.toLocaleString('en-IN')}</td><td><button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px;" onclick="billMultiItems.splice(${idx},1); renderBillMultiItemsTable();">✕</button></td></tr>`;
             });
             tbody.innerHTML = html;
         }
 
-        // Extremely Easy & Clear Calculator: 1 Kg, 50 Kg, 100 Kg bags estimation
         function calculateBagsSimple() {
             let l = parseFloat(document.getElementById('estLen').value) || 0;
             let w = parseFloat(document.getElementById('estWid').value) || 0;
             let gsm = parseFloat(document.getElementById('estGsm').value) || 0;
-
             if(l > 0 && w > 0 && gsm > 0) {
                 let areaSqMeters = (l * 0.0254) * (w * 0.0254) * 2;
                 let weightPerBagGrams = areaSqMeters * gsm;
-                
                 let bagsPerKg = Math.round(1000 / weightPerBagGrams);
-                let bagsPer50Kg = bagsPerKg * 50;
-                let bagsPer100Kg = bagsPerKg * 100;
-
-                document.getElementById('estResult').innerHTML = `
-                    💡 <b>Aasan Ganit (Easy Calculation):</b><br>
-                    • 1 Kg kapde mein: <b>~${bagsPerKg} pcs</b> bag banenge<br>
-                    • 50 Kg kapde mein: <b>~${bagsPer50Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
-                    • 100 Kg kapde mein: <b>~${bagsPer100Kg.toLocaleString('en-IN')} pcs</b> bag banenge<br>
-                    <small style="color:#334155;">(Har ek bag ka vajan lagbhag ${weightPerBagGrams.toFixed(1)} gram hoga)</small>
-                `;
-            } else {
-                alert('Kripya Length, Width aur GSM sahi se bharein!');
-            }
+                document.getElementById('estResult').innerHTML = `💡 1 Kg: ~${bagsPerKg} pcs | 50 Kg: ~${(bagsPerKg*50).toLocaleString('en-IN')} pcs`;
+            } else { alert('Enter valid dimensions!'); }
         }
 
-        function openAdminCheck() {
-            document.getElementById('adminPinInput').value = '';
-            document.getElementById('adminModal').style.display = 'flex';
-        }
-
+        function openAdminCheck() { document.getElementById('adminPinInput').value = ''; document.getElementById('adminModal').style.display = 'flex'; }
         function verifyAdminPin() {
             let pin = document.getElementById('adminPinInput').value;
-            if(pin === '6301' || pin === '7860') {
-                document.getElementById('adminModal').style.display = 'none';
-                switchView('admin');
-            } else {
-                alert('Incorrect PIN!');
-            }
+            if(pin === '6301' || pin === '7860') { document.getElementById('adminModal').style.display = 'none'; switchView('admin'); }
+            else { alert('Incorrect PIN!'); }
         }
 
         function switchAdminTab(tab) {
@@ -1137,7 +948,7 @@
             document.getElementById('invPhone').value = phone;
             billMultiItems = [{ desc: itemsSummary, qty: 1000, rate: Math.round(totalAmt/1000) || 15, amount: totalAmt }];
             renderBillMultiItemsTable();
-            alert('Order loaded into Multi-Item Tax Invoice Maker!');
+            alert('Loaded into Bill Maker!');
         }
 
         async function generateAndShowInvoiceModal() {
@@ -1145,21 +956,13 @@
             let phone = document.getElementById('invPhone').value;
             let gst = Number(document.getElementById('invGst').value);
             let advance = Number(document.getElementById('invAdvance').value) || 0;
-
-            if(!cust || !phone || billMultiItems.length === 0) {
-                alert('Kripya Customer name, phone aur kam se kam ek item zaroor add karein!');
-                return;
-            }
-
+            if(!cust || !phone || billMultiItems.length === 0) { alert('Enter customer details and items!'); return; }
             let subtotal = billMultiItems.reduce((s, i) => s + i.amount, 0);
             let tax = subtotal * (gst / 100);
-            let totalBeforeAdvance = subtotal + tax;
-            let total = totalBeforeAdvance - advance;
+            let total = (subtotal + tax) - advance;
             let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
             globalCurrentInvoiceData = { cust, phone, items: [...billMultiItems], subtotal, gst, tax, advance, total, nowStr };
-
-            // Fill Modal
             document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
             document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
             document.getElementById('mCustName').innerText = cust;
@@ -1167,14 +970,7 @@
 
             let tbodyHtml = '';
             billMultiItems.forEach(i => {
-                tbodyHtml += `
-                    <tr>
-                        <td style="border:1px solid #ccc; padding:6px;">${i.desc}</td>
-                        <td style="border:1px solid #ccc; padding:6px;">${i.qty} pcs</td>
-                        <td style="border:1px solid #ccc; padding:6px;">₹${i.rate}</td>
-                        <td style="border:1px solid #ccc; padding:6px; font-weight:bold;">₹${i.amount.toLocaleString('en-IN')}</td>
-                    </tr>
-                `;
+                tbodyHtml += `<tr><td style="border:1px solid #ccc; padding:4px;">${i.desc}</td><td style="border:1px solid #ccc; padding:4px;">${i.qty} pcs</td><td style="border:1px solid #ccc; padding:4px;">₹${i.rate}</td><td style="border:1px solid #ccc; padding:4px;">₹${i.amount.toLocaleString('en-IN')}</td></tr>`;
             });
             document.getElementById('modalItemsTableBody').innerHTML = tbodyHtml;
             document.getElementById('mSubtotal').innerText = "₹" + subtotal.toLocaleString('en-IN');
@@ -1182,143 +978,81 @@
             document.getElementById('mTaxAmount').innerText = "₹" + tax.toFixed(2);
             document.getElementById('mAdvanceAmount').innerText = "- ₹" + advance.toLocaleString('en-IN');
             document.getElementById('mGrandTotal').innerText = "₹" + total.toLocaleString('en-IN');
-            
-            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=${bankConfig.upi}&pn=AS%20Enterprises`;
-            document.getElementById('mQrImg').src = qrUrl;
-            document.getElementById('mUpiText').innerText = "Scan & Pay via UPI (" + bankConfig.upi + ")";
-            document.getElementById('mBankText').innerHTML = `<b>Bank:</b> ${bankConfig.bankName} | A/C: ${bankConfig.accountNo} | IFSC: ${bankConfig.ifsc}`;
-
-            // Show Modal
             document.getElementById('invoicePreviewModal').style.display = 'block';
 
-            // Save to Firebase
-            let summaryStr = billMultiItems.map(i => `${i.desc} (${i.qty} pcs)`).join(', ');
             try {
-                await window.myAddDoc(window.colInvoices, {
-                    customer: cust,
-                    phone: phone,
-                    bagDetails: summaryStr,
-                    qty: billMultiItems.reduce((s,i)=>s+i.qty,0),
-                    totalAmount: total,
-                    timestampStr: nowStr,
-                    timestamp: new Date()
-                });
+                await window.myAddDoc(window.colInvoices, { customer: cust, phone: phone, bagDetails: billMultiItems.map(i => `${i.desc} (${i.qty} pcs)`).join(', '), qty: billMultiItems.reduce((s,i)=>s+i.qty,0), totalAmount: total, timestampStr: nowStr, timestamp: new Date() });
             } catch(e) { console.error(e); }
         }
 
-        function closeInvoiceModal() {
-            document.getElementById('invoicePreviewModal').style.display = 'none';
-        }
-
-        function printInvoiceClean() {
-            window.print();
-        }
+        function closeInvoiceModal() { document.getElementById('invoicePreviewModal').style.display = 'none'; }
+        function printInvoiceClean() { window.print(); }
 
         function sendInvoiceToWhatsApp() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
             let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('%0A');
-            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Time:* ${d.nowStr}%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST (${d.gst}%):* ₹${d.tax.toFixed(2)}%0A*Advance Paid (-):* ₹${d.advance}%0A*💰 Grand Total Payable:* ₹${d.total.toLocaleString('en-IN')}%0A--------------------------------%0A*🏦 Bank Details:*%0A${bankConfig.bankName} - A/C: ${bankConfig.accountNo}%0AIFSC: ${bankConfig.ifsc}%0A*💳 UPI ID / QR:* ${bankConfig.upi}%0A*📞 Support:* 6301456725`;
+            let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST:* ₹${d.tax.toFixed(2)}%0A*Advance (-):* ₹${d.advance}%0A*💰 Grand Total:* ₹${d.total.toLocaleString('en-IN')}%0A*📞 Support:* 6301456725`;
             window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
-        }
-
-        function factoryDataReset() {
-            if(confirm("Are you sure you want to perform Factory Data Reset? This will clear local app cache.")) {
-                localStorage.clear();
-                sessionStorage.clear();
-                alert("Factory Reset Complete. App cache cleared successfully!");
-                location.reload();
-            }
         }
 
         async function savePublicKhata() {
             let name = document.getElementById('khataName').value;
             let amt = document.getElementById('khataAmt').value;
-            if(!name || !amt) { alert('Enter name and amount'); return; }
-            try {
-                await window.myAddDoc(window.colKhata, { workerName: name, amount: Number(amt), note: "Distributor Credit", timestamp: new Date() });
-                alert('Khata Entry Saved Successfully!');
-                document.getElementById('khataName').value = '';
-                document.getElementById('khataAmt').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!name || !amt) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colKhata, { workerName: name, amount: Number(amt), note: "Credit", timestamp: new Date() }); alert('Saved!'); document.getElementById('khataName').value=''; document.getElementById('khataAmt').value=''; }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function saveWorkerKhataEntry() {
             let name = document.getElementById('wkName').value;
             let amt = document.getElementById('wkAmt').value;
             let note = document.getElementById('wkNote').value;
-            if(!name || !amt) { alert('Enter worker name & amount'); return; }
-            try {
-                await window.myAddDoc(window.colKhata, { workerName: name, amount: Number(amt), note: note || 'Advance', timestamp: new Date() });
-                alert('Worker Khata Saved!');
-                document.getElementById('wkName').value = '';
-                document.getElementById('wkAmt').value = '';
-                document.getElementById('wkNote').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!name || !amt) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colKhata, { workerName: name, amount: Number(amt), note: note || 'Advance', timestamp: new Date() }); alert('Saved!'); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function saveWorkerData() {
             let name = document.getElementById('workerNameInput').value;
             let phone = document.getElementById('workerPhoneInput').value;
             let address = document.getElementById('workerAddressInput').value;
-            if(!name || !phone) { alert('Enter Worker Name and Phone Number'); return; }
-            try {
-                await window.myAddDoc(window.colWorkers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
-                alert('Worker Registered Successfully!');
-                document.getElementById('workerNameInput').value = '';
-                document.getElementById('workerPhoneInput').value = '';
-                document.getElementById('workerAddressInput').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!name || !phone) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colWorkers, { name, phone, address: address || 'Hyderabad', timestamp: new Date() }); alert('Worker Saved!'); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function saveCustomerDirectoryData() {
             let name = document.getElementById('dirCustName').value;
             let phone = document.getElementById('dirCustPhone').value;
             let address = document.getElementById('dirCustAddress').value;
-            if(!name || !phone) { alert('Enter Customer Name and Phone Number'); return; }
-            try {
-                await window.myAddDoc(window.colCustomers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
-                alert('Customer Saved to Directory!');
-                document.getElementById('dirCustName').value = '';
-                document.getElementById('dirCustPhone').value = '';
-                document.getElementById('dirCustAddress').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!name || !phone) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colCustomers, { name, phone, address: address || 'Hyderabad', timestamp: new Date() }); alert('Customer Saved!'); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function saveManufacturerData() {
             let name = document.getElementById('mfgName').value;
             let phone = document.getElementById('mfgPhone').value;
             let address = document.getElementById('mfgAddress').value;
-            if(!name || !phone) { alert('Enter Manufacturer Name & Phone'); return; }
-            try {
-                await window.myAddDoc(window.colManufacturers, { name: name, phone: phone, address: address || 'Hyderabad', timestamp: new Date() });
-                alert('Manufacturer Saved Successfully & Added to Item Brands List!');
-                document.getElementById('mfgName').value = '';
-                document.getElementById('mfgPhone').value = '';
-                document.getElementById('mfgAddress').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!name || !phone) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colManufacturers, { name, phone, address: address || 'Hyderabad', timestamp: new Date() }); alert('Manufacturer Saved!'); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         async function saveBusinessExpense() {
             let title = document.getElementById('expTitle').value;
             let amt = document.getElementById('expAmt').value;
-            if(!title || !amt) { alert('Enter title and amount'); return; }
-            try {
-                await window.myAddDoc(window.colExpenses, { title: title, amount: Number(amt), category: "General", timestamp: new Date() });
-                alert('Expense Recorded Successfully!');
-                document.getElementById('expTitle').value = '';
-                document.getElementById('expAmt').value = '';
-            } catch(e) { alert('Error: ' + e.message); }
+            if(!title || !amt) { alert('Fill fields'); return; }
+            try { await window.myAddDoc(window.colExpenses, { title, amount: Number(amt), category: "General", timestamp: new Date() }); alert('Expense Saved!'); }
+            catch(e) { alert('Error: ' + e.message); }
         }
 
         function convertImageToBase64(element) {
             let file = element.files[0];
             if(file) {
                 let reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedImageBase64 = e.target.result;
-                    document.getElementById('newBagImgUrl').value = "[Image Attached]";
-                };
+                reader.onload = function(e) { uploadedImageBase64 = e.target.result; document.getElementById('newBagImgUrl').value = "[Image Attached]"; };
                 reader.readAsDataURL(file);
             }
         }
@@ -1331,34 +1065,13 @@
             let gsm = document.getElementById('newBagGsm').value;
             let price = document.getElementById('newBagPrice').value;
             let imgUrl = document.getElementById('newBagImgUrl').value;
-
-            if(!name || !price) { alert('Enter bag name and price!'); return; }
-            
+            if(!name || !price) { alert('Enter name and price!'); return; }
             let finalImg = (imgUrl && imgUrl !== "[Image Attached]") ? imgUrl : uploadedImageBase64;
-
             try {
-                await window.myAddDoc(window.colProducts, { 
-                    name: name, 
-                    printType: printType,
-                    brand: brand, 
-                    size: size || "Standard", 
-                    gsm: gsm || "70 GSM", 
-                    price: Number(price), 
-                    img: finalImg,
-                    stock: 5000, 
-                    timestamp: new Date() 
-                });
-                alert('New Bag published live with Size, GSM, Brand & Photo to Firebase Catalog!');
-                document.getElementById('newBagName').value = '';
-                document.getElementById('newBagSize').value = '';
-                document.getElementById('newBagGsm').value = '';
-                document.getElementById('newBagPrice').value = '';
-                document.getElementById('newBagImgUrl').value = '';
-                uploadedImageBase64 = "";
+                await window.myAddDoc(window.colProducts, { name, printType, brand, size: size || "Standard", gsm: gsm || "70 GSM", price: Number(price), img: finalImg, stock: 5000, timestamp: new Date() });
+                alert('Bag published live to Firebase!');
                 switchView('home');
-            } catch(e) {
-                alert('Error: ' + e.message);
-            }
+            } catch(e) { alert('Error: ' + e.message); }
         }
     </script>
 </body>
