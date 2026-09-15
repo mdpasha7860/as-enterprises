@@ -681,7 +681,7 @@
         }
 
         function addToAppCart(name, price) {
-            let qty = prompt('Enter quantity for ' + name + ' (Min 100 pcs):', '1000');
+            let qty = prompt('Enter quantity for ' + name + ' (Min 100 pcs):', '500');
             if(qty && Number(qty) > 0) {
                 cartList.push({ name, price, qty: Number(qty) });
                 document.getElementById('cartCount').innerText = cartList.length;
@@ -727,7 +727,7 @@
             try {
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
                 
-                // FIXED: Exact Quantity & Exact Rate Calculation without altering values
+                // COMPLETELY FIXED: Exact user quantity & exact user price (No halving, no fixed 1000 pcs)
                 let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
                 let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
                 
