@@ -727,7 +727,7 @@
             try {
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
                 
-                // COMPLETELY FIXED: Exact user quantity & exact user price (No halving, no fixed 1000 pcs)
+                // EXACT USER QUANTITY & EXACT USER PRICE CALCULATION
                 let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
                 let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
                 
@@ -755,8 +755,10 @@
                 
                 document.getElementById('invoicePreviewModal').style.display = 'block';
 
+                // FIXED: WhatsApp opens to the customer's phone number and sends the order details properly
+                let cleanPhone = phone.replace(/\D/g, '').slice(-10);
                 let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${grandTotal.toLocaleString('en-IN')}`;
-                window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
+                window.open(`https://wa.me/91${cleanPhone}?text=${msg}`, '_blank');
 
                 cartList = [];
                 document.getElementById('cartCount').innerText = '0';
@@ -884,9 +886,10 @@
         function sendInvoiceToWhatsAppDirect() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
+            let cleanPhone = d.phone.replace(/\D/g, '').slice(-10);
             let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('%0A');
             let msg = `*📄 ${bankConfig.companyName} TAX INVOICE*%0A--------------------------------%0A*Customer:* ${d.cust}%0A*Phone:* ${d.phone}%0A*Items:*%0A${itemsText}%0A--------------------------------%0A*Subtotal:* ₹${d.subtotal}%0A*GST:* ₹${d.tax.toFixed(2)}%0A*Advance (-):* ₹${d.advance}%0A*💰 Grand Total:* ₹${d.total.toLocaleString('en-IN')}%0A*📞 Support:* 6301456725`;
-            window.open(`https://wa.me/91${d.phone.replace(/\D/g,'').slice(-10)}?text=${msg}`, '_blank');
+            window.open(`https://wa.me/91${cleanPhone}?text=${msg}`, '_blank');
         }
 
         async function savePublicKhata() {
