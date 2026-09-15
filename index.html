@@ -444,7 +444,7 @@
                     </div>
                     <table style="margin-bottom:12px;">
                         <thead><tr><th>Item</th><th>Qty @ Rate</th><th>Amount</th><th>Action</th></tr></thead>
-                        <tbody id="billItemsTableBody"><tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet.</td></tr></tbody>
+                        <tbody id="billItemsTableBody"><tr><td colspan="4" style="text-align:center; color:#64748b;">No items added yet.</td></tr></tbody>
                     </table>
                     <label>Advance Amount Received (₹) [Minus]:</label>
                     <input type="number" id="invAdvance" value="0" placeholder="0">
@@ -930,11 +930,41 @@
             catch(e) { alert('Error: ' + e.message); }
         }
 
+        // AUTO-COMPRESS IMAGE FUNCTION TO PREVENT 1MB FIREBASE LIMIT ERROR
         function convertImageToBase64(element) {
             let file = element.files[0];
             if(file) {
                 let reader = new FileReader();
-                reader.onload = function(e) { uploadedImageBase64 = e.target.result; document.getElementById('newBagImgUrl').value = "[Image Attached]"; };
+                reader.onload = function(e) {
+                    let img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        let canvas = document.createElement('canvas');
+                        let ctx = canvas.getContext('2d');
+                        let MAX_WIDTH = 400;
+                        let MAX_HEIGHT = 400;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.6);
+                        document.getElementById('newBagImgUrl').value = "[Compressed Image Attached]";
+                    };
+                };
                 reader.readAsDataURL(file);
             }
         }
@@ -948,7 +978,7 @@
             let price = document.getElementById('newBagPrice').value;
             let imgUrl = document.getElementById('newBagImgUrl').value;
             if(!name || !price) { alert('Enter name and price!'); return; }
-            let finalImg = (imgUrl && imgUrl !== "[Image Attached]") ? imgUrl : uploadedImageBase64;
+            let finalImg = (imgUrl && imgUrl !== "[Compressed Image Attached]" && imgUrl !== "[Image Attached]") ? imgUrl : uploadedImageBase64;
             try {
                 await window.myAddDoc(window.colProducts, { name, printType, brand, size: size || "Standard", gsm: gsm || "70 GSM", price: Number(price), img: finalImg, stock: 5000, timestamp: new Date() });
                 alert('Bag published live to Firebase!');
