@@ -22,7 +22,8 @@
         .lang-select-box { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; cursor: pointer; outline: none; }
         .lang-select-box option { background: #0A1931; color: #fff; }
         
-        .header-tools-right { display: flex; align-items: center; gap: 12px; }
+        .header-tools-right { display: flex; align-items: center; gap: 10px; }
+        .refresh-btn { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; }
         .action-icon-btn { background: transparent; color: #fff; border: none; padding: 6px; cursor: pointer; font-size: 20px; position: relative; }
         .cart-badge { position: absolute; top: 0; right: 0; background: #f97316; color: #fff; font-size: 10px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .menu-btn { background: #f97316 !important; color: #fff !important; padding: 8px 16px !important; border-radius: 999px !important; font-size: 13px !important; font-weight: 800 !important; border: none !important; }
@@ -317,6 +318,7 @@
                 <option value="TE">🌐 తెలుగు</option>
             </select>
             <div class="header-tools-right">
+                <button class="refresh-btn" onclick="location.reload()" title="Refresh Page">🔄 Refresh</button>
                 <button class="action-icon-btn" onclick="toggleCartDrawer()">🛒<span class="cart-badge" id="cartCount">0</span></button>
             </div>
         </div>
@@ -541,6 +543,9 @@
                     <label>UPI ID:</label><input type="text" id="setUpi" value="9030574216@upi">
                     <button class="primary-btn" onclick="saveBankSettings()">💾 Save Settings</button>
                     <div style="text-align:center; margin-top:16px; margin-bottom:16px;"><img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;"></div>
+                    <hr style="border:0; border-top:1px solid #cbd5e1; margin:16px 0;">
+                    <h4 style="color:#dc2626; font-size:14px; margin-bottom:8px;">⚠️ Danger Zone</h4>
+                    <button class="primary-btn" style="background:#dc2626;" onclick="factoryDataReset()">⚠️ Factory Data Reset (Clear Local Cache)</button>
                 </div>
             </div>
         </div>
@@ -720,10 +725,8 @@
             let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
             
             try {
-                // 1. Save to Firebase Orders
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
                 
-                // 2. Prepare Invoice Data & Show Full-Screen Invoice Modal
                 let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
                 let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
                 globalCurrentInvoiceData = { cust: name, phone: phone, items: formattedItems, subtotal: total, gst: 5, tax: total * 0.05, advance: 0, total: total * 1.05, nowStr };
@@ -744,7 +747,6 @@
                 
                 document.getElementById('invoicePreviewModal').style.display = 'block';
 
-                // 3. Open WhatsApp message automatically in background tab
                 let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
 
@@ -952,6 +954,15 @@
                 alert('Bag published live to Firebase!');
                 switchView('home');
             } catch(e) { alert('Error: ' + e.message); }
+        }
+
+        function factoryDataReset() {
+            if(confirm("Are you sure you want to perform Factory Data Reset? This will clear local app cache.")) {
+                localStorage.clear();
+                sessionStorage.clear();
+                alert("Factory Reset Complete. App cache cleared successfully!");
+                location.reload();
+            }
         }
     </script>
 </body>
