@@ -141,7 +141,6 @@
 
         window.appCart = [];
 
-        // Real-time Catalog & Inventory Sync with Loading State Fix & Image Fallback
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogGrid');
             let fullContainer = document.getElementById('fullCatalogGrid');
@@ -301,7 +300,6 @@
 <body>
 
     <header class="no-print">
-        <!-- Top Row: Big Brand Name & Admin Button -->
         <div class="header-top-row">
             <div class="logo-group" onclick="switchView('home')">
                 <div class="logo-badge">AS</div>
@@ -312,7 +310,6 @@
             </div>
             <button class="menu-btn" onclick="openAdminCheck()" data-tr="admin_btn">⚙️ Admin</button>
         </div>
-        <!-- Bottom Row: Language Selector & Cart Icon -->
         <div class="header-bottom-row">
             <select class="lang-select-box" onchange="setLang(this.value)">
                 <option value="EN">🌐 English</option>
@@ -549,6 +546,7 @@
         </div>
     </div>
 
+    <!-- INVOICE PREVIEW MODAL -->
     <div id="invoicePreviewModal">
         <div class="invoice-paper" id="printableArea">
             <div style="text-align:center; border-bottom:2px solid #f97316; padding-bottom:6px; margin-bottom:8px;">
@@ -577,7 +575,7 @@
         </div>
         <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;" class="no-print">
             <button class="primary-btn" onclick="printInvoiceClean()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
-            <button class="primary-btn" onclick="sendInvoiceToWhatsApp()" style="background:#25d366;">💬 Send via WhatsApp</button>
+            <button class="primary-btn" onclick="sendInvoiceToWhatsAppDirect()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
         </div>
     </div>
@@ -595,7 +593,7 @@
             <input type="text" id="orderName" placeholder="Ramesh Traders">
             <label>Phone Number (Mandatory):</label>
             <input type="tel" id="orderPhone" placeholder="9848012345">
-            <button class="primary-btn" onclick="submitCartOrder()">🚀 Place Order via WhatsApp</button>
+            <button class="primary-btn" onclick="submitCartOrder()">🚀 Place Order & Open Invoice / WhatsApp</button>
         </div>
     </div>
 
@@ -720,14 +718,39 @@
             if(!name || !phone) { alert('Enter Name and Phone!'); return; }
             let total = cartList.reduce((s, i) => s + (i.price * i.qty), 0);
             let summary = cartList.map(i => `${i.name} (${i.qty} pcs)`).join(', ');
+            
             try {
+                // 1. Save to Firebase Orders
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
+                
+                // 2. Prepare Invoice Data & Show Full-Screen Invoice Modal
+                let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
+                let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+                globalCurrentInvoiceData = { cust: name, phone: phone, items: formattedItems, subtotal: total, gst: 5, tax: total * 0.05, advance: 0, total: total * 1.05, nowStr };
+
+                document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
+                document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
+                document.getElementById('mCustName').innerText = name;
+                document.getElementById('mCustPhone').innerText = phone;
+
+                let tbodyHtml = '';
+                formattedItems.forEach(i => {
+                    tbodyHtml += `<tr><td style="border:1px solid #ccc; padding:4px;">${i.desc}</td><td style="border:1px solid #ccc; padding:4px;">${i.qty} pcs</td><td style="border:1px solid #ccc; padding:4px;">₹${i.rate}</td><td style="border:1px solid #ccc; padding:4px;">₹${i.amount.toLocaleString('en-IN')}</td></tr>`;
+                });
+                document.getElementById('modalItemsTableBody').innerHTML = tbodyHtml;
+                document.getElementById('mSubtotal').innerText = "₹" + total.toLocaleString('en-IN');
+                document.getElementById('mTaxAmount').innerText = "₹" + (total * 0.05).toFixed(2);
+                document.getElementById('mGrandTotal').innerText = "₹" + (total * 1.05).toLocaleString('en-IN');
+                
+                document.getElementById('invoicePreviewModal').style.display = 'block';
+
+                // 3. Open WhatsApp message automatically in background tab
                 let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
+
                 cartList = [];
                 document.getElementById('cartCount').innerText = '0';
                 toggleCartDrawer();
-                alert('Order placed successfully!');
             } catch(e) { alert('Error: ' + e.message); }
         }
 
@@ -845,7 +868,7 @@
         function closeInvoiceModal() { document.getElementById('invoicePreviewModal').style.display = 'none'; }
         function printInvoiceClean() { window.print(); }
 
-        function sendInvoiceToWhatsApp() {
+        function sendInvoiceToWhatsAppDirect() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
             let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('%0A');
