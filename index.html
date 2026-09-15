@@ -579,7 +579,7 @@
             </div>
         </div>
         <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;" class="no-print">
-            <button class="primary-btn" onclick="shareInvoiceAsTextOrImage()" style="background:#2563eb;" id="shareBtn">📤 Share Invoice Details</button>
+            <button class="primary-btn" onclick="downloadPdfFile()" style="background:#2563eb;" id="pdfDownloadBtn">📥 Download PDF File</button>
             <button class="primary-btn" onclick="sendInvoiceToWhatsAppDirect()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
         </div>
@@ -877,25 +877,23 @@
 
         function closeInvoiceModal() { document.getElementById('invoicePreviewModal').style.display = 'none'; }
         
-        // FIXED: Web Share API so that clicking the blue button directly opens sharing options (WhatsApp, Bluetooth, Drive, etc.) to share invoice text
-        async function shareInvoiceAsTextOrImage() {
+        // FIXED: Pure Blob PDF/Text file generator that creates a real downloadable file in phone's Downloads folder
+        function downloadPdfFile() {
             if(!globalCurrentInvoiceData) return;
             let d = globalCurrentInvoiceData;
             let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('\n');
-            let shareText = `📄 ${bankConfig.companyName} TAX INVOICE\n--------------------------------\nCustomer: ${d.cust}\nPhone: ${d.phone}\nItems:\n${itemsText}\n--------------------------------\nSubtotal: ₹${d.subtotal}\nGST: ₹${d.tax.toFixed(2)}\nGrand Total: ₹${d.total.toLocaleString('en-IN')}\n📞 Support: 6301456725`;
+            let fileContent = `========================================\n        ${bankConfig.companyName}        \n    PP Woven Bags Hub • Hyderabad, TS    \n========================================\nDate & Time: ${d.nowStr}\nCustomer: ${d.cust}\nPhone: ${d.phone}\n----------------------------------------\nITEMS:\n${itemsText}\n----------------------------------------\nSubtotal: ₹${d.subtotal}\nGST (${d.gst}%): ₹${d.tax.toFixed(2)}\nAdvance Paid: ₹${d.advance}\nGRAND TOTAL: ₹${d.total.toLocaleString('en-IN')}\n========================================\nThank you for your business!\nUPI: ${bankConfig.upi}\nSupport: 6301456725`;
 
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: `${bankConfig.companyName} Invoice`,
-                        text: shareText
-                    });
-                } catch (err) {
-                    console.log('Share canceled');
-                }
-            } else {
-                window.print();
-            }
+            let blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = `Invoice_${d.cust.replace(/\s+/g, '_')}_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            alert("Invoice file downloaded successfully to your Downloads folder!");
         }
 
         function sendInvoiceToWhatsAppDirect() {
