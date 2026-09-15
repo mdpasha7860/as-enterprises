@@ -579,7 +579,7 @@
             </div>
         </div>
         <div style="max-width:600px; margin:0 auto 20px auto; display:flex; gap:10px; padding:0 10px;" class="no-print">
-            <button class="primary-btn" onclick="printInvoiceClean()" style="background:#2563eb;">🖨️ Print / Download PDF</button>
+            <button class="primary-btn" onclick="shareInvoiceAsTextOrImage()" style="background:#2563eb;" id="shareBtn">📤 Share Invoice Details</button>
             <button class="primary-btn" onclick="sendInvoiceToWhatsAppDirect()" style="background:#25d366;">💬 Send via WhatsApp</button>
             <button class="secondary-btn" onclick="closeInvoiceModal()" style="background:#dc2626; border:none; color:#fff;">✕ Close</button>
         </div>
@@ -727,7 +727,6 @@
             try {
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
                 
-                // MULTI-ITEM CART CONVERSION & ACCURATE RATE CALCULATION
                 let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
                 let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
                 
@@ -755,7 +754,6 @@
                 
                 document.getElementById('invoicePreviewModal').style.display = 'block';
 
-                // FIXED: WhatsApp opens to the exact customer phone number entered by the user
                 let cleanPhone = phone.replace(/\D/g, '').slice(-10);
                 let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${grandTotal.toLocaleString('en-IN')}`;
                 window.open(`https://wa.me/91${cleanPhone}?text=${msg}`, '_blank');
@@ -879,8 +877,25 @@
 
         function closeInvoiceModal() { document.getElementById('invoicePreviewModal').style.display = 'none'; }
         
-        function printInvoiceClean() { 
-            window.print(); 
+        // FIXED: Web Share API so that clicking the blue button directly opens sharing options (WhatsApp, Bluetooth, Drive, etc.) to share invoice text
+        async function shareInvoiceAsTextOrImage() {
+            if(!globalCurrentInvoiceData) return;
+            let d = globalCurrentInvoiceData;
+            let itemsText = d.items.map(i => `• ${i.desc}: ${i.qty} pcs @ ₹${i.rate} = ₹${i.amount}`).join('\n');
+            let shareText = `📄 ${bankConfig.companyName} TAX INVOICE\n--------------------------------\nCustomer: ${d.cust}\nPhone: ${d.phone}\nItems:\n${itemsText}\n--------------------------------\nSubtotal: ₹${d.subtotal}\nGST: ₹${d.tax.toFixed(2)}\nGrand Total: ₹${d.total.toLocaleString('en-IN')}\n📞 Support: 6301456725`;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `${bankConfig.companyName} Invoice`,
+                        text: shareText
+                    });
+                } catch (err) {
+                    console.log('Share canceled');
+                }
+            } else {
+                window.print();
+            }
         }
 
         function sendInvoiceToWhatsAppDirect() {
