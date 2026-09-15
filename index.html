@@ -727,9 +727,16 @@
             try {
                 await window.myAddDoc(window.colOrders, { name: name, phone: phone, itemsSummary: summary, total: total, status: "Pending", timestamp: new Date() });
                 
+                // FIXED: Exact Quantity & Exact Rate Calculation without altering values
                 let formattedItems = cartList.map(i => ({ desc: i.name, qty: i.qty, rate: i.price, amount: i.price * i.qty }));
                 let nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
-                globalCurrentInvoiceData = { cust: name, phone: phone, items: formattedItems, subtotal: total, gst: 5, tax: total * 0.05, advance: 0, total: total * 1.05, nowStr };
+                
+                let subtotal = total;
+                let gst = 5;
+                let tax = subtotal * (gst / 100);
+                let grandTotal = subtotal + tax;
+
+                globalCurrentInvoiceData = { cust: name, phone: phone, items: formattedItems, subtotal: subtotal, gst: gst, tax: tax, advance: 0, total: grandTotal, nowStr };
 
                 document.getElementById('invModalCompanyName').innerText = bankConfig.companyName;
                 document.getElementById('modalTimestamp').innerText = "Date & Time: " + nowStr;
@@ -741,13 +748,14 @@
                     tbodyHtml += `<tr><td style="border:1px solid #ccc; padding:4px;">${i.desc}</td><td style="border:1px solid #ccc; padding:4px;">${i.qty} pcs</td><td style="border:1px solid #ccc; padding:4px;">₹${i.rate}</td><td style="border:1px solid #ccc; padding:4px;">₹${i.amount.toLocaleString('en-IN')}</td></tr>`;
                 });
                 document.getElementById('modalItemsTableBody').innerHTML = tbodyHtml;
-                document.getElementById('mSubtotal').innerText = "₹" + total.toLocaleString('en-IN');
-                document.getElementById('mTaxAmount').innerText = "₹" + (total * 0.05).toFixed(2);
-                document.getElementById('mGrandTotal').innerText = "₹" + (total * 1.05).toLocaleString('en-IN');
+                document.getElementById('mSubtotal').innerText = "₹" + subtotal.toLocaleString('en-IN');
+                document.getElementById('mGstPercent').innerText = gst;
+                document.getElementById('mTaxAmount').innerText = "₹" + tax.toFixed(2);
+                document.getElementById('mGrandTotal').innerText = "₹" + grandTotal.toLocaleString('en-IN');
                 
                 document.getElementById('invoicePreviewModal').style.display = 'block';
 
-                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${total.toLocaleString('en-IN')}`;
+                let msg = `*📦 NEW PP BAGS ORDER*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Items:* ${summary}%0A*Total:* ₹${grandTotal.toLocaleString('en-IN')}`;
                 window.open(`https://wa.me/916301456725?text=${msg}`, '_blank');
 
                 cartList = [];
@@ -868,7 +876,10 @@
         }
 
         function closeInvoiceModal() { document.getElementById('invoicePreviewModal').style.display = 'none'; }
-        function printInvoiceClean() { window.print(); }
+        
+        function printInvoiceClean() { 
+            window.print(); 
+        }
 
         function sendInvoiceToWhatsAppDirect() {
             if(!globalCurrentInvoiceData) return;
@@ -930,7 +941,6 @@
             catch(e) { alert('Error: ' + e.message); }
         }
 
-        // AUTO-COMPRESS IMAGE FUNCTION TO PREVENT 1MB FIREBASE LIMIT ERROR
         function convertImageToBase64(element) {
             let file = element.files[0];
             if(file) {
