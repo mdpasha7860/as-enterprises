@@ -10,15 +10,17 @@
         
         #netlify-badge, iframe[src*="netlify"], div[style*="z-index: 2147483647"], a[href*="netlify.com"], [id*="netlify"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
-        header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 8px 12px; border-radius: 8px; font-size: 16px; }
-        .brand-name { font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+        header { background: #0A1931; border-bottom: 4px solid #f97316; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .logo-group { display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1; min-width: 0; }
+        .logo-badge { background: #f97316; color: #fff; font-weight: 900; padding: 6px 10px; border-radius: 8px; font-size: 15px; flex-shrink: 0; }
+        .brand-text-wrap { min-width: 0; }
+        .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .brand-location { font-size: 10px; color: #fb923c; font-weight: 700; text-transform: uppercase; }
         
-        .header-tools { display: flex; align-items: center; gap: 4px; position: relative; }
-        .lang-btn { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 6px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; }
-        .action-icon-btn { background: transparent; color: #fff; border: none; padding: 6px; cursor: pointer; font-size: 18px; position: relative; }
+        .header-tools { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+        .lang-select-box { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 5px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; cursor: pointer; outline: none; }
+        .lang-select-box option { background: #0A1931; color: #fff; }
+        .action-icon-btn { background: transparent; color: #fff; border: none; padding: 6px; cursor: pointer; font-size: 17px; position: relative; }
         .cart-badge { position: absolute; top: 0; right: 0; background: #f97316; color: #fff; font-size: 10px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .menu-btn { background: #f97316 !important; color: #fff !important; padding: 6px 10px !important; border-radius: 999px !important; font-size: 12px !important; font-weight: 800 !important; border: none !important; white-space: nowrap; }
 
@@ -136,7 +138,7 @@
 
         window.appCart = [];
 
-        // Real-time Catalog & Inventory Sync with Loading State Fix
+        // Real-time Catalog & Inventory Sync with Loading State Fix & Image Fallback
         onSnapshot(window.colProducts, (snapshot) => {
             let container = document.getElementById('liveCatalogGrid');
             let fullContainer = document.getElementById('fullCatalogGrid');
@@ -182,27 +184,18 @@
             if(inventoryContainer) inventoryContainer.innerHTML = invHtml || '<tr><td colspan="4" style="text-align:center;">No inventory found.</td></tr>';
         });
 
-        // Real-time Workers Directory Sync
         onSnapshot(window.colWorkers, (snapshot) => {
             let container = document.getElementById('workersTableBody');
             if(container) {
                 let html = '';
                 snapshot.forEach(docSnap => {
                     let w = { id: docSnap.id, ...docSnap.data() };
-                    html += `
-                        <tr>
-                            <td><b>${w.name}</b></td>
-                            <td>📞 ${w.phone}</td>
-                            <td>📍 ${w.address}</td>
-                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_workers_directory', '${w.id}')">Delete</button></td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${w.name}</b></td><td>📞 ${w.phone}</td><td>📍 ${w.address}</td><td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer;" onclick="deleteRecord('as_enterprises_workers_directory', '${w.id}')">Delete</button></td></tr>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No workers added.</td></tr>';
             }
         });
 
-        // Real-time Manufacturers List Sync with Delete Support
         onSnapshot(window.colManufacturers, (snapshot) => {
             let container = document.getElementById('manufacturerTableBody');
             let selectDropdown = document.getElementById('newBagBrand');
@@ -211,14 +204,7 @@
                 let selectHtml = `<option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>`;
                 snapshot.forEach(docSnap => {
                     let m = { id: docSnap.id, ...docSnap.data() };
-                    html += `
-                        <tr>
-                            <td><b>${m.name}</b></td>
-                            <td>📞 ${m.phone}</td>
-                            <td>📍 ${m.address}</td>
-                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_manufacturers_directory', '${m.id}')">Delete</button></td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${m.name}</b></td><td>📞 ${m.phone}</td><td>📍 ${m.address}</td><td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer;" onclick="deleteRecord('as_enterprises_manufacturers_directory', '${m.id}')">Delete</button></td></tr>`;
                     selectHtml += `<option value="${m.name}">${m.name} (Manufacturer)</option>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No manufacturers added.</td></tr>';
@@ -226,27 +212,18 @@
             }
         });
 
-        // Real-time Customers Directory Sync with Delete Support
         onSnapshot(window.colCustomers, (snapshot) => {
             let container = document.getElementById('customersTableBody');
             if(container) {
                 let html = '';
                 snapshot.forEach(docSnap => {
                     let c = { id: docSnap.id, ...docSnap.data() };
-                    html += `
-                        <tr>
-                            <td><b>${c.name}</b></td>
-                            <td>📞 ${c.phone}</td>
-                            <td>📍 ${c.address}</td>
-                            <td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_customers_directory', '${c.id}')">Delete</button></td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${c.name}</b></td><td>📞 ${c.phone}</td><td>📍 ${c.address}</td><td><button style="background:#dc2626; color:#fff; border:none; padding:4px 8px; border-radius:6px; cursor:pointer;" onclick="deleteRecord('as_enterprises_customers_directory', '${c.id}')">Delete</button></td></tr>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="4" style="text-align:center;">No customers found.</td></tr>';
             }
         });
 
-        // Real-time Orders Sync with Approve/Reject Support
         onSnapshot(window.colOrders, (snapshot) => {
             let container = document.getElementById('adminOrdersTableBody');
             if(container) {
@@ -262,9 +239,9 @@
                             <td><span style="color:${statusColor}; font-weight:bold;">${ord.status || 'Pending'}</span></td>
                             <td>
                                 <button style="background:#2563eb; color:#fff; border:none; padding:4px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-bottom:2px;" onclick="loadOrderIntoInvoice('${ord.name}', '${ord.phone}', \`${ord.itemsSummary}\`, ${ord.total})">📄 Bill</button><br>
-                                <button style="background:#16a34a; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Approved')">✔</button>
-                                <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Rejected')">✖</button>
-                                <button style="background:#64748b; color:#fff; border:none; padding:3px 6px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Del</button>
+                                <button style="background:#16a34a; color:#fff; border:none; padding:3px 6px; border-radius:4px; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Approved')">✔</button>
+                                <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:4px; cursor:pointer; margin-right:2px;" onclick="updateOrderStatus('${ord.id}', 'Rejected')">✖</button>
+                                <button style="background:#64748b; color:#fff; border:none; padding:3px 6px; border-radius:4px; cursor:pointer;" onclick="deleteRecord('as_enterprises_pp_orders', '${ord.id}')">Del</button>
                             </td>
                         </tr>
                     `;
@@ -273,30 +250,18 @@
             }
         });
 
-        // Real-time Saved Invoices Sync with Delete Support
         onSnapshot(window.colInvoices, (snapshot) => {
             let container = document.getElementById('savedInvoicesTableBody');
             if(container) {
                 let html = '';
                 snapshot.forEach(docSnap => {
                     let inv = { id: docSnap.id, ...docSnap.data() };
-                    html += `
-                        <tr>
-                            <td><b>${inv.customer}</b><br><small>📞 ${inv.phone}</small></td>
-                            <td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td>
-                            <td>₹${inv.totalAmount}</td>
-                            <td>
-                                <span style="color:#047857; font-weight:bold;">Saved</span><br>
-                                <button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:4px;" onclick="deleteRecord('as_enterprises_saved_invoices', '${inv.id}')">Delete</button>
-                            </td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${inv.customer}</b><br><small>📞 ${inv.phone}</small></td><td>${inv.bagDetails} (${inv.qty} pcs)<br><small>${inv.timestampStr || ''}</small></td><td>₹${inv.totalAmount}</td><td><span style="color:#047857; font-weight:bold;">Saved</span><br><button style="background:#dc2626; color:#fff; border:none; padding:3px 6px; border-radius:6px; cursor:pointer; margin-top:4px;" onclick="deleteRecord('as_enterprises_saved_invoices', '${inv.id}')">Delete</button></td></tr>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:#64748b;">No saved invoices yet.</td></tr>';
             }
         });
 
-        // Real-time Worker Khata Sync
         onSnapshot(window.colKhata, (snapshot) => {
             let container = document.getElementById('workerKhataTableBody');
             let sumBox = document.getElementById('totalWorkerKhataSum');
@@ -306,20 +271,13 @@
                 snapshot.forEach(docSnap => {
                     let k = { id: docSnap.id, ...docSnap.data() };
                     totalKhata += Number(k.amount || 0);
-                    html += `
-                        <tr>
-                            <td><b>${k.workerName}</b></td>
-                            <td>₹${k.amount}</td>
-                            <td>${k.note || 'Advance'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_worker_khata', '${k.id}')">✕</button></td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${k.workerName}</b></td><td>₹${k.amount}</td><td>${k.note || 'Advance'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_worker_khata', '${k.id}')">✕</button></td></tr>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="3" style="text-align:center;">No records.</td></tr>';
                 if(sumBox) sumBox.innerText = `Total Outstanding / Advanced: ₹${totalKhata.toLocaleString('en-IN')}`;
             }
         });
 
-        // Real-time Expenses Sync
         onSnapshot(window.colExpenses, (snapshot) => {
             let container = document.getElementById('expensesTableBody');
             let sumBox = document.getElementById('totalExpensesSum');
@@ -329,13 +287,7 @@
                 snapshot.forEach(docSnap => {
                     let e = { id: docSnap.id, ...docSnap.data() };
                     totalExp += Number(e.amount || 0);
-                    html += `
-                        <tr>
-                            <td><b>${e.title}</b></td>
-                            <td>₹${e.amount}</td>
-                            <td>${e.category || 'General'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_expenses', '${e.id}')">✕</button></td>
-                        </tr>
-                    `;
+                    html += `<tr><td><b>${e.title}</b></td><td>₹${e.amount}</td><td>${e.category || 'General'} <button style="background:#dc2626; color:#fff; border:none; padding:2px 6px; border-radius:6px; cursor:pointer; float:right;" onclick="deleteRecord('as_enterprises_expenses', '${e.id}')">✕</button></td></tr>`;
                 });
                 container.innerHTML = html || '<tr><td colspan="3" style="text-align:center;">No expenses.</td></tr>';
                 if(sumBox) sumBox.innerText = `Total Expenses: ₹${totalExp.toLocaleString('en-IN')}`;
@@ -348,16 +300,17 @@
     <header class="no-print">
         <div class="logo-group" onclick="switchView('home')">
             <div class="logo-badge">AS</div>
-            <div>
+            <div class="brand-text-wrap">
                 <div class="brand-name" id="headerCompanyName">AS ENTERPRISES</div>
                 <div class="brand-location" data-tr="brand_sub">PP Woven Bags Hub</div>
             </div>
         </div>
         <div class="header-tools">
-            <button class="lang-btn" onclick="location.reload()" title="Refresh Page">🔄</button>
-            <button class="lang-btn" onclick="setLang('EN')">EN</button>
-            <button class="lang-btn" onclick="setLang('HI')">HI</button>
-            <button class="lang-btn" onclick="setLang('TE')">TE</button>
+            <select class="lang-select-box" onchange="setLang(this.value)">
+                <option value="EN">🌐 English</option>
+                <option value="HI">🌐 हिंदी</option>
+                <option value="TE">🌐 తెలుగు</option>
+            </select>
             <button class="action-icon-btn" onclick="toggleCartDrawer()">🛒<span class="cart-badge" id="cartCount">0</span></button>
             <button class="menu-btn" onclick="openAdminCheck()" data-tr="admin_btn">⚙️ Admin</button>
         </div>
@@ -370,7 +323,6 @@
     </div>
 
     <div class="main-wrapper">
-        
         <div id="homeView">
             <div class="hero-card">
                 <div class="hero-tag" data-tr="hero_tag">⚡ Industrial Packaging Hub</div>
@@ -407,18 +359,13 @@
             <div class="form-panel">
                 <h3 style="color:#f97316; margin-bottom:10px; font-weight:900;">📐 Simple Kilo to Bags Calculator</h3>
                 <p style="font-size:12px; color:#334155; margin-bottom:14px;">Jaaniye 1 किलो, 50 किलो या 100 किलो कपड़े में कितने बैग बनेंगे!</p>
-                
                 <label>Bag Length (inch):</label>
                 <input type="number" id="estLen" placeholder="36">
-                
                 <label>Bag Width (inch):</label>
                 <input type="number" id="estWid" placeholder="24">
-                
                 <label>GSM (Weight quality e.g. 70, 100, 120):</label>
                 <input type="number" id="estGsm" placeholder="120">
-                
                 <button class="primary-btn" onclick="calculateBagsSimple()">Calculate Bags per Kg / 50Kg / 100Kg</button>
-                
                 <div id="estResult" style="margin-top:14px; font-weight:800; color:#047857; font-size:14px; line-height:1.6; background:#f1f5f9; padding:12px; border-radius:8px;"></div>
             </div>
         </div>
@@ -472,16 +419,14 @@
                 </div>
 
                 <div id="adminInvoiceTab" class="admin-sub-tab" style="margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker (Multi-Item & Advance)</h3>
-                    
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Multi-GST Bill Maker</h3>
                     <label>Customer / Firm Name:</label>
                     <input type="text" id="invCust" placeholder="Deccan Agencies">
                     <label>WhatsApp Number:</label>
                     <input type="tel" id="invPhone" placeholder="9848012345">
-
                     <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px;">
                         <h4 style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:8px;">Add Items to Bill</h4>
-                        <label>Item / Bag Description:</label>
+                        <label>Item Description:</label>
                         <input type="text" id="addItemDesc" placeholder="24 x 30 inch PP Woven Bag">
                         <label>Quantity (pcs):</label>
                         <input type="number" id="addItemQty" placeholder="5000">
@@ -489,35 +434,20 @@
                         <input type="number" id="addItemRate" placeholder="14.50">
                         <button class="primary-btn" style="padding:10px; font-size:12px; margin-top:4px;" onclick="addBillItemRow()">+ Add Item to Current Bill</button>
                     </div>
-
                     <table style="margin-bottom:12px;">
                         <thead><tr><th>Item</th><th>Qty @ Rate</th><th>Amount</th><th>Action</th></tr></thead>
-                        <tbody id="billItemsTableBody">
-                            <tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet. Add items above.</td></tr>
-                        </tbody>
+                        <tbody id="billItemsTableBody"><tr><td colspan="4" style="text-align:center; color:#475569;">No items added yet.</td></tr></tbody>
                     </table>
-
                     <label>Advance Amount Received (₹) [Minus]:</label>
                     <input type="number" id="invAdvance" value="0" placeholder="0">
-
                     <label>GST Rate (%):</label>
-                    <select id="invGst">
-                        <option value="5">5% GST</option>
-                        <option value="12">12% GST</option>
-                        <option value="18">18% GST</option>
-                    </select>
-
+                    <select id="invGst"><option value="5">5% GST</option><option value="12">12% GST</option><option value="18">18% GST</option></select>
                     <button class="primary-btn" onclick="generateAndShowInvoiceModal()">🖨️ Generate Full Screen Invoice, PDF & WhatsApp</button>
                 </div>
 
                 <div id="adminSavedInvoicesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Saved Invoices & Reports</h3>
-                    <table>
-                        <thead><tr><th>Customer</th><th>Details & Time</th><th>Total</th><th>Action</th></tr></thead>
-                        <tbody id="savedInvoicesTableBody">
-                            <tr><td colspan="4" style="text-align:center; color:#475569;">Loading...</td></tr>
-                        </tbody>
-                    </table>
+                    <table><thead><tr><th>Customer</th><th>Details & Time</th><th>Total</th><th>Action</th></tr></thead><tbody id="savedInvoicesTableBody"><tr><td colspan="4" style="text-align:center;">Loading...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminDayReportTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
@@ -530,159 +460,84 @@
 
                 <div id="adminInventoryTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Inventory & Photos (Edit/Delete)</h3>
-                    <table>
-                        <thead><tr><th>Item</th><th>Size/GSM/Rate</th><th>Stock</th><th>Action</th></tr></thead>
-                        <tbody id="inventoryTableBody">
-                            <tr><td colspan="4" style="text-align:center;">Loading inventory...</td></tr>
-                        </tbody>
-                    </table>
+                    <table><thead><tr><th>Item</th><th>Size/GSM/Rate</th><th>Stock</th><th>Action</th></tr></thead><tbody id="inventoryTableBody"><tr><td colspan="4" style="text-align:center;">Loading inventory...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminOrdersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Customer Orders (Approve / Reject)</h3>
-                    <table>
-                        <thead><tr><th>Customer & Phone</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
-                        <tbody id="adminOrdersTableBody">
-                            <tr><td colspan="5" style="text-align:center; color:#475569;">Loading orders...</td></tr>
-                        </tbody>
-                    </table>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Live Customer Orders</h3>
+                    <table><thead><tr><th>Customer & Phone</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminOrdersTableBody"><tr><td colspan="5" style="text-align:center;">Loading orders...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminWorkersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Workers Attendance & Directory</h3>
-                    <label>Worker Name:</label>
-                    <input type="text" id="workerNameInput" placeholder="Raju">
-                    <label>Phone Number:</label>
-                    <input type="tel" id="workerPhoneInput" placeholder="9848011223">
-                    <label>Complete Address:</label>
-                    <textarea id="workerAddressInput" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:60px;"></textarea>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Workers Directory</h3>
+                    <label>Worker Name:</label><input type="text" id="workerNameInput" placeholder="Raju">
+                    <label>Phone Number:</label><input type="tel" id="workerPhoneInput" placeholder="9848011223">
+                    <label>Address:</label><textarea id="workerAddressInput" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; margin-bottom:12px; height:60px;"></textarea>
                     <button class="primary-btn" onclick="saveWorkerData()">+ Register Worker</button>
-                    <table>
-                        <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
-                        <tbody id="workersTableBody"><tr><td colspan="4" style="text-align:center;">Loading workers...</td></tr></tbody>
-                    </table>
+                    <table><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead><tbody id="workersTableBody"><tr><td colspan="4" style="text-align:center;">Loading workers...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminWorkerKhataTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Worker Khata & Advance Ledger</h3>
-                    <label>Worker Name:</label>
-                    <input type="text" id="wkName" placeholder="Shanker">
-                    <label>Advance/Payment Amount (₹):</label>
-                    <input type="number" id="wkAmt" placeholder="2000">
-                    <label>Note:</label>
-                    <input type="text" id="wkNote" placeholder="Advance">
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Worker Khata</h3>
+                    <label>Worker Name:</label><input type="text" id="wkName" placeholder="Shanker">
+                    <label>Amount (₹):</label><input type="number" id="wkAmt" placeholder="2000">
+                    <label>Note:</label><input type="text" id="wkNote" placeholder="Advance">
                     <button class="primary-btn" onclick="saveWorkerKhataEntry()">+ Save Worker Khata</button>
                     <div id="totalWorkerKhataSum" style="margin-top:10px; font-weight:900; color:#047857;"></div>
-                    <table>
-                        <thead><tr><th>Worker</th><th>Amount</th><th>Note</th></tr></thead>
-                        <tbody id="workerKhataTableBody"><tr><td colspan="3" style="text-align:center;">Loading...</td></tr></tbody>
-                    </table>
+                    <table><thead><tr><th>Worker</th><th>Amount</th><th>Note</th></tr></thead><tbody id="workerKhataTableBody"><tr><td colspan="3" style="text-align:center;">Loading...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminCustomersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Private Customers Directory</h3>
-                    <label>Customer / Firm Name:</label>
-                    <input type="text" id="dirCustName" placeholder="Balaji Traders">
-                    <label>Phone Number:</label>
-                    <input type="tel" id="dirCustPhone" placeholder="9848011223">
-                    <label>Complete Address:</label>
-                    <textarea id="dirCustAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Customers Directory</h3>
+                    <label>Customer Name:</label><input type="text" id="dirCustName" placeholder="Balaji Traders">
+                    <label>Phone:</label><input type="tel" id="dirCustPhone" placeholder="9848011223">
+                    <label>Address:</label><textarea id="dirCustAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; margin-bottom:12px; height:70px;"></textarea>
                     <button class="primary-btn" onclick="saveCustomerDirectoryData()">+ Save Customer</button>
-                    <table>
-                        <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
-                        <tbody id="customersTableBody"><tr><td colspan="4" style="text-align:center;">Loading directory...</td></tr></tbody>
-                    </table>
+                    <table><thead><tr><th>Name</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead><tbody id="customersTableBody"><tr><td colspan="4" style="text-align:center;">Loading directory...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminManufacturersTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Manufacturers Directory</h3>
-                    <label>Manufacturer Name:</label>
-                    <input type="text" id="mfgName" placeholder="Shree Poly">
-                    <label>Contact Phone:</label>
-                    <input type="tel" id="mfgPhone" placeholder="9988776655">
-                    <label>Factory Address:</label>
-                    <textarea id="mfgAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; color:#0f172a; border-radius:6px; margin-bottom:12px; font-size:14px; outline:none; height:70px;"></textarea>
+                    <label>Manufacturer Name:</label><input type="text" id="mfgName" placeholder="Shree Poly">
+                    <label>Phone:</label><input type="tel" id="mfgPhone" placeholder="9988776655">
+                    <label>Address:</label><textarea id="mfgAddress" placeholder="Hyderabad" style="width:100%; padding:10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; margin-bottom:12px; height:70px;"></textarea>
                     <button class="primary-btn" onclick="saveManufacturerData()">+ Save Manufacturer</button>
-                    <table>
-                        <thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>
-                        <tbody id="manufacturerTableBody"><tr><td colspan="4" style="text-align:center;">Loading manufacturers...</td></tr></tbody>
-                    </table>
+                    <table><thead><tr><th>Manufacturer</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead><tbody id="manufacturerTableBody"><tr><td colspan="4" style="text-align:center;">Loading manufacturers...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminExpensesTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
-                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Business Expenses Tracker</h3>
-                    <label>Expense Title:</label>
-                    <input type="text" id="expTitle" placeholder="Transport Fuel">
-                    <label>Amount (₹):</label>
-                    <input type="number" id="expAmt" placeholder="1500">
+                    <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Expenses Tracker</h3>
+                    <label>Expense Title:</label><input type="text" id="expTitle" placeholder="Transport Fuel">
+                    <label>Amount (₹):</label><input type="number" id="expAmt" placeholder="1500">
                     <button class="primary-btn" onclick="saveBusinessExpense()">+ Record Expense</button>
                     <div id="totalExpensesSum" style="margin-top:10px; font-weight:900; color:#c2410c;"></div>
-                    <table>
-                        <thead><tr><th>Expense</th><th>Amount</th><th>Category</th></tr></thead>
-                        <tbody id="expensesTableBody"><tr><td colspan="3" style="text-align:center;">Loading...</td></tr></tbody>
-                    </table>
+                    <table><thead><tr><th>Expense</th><th>Amount</th><th>Category</th></tr></thead><tbody id="expensesTableBody"><tr><td colspan="3" style="text-align:center;">Loading...</td></tr></tbody></table>
                 </div>
 
                 <div id="adminAddItemTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Add New Bag to Cloud Catalog</h3>
-                    <label>New Bag Name:</label>
-                    <input type="text" id="newBagName" placeholder="PP Woven Bag">
-                    
-                    <label>Print Type:</label>
-                    <select id="newBagPrintType">
-                        <option value="Printed">Printed</option>
-                        <option value="Non-Printed">Non-Printed</option>
-                    </select>
-
-                    <label>Brand:</label>
-                    <select id="newBagBrand">
-                        <option value="AS HeavyDuty">AS HeavyDuty (In-house)</option>
-                    </select>
-
-                    <label>Size:</label>
-                    <input type="text" id="newBagSize" placeholder="24 x 36 inch">
-
-                    <label>GSM:</label>
-                    <input type="text" id="newBagGsm" placeholder="70 GSM">
-
-                    <label>Price per piece (₹):</label>
-                    <input type="number" id="newBagPrice" placeholder="12.00">
-
-                    <label>Bag Photo:</label>
-                    <input type="file" id="newBagImgFile" accept="image/*" style="margin-bottom:6px;" onchange="convertImageToBase64(this)">
-                    <input type="text" id="newBagImgUrl" placeholder="Or image URL">
-
+                    <label>Bag Name:</label><input type="text" id="newBagName" placeholder="PP Woven Bag">
+                    <label>Print Type:</label><select id="newBagPrintType"><option value="Printed">Printed</option><option value="Non-Printed">Non-Printed</option></select>
+                    <label>Brand:</label><select id="newBagBrand"><option value="AS HeavyDuty">AS HeavyDuty (In-house)</option></select>
+                    <label>Size:</label><input type="text" id="newBagSize" placeholder="24 x 36 inch">
+                    <label>GSM:</label><input type="text" id="newBagGsm" placeholder="70 GSM">
+                    <label>Price per piece (₹):</label><input type="number" id="newBagPrice" placeholder="12.00">
+                    <label>Bag Photo:</label><input type="file" id="newBagImgFile" accept="image/*" style="margin-bottom:6px;" onchange="convertImageToBase64(this)"><input type="text" id="newBagImgUrl" placeholder="Or image URL">
                     <button class="primary-btn" onclick="publishNewBag()">+ Publish Item</button>
                 </div>
 
                 <div id="adminSettingsTab" class="admin-sub-tab" style="display:none; margin-top:16px;">
                     <h3 style="color:#0f172a; font-size:15px; margin-bottom:10px;">Settings</h3>
-                    
-                    <label>Company Name:</label>
-                    <input type="text" id="setCompanyName" value="AS ENTERPRISES">
-
-                    <label>Bank Name:</label>
-                    <input type="text" id="setBankName" value="HDFC Bank">
-
-                    <label>Account Number:</label>
-                    <input type="text" id="setAccountNo" value="50200012345678">
-
-                    <label>IFSC Code:</label>
-                    <input type="text" id="setIfsc" value="HDFC0001234">
-
-                    <label>UPI ID:</label>
-                    <input type="text" id="setUpi" value="9030574216@upi">
-
+                    <label>Company Name:</label><input type="text" id="setCompanyName" value="AS ENTERPRISES">
+                    <label>Bank Name:</label><input type="text" id="setBankName" value="HDFC Bank">
+                    <label>Account Number:</label><input type="text" id="setAccountNo" value="50200012345678">
+                    <label>IFSC Code:</label><input type="text" id="setIfsc" value="HDFC0001234">
+                    <label>UPI ID:</label><input type="text" id="setUpi" value="9030574216@upi">
                     <button class="primary-btn" onclick="saveBankSettings()">💾 Save Settings</button>
-
-                    <div style="text-align:center; margin-top:16px; margin-bottom:16px;">
-                        <img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;">
-                    </div>
+                    <div style="text-align:center; margin-top:16px; margin-bottom:16px;"><img id="setQrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=9030574216@upi&pn=AS%20Enterprises" alt="QR" style="border-radius:8px; border:2px solid #f97316; padding:4px; background:#fff;"></div>
                 </div>
-
             </div>
         </div>
-
     </div>
 
     <div id="invoicePreviewModal">
@@ -697,14 +552,7 @@
                 <p><b>Phone:</b> <span id="mCustPhone">--</span></p>
             </div>
             <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:8px; color:#000;">
-                <thead>
-                    <tr style="background:#f1f5f9; color:#000;">
-                        <th style="border:1px solid #ccc; padding:4px;">Item Description</th>
-                        <th style="border:1px solid #ccc; padding:4px;">Qty</th>
-                        <th style="border:1px solid #ccc; padding:4px;">Rate</th>
-                        <th style="border:1px solid #ccc; padding:4px;">Total</th>
-                    </tr>
-                </thead>
+                <thead><tr style="background:#f1f5f9; color:#000;"><th style="border:1px solid #ccc; padding:4px;">Item Description</th><th style="border:1px solid #ccc; padding:4px;">Qty</th><th style="border:1px solid #ccc; padding:4px;">Rate</th><th style="border:1px solid #ccc; padding:4px;">Total</th></tr></thead>
                 <tbody id="modalItemsTableBody"></tbody>
             </table>
             <div style="text-align:right; font-size:11px; margin-bottom:8px; line-height:1.4;">
